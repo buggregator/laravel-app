@@ -42,8 +42,8 @@ const store = createStore({
             state.screens = []
         },
         switchScreen(state, screen) {
-            if (screen.length === 0) {
-                screen = moment().format('hh:mm:ss')
+            if (_.isEmpty(screen)) {
+                screen = 'Debug at ' + moment().format('hh:mm:ss')
             }
 
             state.currentScreen = screen
