@@ -10,11 +10,10 @@ RUN apk add --no-cache supervisor git
 
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
-
 WORKDIR /app
 
+ARG CACHEBUST=1
 RUN git clone https://github.com/butschster/ray-server.git /app
-RUN cd /app
 RUN git pull
 RUN composer install
 

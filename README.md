@@ -25,7 +25,7 @@ This server application will help you debug your application with Ray tool witho
 You can run Ray server via docker
 
 ```
-docker build - < Dockerfile -t ray-server
+docker build - < Dockerfile -t ray-server --build-arg CACHEBUST=$(date +%s)
 docker run -p 8000:8000 -p 23517:23517 ray-server
 ```
 

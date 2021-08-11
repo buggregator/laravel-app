@@ -5,6 +5,7 @@ import {createStore} from 'vuex'
 import {createInertiaApp} from '@inertiajs/inertia-vue3';
 import {InertiaProgress} from '@inertiajs/progress';
 import SfdumpFunc from './dumper'
+import moment from 'moment';
 
 window.Sfdump = SfdumpFunc(document)
 
