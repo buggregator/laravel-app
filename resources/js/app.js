@@ -10,11 +10,12 @@ window.Sfdump = SfdumpFunc(document)
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
+const host = process.env.MIX_WS_SERVER_HOST || '127.0.0.1'
+const port = process.env.MIX_WS_SERVER_PORT || 23517
 let WebSocketClient = require('websocket').w3cwebsocket;
-let client = new WebSocketClient(`ws://${process.env.MIX_WS_SERVER_HOST}:${process.env.MIX_WS_SERVER_PORT}/`);
+let client = new WebSocketClient(`ws://${host}:${port}/`);
 
 client.onmessage = function (e) {
-    console.log(JSON.parse(e.data));
     const log = JSON.parse(e.data);
 
     if (log.payloads[0].type == 'clear_all') {
