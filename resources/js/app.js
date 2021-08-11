@@ -30,7 +30,7 @@ client.onmessage = function (e) {
 const store = createStore({
     state() {
         return {
-            currentScreen: "",
+            currentScreen: moment().format('hh:mm:ss'),
             screens: [],
             logs: {}
         }
@@ -41,6 +41,10 @@ const store = createStore({
             state.screens = []
         },
         switchScreen(state, screen) {
+            if (screen.length === 0) {
+                screen = moment().format('hh:mm:ss')
+            }
+
             state.currentScreen = screen
 
             if (!state.screens.includes(state.currentScreen)) {
