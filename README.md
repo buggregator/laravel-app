@@ -20,6 +20,15 @@ This server application will help you debug your application with Ray tool witho
    - `RAY_HOST=127.0.0.1` - Octane server HTTP host
    - `RAY_PORT=8000` - Octane server HTTP port
 
+
+# Docker image
+You can run Ray server via docker
+
+```
+docker build - < Dockerfile -t ray-server
+docker run -p 8000:8000 -p 23517:23517 ray-server
+```
+
 Enjoy!
 
 ## License
