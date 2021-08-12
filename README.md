@@ -42,3 +42,41 @@ Enjoy!
 
 ### License
 The Ray server is open-sourced software licensed under the MIT license.
+
+### Tasks to do
+
+- [x] Simple data
+- [x] Colors
+- [x] Sizes
+- [x] Labels
+- [x] New screen
+- [x] Clear all
+- [x] Caller
+- [x] Trace
+- [ ] Pause
+- [x] Counter
+- [ ] Class name of an object
+- [ ] Measure
+- [ ] Json
+- [ ] Xml
+- [ ] Carbon
+- [ ] File
+- [ ] Table
+- [ ] Image
+- [ ] Html
+- [ ] Text
+- [ ] Notification
+- [ ] Phpinfo
+- [ ] Exception
+- [x] Show queries
+- [ ] Count queries
+- [x] Show events
+- [ ] Show jobs
+- [ ] Show cache
+- [ ] Show Http client requests
+- [ ] Model
+- [ ] Mailable
+- [ ] Show views
+- [ ] Markdown
+- [ ] Env
+- [ ] Show WordPress errors
