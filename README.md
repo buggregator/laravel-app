@@ -1,6 +1,6 @@
 ![Ray server](https://user-images.githubusercontent.com/773481/129159856-a90e2a60-0ca8-4d6b-b80c-2707d9770c3a.png)
 
-# Debug your application with a Ray server 
+# Debug your application with a Ray server
 
 This server application will help you debuging your application with a [Ray tool](https://github.com/spatie/ray) 
 
@@ -17,6 +17,8 @@ This server application will help you debuging your application with a [Ray tool
 ## Server requirements
 1. PHP 8.0
 2. Swoole 4.7
+
+![Ray server devices (1)](https://user-images.githubusercontent.com/773481/129255325-bf91a694-8890-415c-bab4-c86a332986b8.png)
 
 ## Usage
 1. Clone repository
