@@ -56,6 +56,7 @@ The Ray server is open-sourced software licensed under the MIT license.
 
 ### Tasks to do
 
+- [x] Dark theme
 - [x] Simple data
 - [x] Colors
 - [x] Sizes
