@@ -2,6 +2,14 @@
     <div class="md:flex border-b p-5 space-y-10 md:space-y-0 md:space-x-10">
         <div class="w-full md:w-1/4 relative">
             <div class="w-3 h-3 rounded-full absolute top-0 left-0" :class="color"></div>
+            <div class="w-5 h-5 absolute -top-1 left-6 cursor-pointer text-red-700" @click="deleteEvent">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor">
+                    <g id="close">
+                        <path id="x"
+                              d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"/>
+                    </g>
+                </svg>
+            </div>
 
             <div class="flex md:flex-col md:items-end md:space-y-3 space-x-3 justify-end">
                 <Label :text="date"></Label>
@@ -20,11 +28,24 @@
 <script>
 import EventPayload from "./Payloads/EventPayload";
 import Label from "./UI/Label";
+import {useStore} from "vuex";
 
 export default {
     components: {Label, EventPayload},
     props: {
         event: Object
+    },
+    setup() {
+        const store = useStore();
+
+        return {
+            store
+        }
+    },
+    methods: {
+        deleteEvent() {
+            this.store.commit('deleteEvent', this.event.uuid)
+        }
     },
     computed: {
         date() {

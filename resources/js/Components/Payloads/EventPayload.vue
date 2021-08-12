@@ -19,11 +19,14 @@ import Json from "./Json";
 import Carbon from "./Carbon";
 import Table from "./Table";
 import Job from "./Job";
+import EloquentModel from "./EloquentModel";
+import View from "./View";
+import Response from "./Response";
 
 export default {
     components: {
         LogValue, LogCustom, LogTrace, LogCaller, LogQuery, LogEvent,
-        LogDefault, Measure, Json, Carbon, Table, Job, Origin
+        LogDefault, Measure, Json, Carbon, Table, Job, EloquentModel, View, Origin, Response
     },
     props: {
         payload: Object
@@ -53,6 +56,12 @@ export default {
                     return 'Table';
                 case 'job_event':
                     return 'Job';
+                case 'eloquent_model':
+                    return 'EloquentModel';
+                case 'view':
+                    return 'View';
+                case 'response':
+                    return 'Response';
             }
 
             return 'LogDefault';

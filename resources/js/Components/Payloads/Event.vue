@@ -2,7 +2,9 @@
   <div ref="trace">
     <Dump v-if="payload.content.class_based_event" :value="payload.content.event" />
     <div v-else>
-      <h3 class="text-gray-800">Event: <span class="font-semibold">{{ payload.content.name }}</span></h3>
+      <h3 class="text-gray-800">
+          Event: <code class="font-semibold">{{ payload.content.name }}</code>
+      </h3>
       <Dump :value="payload.content.payload" />
     </div>
   </div>

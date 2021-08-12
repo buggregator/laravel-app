@@ -1,11 +1,11 @@
 <template>
     <div ref="trace">
-        <div class="font-semibold">
+        <div>
             <h3 class="text-gray-800">Called from </h3>
             <a
                 class="text-blue-400 underline"
                 :href='`phpstorm://open?file=${encodeURIComponent(file.file_name)}&line=${file.line_number}`'>
-                {{ file.class || 'null' }}:{{ file.method }}
+                <code class="font-semibold">{{ file.class || 'null' }}:{{ file.method }}</code>
             </a>
         </div>
     </div>

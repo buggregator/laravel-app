@@ -5,13 +5,13 @@ import {listenRayEvents} from "./websocket";
 import {RayEvent} from "./event";
 
 function generateScreenName() {
-    return'Debug at ' + moment().format('hh:mm:ss')
+    return 'Debug at ' + moment().format('hh:mm:ss')
 }
 
 export function init() {
     window.Sfdump = SfdumpFunc(window.document)
 
-    const host = process.env.MIX_WS_SERVER_HOST || '127.0.0.1'
+    const host = window.location.hostname
     const port = process.env.MIX_WS_SERVER_PORT || 23517
 
     listenRayEvents(host, port, function (e) {
@@ -40,6 +40,12 @@ export const store = createStore({
             state.events = {}
             state.screens = []
         },
+        deleteEvent(state, uuid) {
+            state.events[state.currentScreen] = _.keyBy(
+                _.filter(state.events[state.currentScreen], (e) => e.uuid != uuid),
+                'uuid'
+            );
+        },
         ensureScreenExists(state, screen) {
             if (!state.screens.includes(screen)) {
                 state.screens.push(screen)
@@ -48,7 +54,8 @@ export const store = createStore({
             if (!state.events.hasOwnProperty(screen)) {
                 state.events[screen] = {}
             }
-        },
+        }
+        ,
         switchScreen(state, screen) {
             if (_.isEmpty(screen)) {
                 screen = generateScreenName()
@@ -57,7 +64,8 @@ export const store = createStore({
             state.currentScreen = screen
 
             this.commit('ensureScreenExists', screen)
-        },
+        }
+        ,
         pushEvent(state, event) {
             this.commit('ensureScreenExists', state.currentScreen)
 

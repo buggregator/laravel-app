@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace" class="font-semibold">
+    <div ref="trace">
         <div v-html="payload.content.content"></div>
     </div>
 </template>

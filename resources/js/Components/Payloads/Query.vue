@@ -17,7 +17,6 @@
 
 <script>
 import SshPre from 'simple-syntax-highlighter'
-import 'simple-syntax-highlighter/dist/sshpre.css'
 import Table from "../UI/Table";
 import TableRow from "../UI/TableRow";
 

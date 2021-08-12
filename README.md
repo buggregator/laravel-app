@@ -12,11 +12,11 @@ This server application will help you debuging your application with a [Ray tool
 - Swoole Websocket
 - Ocatne Http server
 - Vue
-- Tailwindcss
+- TailwindCSS
 - 
 ## Server requirements
 1. PHP 8.0
-2. Swoole
+2. Swoole 4.7
 
 ## Usage
 1. Clone repository
@@ -29,7 +29,6 @@ This server application will help you debuging your application with a [Ray tool
 6. Configure your Ray pakcage
    - `RAY_HOST=127.0.0.1` - Octane server HTTP host
    - `RAY_PORT=8000` - Octane server HTTP port
-
 
 ## Docker image
 You can run a Ray server via docker
@@ -75,9 +74,12 @@ The Ray server is open-sourced software licensed under the MIT license.
 - [x] Show jobs
 - [x] Show cache
 - [ ] Show Http client requests
-- [ ] Model
+- [x] Model
 - [ ] Mailable
-- [ ] Show views
-- [ ] Markdown
-- [ ] Env
+- [x] Show views
+- [x] Markdown
+- [x] Collections
+- [x] Env
+- [x] Response
+- [x] Request
 - [ ] Show WordPress errors
