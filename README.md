@@ -1,12 +1,12 @@
 ![Ray server](https://user-images.githubusercontent.com/773481/129159856-a90e2a60-0ca8-4d6b-b80c-2707d9770c3a.png)
 
-# Debug your application with a Ray server
+# Debug your projects with Ray server
 
-This server application will help you debuging your application with a [Ray tool](https://github.com/spatie/ray)
+[![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
 
-[Ray](https://myray.app/) is a beautiful, lightweight desktop app that helps you debug your app.
+This Ray server will help you debuging your projects with a [Ray tool](https://github.com/spatie/ray)
 
-### Built on Laravel
+### Technological stack
 
 - Laravel 8
 - Inertia
@@ -14,7 +14,6 @@ This server application will help you debuging your application with a [Ray tool
 - Ocatne Http server
 - Vue
 - TailwindCSS
--
 
 ## Server requirements
 
@@ -34,6 +33,7 @@ docker run -p 8000:8000 -p 23517:23517 butschster/ray-server
 2. Configure your .env for Ray package
     - `RAY_HOST=127.0.0.1` - Octane server HTTP host
     - `RAY_PORT=8000` - Octane server HTTP port
+3. Open http://127.0.0.1:8000 url in your browser
 
 ## Usage
 
@@ -48,6 +48,7 @@ docker run -p 8000:8000 -p 23517:23517 butschster/ray-server
 7. Configure your .env for Ray package
     - `RAY_HOST=127.0.0.1` - Octane server HTTP host
     - `RAY_PORT=8000` - Octane server HTTP port
+8. Open http://127.0.0.1:8000 url in your browser
 
 Enjoy!
 
