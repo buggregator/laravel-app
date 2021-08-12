@@ -1,0 +1,13 @@
+version: "2"
+services:
+    php:
+        build: "./docker/server"
+        restart: unless-stopped
+        ports:
+        - 8000:8000
+        - 23517:23517
+        volumes:
+            - ./:/app
+volumes:
+    web-root:
+        driver: local
