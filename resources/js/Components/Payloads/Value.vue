@@ -1,7 +1,5 @@
 <template>
-    <div class="flex-grow" v-for="value in payload.content.values">
-        <Dump :value="value" :class="textSize"/>
-    </div>
+    <Dump v-for="value in payload.content.values" :value="value" :class="textSize"/>
 </template>
 
 <script>

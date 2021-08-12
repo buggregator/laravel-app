@@ -18,11 +18,11 @@ export function init() {
         const event = new RayEvent(JSON.parse(e.data));
 
         if (event.isType('clear_all')) {
-            store.commit('clearLogs')
+            store.commit('clearEvents')
         } else if (event.isType('new_screen')) {
             store.commit('switchScreen', event.content('name'))
         } else {
-            store.commit('pushLog', event)
+            store.commit('pushEvent', event)
         }
     })
 }
@@ -32,12 +32,12 @@ export const store = createStore({
         return {
             currentScreen: generateScreenName(),
             screens: [],
-            logs: {}
+            events: {}
         }
     },
     mutations: {
-        clearLogs(state) {
-            state.logs = {}
+        clearEvents(state) {
+            state.events = {}
             state.screens = []
         },
         ensureScreenExists(state, screen) {
@@ -45,8 +45,8 @@ export const store = createStore({
                 state.screens.push(screen)
             }
 
-            if (!state.logs.hasOwnProperty(screen)) {
-                state.logs[screen] = {}
+            if (!state.events.hasOwnProperty(screen)) {
+                state.events[screen] = {}
             }
         },
         switchScreen(state, screen) {
@@ -55,15 +55,16 @@ export const store = createStore({
             }
 
             state.currentScreen = screen
-            this.ensureScreenExists(state, screen)
-        },
-        pushLog(state, event) {
-            this.ensureScreenExists(state, state.currentScreen)
 
-            if (state.logs[state.currentScreen].hasOwnProperty(event.uuid)) {
-                state.logs[state.currentScreen][event.uuid] = _.merge(state.logs[state.currentScreen][event.uuid], event)
+            this.commit('ensureScreenExists', screen)
+        },
+        pushEvent(state, event) {
+            this.commit('ensureScreenExists', state.currentScreen)
+
+            if (state.events[state.currentScreen].hasOwnProperty(event.uuid)) {
+                state.events[state.currentScreen][event.uuid] = _.merge(event, state.events[state.currentScreen][event.uuid])
             } else {
-                state.logs[state.currentScreen][event.uuid] = event
+                state.events[state.currentScreen][event.uuid] = event
             }
         }
     }

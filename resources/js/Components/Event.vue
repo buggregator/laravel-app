@@ -1,38 +1,34 @@
 <template>
-    <div class="flex border-b p-5 gap-8">
-        <div class="w-1/4">
-            <time class="text-gray-600 font-semibold text-sm flex justify-between items-center">
-                <div class="w-3 h-3 rounded-full" :class="color"></div>
+    <div class="md:flex border-b p-5 space-y-10 md:space-y-0 md:space-x-10">
+        <div class="w-full md:w-1/4 relative">
+            <div class="w-3 h-3 rounded-full absolute top-0 left-0" :class="color"></div>
 
-                <span class="border py-1 px-3 rounded-smtext-sm inline-block">
-                    {{ date }}
-                </span>
-            </time>
+            <div class="flex md:flex-col md:items-end md:space-y-3 space-x-3 justify-end">
+                <Label :text="date"></Label>
 
-            <div v-if="hasLabels" class="flex flex-row-reverse mt-2">
-                <span v-for="label in labels" class="border py-1 px-3 text-gray-500 rounded-sm text-sm font-semibold inline-block ml-1">
-                    {{ label }}
-                </span>
+                <div v-if="hasLabels" class="flex space-x-4 md:mt-2">
+                    <Label v-for="label in labels" :text="label" class="font-semibold"></Label>
+                </div>
             </div>
-
         </div>
-        <div class="w-3/4">
-            <EventPayload v-for="payload in event.payloads" :payload="payload" />
+        <div class="w-full md:w-3/4 flex-col space-y-5">
+            <EventPayload v-for="payload in event.payloads" :payload="payload"/>
         </div>
     </div>
 </template>
 
 <script>
 import EventPayload from "./Payloads/EventPayload";
+import Label from "./UI/Label";
 
 export default {
-    components: {EventPayload},
+    components: {Label, EventPayload},
     props: {
         event: Object
     },
     computed: {
         date() {
-            return this.event.date
+            return this.event.date.format('MMMM Do, HH:mm:ss')
         },
         color() {
             const color = this.event.color

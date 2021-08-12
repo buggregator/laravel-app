@@ -1,13 +1,10 @@
 import moment from "moment";
 
 export class RayEvent {
-    constructor(event) {
-        this.event = event;
-        this.date = moment()
-    }
+    date = moment()
 
-    get date() {
-        return this.date.format('MMMM Do YYYY, hh:mm:ss')
+    constructor(event) {
+        this.event = event
     }
 
     get type() {

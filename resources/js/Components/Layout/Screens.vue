@@ -7,12 +7,13 @@
                  :class="{'bg-blue-500': currentScreen == screen}"
                  @click="switchScreen(screen)"></div>
         </div>
+
         <div>
             <button
                 @click="clearEvents"
                 class="px-3 py-1 text-sm border border-gray-300 text-gray-400 rounded-sm hover:border-gray-500 hover:text-gray-600"
             >
-                Clear
+                Clear events
             </button>
         </div>
     </div>
@@ -27,7 +28,7 @@ export default {
             this.store.commit('switchScreen', screen);
         },
         clearEvents() {
-            this.store.commit('clearLogs');
+            this.store.commit('clearEvents');
         }
     },
 

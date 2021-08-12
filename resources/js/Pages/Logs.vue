@@ -16,14 +16,14 @@ import Screens from "../Components/Layout/Screens";
 
 export default {
     components: {
-        Screens, Head, Link, LogItem: Event
+        Screens, Head, Link, Event
     },
 
     setup() {
         const store = useStore();
 
         let events = computed(function () {
-            return store.state.logs[store.state.currentScreen] || []
+            return store.state.events[store.state.currentScreen] || []
         });
 
         let currentScreen = computed(function () {

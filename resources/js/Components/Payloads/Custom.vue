@@ -1,6 +1,6 @@
 <template>
     <div ref="trace" class="font-semibold">
-        <h3 class="text-gray-800">{{ payload.content.content }}</h3>
+        <div v-html="payload.content.content"></div>
     </div>
 </template>
 

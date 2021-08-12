@@ -12,6 +12,7 @@ This server application will help you debuging your application with a [Ray tool
 - Swoole Websocket
 - Ocatne Http server
 - Vue
+- Tailwindcss
 - 
 ## Server requirements
 1. PHP 8.0
@@ -55,24 +56,24 @@ The Ray server is open-sourced software licensed under the MIT license.
 - [x] Trace
 - [ ] Pause
 - [x] Counter
-- [ ] Class name of an object
-- [ ] Measure
-- [ ] Json
-- [ ] Xml
-- [ ] Carbon
-- [ ] File
-- [ ] Table
-- [ ] Image
-- [ ] Html
-- [ ] Text
+- [x] Class name of an object
+- [x] Measure
+- [x] Json
+- [x] Xml
+- [x] Carbon
+- [x] File
+- [x] Table
+- [x] Image
+- [x] Html
+- [x] Text
 - [ ] Notification
-- [ ] Phpinfo
+- [x] Phpinfo
 - [ ] Exception
 - [x] Show queries
-- [ ] Count queries
+- [x] Count queries
 - [x] Show events
-- [ ] Show jobs
-- [ ] Show cache
+- [x] Show jobs
+- [x] Show cache
 - [ ] Show Http client requests
 - [ ] Model
 - [ ] Mailable
