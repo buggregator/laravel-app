@@ -30,6 +30,10 @@ You can run a Ray server via docker
 docker run -p 8000:8000 -p 23517:23517 butschster/ray-server
 ```
 
+6. Configure your .env for Ray package
+    - `RAY_HOST=127.0.0.1` - Octane server HTTP host
+    - `RAY_PORT=8000` - Octane server HTTP port
+
 ## Usage
 
 1. Clone repository
@@ -39,7 +43,7 @@ docker run -p 8000:8000 -p 23517:23517 butschster/ray-server
     - `WS_SERVER_PORT=23517`
 4. Run artisan command `php artisan websocket:serve`
 5. Run artisan command `php artisan octane:start --host=127.0.0.1 --port=8000`
-6. Configure your Ray pakcage
+6. Configure your .env for Ray package
     - `RAY_HOST=127.0.0.1` - Octane server HTTP host
     - `RAY_PORT=8000` - Octane server HTTP port
 
