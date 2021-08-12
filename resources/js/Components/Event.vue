@@ -17,47 +17,35 @@
 
         </div>
         <div class="w-3/4">
-            <LogPayload v-for="payload in log.payloads" :payload="payload" />
+            <EventPayload v-for="payload in event.payloads" :payload="payload" />
         </div>
     </div>
 </template>
 
 <script>
-import moment from 'moment';
-import LogPayload from "./LogPayload";
+import EventPayload from "./Payloads/EventPayload";
 
 export default {
-    components: {LogPayload},
+    components: {EventPayload},
     props: {
-        log: Object
+        event: Object
     },
     computed: {
         date() {
-            return moment().format('MMMM Do YYYY, hh:mm:ss');
+            return this.event.date
         },
         color() {
-            let color = 'bg-gray-300';
+            const color = this.event.color
 
-            this.log.payloads.forEach(function (payload) {
-                if (payload.content.color) {
-                    color = `bg-${payload.content.color}-500`
-                }
-            })
+            switch (color) {
+                case 'gray':
+                    return 'bg-gray-300';
+            }
 
-            return color
+            return `bg-${color}-500`
         },
         labels() {
-            let labels = [];
-
-            this.log.payloads.forEach(function (payload) {
-                if (payload.content.label) {
-                    labels.push(payload.content.label)
-                }
-
-                labels.push(payload.type)
-            })
-
-            return _.uniq(labels)
+            return this.event.labels
         },
         hasLabels() {
             return this.labels.length > 0

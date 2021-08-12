@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import LogValue from "./LogValue";
-import LogCustom from "./LogCustom";
-import LogTrace from "./LogTrace";
-import LogCaller from "./LogCaller";
-import LogQuery from "./LogQuery";
-import LogEvent from "./LogEvent";
+import LogValue from "./Value";
+import LogCustom from "./Custom";
+import LogTrace from "./Trace";
+import LogCaller from "./Caller";
+import LogQuery from "./Query";
+import LogEvent from "./Event";
 import Origin from "./Origin";
 
 export default {
