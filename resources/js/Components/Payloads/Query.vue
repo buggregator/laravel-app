@@ -1,22 +1,28 @@
 <template>
     <div ref="trace">
-        <ssh-pre language="sql" class="text-sm w-2/3 mb-2">
+        <ssh-pre language="sql" class="text-sm">
             {{ formattedSql }}
         </ssh-pre>
 
-        <ul>
-            <li class="border-b text-gray-800">Connection name: <strong>{{ this.payload.content.connection_name }}</strong></li>
-            <li class="border-b text-gray-800">Time: <strong>{{ this.payload.content.time }}ms</strong></li>
-        </ul>
+        <Table>
+            <TableRow title="Connection name">
+                {{ this.payload.content.connection_name }}
+            </TableRow>
+            <TableRow title="Time">
+                {{ this.payload.content.time }}ms
+            </TableRow>
+        </Table>
     </div>
 </template>
 
 <script>
 import SshPre from 'simple-syntax-highlighter'
 import 'simple-syntax-highlighter/dist/sshpre.css'
+import Table from "../UI/Table";
+import TableRow from "../UI/TableRow";
 
 export default {
-    components: {SshPre},
+    components: {TableRow, Table, SshPre},
     props: {
         payload: Object
     },
