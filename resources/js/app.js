@@ -1,6 +1,7 @@
 require('./bootstrap');
 import {createApp, h} from 'vue';
 import {createInertiaApp} from '@inertiajs/inertia-vue3';
+import Notifications from '@kyvg/vue3-notification'
 import {InertiaProgress} from '@inertiajs/progress';
 import {init as rayInit, store} from "./Ray/server";
 
@@ -15,6 +16,7 @@ createInertiaApp({
         return createApp({render: () => h(app, props)})
             .use(plugin)
             .use(store)
+            .use(Notifications)
             .mixin({methods: {route}})
             .mount(el);
     },

@@ -1,8 +1,8 @@
 <template>
-    <tr class="bg-gray-50 border-b border-gray-200">
-        <th class="px-4 py-2 text-left" v-if="title !== null" v-html="title"></th>
-        <td class="px-4 py-2"><slot></slot></td>
-    </tr>
+    <div class="md:flex bg-gray-50 border-b border-gray-200">
+        <div class="px-4 md:py-2 py-1 text-left" v-if="title !== null" v-html="title"></div>
+        <div class="px-4 md:py-2 py-1 break-words"><slot></slot></div>
+    </div>
 </template>
 
 <script>

@@ -3,9 +3,10 @@ import {createStore} from "vuex";
 import SfdumpFunc from '../dumper'
 import {listenRayEvents} from "./websocket";
 import {RayEvent} from "./event";
+import { notify } from "@kyvg/vue3-notification";
 
 function generateScreenName() {
-    return 'Debug at ' + moment().format('hh:mm:ss')
+    return 'Debug session ' + moment().format('hh:mm:ss')
 }
 
 export function init() {
@@ -21,11 +22,19 @@ export function init() {
             store.commit('clearEvents')
         } else if (event.isType('new_screen')) {
             store.commit('switchScreen', event.content('name'))
+        } else if (event.isType('notify')) {
+            notify({
+                title: "Hello from Ray",
+                text: event.payloads[0].content.value,
+                duration: -1
+            })
         } else {
             store.commit('pushEvent', event)
         }
     })
 }
+
+const maxEvents = 10
 
 export const store = createStore({
     state() {
@@ -54,8 +63,7 @@ export const store = createStore({
             if (!state.events.hasOwnProperty(screen)) {
                 state.events[screen] = {}
             }
-        }
-        ,
+        },
         switchScreen(state, screen) {
             if (_.isEmpty(screen)) {
                 screen = generateScreenName()
@@ -64,16 +72,23 @@ export const store = createStore({
             state.currentScreen = screen
 
             this.commit('ensureScreenExists', screen)
-        }
-        ,
+        },
         pushEvent(state, event) {
             this.commit('ensureScreenExists', state.currentScreen)
 
+            // Merge events into one by uuid (colors|labels|...)
             if (state.events[state.currentScreen].hasOwnProperty(event.uuid)) {
                 state.events[state.currentScreen][event.uuid] = _.merge(event, state.events[state.currentScreen][event.uuid])
             } else {
                 state.events[state.currentScreen][event.uuid] = event
             }
+
+            // Remain only last events
+            // state.events[state.currentScreen] = _.keyBy(
+            //     Object.entries(state.events[state.currentScreen]).slice(maxEvents * -1).map(entry => entry[1]),
+            //     'uuid'
+            // )
+
         }
     }
 })

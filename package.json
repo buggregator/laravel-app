@@ -26,6 +26,8 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
+        "@ivanv/vue-collapse-transition": "^1.0.2",
+        "@kyvg/vue3-notification": "^2.3.3",
         "moment": "^2.29.1",
         "simple-syntax-highlighter": "^2.0.6",
         "vuex": "^4.0.2",

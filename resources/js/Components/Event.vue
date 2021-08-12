@@ -1,8 +1,8 @@
 <template>
-    <div class="md:flex border-b p-5 space-y-10 md:space-y-0 md:space-x-10">
+    <div class="md:flex border-b border-gray-300 p-3 md:p-5 space-y-10 md:space-y-0 md:space-x-5 lg:space-x-10">
         <div class="w-full md:w-1/4 relative">
-            <div class="w-3 h-3 rounded-full absolute top-0 left-0" :class="color"></div>
-            <div class="w-5 h-5 absolute -top-1 left-6 cursor-pointer text-red-700" @click="deleteEvent">
+            <div class="w-3 h-3 rounded-full absolute top-2 left-0" :class="color"></div>
+            <div class="w-5 h-5 absolute top-1 left-6 cursor-pointer text-red-700" @click="deleteEvent">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor">
                     <g id="close">
                         <path id="x"
@@ -11,10 +11,10 @@
                 </svg>
             </div>
 
-            <div class="flex md:flex-col md:items-end md:space-y-3 space-x-3 justify-end">
+            <div class="ml-12 flex flex-wrap gap-2 justify-end">
                 <Label :text="date"></Label>
 
-                <div v-if="hasLabels" class="flex space-x-4 md:mt-2">
+                <div v-if="hasLabels" class="flex gap-2">
                     <Label v-for="label in labels" :text="label" class="font-semibold"></Label>
                 </div>
             </div>

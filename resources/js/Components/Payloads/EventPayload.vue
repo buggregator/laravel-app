@@ -22,10 +22,11 @@ import Job from "./Job";
 import EloquentModel from "./EloquentModel";
 import View from "./View";
 import Response from "./Response";
+import Exception from "./Exception";
 
 export default {
     components: {
-        LogValue, LogCustom, LogTrace, LogCaller, LogQuery, LogEvent,
+        LogValue, LogCustom, LogTrace, LogCaller, LogQuery, LogEvent, Exception,
         LogDefault, Measure, Json, Carbon, Table, Job, EloquentModel, View, Origin, Response
     },
     props: {
@@ -62,6 +63,8 @@ export default {
                     return 'View';
                 case 'response':
                     return 'Response';
+                case 'exception':
+                    return 'Exception';
             }
 
             return 'LogDefault';

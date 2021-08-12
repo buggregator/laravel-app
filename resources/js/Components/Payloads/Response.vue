@@ -1,25 +1,22 @@
 <template>
     <div ref="trace">
         <h3 class="text-gray-800">
-            Class name: <code class="font-semibold">{{ payload.content.class_name }}</code>
+            Status code: <code class="font-semibold">{{ payload.content.status_code }}</code>
         </h3>
 
         <div v-if="payload.content.headers" class="mt-3">
             <h3 class="text-gray-800 font-semibold">
                 Headers
             </h3>
+
             <Dump :value="payload.content.headers"/>
         </div>
 
-        <div v-if="payload.content.content" class="mt-3">
-            <h3 class="text-gray-800 font-semibold">
-                HTML
-            </h3>
-
+        <Collapsed class="mt-3" v-if="payload.content.content" title="HTML">
             <ssh-pre language="html" class="text-sm">
                 {{ payload.content.content }}
             </ssh-pre>
-        </div>
+        </Collapsed>
 
         <div v-if="payload.content.json" class="mt-3">
             <h3 class="text-gray-800 font-semibold">
@@ -33,9 +30,10 @@
 <script>
 import SshPre from 'simple-syntax-highlighter'
 import Dump from "./Dump";
+import Collapsed from "../UI/Collapsed";
 
 export default {
-    components: {Dump, SshPre},
+    components: {Collapsed, Dump, SshPre},
     props: {
         payload: Object
     }
