@@ -23,6 +23,13 @@ This server application will help you debuging your application with a [Ray tool
 
 ![Ray server devices (1)](https://user-images.githubusercontent.com/773481/129255325-bf91a694-8890-415c-bab4-c86a332986b8.png)
 
+## Docker image
+You can run a Ray server via docker
+
+```
+docker run -p 8000:8000 -p 23517:23517 butschster/ray-server
+```
+
 ## Usage
 
 1. Clone repository
@@ -36,16 +43,12 @@ This server application will help you debuging your application with a [Ray tool
     - `RAY_HOST=127.0.0.1` - Octane server HTTP host
     - `RAY_PORT=8000` - Octane server HTTP port
 
-## Docker image
+Enjoy!
 
-You can run a Ray server via docker
-
+### Build docker image
 ```
 docker build - < Dockerfile -t ray-server --build-arg CACHEBUST=$(date +%s)
-docker run -p 8000:8000 -p 23517:23517 ray-server
 ```
-
-Enjoy!
 
 ### License
 
