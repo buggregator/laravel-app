@@ -1,14 +1,23 @@
-## Server application for Ray debug tool
+![Ray server](https://user-images.githubusercontent.com/773481/129159856-a90e2a60-0ca8-4d6b-b80c-2707d9770c3a.png)
 
-This server application will help you debug your application with Ray tool without 
+# Debug your application with a Ray server 
+
+This server application will help you debuging your application with a [Ray tool](https://github.com/spatie/ray) 
 
 [Ray](https://myray.app/) is a beautiful, lightweight desktop app that helps you debug your app.
 
-# Server requirements
+### Built on Laravel
+- Laravel 8
+- Inertia
+- Swoole Websocket
+- Ocatne Http server
+- Vue
+- 
+## Server requirements
 1. PHP 8.0
 2. Swoole
 
-# Usage
+## Usage
 1. Clone repository
 2. Run composer `composer install`
 3. Setting env variables
@@ -21,8 +30,8 @@ This server application will help you debug your application with Ray tool witho
    - `RAY_PORT=8000` - Octane server HTTP port
 
 
-# Docker image
-You can run Ray server via docker
+## Docker image
+You can run a Ray server via docker
 
 ```
 docker build - < Dockerfile -t ray-server --build-arg CACHEBUST=$(date +%s)
@@ -31,5 +40,5 @@ docker run -p 8000:8000 -p 23517:23517 ray-server
 
 Enjoy!
 
-## License
+### License
 The Ray server is open-sourced software licensed under the MIT license.
