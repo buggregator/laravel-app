@@ -28,6 +28,7 @@ ENV SESSION_DRIVER=array
 ENV APP_DEBUG=false
 ENV APP_ENV=production
 ENV APP_NAME="Ray server"
+ENV HTTP_CHECK_STATUS=400
 
 RUN cp /app/.env.example /app/.env
 RUN cat /app/.env.example

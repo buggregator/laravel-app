@@ -15,5 +15,5 @@ Route::post('/', function (\Illuminate\Http\Request $request, \Symfony\Component
 });
 
 Route::get('/_availability_check', function () {
-    return true;
+    return response('', env('HTTP_CHECK_STATUS', 200));
 });

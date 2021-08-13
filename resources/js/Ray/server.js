@@ -1,13 +1,35 @@
 import moment from "moment";
 import {createStore} from "vuex";
 import SfdumpFunc from '../dumper'
-import {listenRayEvents} from "./websocket";
 import {RayEvent} from "./event";
-import { notify } from "@kyvg/vue3-notification";
+import {notify} from "@kyvg/vue3-notification";
+import ReconnectingWebSocket from 'reconnecting-websocket';
 
 function generateScreenName() {
     return 'Debug session ' + moment().format('hh:mm:ss')
 }
+
+function createWsConnection(host, port) {
+    return new ReconnectingWebSocket(`ws://${host}:${port}/`, [], {
+        connectionTimeout: 3000,
+        maxRetries: 10,
+    })
+}
+
+function listenRayEvents(host, port, callback) {
+    const socket = createWsConnection(host, port)
+
+    socket.onmessage = callback
+
+    socket.addEventListener('open', () => {
+        store.commit('connectWs')
+    });
+
+    socket.addEventListener('close', () => {
+        store.commit('disconnectWs')
+    });
+}
+
 
 export function init() {
     window.Sfdump = SfdumpFunc(window.document)
@@ -39,12 +61,19 @@ const maxEvents = 10
 export const store = createStore({
     state() {
         return {
+            wsConnected: false,
             currentScreen: generateScreenName(),
             screens: [],
             events: {}
         }
     },
     mutations: {
+        disconnectWs(state) {
+            state.wsConnected = false
+        },
+        connectWs(state) {
+            state.wsConnected = true
+        },
         clearEvents(state) {
             state.events = {}
             state.screens = []
