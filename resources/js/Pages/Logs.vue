@@ -3,8 +3,8 @@
 
     <div>
         <Screens />
-        <div v-if="hasEvents" class="flex flex-col space-y-2">
-            <div v-for="event in events" class="border-b border-gray-300">
+        <div v-if="hasEvents" class="flex flex-col">
+            <div v-for="event in events" class="border-b border-gray-100">
                 <Event :event="event"/>
             </div>
         </div>

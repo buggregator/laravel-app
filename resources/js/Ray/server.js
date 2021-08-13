@@ -75,8 +75,14 @@ export const store = createStore({
             state.wsConnected = true
         },
         clearEvents(state) {
-            state.events = {}
-            state.screens = []
+            state.events[state.currentScreen] = {}
+            state.screens = state.screens.filter((screen) => {
+                return screen != state.currentScreen;
+            })
+
+            if (state.screens.length > 0) {
+                state.currentScreen = state.screens[state.screens.length - 1]
+            }
         },
         deleteEvent(state, uuid) {
             state.events[state.currentScreen] = _.keyBy(

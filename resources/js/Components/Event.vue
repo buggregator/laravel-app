@@ -1,26 +1,27 @@
 <template>
-    <div class="p-3 md:p-5 md:flex space-y-3 md:space-y-0 md:space-x-5 lg:space-x-10">
-        <div class="w-full md:w-1/4 relative">
-            <div class="w-5 h-5 border-4 rounded-full absolute top-1 left-0" :class="color"></div>
-            <div class="w-5 h-5 absolute top-1 left-6 cursor-pointer text-red-700" @click="deleteEvent">
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"
-                     fill="currentColor">
-                    <g id="close">
-                        <path id="x"
-                              d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"/>
-                    </g>
-                </svg>
+    <div class="md:flex md:space-y-0 md:space-x-5 lg:space-x-10 p-3 md:p-0">
+        <div class="w-full md:w-1/4 pb-3 flex justify-between sm:items-center md:items-start border-r-1 border-gray-100 md:px-3 md:py-3 border-r md:bg-gray-50">
+            <div class="flex items-center space-x-2">
+                <div class="w-3 h-3 rounded-full" :class="color"></div>
+                <div class="w-3 h-3 cursor-pointer text-red-700" @click="deleteEvent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"
+                         fill="currentColor">
+                        <g id="close">
+                            <path id="x" d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"/>
+                        </g>
+                    </svg>
+                </div>
             </div>
 
-            <div class="ml-12 flex flex-wrap gap-2 justify-end">
-                <Label :text="date"></Label>
+            <div class="flex flex-wrap gap-2 justify-end">
+                <Label :text="date" class="font-semibold"></Label>
 
                 <div v-if="hasLabels" class="flex gap-2">
                     <Label v-for="label in labels" :text="label" class="font-semibold"></Label>
                 </div>
             </div>
         </div>
-        <div class="w-full md:w-3/4 flex-col space-y-5">
+        <div class="w-full md:w-3/4 flex-col space-y-5 md:pr-5 md:py-3">
             <EventPayload
                 v-for="payload in event.payloads"
                 :payload="payload"
@@ -54,7 +55,7 @@ export default {
     },
     computed: {
         date() {
-            return this.event.date.format('MMMM Do, HH:mm:ss')
+            return this.event.date.format('HH:mm:ss')
         },
         color() {
             const color = this.event.color

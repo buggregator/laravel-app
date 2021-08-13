@@ -1,7 +1,7 @@
 import moment from "moment";
 
 const labelsMap = {
-    create_lock: 'Pause',
+    create_lock: null,
     trace: 'Trace',
     table: 'Table',
     caller: 'Caller',

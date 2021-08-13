@@ -5,7 +5,7 @@ services:
         restart: unless-stopped
         ports:
         - 8000:8000
-        - 23517:23517
+        - 23518:23518
         volumes:
             - ./:/app
 volumes:
