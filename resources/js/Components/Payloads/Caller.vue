@@ -5,7 +5,7 @@
             <a
                 class="text-blue-400 underline"
                 :href='`phpstorm://open?file=${encodeURIComponent(file.file_name)}&line=${file.line_number}`'>
-                <code class="font-semibold">{{ file.class || 'null' }}:{{ file.method }}</code>
+                <code class="font-semibold break-all">{{ file.class || 'null' }}:{{ file.method }}</code>
             </a>
         </div>
     </div>

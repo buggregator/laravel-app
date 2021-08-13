@@ -1,5 +1,5 @@
 <template>
-    <div class="flex p-4 justify-between items-center bg-gray-100 border-b border-gray-200">
+    <div class="flex flex-col md:flex-row px-4 py-2 space-y-2 md:justify-between items-center bg-gray-100 border-b border-gray-200">
         <h3 class="text-gray-700 font-bold" v-if="currentScreen">
             {{ currentScreen }}
         </h3>
@@ -13,9 +13,10 @@
         <div>
             <button
                 @click="clearEvents"
-                class="px-3 py-1 text-sm border border-gray-300 text-gray-400 rounded-sm hover:border-gray-500 hover:text-gray-600"
+                v-show="totalEvents"
+                class="px-3 py-1 text-sm bg-gray-800 text-white rounded-sm hover:bg-gray-700 transition-all duration-300"
             >
-                Clear events [{{ totalEvents }}]
+                Clear {{ totalEvents }} events
             </button>
         </div>
     </div>

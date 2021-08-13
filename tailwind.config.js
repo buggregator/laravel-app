@@ -9,7 +9,11 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
     ],
-
+    variants: {
+        extend: {
+            opacity: ['disabled'],
+        }
+    },
     theme: {
         extend: {
             fontFamily: {

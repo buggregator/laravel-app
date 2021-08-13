@@ -54,7 +54,10 @@ Enjoy!
 
 ### Build docker image
 ```
-docker build - < Dockerfile -t ray-server --build-arg CACHEBUST=$(date +%s)
+docker build - < Dockerfile -t butschster/ray-server --build-arg CACHEBUST=$(date +%s)
+docker push butschster/ray-server:latest
+docker tag butschster/ray-server:latest butschster/ray-server:vX.X
+docker push butschster/ray-server:latest:vX.X
 ```
 
 ### License
@@ -63,7 +66,7 @@ The Ray server is open-sourced software licensed under the MIT license.
 
 ### Tasks to do
 
-- [x] Dark theme
+- [ ] Dark theme
 - [x] Simple data
 - [x] Colors
 - [x] Sizes
@@ -72,7 +75,7 @@ The Ray server is open-sourced software licensed under the MIT license.
 - [x] Clear all
 - [x] Caller
 - [x] Trace
-- [ ] Pause
+- [x] Pause
 - [x] Counter
 - [x] Class name of an object
 - [x] Measure
@@ -102,3 +105,5 @@ The Ray server is open-sourced software licensed under the MIT license.
 - [x] Response
 - [x] Request
 - [ ] Show WordPress errors
+- [x] Ban
+- [x] Charles

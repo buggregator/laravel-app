@@ -1,5 +1,22 @@
 import moment from "moment";
 
+const labelsMap = {
+    create_lock: 'Pause',
+    trace: 'Trace',
+    table: 'Table',
+    caller: 'Caller',
+    measure: 'Measure',
+    event: 'Event',
+    job: 'Job',
+    cache: 'Cache',
+    view: 'View',
+    eloquent_model: 'Eloquent model',
+    executed_query: 'Query',
+    log: null,
+    custom: null
+}
+
+
 export class RayEvent {
     date = moment()
 
@@ -44,12 +61,24 @@ export class RayEvent {
 
         this.event.payloads.forEach(function (payload) {
             if (payload.content.label) {
-                labels.push(payload.content.label)
+                const label = labelsMap.hasOwnProperty(payload.content.label)
+                    ? labelsMap[payload.content.label]
+                    : payload.content.label;
+
+                if (label && !labels.includes(label)) {
+                    labels.push(label)
+                }
             }
 
-            labels.push(payload.type)
+            const typeLabel = labelsMap.hasOwnProperty(payload.type)
+                ? labelsMap[payload.type]
+                : payload.type;
+
+            if (typeLabel && !labels.includes(typeLabel)) {
+                labels.push(typeLabel)
+            }
         })
 
-        return _.uniq(labels)
+        return labels
     }
 }

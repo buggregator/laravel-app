@@ -3,8 +3,12 @@
 
     <div>
         <Screens />
-        <Event :event="event" v-for="event in events" v-if="hasEvents"/>
-        <WsConnectionStatus v-else class="mt-5 mx-3 p-4 border border-blue-300 rounded bg-gray-100" />
+        <div v-if="hasEvents" class="flex flex-col space-y-2">
+            <div v-for="event in events" class="border-b border-gray-300">
+                <Event :event="event"/>
+            </div>
+        </div>
+        <WsConnectionStatus v-else class="mt-5 mx-3 p-2 md:p-3 lg:p-4 border border-blue-300 rounded bg-gray-100" />
         <notifications />
     </div>
 </template>
