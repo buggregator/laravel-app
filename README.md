@@ -10,8 +10,8 @@ This Ray server will help you debuging your projects with a [Ray tool](https://g
 
 - Laravel 8
 - Inertia
-- Swoole Websocket
-- Ocatne Http server
+- Swoole 
+- Octane Http/Websocket server
 - Vue
 - TailwindCSS
 
@@ -26,7 +26,7 @@ This Ray server will help you debuging your projects with a [Ray tool](https://g
 You can run a Ray server via docker
 
 ```
-docker run -p 23517:8000 butschster/ray-server:v1.0
+docker run -p 23517:8000 butschster/ray-server:v1.2
 ```
 
 1. Install `spatie/ray` or other in your project
@@ -47,14 +47,6 @@ docker run -p 23517:8000 butschster/ray-server:v1.0
 8. Open http://127.0.0.1:23517 url in your browser
 
 Enjoy!
-
-### Build docker image
-```
-docker build - < Dockerfile -t butschster/ray-server --build-arg CACHEBUST=$(date +%s)
-docker push butschster/ray-server:latest
-docker tag butschster/ray-server:latest butschster/ray-server:vX.X
-docker push butschster/ray-server:vX.X
-```
 
 ### License
 
