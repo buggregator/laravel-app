@@ -33,9 +33,7 @@ function listenRayEvents(host, port, callback) {
 
 export function init() {
     window.Sfdump = SfdumpFunc(window.document)
-
-    const host = window.location.hostname
-    const port = process.env.MIX_WS_SERVER_PORT || 23517
+    const [host, port] = window.location.host.split(':')
 
     listenRayEvents(host, port, function (e) {
         const event = new RayEvent(JSON.parse(e.data));
@@ -44,6 +42,8 @@ export function init() {
             store.commit('clearEvents')
         } else if (event.isType('new_screen')) {
             store.commit('switchScreen', event.content('name'))
+        } else if (event.isType('remove')) {
+            store.commit('deleteEvent', event.uuid)
         } else if (event.isType('notify')) {
             notify({
                 title: "Hello from Ray",

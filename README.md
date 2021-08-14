@@ -26,7 +26,7 @@ This Ray server will help you debuging your projects with a [Ray tool](https://g
 You can run a Ray server via docker
 
 ```
-docker run -p 23517:8000 -p 23518:23518 butschster/ray-server
+docker run -p 23517:8000 butschster/ray-server:v0.10
 ```
 
 1. Install `spatie/ray` or other in your project
@@ -39,11 +39,7 @@ docker run -p 23517:8000 -p 23518:23518 butschster/ray-server
 
 1. Clone repository
 2. Run composer `composer install`
-3. Setting env variables
-    - `WS_SERVER_HOST=127.0.0.1`
-    - `WS_SERVER_PORT=23518`
-4. Run artisan command `php artisan websocket:serve`
-5. Run artisan command `php artisan octane:start --host=127.0.0.1 --port=23518`
+4. Run artisan command `php artisan server:start --host=127.0.0.1 --port=23517`
 6. Install `spatie/ray` or other in your project
 7. Configure your .env for Ray package
     - `RAY_HOST=127.0.0.1` - Octane server HTTP host
@@ -107,3 +103,4 @@ The Ray server is open-sourced software licensed under the MIT license.
 - [ ] Show WordPress errors
 - [x] Ban
 - [x] Charles
+- [x] Remove
