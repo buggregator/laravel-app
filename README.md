@@ -26,7 +26,7 @@ This Ray server will help you debuging your projects with a [Ray tool](https://g
 You can run a Ray server via docker
 
 ```
-docker run -p 23517:8000 butschster/ray-server:v0.10
+docker run -p 23517:8000 butschster/ray-server:v1.0
 ```
 
 1. Install `spatie/ray` or other in your project
