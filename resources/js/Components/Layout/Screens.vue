@@ -1,8 +1,7 @@
 <template>
-    <div class="flex flex-col md:flex-row px-4 py-2 space-y-2 md:justify-between items-center bg-gray-100 border-b border-gray-200">
+    <div class="flex flex-col md:flex-row px-4 py-2 space-y-2 md:space-y-0 md:justify-between items-center bg-gray-100 border-b border-gray-200">
         <h3 class="text-gray-700 font-bold flex space-x-2 items-center" v-if="currentScreen">
-            <span>{{ currentScreen }}</span>
-
+            <span class="text-xs">{{ currentScreen }}</span>
 
             <button class="w-4 h-4" @click="newScreen">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

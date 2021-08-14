@@ -1,27 +1,36 @@
 <template>
-    <div class="md:flex md:space-y-0 md:space-x-5 lg:space-x-10 p-3 md:p-0">
-        <div class="w-full md:w-1/4 pb-3 flex justify-between sm:items-center md:items-start border-r-1 border-gray-100 md:px-3 md:py-3 border-r md:bg-gray-50">
+    <div ref="event"
+         class="md:flex md:space-y-0 md:space-x-3 lg:space-x-5 p-3 md:p-0 hover:bg-gray-50"
+         :class="{'overflow-hidden shadow-bottom h-20 md:h-12 lg:h-16': event.collapsed}">
+        <div
+            :class="{'md:bg-gray-50': !event.collapsed}"
+            class="w-full md:w-1/4 pb-3 flex justify-between sm:items-center md:items-start border-r-1 border-gray-100 md:px-3 md:py-3 lg:px-5 lg:py-5 border-r">
             <div class="flex items-center space-x-2">
-                <div class="w-3 h-3 rounded-full" :class="color"></div>
+                <button @click="toggle"
+                        class="w-5 h-5 leading-none rounded-full opacity-90 hover:opacity-100 transition transition-all hover:border-4 flex items-center justify-center"
+                        :class="color">
+                    <span class="text-sm text-white font-bold leading-none">{{ !event.collapsed ? '-' : '+'}}</span>
+                </button>
                 <div class="w-3 h-3 cursor-pointer text-red-700" @click="deleteEvent">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"
                          fill="currentColor">
                         <g id="close">
-                            <path id="x" d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"/>
+                            <path id="x"
+                                  d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"/>
                         </g>
                     </svg>
                 </div>
             </div>
 
             <div class="flex flex-wrap gap-2 justify-end">
-                <Label :text="date" class="font-semibold"></Label>
+                <Label :text="date"></Label>
 
                 <div v-if="hasLabels" class="flex gap-2">
-                    <Label v-for="label in labels" :text="label" class="font-semibold"></Label>
+                    <Label v-for="label in labels" :text="label"></Label>
                 </div>
             </div>
         </div>
-        <div class="w-full md:w-3/4 flex-col space-y-5 md:pr-5 md:py-3">
+        <div class="w-full md:w-3/4 flex-col space-y-5 md:pr-3 lg:pr-5 md:py-3 lg:py-5">
             <EventPayload
                 v-for="payload in event.payloads"
                 :payload="payload"
@@ -41,6 +50,11 @@ export default {
     props: {
         event: Object
     },
+    data() {
+        return {
+            open: true
+        }
+    },
     setup() {
         const store = useStore();
 
@@ -49,6 +63,9 @@ export default {
         }
     },
     methods: {
+        toggle() {
+            this.event.setCollapsed(!this.event.collapsed)
+        },
         deleteEvent() {
             this.store.commit('deleteEvent', this.event.uuid)
         }
@@ -62,10 +79,10 @@ export default {
 
             switch (color) {
                 case 'gray':
-                    return 'bg-gray-300 border-gray-200';
+                    return 'bg-gray-400 border-gray-300';
             }
 
-            return `bg-${color}-500 border-${color}-200`
+            return `bg-${color}-600 border-${color}-300`
         },
         labels() {
             return this.event.labels

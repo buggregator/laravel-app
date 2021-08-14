@@ -2,6 +2,6 @@
 
 return [
     'event_handlers' => [
-        App\Ray\Handlers\ReplaceNoBreakSpaceUnicode::class
+        // App\Ray\Handlers\ReplaceNoBreakSpaceUnicode::class
     ]
 ];

@@ -22,6 +22,11 @@ export class RayEvent {
 
     constructor(event) {
         this.event = event
+        this.collapsed = false
+    }
+
+    setCollapsed(state) {
+        this.collapsed = state
     }
 
     get type() {
@@ -80,5 +85,9 @@ export class RayEvent {
         })
 
         return labels
+    }
+
+    merge(event) {
+        this.event = _.merge(event, this.event)
     }
 }

@@ -104,3 +104,5 @@ The Ray server is open-sourced software licensed under the MIT license.
 - [x] Ban
 - [x] Charles
 - [x] Remove
+- [x] Hide/Show events
+- [x] Sticky header

@@ -12,12 +12,19 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
+            borderWidth: ['hover']
         }
     },
     theme: {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+            },
+            transitionProperty: {
+                'height': 'height'
+            },
+            boxShadow: {
+                bottom: 'inset 0 -38px 38px -38px #ececec',
             },
         },
         colors: {

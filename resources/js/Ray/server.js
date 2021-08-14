@@ -44,6 +44,10 @@ export function init() {
             store.commit('switchScreen', event.content('name'))
         } else if (event.isType('remove')) {
             store.commit('deleteEvent', event.uuid)
+        } else if (event.isType('hide')) {
+            store.commit('toggleEventState', [event.uuid, true])
+        } else if (event.isType('show')) {
+            store.commit('toggleEventState', [event.uuid, false])
         } else if (event.isType('notify')) {
             notify({
                 title: "Hello from Ray",
@@ -84,6 +88,11 @@ export const store = createStore({
                 state.currentScreen = state.screens[state.screens.length - 1]
             }
         },
+        toggleEventState(state, data) {
+            if (state.events[state.currentScreen].hasOwnProperty(data[0])) {
+                state.events[state.currentScreen][data[0]].setCollapsed(data[1])
+            }
+        },
         deleteEvent(state, uuid) {
             state.events[state.currentScreen] = _.keyBy(
                 _.filter(state.events[state.currentScreen], (e) => e.uuid != uuid),
@@ -113,7 +122,7 @@ export const store = createStore({
 
             // Merge events into one by uuid (colors|labels|...)
             if (state.events[state.currentScreen].hasOwnProperty(event.uuid)) {
-                state.events[state.currentScreen][event.uuid] = _.merge(event, state.events[state.currentScreen][event.uuid])
+                state.events[state.currentScreen][event.uuid].merge(event)
             } else {
                 state.events[state.currentScreen][event.uuid] = event
             }
