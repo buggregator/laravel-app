@@ -1,10 +1,13 @@
-![Ray server](https://user-images.githubusercontent.com/773481/129159856-a90e2a60-0ca8-4d6b-b80c-2707d9770c3a.png)
+![Ray server (1)](https://user-images.githubusercontent.com/773481/129448524-93f6d835-3ccd-4b58-adcd-73c71997149c.png)
 
 # Debug your projects with Ray server
 
+
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
 
-This Ray server will help you debuging your projects with a [Ray tool](https://github.com/spatie/ray)
+Ray server is a beautiful, lightweight php app build on Laravel that helps you debug your app. It runs without installation on multiple platforms.
+
+Ray server will help you to debug your projects with a [Ray debug tool](https://github.com/spatie/ray) from [spatie](https://spatie.be/). Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash applications. After installing one of the libraries to send information to Ray, you can use the ray function to quickly dump stuff. Any variable(s) that you pass to ray will be displayed. [Read more](https://spatie.be/docs/ray/v1/introduction)
 
 ### Technological stack
 
@@ -15,46 +18,51 @@ This Ray server will help you debuging your projects with a [Ray tool](https://g
 - Vue
 - TailwindCSS
 
-## Server requirements
 
-1. PHP 8.0
-2. Swoole 4.7
-
-![Ray server devices (1)](https://user-images.githubusercontent.com/773481/129255325-bf91a694-8890-415c-bab4-c86a332986b8.png)
+![Ray server devices (2)](https://user-images.githubusercontent.com/773481/129448633-29c62d42-7f5b-49d1-9065-e516183ea403.png)
 
 ## Docker image
-You can run a Ray server via docker
+
+You can run Ray server via docker
+
+Run it from [Docker Hub](https://hub.docker.com/repository/docker/butschster/ray-server) or using the provided [Dockerfile](https://github.com/butschster/ray-server/blob/master/Dockerfile)
 
 ```
 docker run -p 23517:8000 butschster/ray-server:v1.2
 ```
 
-1. Install `spatie/ray` or other in your project
+### Configuration
+
+1. Install `spatie/ray` or other Ray debug tool in your project
 2. Configure your .env for Ray package
-    - `RAY_HOST=127.0.0.1` - Octane server HTTP host
-    - `RAY_PORT=23517` - Octane server HTTP port
+    - `RAY_HOST=127.0.0.1` - Ray server host
+    - `RAY_PORT=23517` - Ray server port
 3. Open http://127.0.0.1:23517 url in your browser
-
-## Usage
-
-1. Clone repository
-2. Run composer `composer install`
-4. Run artisan command `php artisan server:start --host=127.0.0.1 --port=23517`
-6. Install `spatie/ray` or other in your project
-7. Configure your .env for Ray package
-    - `RAY_HOST=127.0.0.1` - Octane server HTTP host
-    - `RAY_PORT=23517` - Octane server HTTP port
-8. Open http://127.0.0.1:23517 url in your browser
 
 Enjoy!
 
-### License
+## Contributing
 
-The Ray server is open-sourced software licensed under the MIT license.
+### Server requirements
+
+1. PHP 8.0
+2. Swoole 4.7
+3. NodeJS
+
+### Installation
+
+1. Clone repository
+2. Run composer `composer install
+3. Run npm `npm i`
+4. Run ray server `php artisan server:start --host=127.0.0.1 --port=23517`
+5. Build npm `npm run prod`
+
+## License
+
+Ray server is open-sourced software licensed under the MIT license.
 
 ### Tasks to do
 
-- [ ] Dark theme
 - [x] Simple data
 - [x] Colors
 - [x] Sizes
@@ -83,18 +91,19 @@ The Ray server is open-sourced software licensed under the MIT license.
 - [x] Show events
 - [x] Show jobs
 - [x] Show cache
-- [ ] Show Http client requests
 - [x] Model
-- [ ] Mailable
 - [x] Show views
 - [x] Markdown
 - [x] Collections
 - [x] Env
 - [x] Response
 - [x] Request
-- [ ] Show WordPress errors
 - [x] Ban
 - [x] Charles
 - [x] Remove
 - [x] Hide/Show events
 - [x] Sticky header
+- [ ] Dark theme
+- [ ] Show Http client requests
+- [ ] Mailable
+- [ ] Show WordPress errors
