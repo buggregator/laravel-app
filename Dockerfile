@@ -21,7 +21,7 @@ RUN chmod 0777 storage -R
 
 ENV OCTANE_SERVER=swoole
 ENV WS_SERVER_HOST=127.0.0.1
-ENV WS_SERVER_PORT=23517
+ENV WS_SERVER_PORT=23518
 ENV APP_KEY=base64:VuqX8AFwyBraeI0glMgUIV8HTJ5kho6D7G348Vkjg6w=
 ENV LOG_CHANNEL=stderr
 ENV SESSION_DRIVER=array
@@ -33,7 +33,7 @@ ENV HTTP_CHECK_STATUS=400
 RUN cp /app/.env.example /app/.env
 RUN cat /app/.env.example
 
-EXPOSE 8000
 EXPOSE 23517
+EXPOSE 23518
 
 CMD ["/usr/bin/supervisord", "-c", "/app/supervisord.conf"]
