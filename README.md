@@ -1,4 +1,5 @@
-![Ray server (1)](https://user-images.githubusercontent.com/773481/129448524-93f6d835-3ccd-4b58-adcd-73c71997149c.png)
+![Ray server (2)](https://user-images.githubusercontent.com/773481/129449481-73563d54-0402-4443-9f24-a4ed43a55833.png)
+
 
 # Debug your projects with Ray server
 
