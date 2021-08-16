@@ -29,7 +29,7 @@ You can run Ray server via docker
 Run it from [Docker Hub](https://hub.docker.com/repository/docker/butschster/ray-server) or using the provided [Dockerfile](https://github.com/butschster/ray-server/blob/master/Dockerfile)
 
 ```
-docker run -p 23517:8000 butschster/ray-server:v1.2
+docker run -p 23517:8000 butschster/ray-server:v1.3
 ```
 
 ### Configuration
