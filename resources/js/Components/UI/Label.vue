@@ -1,13 +1,11 @@
 <template>
-    <span class="font-semibold border border-gray-200 bg-white text-gray-500 py-1 px-3 rounded-sm text-xs inline-block">
-        {{ text }}
+    <span class="font-bold border border-gray-200 bg-white py-1 px-3 rounded-full text-2xs inline-block">
+        <slot></slot>
     </span>
 </template>
 
 <script>
 export default {
-    props: {
-        text: String
-    }
+
 }
 </script>

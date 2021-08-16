@@ -11,22 +11,22 @@
                         :class="color">
                     <span class="text-sm text-white font-bold leading-none">{{ !event.collapsed ? '-' : '+'}}</span>
                 </button>
-                <div class="w-3 h-3 cursor-pointer text-red-700" @click="deleteEvent">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"
-                         fill="currentColor">
-                        <g id="close">
-                            <path id="x"
-                                  d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"/>
-                        </g>
+                <button class="w-5 h-5 p-1 rounded-full text-red-700 bg-white hover:bg-red-700 hover:text-white transition transition-all" @click="deleteEvent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor">
+                        <g id="close"><path id="x" d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"/></g>
                     </svg>
-                </div>
+                </button>
             </div>
 
-            <div class="flex flex-wrap gap-2 justify-end">
-                <Label :text="date"></Label>
+            <div class="flex flex-wrap flex-row-reverse gap-2 justify-end">
+                <Label :class="`border-${event.color}-600 text-${event.color}-600`">
+                    {{ date }}
+                </Label>
 
                 <div v-if="hasLabels" class="flex gap-2">
-                    <Label v-for="label in labels" :text="label"></Label>
+                    <Label v-for="label in labels" class="text-gray-500 ">
+                        {{ label }}
+                    </Label>
                 </div>
             </div>
         </div>

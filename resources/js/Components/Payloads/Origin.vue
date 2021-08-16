@@ -1,10 +1,10 @@
 <template>
-    <a
-        class="text-gray-400 underline text-xs"
+    <span
+        class="text-gray-400 underline text-2xs"
         :title="`${origin.file}:${origin.line_number}`"
-        :href='`phpstorm://open?file=${encodeURIComponent(origin.file)}&line=${origin.line_number}`'>
+    >
         {{ filename }}:{{ origin.line_number }}
-    </a>
+    </span>
 </template>
 
 <script>

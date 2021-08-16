@@ -2,7 +2,14 @@
     <Head :title="currentScreen"/>
 
     <div>
-        <Screens class="sticky top-0 z-50" />
+        <div class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
+            <Screens />
+            <div class="p-2 flex flex-col md:flex-row justify-center md:justify-between items-center">
+                <Labels />
+                <Colors />
+            </div>
+        </div>
+
         <div v-if="hasEvents" class="flex flex-col">
             <div v-for="event in events" class="border-b border-gray-100">
                 <Event :event="event"/>
@@ -14,16 +21,21 @@
 </template>
 
 <script>
+import Label from "../Components/UI/Label";
 import {computed} from 'vue';
 import {useStore} from "vuex";
 import Event from "../Components/Event";
 import {Head, Link} from '@inertiajs/inertia-vue3';
 import Screens from "../Components/Layout/Screens";
 import WsConnectionStatus from "../Components/UI/WsConnectionStatus";
+import Labels from "../Components/Layout/Labels";
+import Colors from "../Components/Layout/Colors";
 
 export default {
     components: {
-        WsConnectionStatus,
+        Colors,
+        Labels,
+        WsConnectionStatus, Label,
         Screens, Head, Link, Event
     },
 
@@ -37,7 +49,7 @@ export default {
         const store = useStore();
 
         let events = computed(function () {
-            return store.state.events[store.state.currentScreen] || []
+            return store.getters.filteredEvents
         });
 
         let currentScreen = computed(function () {
@@ -45,7 +57,7 @@ export default {
         });
 
         return {
-            events, currentScreen
+            store, events, currentScreen
         }
     }
 }

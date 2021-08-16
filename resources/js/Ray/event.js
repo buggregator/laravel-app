@@ -1,28 +1,32 @@
 import moment from "moment";
 
 const labelsMap = {
-    create_lock: null,
+    create_lock: 'Pause',
     trace: 'Trace',
     table: 'Table',
     caller: 'Caller',
     measure: 'Measure',
     event: 'Event',
     job: 'Job',
+    json_string: 'Json',
     cache: 'Cache',
     view: 'View',
     eloquent_model: 'Eloquent model',
     executed_query: 'Query',
-    log: null,
+    log: 'Log',
     custom: null
 }
 
-
 export class RayEvent {
     date = moment()
+    labels = []
+    color = 'gray'
 
     constructor(event) {
         this.event = event
         this.collapsed = false
+        this.labels = this.collectLabels()
+        this.color = this.detectColor()
     }
 
     setCollapsed(state) {
@@ -49,8 +53,8 @@ export class RayEvent {
         return this.event.payloads[0].content[field]
     }
 
-    get color() {
-        let color = 'gray'
+    detectColor() {
+        let color = this.color
 
         this.event.payloads.forEach(function (payload) {
             if (payload.content.color) {
@@ -61,7 +65,7 @@ export class RayEvent {
         return color
     }
 
-    get labels() {
+    collectLabels() {
         let labels = [];
 
         this.event.payloads.forEach(function (payload) {
@@ -89,5 +93,7 @@ export class RayEvent {
 
     merge(event) {
         this.event = _.merge(event, this.event)
+        this.labels = this.collectLabels()
+        this.color = this.detectColor()
     }
 }

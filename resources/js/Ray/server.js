@@ -68,7 +68,47 @@ export const store = createStore({
             wsConnected: false,
             currentScreen: generateScreenName(),
             screens: [],
+            availableColors: ['gray', 'purple', 'green', 'orange', 'red', 'blue'],
+            selectedLabels: [],
+            selectedColors: [],
             events: {}
+        }
+    },
+    getters: {
+        availableLabels: state => {
+            let labels = [];
+
+            _.each(state.events[state.currentScreen] || [], event => {
+                labels = [...labels, ...event.labels]
+            })
+
+
+            return labels.filter((item, index) => labels.indexOf(item) == index)
+        },
+        filteredEvents: state => {
+            let events = state.events[state.currentScreen] || []
+
+            let filteredByColor = _.filter(events, event => {
+                if (state.selectedColors.length > 0) {
+                    return state.selectedColors.includes(event.color)
+                }
+
+                return true
+            });
+
+            return _.filter(filteredByColor, event => {
+                if (state.selectedLabels.length > 0) {
+                    if (event.labels.length === 0) {
+                        return false
+                    }
+
+                    return state.selectedLabels.filter(
+                        value => event.labels.includes(value)
+                    ).length > 0
+                }
+
+                return true
+            });
         }
     },
     mutations: {
@@ -77,6 +117,23 @@ export const store = createStore({
         },
         connectWs(state) {
             state.wsConnected = true
+        },
+        clearSelectedColors(state) {
+            state.selectedColors = []
+        },
+        selectColor(state, color) {
+            if (state.selectedColors.includes(color)) {
+                state.selectedColors = state.selectedColors.filter(c => color != c)
+            } else {
+                state.selectedColors.push(color)
+            }
+        },
+        selectLabel(state, label) {
+            if (state.selectedLabels.includes(label)) {
+                state.selectedLabels = state.selectedLabels.filter(l => label != l)
+            } else {
+                state.selectedLabels.push(label)
+            }
         },
         clearEvents(state) {
             state.events[state.currentScreen] = {}

@@ -1,33 +1,19 @@
 <template>
     <div v-html="cleanHtml"
          ref="code"
-         class="text-blue-700"
+         class="text-blue-700 break-all"
          :class="{'bg-gray-800 rounded p-2 text-xs': isDump}"
     ></div>
 </template>
 
 <script>
-
-function stripStyles(s) {
-    var div = document.createElement('div');
-    div.innerHTML = s;
-    var scripts = div.getElementsByTagName('style');
-    var i = scripts.length;
-    while (i--) {
-        scripts[i].parentNode.removeChild(scripts[i]);
-    }
-    return div.innerHTML;
-}
-
 export default {
     props: {
         value: String
     },
     mounted() {
-        let scripts = this.$refs.code.getElementsByTagName("script")
-        if (scripts.length > 0) {
-            scripts[0].remove()
-            eval(scripts[0].innerHTML)
+        if (this.isDump) {
+            Sfdump(this.$refs.code.getElementsByTagName("pre")[0].id)
         }
     },
     computed: {
@@ -36,7 +22,8 @@ export default {
         },
         cleanHtml() {
             if (this.isDump) {
-                return this.value.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
+                return this.value
+                    .replace(/<(style|script)\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/(style|script)>/gi, "")
             }
 
             return this.value

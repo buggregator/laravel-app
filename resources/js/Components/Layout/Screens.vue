@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col md:flex-row px-4 py-2 space-y-2 md:space-y-0 md:justify-between items-center bg-gray-100 border-b border-gray-200">
+    <div class="flex flex-col md:flex-row px-4 py-2 space-y-2 md:space-y-0 md:justify-between items-center bg-gray-100">
         <h3 class="text-gray-700 font-bold flex space-x-2 items-center" v-if="currentScreen">
             <span class="text-xs">{{ currentScreen }}</span>
 
@@ -18,7 +18,7 @@
 
         <button
             @click="clearEvents"
-            class="px-3 py-1 text-sm bg-red-800 text-white rounded-sm hover:bg-red-700 transition-all duration-300"
+            class="px-3 py-1 text-xs bg-red-800 text-white rounded-sm hover:bg-red-700 transition transition-all duration-300"
         >
             Close screen
         </button>
@@ -55,7 +55,7 @@ export default {
         });
 
         let totalEvents = computed(function () {
-            return _.size(store.state.events[store.state.currentScreen] || [])
+            return _.size(store.getters.filteredEvents)
         });
 
         return {
