@@ -4,7 +4,7 @@
     <div>
         <div class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
             <Screens />
-            <div class="p-2 flex flex-col md:flex-row justify-center md:justify-between items-center">
+            <div class="p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2">
                 <Labels />
                 <Colors />
             </div>
