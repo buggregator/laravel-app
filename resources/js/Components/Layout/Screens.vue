@@ -22,7 +22,7 @@
             @click="clearEvents"
             class="px-3 py-1 text-xs bg-red-800 text-white rounded-sm hover:bg-red-700 transition transition-all duration-300"
         >
-            Close screen
+            Clear screen
         </button>
     </div>
 </template>

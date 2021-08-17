@@ -1,14 +1,17 @@
 <template>
-    <span
-        class="text-gray-400 underline text-2xs"
-        :title="`${origin.file}:${origin.line_number}`"
-    >
-        {{ filename }}:{{ origin.line_number }}
-    </span>
+    <div class="flex space-x-4 items-center">
+        <Host :name="origin.hostname" />
+        <span class="text-gray-400 underline text-2xs" :title="`${origin.file}:${origin.line_number}`">
+            {{ filename }}:{{ origin.line_number }}
+        </span>
+    </div>
 </template>
 
 <script>
+import Host from "@/Components/UI//Host";
+import Label from "@/Components/UI//Label";
 export default {
+    components: {Label, Host},
     props: {
         origin: Object
     },

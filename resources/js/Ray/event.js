@@ -24,12 +24,17 @@ export default class {
     labels = []
     color = 'gray'
     app = 'ray'
+    disabled = false
 
     constructor(event) {
         this.event = event
         this.collapsed = false
         this.labels = this.collectLabels()
         this.color = this.detectColor()
+    }
+
+    disable() {
+        this.disabled = true
     }
 
     setCollapsed(state) {

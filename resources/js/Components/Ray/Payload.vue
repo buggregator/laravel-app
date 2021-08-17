@@ -4,9 +4,11 @@
             class="flex-grow"
             :is="component"
             :payload="payload"
+            :disabled="disabled"
+            v-on:disable="$emit('disable')"
             v-on:delete="deleteEvent"
         ></component>
-        <Origin class="mt-1" :origin="payload.origin"/>
+        <Origin class="mt-3" :origin="payload.origin"/>
     </div>
 </template>
 
@@ -44,7 +46,11 @@ import Origin from "./Origin";
 export default {
     components: {Origin, ...components},
     props: {
-        payload: Object
+        payload: Object,
+        disabled: {
+            type: Boolean,
+            default: true
+        }
     },
     methods: {
         deleteEvent() {

@@ -3,6 +3,8 @@
         <EventPayload
             v-for="payload in event.payloads"
             :payload="payload"
+            :disabled="event.disabled"
+            v-on:disable="event.disable()"
             v-on:delete="$emit('deleteEvent')"
         />
     </Event>

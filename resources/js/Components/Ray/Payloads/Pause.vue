@@ -1,6 +1,6 @@
 <template>
     <div ref="trace" class="flex">
-        <button :disabled="!active" @click="continueExecution"
+        <button :disabled="disabled" @click="continueExecution"
                 class="px-5 py-2 flex items-center space-x-3 bg-gray-100 rounded-l-full border border-gray-200 text-sm font-medium hover:bg-gray-50 active:bg-grey-300 focus:outline-none disabled:opacity-50">
             <div class="w-3 h-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 20 20">
@@ -10,7 +10,7 @@
 
             <span>Continue</span>
         </button>
-        <button :disabled="!active" @click="stopExecution"
+        <button :disabled="disabled" @click="stopExecution"
                 class="px-5 py-2 flex items-center space-x-3 bg-gray-100 border border-l-0 border-gray-200 rounded-r-full text-sm font-medium hover:bg-gray-50 active:bg-grey-300 focus:outline-none disabled:opacity-50">
             <div class="w-3 h-3 bg-red-700"></div>
             <span>Stop execution</span>
@@ -21,20 +21,19 @@
 <script>
 export default {
     props: {
-        payload: Object
-    },
-    data() {
-        return {
-            active: true
+        payload: Object,
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
     methods: {
         continueExecution() {
-            this.active = false
+            this.$emit('disable')
             axios.delete(`/locks/${this.hash}`)
         },
         stopExecution() {
-            this.active = false
+            this.$emit('disable')
             axios.delete(`/locks/${this.hash}`, {
                 params: {stop_execution: true}
             })

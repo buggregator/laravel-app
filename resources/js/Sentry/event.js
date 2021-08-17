@@ -15,6 +15,10 @@ export default class {
         this.collapsed = state
     }
 
+    get serverName() {
+        return this.event.server_name
+    }
+
     get type() {
         return 'Sentry'
     }
