@@ -34,6 +34,7 @@ import {computed} from 'vue';
 import {useStore} from "vuex";
 import RayEventComponent from "@/Components/Ray/Event";
 import SentryEventComponent from "@/Components/Sentry/Event";
+import SlackEventComponent from "@/Components/Slack/Event";
 import {Head, Link} from '@inertiajs/inertia-vue3';
 import Screens from "@/Components/Layout/Screens";
 import WsConnectionStatus from "@/Components/UI/WsConnectionStatus";
@@ -42,6 +43,7 @@ import Colors from "@/Components/Layout/Colors";
 
 import RayEvent from "@/Ray/event";
 import SentryEvent from "@/Sentry/event";
+import SlackEvent from "@/Slack/event";
 
 export default {
     components: {
@@ -49,7 +51,7 @@ export default {
         Labels,
         WsConnectionStatus, Label,
         Screens, Head, Link,
-        RayEventComponent, SentryEventComponent
+        RayEventComponent, SentryEventComponent, SlackEventComponent
     },
 
     computed: {
@@ -62,6 +64,8 @@ export default {
         eventComponent(event) {
             if (event instanceof SentryEvent) {
                 return 'SentryEventComponent'
+            }  else if (event instanceof SlackEvent) {
+                return 'SlackEventComponent'
             }
 
             return 'RayEventComponent'

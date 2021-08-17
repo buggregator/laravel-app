@@ -13,6 +13,7 @@ const labelsMap = {
     view: 'View',
     eloquent_model: 'Eloquent model',
     executed_query: 'Query',
+    application_log: 'Monolog',
     log: 'Log',
     custom: null
 }

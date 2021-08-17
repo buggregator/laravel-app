@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Ray;
 use App\Http\Controllers\Sentry;
+use App\Http\Controllers\Slack;
 use App\Http\Controllers\ShowEventsAction;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,5 @@ Route::post('api/{projectId}/store', Sentry\StoreEventAction::class);
 Route::post('api/{projectId}/envelope', function (\Illuminate\Http\Request $request) {
 
 });
+
+Route::post('slack', Slack\StoreEventAction::class);

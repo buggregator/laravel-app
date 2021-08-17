@@ -16,7 +16,7 @@ const componentsMap = {
     trace: 'Trace',
     caller: 'Caller',
     executed_query: 'Query',
-    log: 'Value',
+    log: 'Values',
     measure: 'Measure',
     json_string: 'Json',
     carbon: 'Carbon',
@@ -27,6 +27,7 @@ const componentsMap = {
     response: 'Response',
     exception: 'Exception',
     create_lock: 'Pause',
+    application_log: 'ApplicationLog',
     default: 'Default'
 }
 

@@ -3,6 +3,7 @@ import {createStore} from "vuex";
 import SfdumpFunc from './Utils/dumper'
 import RayEvent from "./Ray/event";
 import SentryEvent from "./Sentry/event";
+import SlackEvent from "./Slack/event";
 import {notify} from "@kyvg/vue3-notification";
 import ReconnectingWebSocket from 'reconnecting-websocket';
 
@@ -63,6 +64,9 @@ export function init() {
             }
         } else if (json.type == 'sentry') {
             const event = new SentryEvent(json.data);
+            store.commit('pushEvent', event)
+        } else if (json.type == 'slack') {
+            const event = new SlackEvent(json.data);
             store.commit('pushEvent', event)
         }
     })

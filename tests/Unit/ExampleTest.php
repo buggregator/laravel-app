@@ -2,6 +2,8 @@
 
 namespace Tests\Unit;
 
+use Monolog\Handler\SlackWebhookHandler;
+use Monolog\Handler\SocketHandler;
 use PHPUnit\Framework\TestCase;
 
 class ExampleTest extends TestCase
@@ -13,6 +15,9 @@ class ExampleTest extends TestCase
      */
     public function test_example()
     {
-        $this->assertTrue(true);
+        logger()->debug('test');
+        $handler = new SlackWebhookHandler('http://127.0.0.1:8000/slack');
+
+        $handler->handle(['message' => 'hello', 'level' => 'debug', 'extra' => [], 'context' => []]);
     }
 }
