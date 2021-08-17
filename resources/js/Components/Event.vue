@@ -18,9 +18,12 @@
                 </button>
             </div>
 
-            <div class="flex flex-wrap flex-row-reverse gap-2 justify-end">
+            <div class="flex flex-wrap flex-row-reverse gap-2 justify-start">
                 <Label :class="`border-${event.color}-600 text-${event.color}-600`">
                     {{ date }}
+                </Label>
+                <Label class="border-blue-600 text-blue-600">
+                    {{ event.app }}
                 </Label>
 
                 <div v-if="hasLabels" class="flex gap-2">

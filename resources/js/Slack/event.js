@@ -11,6 +11,7 @@ export default class {
     date = moment()
     labels = ['Monolog']
     id = uuidv4()
+    app = 'monolog'
 
     constructor(event) {
         this.event = event

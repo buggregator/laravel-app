@@ -4,7 +4,7 @@
             {{ formattedSql }}
         </ssh-pre>
 
-        <Table>
+        <Table class="mt-3">
             <TableRow title="Connection name">
                 {{ this.payload.content.connection_name }}
             </TableRow>

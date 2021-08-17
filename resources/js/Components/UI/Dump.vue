@@ -18,7 +18,11 @@ export default {
     },
     computed: {
         isDump() {
-            return this.value.includes('sf-dump')
+            if (typeof this.value == 'string') {
+                return this.value.includes('sf-dump')
+            }
+
+            return false
         },
         cleanHtml() {
             if (this.isDump) {

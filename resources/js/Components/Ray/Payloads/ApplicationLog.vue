@@ -1,11 +1,9 @@
 <template>
-    <Dump :value="payload.content.value"/>
+    <pre class="text-xs" v-html="payload.content.value"/>
 </template>
 
 <script>
-import Dump from "@/Components/UI//Dump";
 export default {
-    components: {Dump},
     props: {
         payload: Object
     }

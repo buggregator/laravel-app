@@ -2,6 +2,7 @@
 <?php
 
 use Laravel\Octane\RequestContext;
+use Laravel\Octane\Stream;
 use Laravel\Octane\Swoole\Handlers\OnManagerStart;
 use Laravel\Octane\Swoole\Handlers\OnServerStart;
 use Laravel\Octane\Swoole\Handlers\OnWorkerStart;
@@ -124,15 +125,42 @@ $server->on('request', function ($request, $response) use ($server, $workerState
 });
 
 $server->on('open', function (\Swoole\WebSocket\Server $server, Request $request) use ($workerState) {
+    $workerState->lastRequestTime = microtime(true);
+
     $workerState->tables['connections']->set((string)$request->fd, ['client' => $request->fd]);
+
+    Stream::request(
+        "WS:OPEN:[$request->fd]",
+        "/",
+        101,
+        (microtime(true) - $workerState->lastRequestTime) * 1000,
+    );
 });
 
 $server->on('close', function (\Swoole\WebSocket\Server $server, int $fd) use ($workerState) {
+    $workerState->lastRequestTime = microtime(true);
+
     $workerState->tables['connections']->del((string)$fd);
+
+    Stream::request(
+        "WS:CLOSE:[$fd]",
+        "/",
+        200,
+        (microtime(true) - $workerState->lastRequestTime) * 1000,
+    );
 });
 
 $server->on('disconnect', function (Server $server, int $fd) use ($workerState) {
+    $workerState->lastRequestTime = microtime(true);
+
     $workerState->tables['connections']->del((string)$fd);
+
+    Stream::request(
+        "WS:DISCONNECT:[$fd]",
+        "/",
+        200,
+        (microtime(true) - $workerState->lastRequestTime) * 1000,
+    );
 });
 
 $server->on('Message', function (\Swoole\WebSocket\Server $server, Frame $frame) use ($workerState) {

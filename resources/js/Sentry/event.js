@@ -2,8 +2,9 @@ import moment from "moment";
 
 export default class {
     date = moment()
-    labels = ['Sentry']
+    labels = ['exception']
     color = 'pink'
+    app = 'sentry'
 
     constructor(event) {
         this.event = event

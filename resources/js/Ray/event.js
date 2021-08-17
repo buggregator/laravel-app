@@ -7,13 +7,14 @@ const labelsMap = {
     caller: 'Caller',
     measure: 'Measure',
     event: 'Event',
-    job: 'Job',
+    job_event: 'Job',
     json_string: 'Json',
     cache: 'Cache',
     view: 'View',
     eloquent_model: 'Eloquent model',
     executed_query: 'Query',
     application_log: 'Monolog',
+    mailable: 'Mail',
     log: 'Log',
     custom: null
 }
@@ -22,6 +23,7 @@ export default class {
     date = moment()
     labels = []
     color = 'gray'
+    app = 'ray'
 
     constructor(event) {
         this.event = event

@@ -37,7 +37,7 @@ Run it from [Docker Hub](https://hub.docker.com/repository/docker/butschster/ray
 provided [Dockerfile](https://github.com/butschster/ray-server/blob/master/Dockerfile)
 
 ```
-docker run -p 23517:8000 butschster/ray-server:v1.5
+docker run -p 23517:8000 butschster/ray-server:v1.6
 ```
 
 ### Configuration
@@ -49,6 +49,7 @@ docker run -p 23517:8000 butschster/ray-server:v1.5
 4. Configure your .env for Sentry package
     - `SENTRY_LARAVEL_DSN=http://sentry@127.0.0.1:23517/1` - Sentry DSN
 5. Configure your .env for monolog logs
+    - `LOG_CHANNEL=slack`
     - `LOG_SLACK_WEBHOOK_URL=http://127.0.0.1:23517/slack`
 6. Open http://127.0.0.1:23517 url in your browser
 
@@ -116,10 +117,10 @@ Ray server is open-sourced software licensed under the MIT license.
 - [x] Remove
 - [x] Hide/Show events
 - [x] Sticky header
-- [ ] Application log
-- [ ] Dark theme
-- [ ] Show Http client requests
-- [ ] Mailable
-- [ ] Show WordPress errors
+- [x] Application log
+- [x] Show Http client requests
+- [x] Mailable
 - [x] Sentry
 - [x] Monolog
+- [ ] Show WordPress errors
+- [ ] Dark theme

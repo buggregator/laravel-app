@@ -27,6 +27,8 @@ const componentsMap = {
     response: 'Response',
     exception: 'Exception',
     create_lock: 'Pause',
+    event: 'Event',
+    mailable: 'Mailable',
     application_log: 'ApplicationLog',
     default: 'Default'
 }
