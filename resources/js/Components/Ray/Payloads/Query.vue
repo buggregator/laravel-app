@@ -17,8 +17,8 @@
 
 <script>
 import SshPre from 'simple-syntax-highlighter'
-import Table from "../UI/Table";
-import TableRow from "../UI/TableRow";
+import Table from "@/Components/UI//Table";
+import TableRow from "@/Components/UI//TableRow";
 
 export default {
     components: {TableRow, Table, SshPre},

@@ -29,8 +29,8 @@
 
 <script>
 import SshPre from 'simple-syntax-highlighter'
-import Dump from "./Dump";
-import Collapsed from "../UI/Collapsed";
+import Dump from "@/Components/UI/Dump";
+import Collapsed from "@/Components/UI//Collapsed";
 
 export default {
     components: {Collapsed, Dump, SshPre},

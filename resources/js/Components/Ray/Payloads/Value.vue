@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Dump from "./Dump";
+import Dump from "@/Components/UI//Dump";
 export default {
     components: {Dump},
     props: {
