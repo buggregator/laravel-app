@@ -1,21 +1,23 @@
 ![Ray server (2)](https://user-images.githubusercontent.com/773481/129449481-73563d54-0402-4443-9f24-a4ed43a55833.png)
 
-
 # Debug your projects with Ray server
-
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
 
-Ray server is a beautiful, lightweight php app build on Laravel that helps you debug your app. It runs without installation on multiple platforms.
+Ray server is a beautiful, lightweight web server build on Laravel that helps you debug your app. It runs without installation on multiple platforms.
 
-Ray server will help you to debug your projects with a [Ray debug tool](https://github.com/spatie/ray) from [spatie](https://spatie.be/). Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash applications. After installing one of the libraries to send information to Ray, you can use the ray function to quickly dump stuff. Any variable(s) that you pass to ray will be displayed. [Read more](https://spatie.be/docs/ray/v1/introduction)
+Ray server will help you to debug your projects with a [Ray debug tool](https://github.com/spatie/ray) from [spatie](https://spatie.be/). 
+Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash applications. After installing one of the libraries to send information to Ray, you can use the ray function to quickly dump stuff. Any variable(s) that you pass to ray will be displayed. [Read more](https://spatie.be/docs/ray/v1/introduction)
+
+### Features
+- Compatible with `spatie/ray` package
+- Compatible with Sentry (See https://docs.sentry.io/platforms)
 
 ### Technological stack
 
 - Laravel 8
 - Inertia
-- Swoole 
-- Octane Http/Websocket server
+- Swoole Http/Websocket server
 - Vue
 - TailwindCSS
 
@@ -29,7 +31,7 @@ You can run Ray server via docker
 Run it from [Docker Hub](https://hub.docker.com/repository/docker/butschster/ray-server) or using the provided [Dockerfile](https://github.com/butschster/ray-server/blob/master/Dockerfile)
 
 ```
-docker run -p 23517:8000 butschster/ray-server:v1.3
+docker run -p 23517:8000 butschster/ray-server:v1.4
 ```
 
 ### Configuration
@@ -38,6 +40,8 @@ docker run -p 23517:8000 butschster/ray-server:v1.3
 2. Configure your .env for Ray package
     - `RAY_HOST=127.0.0.1` - Ray server host
     - `RAY_PORT=23517` - Ray server port
+2. Configure your .env for Sentry package
+    - `SENTRY_LARAVEL_DSN=http://sentry@127.0.0.1:23517/1` - Sentry DSN
 3. Open http://127.0.0.1:23517 url in your browser
 
 Enjoy!
@@ -108,3 +112,4 @@ Ray server is open-sourced software licensed under the MIT license.
 - [ ] Show Http client requests
 - [ ] Mailable
 - [ ] Show WordPress errors
+- [x] Sentry

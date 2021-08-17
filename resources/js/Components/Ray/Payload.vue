@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-items-stretch w-full lg:w-3/4">
+    <div class="flex flex-col justify-items-stretch w-full">
         <component
             class="flex-grow"
             :is="component"
@@ -33,7 +33,7 @@ const componentsMap = {
 let components = {};
 
 _.each(componentsMap, (name, type) => {
-    components[name] = require(`./${name}`).default
+    components[name] = require(`./Payloads/${name}`).default
 })
 
 import Origin from "./Origin";

@@ -3,45 +3,68 @@
 
     <div>
         <div class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
-            <Screens />
+            <Screens/>
             <div class="p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2">
-                <Labels />
-                <Colors />
+                <Labels/>
+                <Colors/>
             </div>
         </div>
 
         <div v-if="hasEvents" class="flex flex-col">
             <div v-for="event in events" class="border-b border-gray-100">
-                <Event :event="event"/>
+                <component
+                    class="flex-grow"
+                    :is="eventComponent(event)"
+                    :event="event"
+                ></component>
+
+                <Event/>
             </div>
         </div>
-        <WsConnectionStatus v-else class="mt-5 mx-3 p-2 md:p-3 lg:p-4 border border-gray-300 rounded bg-gray-100" />
-        <notifications />
+
+        <WsConnectionStatus v-else class="mt-5 mx-3 p-2 md:p-3 lg:p-4 border border-gray-300 rounded bg-gray-100"/>
+
+        <notifications/>
     </div>
 </template>
 
 <script>
-import Label from "../Components/UI/Label";
+import Label from "@/Components/UI/Label";
 import {computed} from 'vue';
 import {useStore} from "vuex";
-import Event from "../Components/Event";
+import RayEventComponent from "@/Components/Ray/Event";
+import SentryEventComponent from "@/Components/Sentry/Event";
 import {Head, Link} from '@inertiajs/inertia-vue3';
-import Screens from "../Components/Layout/Screens";
-import WsConnectionStatus from "../Components/UI/WsConnectionStatus";
-import Labels from "../Components/Layout/Labels";
-import Colors from "../Components/Layout/Colors";
+import Screens from "@/Components/Layout/Screens";
+import WsConnectionStatus from "@/Components/UI/WsConnectionStatus";
+import Labels from "@/Components/Layout/Labels";
+import Colors from "@/Components/Layout/Colors";
+
+import RayEvent from "@/Ray/event";
+import SentryEvent from "@/Sentry/event";
 
 export default {
     components: {
         Colors,
         Labels,
         WsConnectionStatus, Label,
-        Screens, Head, Link, Event
+        Screens, Head, Link,
+        RayEventComponent, SentryEventComponent
     },
 
     computed: {
         hasEvents() {
             return _.size(this.events) > 0
+        }
+    },
+
+    methods: {
+        eventComponent(event) {
+            if (event instanceof SentryEvent) {
+                return 'SentryEventComponent'
+            }
+
+            return 'RayEventComponent'
         }
     },
 

@@ -1,7 +1,8 @@
 import moment from "moment";
 import {createStore} from "vuex";
-import SfdumpFunc from '../dumper'
-import {RayEvent} from "./event";
+import SfdumpFunc from './Utils/dumper'
+import RayEvent from "./Ray/event";
+import SentryEvent from "./Sentry/event";
 import {notify} from "@kyvg/vue3-notification";
 import ReconnectingWebSocket from 'reconnecting-websocket';
 
@@ -36,31 +37,36 @@ export function init() {
     const [host, port] = window.location.host.split(':')
 
     listenRayEvents(host, port, function (e) {
-        const event = new RayEvent(JSON.parse(e.data));
+        let json = JSON.parse(e.data);
 
-        if (event.isType('clear_all')) {
-            store.commit('clearEvents')
-        } else if (event.isType('new_screen')) {
-            store.commit('switchScreen', event.content('name'))
-        } else if (event.isType('remove')) {
-            store.commit('deleteEvent', event.uuid)
-        } else if (event.isType('hide')) {
-            store.commit('toggleEventState', [event.uuid, true])
-        } else if (event.isType('show')) {
-            store.commit('toggleEventState', [event.uuid, false])
-        } else if (event.isType('notify')) {
-            notify({
-                title: "Hello from Ray",
-                text: event.payloads[0].content.value,
-                duration: -1
-            })
-        } else {
+        if (json.type == 'ray') {
+            const event = new RayEvent(json.data);
+
+            if (event.isType('clear_all')) {
+                store.commit('clearEvents')
+            } else if (event.isType('new_screen')) {
+                store.commit('switchScreen', event.content('name'))
+            } else if (event.isType('remove')) {
+                store.commit('deleteEvent', event.uuid)
+            } else if (event.isType('hide')) {
+                store.commit('toggleEventState', [event.uuid, true])
+            } else if (event.isType('show')) {
+                store.commit('toggleEventState', [event.uuid, false])
+            } else if (event.isType('notify')) {
+                notify({
+                    title: "Hello from Ray",
+                    text: event.payloads[0].content.value,
+                    duration: -1
+                })
+            } else {
+                store.commit('pushEvent', event)
+            }
+        } else if (json.type == 'sentry') {
+            const event = new SentryEvent(json.data);
             store.commit('pushEvent', event)
         }
     })
 }
-
-const maxEvents = 10
 
 export const store = createStore({
     state() {
@@ -68,7 +74,7 @@ export const store = createStore({
             wsConnected: false,
             currentScreen: generateScreenName(),
             screens: [],
-            availableColors: ['gray', 'purple', 'green', 'orange', 'red', 'blue'],
+            availableColors: ['gray', 'purple', 'green', 'orange', 'red', 'blue', 'pink'],
             selectedLabels: [],
             selectedColors: [],
             events: {}
@@ -183,12 +189,6 @@ export const store = createStore({
             } else {
                 state.events[state.currentScreen][event.uuid] = event
             }
-
-            // Remain only last events
-            // state.events[state.currentScreen] = _.keyBy(
-            //     Object.entries(state.events[state.currentScreen]).slice(maxEvents * -1).map(entry => entry[1]),
-            //     'uuid'
-            // )
 
         }
     }

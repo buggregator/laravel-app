@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import EventPayload from "./Payloads/EventPayload";
-import Label from "./UI/Label";
+import EventPayload from "./Payload";
+import Label from "@/Components/UI//Label";
 import {useStore} from "vuex";
 
 export default {

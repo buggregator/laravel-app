@@ -1,5 +1,6 @@
 <template>
     <div class="flex flex-col md:flex-row px-4 py-2 space-y-2 md:space-y-0 md:justify-between items-center bg-gray-100">
+
         <h3 class="text-gray-700 font-bold flex space-x-2 items-center" v-if="currentScreen">
             <span class="text-xs">{{ currentScreen }}</span>
 
@@ -9,6 +10,7 @@
                 </svg>
             </button>
         </h3>
+
         <div class="flex gap-2 items-center justify-center">
             <template v-for="screen in screens">
                 <WsConnectionIcon class="h-5 w-5" v-if="currentScreen == screen"/>

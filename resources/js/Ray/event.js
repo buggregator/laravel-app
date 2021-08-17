@@ -17,7 +17,7 @@ const labelsMap = {
     custom: null
 }
 
-export class RayEvent {
+export default class {
     date = moment()
     labels = []
     color = 'gray'

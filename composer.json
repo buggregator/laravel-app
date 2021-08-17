@@ -14,7 +14,7 @@
         "laravel/octane": "^1.0",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
-        "textalk/websocket": "^1.5",
+        "php-http/message": "^1.11",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
