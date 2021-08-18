@@ -1,9 +1,7 @@
 <template>
     <div ref="trace">
-        <div class="bg-gray-50 border border-gray-200 py-2 flex-col justify-center space-y-2">
-            <div class="border-b border-l border-r border-gray-200 flex-col justify-center">
-                <File :file="file" v-for="(file, i) in payload.content.frames" />
-            </div>
+        <div class="flex-col justify-center border divide-y">
+            <File :file="file" v-for="(file, i) in payload.content.frames" />
         </div>
     </div>
 </template>

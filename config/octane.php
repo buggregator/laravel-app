@@ -165,6 +165,10 @@ return [
         'connections:1000' => [
             'client' => 'int',
         ],
+        'events:50000' => [
+            'timestamp' => 'float',
+            'event' => 'string',
+        ],
     ],
 
     /*

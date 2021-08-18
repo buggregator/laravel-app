@@ -1,6 +1,6 @@
 <template>
     <div class="text-xs cursor-pointer" @click="collapsed = !collapsed">
-        <div class="border-b bg-gray-50 text-gray-700 break-all font-semibold p-1 px-3 flex justify-between">
+        <div class="bg-gray-50 text-gray-700 break-all font-semibold p-1 px-3 flex justify-between">
             <div>
                 {{ file.file_name }}
                 <span v-if="file.function" class="text-gray-400">in</span>

@@ -1,6 +1,6 @@
 <template>
-    <div class="border-4 border-gray-200 rounded bg-white" :class="{'cursor-pointer': !isOpen}" @click="isOpen = !isOpen">
-        <h3 class="text-gray-800 font-semibold flex justify-between items-center border-b border-gray-200 p-3">
+    <div class="border rounded bg-white" :class="{'cursor-pointer': !isOpen}" @click="isOpen = !isOpen">
+        <h3 class="text-gray-800 font-semibold flex justify-between items-center border-b p-3">
             {{ title }}
 
             <div class="w-5 h-5 border border-gray-300 bg-white py-1 rounded">

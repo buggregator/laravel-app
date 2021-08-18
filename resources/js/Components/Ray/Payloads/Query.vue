@@ -1,10 +1,9 @@
 <template>
     <div ref="trace">
-        <ssh-pre language="sql" class="text-sm">
+        <ssh-pre language="sql" class="border-b-0">
             {{ formattedSql }}
         </ssh-pre>
-
-        <Table class="mt-3">
+        <Table>
             <TableRow title="Connection name">
                 {{ this.payload.content.connection_name }}
             </TableRow>

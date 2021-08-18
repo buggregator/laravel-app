@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Sentry;
 
+use App\EventsRepository;
 use App\Http\Controllers\Controller;
 use App\Sentry\Contracts\EventHandler;
 use App\Websocket\ConnectionsRepository;
@@ -15,6 +16,7 @@ class StoreEventAction extends Controller
         Request               $request,
         Server                $server,
         ConnectionsRepository $connections,
+        EventsRepository      $events,
         EventHandler          $handler
     ): void
     {
@@ -23,12 +25,12 @@ class StoreEventAction extends Controller
         );
 
         $event = $handler->handle(json_decode($stream->getContents(), true));
+        $event = ['type' => 'sentry', 'data' => $event];
+
+        $events->store($event);
 
         foreach ($connections->all() as $client => $connection) {
-            $server->push($client, json_encode([
-                'type' => 'sentry',
-                'data' => $event
-            ]));
+            $server->push($client, json_encode($event));
         }
     }
 }

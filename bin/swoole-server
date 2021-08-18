@@ -129,6 +129,17 @@ $server->on('open', function (\Swoole\WebSocket\Server $server, Request $request
 
     $workerState->tables['connections']->set((string)$request->fd, ['client' => $request->fd]);
 
+//    $events = [];
+//    foreach ($workerState->tables['events'] as $data) {
+//        $events[$data['timestamp']] = $data['event'];
+//    }
+//
+//    ksort($events);
+//
+//    foreach ($events as $event) {
+//        $server->push($request->fd, $event);
+//    }
+
     Stream::request(
         "WS:OPEN:[$request->fd]",
         "/",

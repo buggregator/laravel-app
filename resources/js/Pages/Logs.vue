@@ -1,31 +1,31 @@
 <template>
     <Head :title="currentScreen"/>
 
-    <div>
-        <div class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
+    <div class="flex flex-col h-screen">
+        <header class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
             <Screens/>
             <div class="p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2">
                 <Labels/>
                 <Colors/>
             </div>
-        </div>
+        </header>
 
-        <div v-if="hasEvents" class="flex flex-col">
-            <div v-for="event in events" class="border-b border-gray-100">
-                <component
-                    class="flex-grow"
-                    :is="eventComponent(event)"
-                    :event="event"
-                ></component>
+        <main v-if="hasEvents" class="flex flex-col divide-y border-b">
+            <component
+                class="flex-grow"
+                :is="eventComponent(event)"
+                :event="event"
+                v-for="event in events"
+            ></component>
+        </main>
 
-                <Event/>
-            </div>
-        </div>
-
-        <WsConnectionStatus v-else class="mt-5 mx-3 p-2 md:p-3 lg:p-4 border border-gray-300 rounded bg-gray-100"/>
-
-        <notifications/>
+        <section v-else class="flex-1 p-4 flex flex-col justify-center items-center bg-gray-50">
+            <WsConnectionStatus/>
+<!--            <Tips />-->
+        </section>
     </div>
+
+    <notifications/>
 </template>
 
 <script>
@@ -40,6 +40,7 @@ import Screens from "@/Components/Layout/Screens";
 import WsConnectionStatus from "@/Components/UI/WsConnectionStatus";
 import Labels from "@/Components/Layout/Labels";
 import Colors from "@/Components/Layout/Colors";
+import Tips from "@/Components/Layout/Tips";
 
 import RayEvent from "@/Ray/event";
 import SentryEvent from "@/Sentry/event";
@@ -47,10 +48,9 @@ import SlackEvent from "@/Slack/event";
 
 export default {
     components: {
-        Colors,
-        Labels,
-        WsConnectionStatus, Label,
-        Screens, Head, Link,
+        Colors, Labels,Screens,
+        WsConnectionStatus, Tips,
+        Label, Head, Link,
         RayEventComponent, SentryEventComponent, SlackEventComponent
     },
 

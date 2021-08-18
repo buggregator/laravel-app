@@ -5,4 +5,5 @@
 
 .ssh-pre {
     margin-top: 0 !important;
+    @apply p-2 md:px-3 lg:px-4 text-2xs sm:text-xs md:text-sm rounded-none border;
 }

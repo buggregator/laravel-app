@@ -1,9 +1,13 @@
 <template>
-    <pre class="text-xs" v-html="payload.content.value"/>
+    <ssh-pre>
+        {{ payload.content.value }}
+    </ssh-pre>
 </template>
 
 <script>
+import SshPre from 'simple-syntax-highlighter'
 export default {
+    components: {SshPre},
     props: {
         payload: Object
     }

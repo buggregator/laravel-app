@@ -13,7 +13,7 @@
         </div>
 
         <Collapsed class="mt-3" v-if="payload.content.content" title="HTML">
-            <ssh-pre language="html" class="text-sm">
+            <ssh-pre language="html">
                 {{ payload.content.content }}
             </ssh-pre>
         </Collapsed>

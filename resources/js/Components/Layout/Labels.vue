@@ -1,5 +1,5 @@
 <template>
-    <div v-if="hasLabels" class="flex flex-row flex-wrap gap-2 items-center justify-center">
+    <div class="flex flex-row flex-wrap gap-2 items-center justify-center">
         <Label @click="toggleLabel(label)"
                v-for="label in labels"
                class="cursor-pointer"

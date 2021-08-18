@@ -4,7 +4,7 @@
          :class="{'overflow-hidden shadow-bottom h-20 md:h-12 lg:h-16': event.collapsed}">
         <div
             :class="{'md:bg-gray-50': !event.collapsed}"
-            class="w-full md:w-1/4 pb-3 flex justify-between sm:items-center md:items-start border-r-1 border-gray-100 md:px-3 md:py-3 lg:px-5 lg:py-5 border-r">
+            class="w-full md:w-1/4 pb-3 flex justify-between sm:items-center md:items-start md:px-3 md:py-3 lg:px-5 lg:py-5 md:border-r">
             <div class="flex items-center space-x-2">
                 <button @click="toggle"
                         class="w-5 h-5 leading-none rounded-full opacity-90 hover:opacity-100 transition transition-all hover:border-4 flex items-center justify-center"

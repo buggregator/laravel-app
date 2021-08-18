@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Ray;
 
+use App\EventsRepository;
 use App\Http\Controllers\Controller;
 use App\Ray\Contracts\EventHandler;
 use App\Websocket\ConnectionsRepository;
@@ -17,6 +18,7 @@ class StoreEventAction extends Controller
         Server                $server,
         Repository            $cache,
         ConnectionsRepository $connections,
+        EventsRepository      $events,
         EventHandler          $handler
     ): void
     {
@@ -29,11 +31,11 @@ class StoreEventAction extends Controller
 
         $event = $handler->handle($request->all());
 
+        $event = ['type' => 'ray', 'data' => $event];
+        $events->store($event);
+
         foreach ($connections->all() as $client => $connection) {
-            $server->push($client, json_encode([
-                'type' => 'ray',
-                'data' => $event
-            ]));
+            $server->push($client, json_encode($event));
         }
     }
 }
