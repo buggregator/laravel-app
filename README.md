@@ -4,7 +4,7 @@
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
 
-Ray server is a beautiful, lightweight web server build on Laravel that helps you debug your app. It runs without
+Ray server is a beautiful, lightweight web server built on Laravel that helps debugging your app. It runs without
 installation on multiple platforms.
 
 Ray server will help you to debug your projects with a [Ray debug tool](https://github.com/spatie/ray)
