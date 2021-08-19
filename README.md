@@ -37,7 +37,7 @@ Run it from [Docker Hub](https://hub.docker.com/repository/docker/butschster/ray
 provided [Dockerfile](https://github.com/butschster/ray-server/blob/master/Dockerfile)
 
 ```
-docker run -p 23517:8000 butschster/ray-server:v1.7
+docker run --pull always -p 23517:8000 butschster/ray-server:latest
 ```
 
 ### Configuration

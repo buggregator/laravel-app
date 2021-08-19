@@ -3,25 +3,25 @@
         <div>
             <h3 class="text-gray-700 font-bold flex space-x-2 items-center" v-if="currentScreen">
                 <span class="text-xs">{{ currentScreen }}</span>
-
-                <button class="w-4 h-4" @click="newScreen">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
-                    </svg>
-                </button>
             </h3>
         </div>
 
         <nav class="flex gap-2 items-center justify-center">
             <template v-for="screen in screens">
                 <WsConnectionIcon class="h-5 w-5" v-if="currentScreen == screen"/>
-                <div v-else class="w-3 h-3 cursor-pointer rounded-full border border-blue-500" @click="switchScreen(screen)"></div>
+                <div v-else class="w-4 h-4 cursor-pointer rounded-full border-2 border-blue-400" @click="switchScreen(screen)"></div>
             </template>
+
+
+            <button class="w-4 h-4 flex text-xs font-bold items-center justify-center cursor-pointer rounded-full border-2 border-gray-300 text-gray-300"
+                    @click="newScreen">
+                +
+            </button>
         </nav>
 
         <button
             @click="clearEvents"
-            class="px-3 py-1 text-xs bg-red-800 text-white rounded-sm hover:bg-red-700 transition transition-all duration-300"
+            class="px-3 py-1 ring ring-red-300 text-xs bg-red-800 text-white rounded-sm hover:bg-red-700 transition transition-all duration-300"
         >
             Clear screen
         </button>
@@ -40,10 +40,10 @@ export default {
             this.store.commit('switchScreen');
         },
         switchScreen(screen) {
-            this.store.commit('switchScreen', screen);
+            this.store.commit('switchScreen', screen)
         },
         clearEvents() {
-            this.store.commit('clearEvents');
+            this.store.commit('clearEvents')
         }
     },
 
@@ -51,7 +51,7 @@ export default {
         const store = useStore();
 
         let screens = computed(function () {
-            return store.state.screens
+            return store.getters.screens
         });
 
         let currentScreen = computed(function () {
@@ -59,7 +59,7 @@ export default {
         });
 
         let totalEvents = computed(function () {
-            return _.size(store.getters.filteredEvents)
+            return store.getters.totalEvents
         });
 
         return {

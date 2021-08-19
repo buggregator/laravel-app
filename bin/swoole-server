@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use Laravel\Octane\ApplicationFactory;
 use Laravel\Octane\RequestContext;
 use Laravel\Octane\Stream;
 use Laravel\Octane\Swoole\Handlers\OnManagerStart;
@@ -17,6 +18,8 @@ use Swoole\WebSocket\Frame;
 ini_set('display_errors', 'stderr');
 
 require_once __DIR__ . '/../vendor/laravel/octane/src/Stream.php';
+require_once __DIR__ . '/../vendor/laravel/octane/src/DispatchesEvents.php';
+require_once __DIR__ . '/../vendor/laravel/octane/src/ApplicationFactory.php';
 
 $bootstrap = fn($serverState) => require __DIR__ . '/../vendor/laravel/octane/bin/bootstrap.php';
 
@@ -79,12 +82,15 @@ $server->on('managerstart', fn() => $bootstrap($serverState) && (new OnManagerSt
 */
 
 require_once __DIR__ . '/../vendor/laravel/octane/bin/WorkerState.php';
+require_once __DIR__ . '/../app/Websocket/Worker.php';
 
 $workerState = new WorkerState;
 
 $workerState->cacheTable = require __DIR__ . '/../vendor/laravel/octane/bin/createSwooleCacheTable.php';
 $workerState->timerTable = $timerTable;
 $workerState->tables = require __DIR__ . '/../vendor/laravel/octane/bin/createSwooleTables.php';
+
+$connections = $workerState->tables['connections'];
 
 $server->on('workerstart', fn(Server $server, $workerId) => (fn($basePath) => (new OnWorkerStart(
     new SwooleExtension, $basePath, $serverState, $workerState
@@ -127,18 +133,11 @@ $server->on('request', function ($request, $response) use ($server, $workerState
 $server->on('open', function (\Swoole\WebSocket\Server $server, Request $request) use ($workerState) {
     $workerState->lastRequestTime = microtime(true);
 
-    $workerState->tables['connections']->set((string)$request->fd, ['client' => $request->fd]);
+    $wsWorker = new \App\Websocket\Worker(
+        $workerState->worker->application()
+    );
 
-//    $events = [];
-//    foreach ($workerState->tables['events'] as $data) {
-//        $events[$data['timestamp']] = $data['event'];
-//    }
-//
-//    ksort($events);
-//
-//    foreach ($events as $event) {
-//        $server->push($request->fd, $event);
-//    }
+    $wsWorker->handle(\App\Events\Websocket\ConnectionOpened::class, $request->fd);
 
     Stream::request(
         "WS:OPEN:[$request->fd]",
@@ -151,7 +150,10 @@ $server->on('open', function (\Swoole\WebSocket\Server $server, Request $request
 $server->on('close', function (\Swoole\WebSocket\Server $server, int $fd) use ($workerState) {
     $workerState->lastRequestTime = microtime(true);
 
-    $workerState->tables['connections']->del((string)$fd);
+    $wsWorker = new \App\Websocket\Worker(
+        $workerState->worker->application()
+    );
+    $wsWorker->handle(\App\Events\Websocket\ConnectionClosed::class, $fd);
 
     Stream::request(
         "WS:CLOSE:[$fd]",
@@ -164,7 +166,10 @@ $server->on('close', function (\Swoole\WebSocket\Server $server, int $fd) use ($
 $server->on('disconnect', function (Server $server, int $fd) use ($workerState) {
     $workerState->lastRequestTime = microtime(true);
 
-    $workerState->tables['connections']->del((string)$fd);
+    $wsWorker = new \App\Websocket\Worker(
+        $workerState->worker->application()
+    );
+    $wsWorker->handle(\App\Events\Websocket\ConnectionDisconnected::class, $fd);
 
     Stream::request(
         "WS:DISCONNECT:[$fd]",
@@ -175,7 +180,7 @@ $server->on('disconnect', function (Server $server, int $fd) use ($workerState) 
 });
 
 $server->on('Message', function (\Swoole\WebSocket\Server $server, Frame $frame) use ($workerState) {
-
+    event(new \App\Events\Websocket\MessageReceived($frame));
 });
 
 /*

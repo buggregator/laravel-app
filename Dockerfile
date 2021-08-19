@@ -21,6 +21,7 @@ RUN chmod 0777 storage -R
 
 RUN cp /app/.env.example /app/.env
 RUN cat /app/.env.example
+RUN touch /app/database/database.sqlite
 
 EXPOSE 8000
-CMD php artisan server:start --host=0.0.0.0
+CMD php artisan migrate:fresh && php artisan server:start --host=0.0.0.0

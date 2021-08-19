@@ -6,18 +6,17 @@ namespace App\Http\Controllers\Sentry;
 use App\EventsRepository;
 use App\Http\Controllers\Controller;
 use App\Sentry\Contracts\EventHandler;
-use App\Websocket\ConnectionsRepository;
+use App\WebsocketServer;
 use Illuminate\Http\Request;
-use Swoole\Http\Server;
+use Ramsey\Uuid\Uuid;
 
 class StoreEventAction extends Controller
 {
     public function __invoke(
-        Request               $request,
-        Server                $server,
-        ConnectionsRepository $connections,
-        EventsRepository      $events,
-        EventHandler          $handler
+        Request          $request,
+        WebsocketServer  $server,
+        EventsRepository $events,
+        EventHandler     $handler
     ): void
     {
         $stream = new \Http\Message\Encoding\GzipDecodeStream(
@@ -25,13 +24,10 @@ class StoreEventAction extends Controller
         );
 
         $event = $handler->handle(json_decode($stream->getContents(), true));
-        $event = ['type' => 'sentry', 'data' => $event];
+        $event = ['type' => 'sentry', 'uuid' => Uuid::uuid4()->toString(), 'data' => $event];
 
         $events->store($event);
-
-        foreach ($connections->all() as $client => $connection) {
-            $server->push($client, json_encode($event));
-        }
+        $server->sendEvent($event);
     }
 }
 

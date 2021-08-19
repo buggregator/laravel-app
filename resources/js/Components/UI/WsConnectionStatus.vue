@@ -19,7 +19,7 @@ export default {
         const store = useStore();
 
         let wsConnected = computed(function () {
-            return store.state.wsConnected
+            return store.state.ws.connected
         });
 
         return {

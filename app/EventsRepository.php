@@ -3,32 +3,32 @@ declare(strict_types=1);
 
 namespace App;
 
-use Laravel\Octane\Octane;
-use Ramsey\Uuid\Uuid;
+use App\Models\Event;
 
 class EventsRepository
 {
-    private Octane $octane;
-
-    public function __construct(Octane $octane)
-    {
-        $this->octane = $octane;
-    }
-
     public function store(array $event): void
     {
-//        $uuid = Uuid::uuid4();
-
-//        $this->octane->table('events')->set($uuid->toString(), [
-//            'timestamp' => microtime(true),
-//            'event' => json_encode($event)
-//        ]);
+        Event::create([
+            'id' => $event['uuid'],
+            'event' => $event
+        ]);
     }
 
-    public function all(): \Generator
+    public function delete(string $uuid): void
     {
-        foreach ($this->octane->table('events') as $row) {
-            yield json_decode($row['event']);
-        }
+        Event::where('id', $uuid)->delete();
+    }
+
+    public function all(): array
+    {
+        return Event::oldest()->get()->map(function (Event $event) {
+            return array_merge($event->event, ['timestamp' => $event->created_at->timestamp]);
+        })->all();
+    }
+
+    public function clear(): void
+    {
+        Event::query()->truncate();
     }
 }

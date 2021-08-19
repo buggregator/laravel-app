@@ -1,4 +1,6 @@
-import moment from "moment";
+import {Event} from "../Event"
+import {store} from "../store";
+import {notify} from "@kyvg/vue3-notification";
 
 const labelsMap = {
     create_lock: 'Pause',
@@ -19,52 +21,67 @@ const labelsMap = {
     custom: null
 }
 
-export default class {
-    date = moment()
-    labels = []
-    color = 'gray'
-    app = 'ray'
-    disabled = false
+const handlers = {
+    clear_all: (event) => {
+        store.commit('clearEvents')
+        return false
+    },
+    new_screen: (event) => {
+        store.commit('switchScreen', event.content('name'))
+        return false
+    },
+    remove: (event) => {
+        store.commit('deleteEvent', event.uuid)
+        return false
+    },
+    hide: (event) => {
+        store.commit('toggleEventState', [event.uuid, true])
+        return false
+    },
+    show: (event) => {
+        store.commit('toggleEventState', [event.uuid, false])
+        return false
+    },
+    notify: (event) => {
+        notify({
+            title: "Hello from Ray",
+            text: event.payloads[0].content.value,
+            duration: -1
+        })
+        return false
+    }
+}
 
-    constructor(event) {
-        this.event = event
-        this.collapsed = false
+export default class extends Event {
+    app = 'ray'
+
+    constructor(event, id, timestamp) {
+        super(event, id, timestamp)
+
         this.labels = this.collectLabels()
         this.color = this.detectColor()
     }
 
-    disable() {
-        this.disabled = true
-    }
-
-    setCollapsed(state) {
-        this.collapsed = state
-    }
-
     get type() {
-        return this.event.payloads[0].type
+        return this.payloads[0].type
     }
 
-    get uuid() {
-        return this.event.uuid
+    get serverName() {
+        return this.payloads[0].origin.hostname
     }
 
     get payloads() {
         return this.event.payloads || []
     }
 
-    isType(type) {
-        return this.type === type
-    }
-
     content(field) {
-        return this.event.payloads[0].content[field]
+        return this.payloads[0].content[field]
     }
 
     detectColor() {
         let color = this.color
 
-        this.event.payloads.forEach(function (payload) {
+        this.payloads.forEach(function (payload) {
             if (payload.content.color) {
                 color = payload.content.color
             }
@@ -76,7 +93,7 @@ export default class {
     collectLabels() {
         let labels = [];
 
-        this.event.payloads.forEach(function (payload) {
+        this.payloads.forEach(function (payload) {
             if (payload.content.label) {
                 const label = labelsMap.hasOwnProperty(payload.content.label)
                     ? labelsMap[payload.content.label]
@@ -103,5 +120,19 @@ export default class {
         this.event = _.merge(event, this.event)
         this.labels = this.collectLabels()
         this.color = this.detectColor()
+    }
+}
+
+export class EventHandler {
+    constructor(event) {
+        this.event = event
+    }
+
+    handle() {
+        if (handlers.hasOwnProperty(this.event.type)) {
+            return handlers[this.event.type](this.event)
+        }
+
+        return true
     }
 }
