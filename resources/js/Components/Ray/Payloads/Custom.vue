@@ -1,6 +1,6 @@
 <template>
     <div ref="trace">
-        <div v-html="payload.content.content"></div>
+        <div class="break-all" v-html="payload.content.content"></div>
     </div>
 </template>
 

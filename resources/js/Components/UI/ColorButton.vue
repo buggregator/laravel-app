@@ -2,6 +2,7 @@
     <button
         @click="toggleColor"
         class="h-4 w-4 rounded-full border-4 border-double"
+        :title="color"
         :class="styles"
     >
     </button>

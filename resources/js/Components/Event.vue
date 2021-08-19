@@ -7,7 +7,7 @@
             class="w-full md:w-1/4 pb-3 flex justify-between sm:items-center md:items-start md:px-3 md:py-3 lg:px-5 lg:py-5 md:border-r">
             <div class="flex items-center space-x-2">
                 <button @click="toggle"
-                        class="w-5 h-5 leading-none rounded-full opacity-90 hover:opacity-100 transition transition-all hover:border-4 flex items-center justify-center"
+                        class="w-5 h-5 md:w-4 md:h-4 leading-none rounded-full opacity-90 hover:opacity-100 transition transition-all hover:ring-4 ring-offset-1 flex items-center justify-center"
                         :class="color">
                     <span class="text-sm text-white font-bold leading-none">{{ !event.collapsed ? '-' : '+'}}</span>
                 </button>
@@ -77,10 +77,10 @@ export default {
 
             switch (color) {
                 case 'gray':
-                    return 'bg-gray-400 border-gray-300';
+                    return 'bg-gray-400 ring-gray-300';
             }
 
-            return `bg-${color}-600 border-${color}-300`
+            return `bg-${color}-600 ring-${color}-300`
         },
         labels() {
             return this.event.labels

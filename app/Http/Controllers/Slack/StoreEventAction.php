@@ -5,27 +5,23 @@ namespace App\Http\Controllers\Slack;
 
 use App\EventsRepository;
 use App\Http\Controllers\Controller;
-use App\Websocket\ConnectionsRepository;
+use App\WebsocketServer;
 use Illuminate\Http\Request;
-use Swoole\Http\Server;
+use Ramsey\Uuid\Uuid;
 
 class StoreEventAction extends Controller
 {
     public function __invoke(
-        Request               $request,
-        Server                $server,
-        EventsRepository      $events,
-        ConnectionsRepository $connections
+        Request          $request,
+        WebsocketServer  $server,
+        EventsRepository $events
     ): void
     {
         $event = $request->all();
-        $event = ['type' => 'slack', 'data' => $event];
+        $event = ['type' => 'slack', 'uuid' => Uuid::uuid4()->toString(), 'data' => $event];
 
         $events->store($event);
-
-        foreach ($connections->all() as $client => $connection) {
-            $server->push($client, json_encode($event));
-        }
+        $server->sendEvent($event);
     }
 }
 

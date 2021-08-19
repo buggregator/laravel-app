@@ -1,5 +1,4 @@
-import moment from "moment";
-import {v4 as uuidv4} from 'uuid';
+import {Event} from "../Event"
 
 const colorMap = {
     danger: 'red',
@@ -7,29 +6,18 @@ const colorMap = {
     good: 'green'
 }
 
-export default class {
-    date = moment()
+export default class extends Event{
     labels = ['Monolog']
-    id = uuidv4()
     app = 'monolog'
 
-    constructor(event) {
-        this.event = event
-        this.collapsed = false
+    constructor(event, id, timestamp) {
+        super(event, id, timestamp)
         this.color = colorMap[this.payloads[0].color] || 'gray'
         this.labels.push(this.content('level'))
     }
 
-    setCollapsed(state) {
-        this.collapsed = state
-    }
-
     get type() {
         return 'monolog_slack'
-    }
-
-    get uuid() {
-        return this.id
     }
 
     get text() {
@@ -56,13 +44,5 @@ export default class {
         })
 
         return value
-    }
-
-    isType(type) {
-        return this.type === type
-    }
-
-    merge(event) {
-
     }
 }

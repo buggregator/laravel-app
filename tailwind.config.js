@@ -8,7 +8,8 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
-            borderWidth: ['hover']
+            borderWidth: ['hover'],
+            ringWidth: ['hover'],
         }
     },
     theme: {
@@ -24,7 +25,7 @@ module.exports = {
             },
             fontSize: {
                 '2xs': ['0.6rem', { lineHeight: '1rem' }]
-            }
+            },
         },
         colors: {
             transparent: 'transparent',

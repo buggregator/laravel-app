@@ -73,6 +73,26 @@ return [
             //
         ],
 
+        \App\Events\Websocket\ConnectionOpened::class => [
+            ...Octane::prepareApplicationForNextOperation(),
+            \App\Listeners\Websocket\StoreConnection::class,
+            \App\Listeners\Websocket\BroadcastStoredEvents::class,
+        ],
+
+        \App\Events\Websocket\ConnectionClosed::class => [
+            ...Octane::prepareApplicationForNextOperation(),
+            \App\Listeners\Websocket\CloseConnection::class,
+        ],
+
+        \App\Events\Websocket\ConnectionDisconnected::class => [
+            ...Octane::prepareApplicationForNextOperation(),
+            \App\Listeners\Websocket\CloseConnection::class,
+        ],
+
+        \App\Events\Websocket\MessageReceived::class => [
+            ...Octane::prepareApplicationForNextOperation(),
+        ],
+
         RequestHandled::class => [
             //
         ],

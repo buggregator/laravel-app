@@ -3,11 +3,30 @@ services:
     php:
         build: "./docker/server"
         restart: unless-stopped
+        environment:
+            DB_CONNECTION: pgsql
+            DB_HOST: db
+            DB_DATABASE: homestead
+            DB_USERNAME: homestead
+            DB_PASSWORD: secret
         ports:
         - 8000:8000
-        - 23518:23518
         volumes:
             - ./:/app
-volumes:
-    web-root:
-        driver: local
+        depends_on:
+            - db
+
+    db:
+        image: postgres
+        environment:
+            POSTGRES_USER: homestead
+            POSTGRES_DB: homestead
+            POSTGRES_PASSWORD: secret
+
+    adminer:
+        image: adminer
+        restart: unless-stopped
+        ports:
+            - 8011:8080
+        depends_on:
+            - db

@@ -6,20 +6,19 @@ namespace App\Http\Controllers\Ray;
 use App\EventsRepository;
 use App\Http\Controllers\Controller;
 use App\Ray\Contracts\EventHandler;
-use App\Websocket\ConnectionsRepository;
+use App\WebsocketServer;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Request;
-use Swoole\Http\Server;
+use Ramsey\Uuid\Uuid;
 
 class StoreEventAction extends Controller
 {
     public function __invoke(
-        Request               $request,
-        Server                $server,
-        Repository            $cache,
-        ConnectionsRepository $connections,
-        EventsRepository      $events,
-        EventHandler          $handler
+        Request          $request,
+        WebsocketServer  $server,
+        Repository       $cache,
+        EventsRepository $events,
+        EventHandler     $handler
     ): void
     {
         $type = $request->input('payloads.0.type');
@@ -27,15 +26,15 @@ class StoreEventAction extends Controller
         if ($type === 'create_lock') {
             $hash = $request->input('payloads.0.content.name');
             $cache->put($hash, 1, now()->addMinutes(5));
+        } elseif ($type === 'clear_all') {
+            $events->clear();
         }
 
         $event = $handler->handle($request->all());
 
-        $event = ['type' => 'ray', 'data' => $event];
-        $events->store($event);
+        $event = ['type' => 'ray', 'uuid' => Uuid::uuid4()->toString(), 'data' => $event];
 
-        foreach ($connections->all() as $client => $connection) {
-            $server->push($client, json_encode($event));
-        }
+        $events->store($event);
+        $server->sendEvent($event);
     }
 }

@@ -3,7 +3,8 @@ import {createApp, h} from 'vue';
 import {createInertiaApp} from '@inertiajs/inertia-vue3';
 import Notifications from '@kyvg/vue3-notification'
 import {InertiaProgress} from '@inertiajs/progress';
-import {init as rayInit, store} from "./server";
+import {init as rayInit} from "./server";
+import {store} from './store'
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Ray server';
 
