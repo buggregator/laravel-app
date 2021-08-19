@@ -1,4 +1,5 @@
-![Ray server (2)](https://user-images.githubusercontent.com/773481/129449481-73563d54-0402-4443-9f24-a4ed43a55833.png)
+![Ray server (3)](https://user-images.githubusercontent.com/773481/130154416-cc7d84e7-086e-4f35-b136-9a9f5ee55974.png)
+
 
 # Debug your projects with Ray server
 
@@ -27,7 +28,8 @@ displayed. [Read more](https://spatie.be/docs/ray/v1/introduction)
 - Vue
 - TailwindCSS
 
-![Ray server devices (2)](https://user-images.githubusercontent.com/773481/129448633-29c62d42-7f5b-49d1-9065-e516183ea403.png)
+![Ray server devices (4)](https://user-images.githubusercontent.com/773481/130154428-ad856cff-6d2e-423c-afa8-43ce579ef490.png)
+
 
 ## Docker image
 
