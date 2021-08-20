@@ -21,7 +21,7 @@
 
         <section v-else class="flex-1 p-4 flex flex-col justify-center items-center bg-gray-50">
             <WsConnectionStatus/>
-<!--            <Tips />-->
+            <Tips />
         </section>
     </div>
 
@@ -56,7 +56,7 @@ export default {
 
     computed: {
         hasEvents() {
-            return _.size(this.events) > 0
+            return this.totalEvents > 0
         }
     },
 
@@ -75,16 +75,12 @@ export default {
     setup() {
         const store = useStore();
 
-        let events = computed(function () {
-            return store.getters.filteredEvents
-        });
-
-        let currentScreen = computed(function () {
-            return store.state.currentScreen
-        });
+        const events = computed(() => store.getters.filteredEvents)
+        const totalEvents = computed(() => store.getters.totalEvents)
+        const currentScreen = computed(()  => store.state.currentScreen)
 
         return {
-            store, events, currentScreen
+            store, events, totalEvents, currentScreen
         }
     }
 }

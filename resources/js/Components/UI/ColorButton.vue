@@ -36,9 +36,7 @@ export default {
     setup() {
         const store = useStore();
 
-        let selectedColors = computed(function () {
-            return store.state.selectedColors
-        });
+        const selectedColors = computed(()  => store.state.selectedColors)
 
         return {
             store, selectedColors

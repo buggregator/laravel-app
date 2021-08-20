@@ -13,6 +13,8 @@ RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/
 WORKDIR /app
 
 ARG CACHEBUST=1
+ARG APP_VERSION=v1.0
+
 RUN git clone https://github.com/butschster/ray-server.git /app
 RUN git pull
 RUN composer install
@@ -21,6 +23,11 @@ RUN chmod 0777 storage -R
 
 RUN cp /app/.env.example /app/.env
 RUN cat /app/.env.example
+RUN echo "APP_VERSION=\"${APP_VERSION}\"" >> /app/.env
+
+RUN cat /app/.env
+
+# Create a sqlite database
 RUN touch /app/database/database.sqlite
 
 EXPOSE 8000

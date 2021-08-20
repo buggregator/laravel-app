@@ -33,13 +33,8 @@ export default {
         const store = useStore();
 
 
-        let labels = computed(function () {
-            return store.getters.availableLabels
-        });
-
-        let selectedLabels = computed(function () {
-            return store.state.selectedLabels
-        });
+        const labels = computed(()  => store.getters.availableLabels)
+        const selectedLabels = computed(()  => store.state.selectedLabels)
 
         return {
             store, labels, selectedLabels
