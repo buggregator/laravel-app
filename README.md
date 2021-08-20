@@ -44,7 +44,7 @@ docker run --pull always -p 23517:8000 butschster/ray-server:latest
 
 # or 
 
-docker run -p 23517:8000 butschster/ray-server:v1.10
+docker run -p 23517:8000 butschster/ray-server:v1.10.1
 ```
 
 ### Configuration
