@@ -16,6 +16,7 @@
                 :is="eventComponent(event)"
                 :event="event"
                 v-for="event in events"
+                :key="event.uuid"
             ></component>
         </main>
 

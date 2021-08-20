@@ -1,8 +1,7 @@
 <template>
     <div v-html="cleanHtml"
-         ref="code"
          class="text-blue-700 break-all"
-         :class="{'bg-gray-800 rounded p-2 text-xs': isDump}"
+         :class="{'bg-gray-800 rounded p-2 text-xs': dumpId}"
     ></div>
 </template>
 
@@ -11,23 +10,32 @@ export default {
     props: {
         value: String
     },
+    data() {
+        return {
+            evaluated: false
+        }
+    },
     mounted() {
-        if (this.isDump) {
-            Sfdump(this.$refs.code.getElementsByTagName("pre")[0].id)
+        if (this.dumpId) {
+            window.Sfdump(this.dumpId)
         }
     },
     computed: {
-        isDump() {
-            if (typeof this.value == 'string') {
-                return this.value.includes('sf-dump')
+        dumpId() {
+            const matches = this.value.match(/(sf\-dump\-[0-9]+)/i)
+            if (matches) {
+                return matches[0]
             }
 
-            return false
+            return null
         },
         cleanHtml() {
-            if (this.isDump) {
-                return this.value
-                    .replace(/<(style|script)\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/(style|script)>/gi, "")
+            if (this.dumpId) {
+                // Remove all style and script tags from dump
+                return this.value.replace(
+                        /<(style|script)\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/(style|script)>/gi,
+                        ""
+                    )
             }
 
             return this.value
