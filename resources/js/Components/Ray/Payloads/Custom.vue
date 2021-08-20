@@ -1,11 +1,12 @@
 <template>
-    <div ref="trace">
-        <div class="break-all" v-html="payload.content.content"></div>
-    </div>
+    <Dump :value="payload.content.content"/>
 </template>
 
 <script>
+import Dump from "@/Components/UI//Dump";
+
 export default {
+    components: {Dump},
     props: {
         payload: Object
     }

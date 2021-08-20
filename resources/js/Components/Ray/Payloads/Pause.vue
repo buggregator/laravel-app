@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace" class="flex">
+    <div class="flex">
         <button :disabled="disabled" @click="continueExecution"
                 class="px-5 py-2 flex items-center space-x-3 bg-gray-100 rounded-l-full border text-sm font-medium hover:bg-gray-50 active:bg-grey-300 focus:outline-none disabled:opacity-50">
             <div class="w-3 h-3">

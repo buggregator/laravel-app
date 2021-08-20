@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace">
+    <div>
         <h3 v-if="payload.content.subject" class="text-gray-800 font-bold">
             {{ payload.content.subject }}
         </h3>

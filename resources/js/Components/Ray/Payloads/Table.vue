@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace">
+    <div>
         <Table>
             <TableRow :title="title" v-for="(value, title) in payload.content.values">
                 <Dump :value="value" />

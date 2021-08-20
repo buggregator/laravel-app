@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace">
+    <div>
         <div class="flex-col justify-center border divide-y">
             <File :file="file" v-for="(file, i) in payload.content.frames" />
         </div>

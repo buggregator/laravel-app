@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace">
+    <div>
         <ssh-pre language="json">
             {{ json }}
         </ssh-pre>

@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace">
+    <div>
         <h3 class="text-gray-800">
             Class name: <code class="font-semibold">{{ payload.content.class_name }}</code>
         </h3>

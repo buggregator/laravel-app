@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace">
+    <div>
         <ssh-pre language="sql" class="border-b-0">
             {{ formattedSql }}
         </ssh-pre>

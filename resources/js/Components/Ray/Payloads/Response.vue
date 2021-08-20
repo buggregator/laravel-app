@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace">
+    <div>
         <h3 class="text-gray-800">
             Status code: <code class="font-semibold">{{ payload.content.status_code }}</code>
         </h3>

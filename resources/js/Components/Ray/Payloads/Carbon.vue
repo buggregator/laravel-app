@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace">
+    <div>
         <Table>
             <TableRow title="Formatted">
                 {{ payload.content.formatted }}

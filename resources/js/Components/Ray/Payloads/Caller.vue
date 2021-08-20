@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace">
+    <div>
         <div>
             <h3 class="text-gray-800">Called from </h3>
             <a

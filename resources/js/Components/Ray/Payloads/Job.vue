@@ -1,5 +1,5 @@
 <template>
-  <div ref="trace">
+  <div>
       <Dump :value="payload.content.job" />
   </div>
 </template>

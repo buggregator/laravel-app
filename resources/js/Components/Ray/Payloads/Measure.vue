@@ -1,5 +1,5 @@
 <template>
-    <div ref="trace">
+    <div>
         <h3 v-if="payload.content.is_new_timer" class="text-gray-800 font-bold">
             Start measuring performance...
         </h3>

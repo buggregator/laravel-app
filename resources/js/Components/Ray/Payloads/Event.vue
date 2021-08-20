@@ -1,5 +1,5 @@
 <template>
-  <div ref="trace">
+  <div>
     <Dump v-if="payload.content.class_based_event" :value="payload.content.event" />
     <div v-else>
       <h3 class="text-gray-800">
