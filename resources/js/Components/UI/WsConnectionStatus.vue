@@ -18,9 +18,7 @@ export default {
     setup() {
         const store = useStore();
 
-        let wsConnected = computed(function () {
-            return store.state.ws.connected
-        });
+        let wsConnected = computed(()  => store.state.ws.connected)
 
         return {
             wsConnected

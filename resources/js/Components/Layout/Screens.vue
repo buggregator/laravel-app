@@ -50,17 +50,9 @@ export default {
     setup() {
         const store = useStore();
 
-        let screens = computed(function () {
-            return store.getters.screens
-        });
-
-        let currentScreen = computed(function () {
-            return store.state.currentScreen
-        });
-
-        let totalEvents = computed(function () {
-            return store.getters.totalEvents
-        });
+        const screens = computed(()  => store.getters.screens)
+        const currentScreen = computed(()  => store.state.currentScreen)
+        const totalEvents = computed(() => store.getters.totalEvents)
 
         return {
             store, screens, currentScreen, totalEvents

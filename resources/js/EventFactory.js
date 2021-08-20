@@ -13,7 +13,6 @@ const eventTypes = {
     slack: json => new SlackEvent(json.data, json.uuid, json.timestamp)
 }
 
-
 export default {
     create(json) {
         const type = json.type.toLowerCase()
