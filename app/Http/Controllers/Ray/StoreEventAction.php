@@ -31,7 +31,6 @@ class StoreEventAction extends Controller
         }
 
         $event = $handler->handle($request->all());
-
         $event = ['type' => 'ray', 'uuid' => Uuid::uuid4()->toString(), 'data' => $event];
 
         $events->store($event);

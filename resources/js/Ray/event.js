@@ -62,6 +62,10 @@ export default class extends Event {
         this.color = this.detectColor()
     }
 
+    get uuid() {
+        return this.event.uuid
+    }
+
     get type() {
         return this.payloads[0].type
     }

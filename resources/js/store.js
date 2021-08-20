@@ -47,7 +47,7 @@ export const store = createStore({
             return screens
         },
         eventByUuid: (state) => (uuid) => {
-            return state.events[state.currentScreen].find(event => event.uuid === uuid)
+            return state.events[state.currentScreen].find(event => event.uuid == uuid)
         },
         totalEvents: (state, getters) => {
             return getters.filteredEvents.length
