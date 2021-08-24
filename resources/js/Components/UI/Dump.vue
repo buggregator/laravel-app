@@ -1,15 +1,18 @@
 <template>
-    <div v-html="cleanHtml"
+    <ssh-pre v-if="isBool" language="php">
+        {{ value }}
+    </ssh-pre>
+    <div v-else v-html="cleanHtml"
          class="text-blue-700 break-all"
          :class="{'bg-gray-800 rounded p-2 text-xs': dumpId}"
     ></div>
 </template>
 
 <script>
+import SshPre from 'simple-syntax-highlighter'
 export default {
-    props: {
-        value: String
-    },
+    components: {SshPre},
+    props: ['value'],
     data() {
         return {
             evaluated: false
@@ -21,6 +24,9 @@ export default {
         }
     },
     computed: {
+        isBool() {
+            return typeof this.value == 'boolean'
+        },
         dumpId() {
             const matches = this.value.match(/(sf\-dump\-[0-9]+)/i)
             if (matches) {
@@ -33,9 +39,9 @@ export default {
             if (this.dumpId) {
                 // Remove all style and script tags from dump
                 return this.value.replace(
-                        /<(style|script)\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/(style|script)>/gi,
-                        ""
-                    )
+                    /<(style|script)\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/(style|script)>/gi,
+                    ""
+                )
             }
 
             return this.value

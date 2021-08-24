@@ -1,23 +1,32 @@
 <template>
     <Event :event="event">
-        <EventPayload
-            v-for="payload in event.payloads"
-            :payload="payload"
-            :disabled="event.disabled"
-            v-on:disable="event.disable()"
-            v-on:delete="$emit('deleteEvent')"
-        />
+        <div class="flex flex-col justify-items-stretch w-full divide-y">
+            <EventPayload
+                v-for="payload in event.payloads"
+                :payload="payload"
+                :disabled="event.disabled"
+                v-on:disable="event.disable()"
+                v-on:delete="$emit('deleteEvent')"
+            />
+        </div>
+        <Origin v-if="hasPayloads" class="mt-3" :origin="event.payloads[0].origin"/>
     </Event>
 </template>
 
 <script>
+import Origin from "./Origin";
 import EventPayload from "./Payload";
 import Event from "../Event";
 
 export default {
-    components: {Event, EventPayload},
+    components: {Event, EventPayload, Origin},
     props: {
         event: Object
+    },
+    computed: {
+        hasPayloads() {
+            return this.event.payloads.length > 0
+        }
     }
 }
 </script>

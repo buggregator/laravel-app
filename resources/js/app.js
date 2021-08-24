@@ -14,7 +14,13 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => require(`./Pages/${name}.vue`),
     setup({el, app, props, plugin}) {
-        return createApp({render: () => h(app, props)})
+
+        const vueApp = createApp({render: () => h(app, props)})
+
+        vueApp.config.errorHandler = () => null;
+        vueApp.config.warnHandler = () => null;
+
+        return vueApp
             .use(plugin)
             .use(store)
             .use(Notifications)

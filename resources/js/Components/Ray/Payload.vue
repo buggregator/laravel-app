@@ -1,5 +1,4 @@
 <template>
-    <div class="flex flex-col justify-items-stretch w-full">
         <component
             class="flex-grow"
             :is="component"
@@ -8,8 +7,6 @@
             v-on:disable="$emit('disable')"
             v-on:delete="deleteEvent"
         ></component>
-        <Origin class="mt-3" :origin="payload.origin"/>
-    </div>
 </template>
 
 <script>
@@ -41,10 +38,8 @@ _.each(componentsMap, (name, type) => {
     components[name] = require(`./Payloads/${name}`).default
 })
 
-import Origin from "./Origin";
-
 export default {
-    components: {Origin, ...components},
+    components: {...components},
     props: {
         payload: Object,
         disabled: {
