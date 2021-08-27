@@ -5,6 +5,7 @@
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
 [![Downloads](https://img.shields.io/docker/pulls/butschster/ray-server.svg)](https://hub.docker.com/repository/docker/butschster/ray-server)
+[![Join to iur telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/rayserver)
 
 Ray server is a beautiful, lightweight web server built on Laravel that helps debugging your app. It runs without
 installation on multiple platforms.
@@ -13,6 +14,8 @@ Ray server will help you to debug your projects with a [Ray debug tool](https://
 from [spatie](https://spatie.be/). Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash
 applications. After installing one of the libraries to send information to Ray, you can use the ray function to quickly
 dump stuff. Any variable(s) that you pass to ray will be displayed. [Read more](https://spatie.be/docs/ray/v1/introduction)
+
+Code samples you can see [here](https://github.com/butschster/ray-server-test/tree/master/tests/Feature)
 
 ### Features
 
