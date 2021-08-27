@@ -91,6 +91,7 @@ return [
 
         \App\Events\Websocket\MessageReceived::class => [
             ...Octane::prepareApplicationForNextOperation(),
+            \App\Listeners\Websocket\BroadcastReceivedEvent::class,
         ],
 
         RequestHandled::class => [

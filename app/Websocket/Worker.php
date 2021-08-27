@@ -19,7 +19,7 @@ class Worker
     {
     }
 
-    public function handle(string $event, int $fd): void
+    public function handle(string $event, ...$params): void
     {
         // We will clone the application instance so that we have a clean copy to switch
         // back to once the request has been handled. This allows us to easily delete
@@ -31,7 +31,7 @@ class Worker
         try {
             $this->invokeRequestHandledCallbacks($sandbox);
 
-            $this->dispatchEvent($sandbox, new $event($this->app, $sandbox, $fd));
+            $this->dispatchEvent($sandbox, new $event($this->app, $sandbox, ...$params));
 
             $sandbox->terminate();
         } catch (\Throwable $e) {
@@ -51,7 +51,7 @@ class Worker
     /**
      * Invoke the request handled callbacks.
      *
-     * @param  \Illuminate\Foundation\Application  $sandbox
+     * @param \Illuminate\Foundation\Application $sandbox
      * @return void
      */
     protected function invokeRequestHandledCallbacks($sandbox): void
@@ -64,14 +64,15 @@ class Worker
     /**
      * Handle an uncaught exception from the worker.
      *
-     * @param  \Throwable  $e
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param \Throwable $e
+     * @param \Illuminate\Foundation\Application $app
      * @return void
      */
     protected function handleWorkerError(
-        \Throwable $e,
+        \Throwable  $e,
         Application $app
-    ): void {
+    ): void
+    {
 
         $this->dispatchEvent($app, new WorkerErrorOccurred($e, $app));
     }

@@ -6,7 +6,7 @@ RUN echo "UTC" > /etc/timezone
 RUN docker-php-ext-install opcache && docker-php-ext-enable opcache
 RUN docker-php-ext-install pcntl
 RUN apk add --no-cache libzip-dev && docker-php-ext-configure zip && docker-php-ext-install zip
-RUN apk add --no-cache git
+RUN apk add --no-cache supervisor git
 
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
@@ -31,4 +31,6 @@ RUN cat /app/.env
 RUN touch /app/database/database.sqlite
 
 EXPOSE 8000
-CMD php artisan migrate:fresh && php artisan server:start --host=0.0.0.0
+EXPOSE 1025
+
+CMD php artisan migrate:fresh && /usr/bin/supervisord -c /app/supervisord.conf

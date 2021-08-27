@@ -11,6 +11,7 @@ services:
             DB_PASSWORD: secret
         ports:
         - 8000:8000
+        - 1025:1025
         volumes:
             - ./:/app
         depends_on:
