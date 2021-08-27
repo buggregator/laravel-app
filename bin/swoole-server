@@ -180,7 +180,19 @@ $server->on('disconnect', function (Server $server, int $fd) use ($workerState) 
 });
 
 $server->on('Message', function (\Swoole\WebSocket\Server $server, Frame $frame) use ($workerState) {
-    event(new \App\Events\Websocket\MessageReceived($frame));
+    $workerState->lastRequestTime = microtime(true);
+
+    $wsWorker = new \App\Websocket\Worker(
+        $workerState->worker->application()
+    );
+    $wsWorker->handle(\App\Events\Websocket\MessageReceived::class, $frame);
+
+    Stream::request(
+        "WS:MESSAGE:[$frame->fd]",
+        "/",
+        200,
+        (microtime(true) - $workerState->lastRequestTime) * 1000,
+    );
 });
 
 /*

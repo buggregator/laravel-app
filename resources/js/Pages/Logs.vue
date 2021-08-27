@@ -1,63 +1,65 @@
 <template>
     <Head :title="currentScreen"/>
 
-    <div class="flex flex-col h-screen">
-        <header class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
+    <div>
+        <div class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
             <Screens/>
             <div class="p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2">
                 <Labels/>
                 <Colors/>
             </div>
-        </header>
+        </div>
 
-        <main v-if="hasEvents" class="flex flex-col divide-y border-b">
-            <component
-                class="flex-grow"
-                :is="eventComponent(event)"
-                :event="event"
-                v-for="event in events"
-                :key="event.uuid"
-            ></component>
-        </main>
+        <div v-if="hasEvents" class="flex flex-col">
+            <div v-for="event in events" class="border-b border-gray-100">
+                <component
+                    class="flex-grow"
+                    :is="eventComponent(event)"
+                    :event="event"
+                ></component>
 
-        <section v-else class="flex-1 p-4 flex flex-col justify-center items-center bg-gray-50">
-            <WsConnectionStatus/>
-            <Tips />
-        </section>
+                <Event/>
+            </div>
+        </div>
+
+        <WsConnectionStatus v-else class="mt-5 mx-3 p-2 md:p-3 lg:p-4 border border-gray-300 rounded bg-gray-100"/>
+
+        <notifications/>
     </div>
-
-    <notifications/>
 </template>
 
 <script>
 import Label from "@/Components/UI/Label";
 import {computed} from 'vue';
 import {useStore} from "vuex";
-import RayEventComponent from "@/Components/Ray/Event";
-import SentryEventComponent from "@/Components/Sentry/Event";
-import SlackEventComponent from "@/Components/Slack/Event";
 import {Head, Link} from '@inertiajs/inertia-vue3';
 import Screens from "@/Components/Layout/Screens";
 import WsConnectionStatus from "@/Components/UI/WsConnectionStatus";
 import Labels from "@/Components/Layout/Labels";
 import Colors from "@/Components/Layout/Colors";
-import Tips from "@/Components/Layout/Tips";
 
-import RayEvent from "@/Ray/event";
+
+import RayEventComponent from "@/Components/Ray/Event";
+import SentryEventComponent from "@/Components/Sentry/Event";
+import SlackEventComponent from "@/Components/Slack/Event";
+import SmtpEventComponent from "@/Components/Smtp/Event";
+
 import SentryEvent from "@/Sentry/event";
 import SlackEvent from "@/Slack/event";
+import SmtpEvent from "@/Smtp/event";
 
 export default {
     components: {
-        Colors, Labels,Screens,
-        WsConnectionStatus, Tips,
-        Label, Head, Link,
-        RayEventComponent, SentryEventComponent, SlackEventComponent
+        Colors,
+        Labels,
+        WsConnectionStatus, Label,
+        Screens, Head, Link,
+        RayEventComponent, SentryEventComponent, SlackEventComponent, SmtpEventComponent
     },
 
     computed: {
         hasEvents() {
-            return this.totalEvents > 0
+            return _.size(this.events) > 0
         }
     },
 
@@ -67,6 +69,8 @@ export default {
                 return 'SentryEventComponent'
             }  else if (event instanceof SlackEvent) {
                 return 'SlackEventComponent'
+            }  else if (event instanceof SmtpEvent) {
+                return 'SmtpEventComponent'
             }
 
             return 'RayEventComponent'
@@ -76,12 +80,16 @@ export default {
     setup() {
         const store = useStore();
 
-        const events = computed(() => store.getters.filteredEvents)
-        const totalEvents = computed(() => store.getters.totalEvents)
-        const currentScreen = computed(()  => store.state.currentScreen)
+        let events = computed(function () {
+            return store.getters.filteredEvents
+        });
+
+        let currentScreen = computed(function () {
+            return store.state.currentScreen
+        });
 
         return {
-            store, events, totalEvents, currentScreen
+            store, events, currentScreen
         }
     }
 }

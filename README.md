@@ -12,14 +12,14 @@ installation on multiple platforms.
 Ray server will help you to debug your projects with a [Ray debug tool](https://github.com/spatie/ray)
 from [spatie](https://spatie.be/). Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash
 applications. After installing one of the libraries to send information to Ray, you can use the ray function to quickly
-dump stuff. Any variable(s) that you pass to ray will be
-displayed. [Read more](https://spatie.be/docs/ray/v1/introduction)
+dump stuff. Any variable(s) that you pass to ray will be displayed. [Read more](https://spatie.be/docs/ray/v1/introduction)
 
 ### Features
 
 - Compatible with `spatie/ray` package
 - Compatible with Sentry (See https://docs.sentry.io/platforms)
 - Compatible with Monolog via `\Monolog\Handler\SlackWebhookHandler`
+- Compatible with SMTP. RayServer can be used as an email testing tool.
 
 ### Technological stack
 
@@ -40,11 +40,11 @@ Run it from [Docker Hub](https://hub.docker.com/repository/docker/butschster/ray
 provided [Dockerfile](https://github.com/butschster/ray-server/blob/master/Dockerfile)
 
 ```
-docker run --pull always -p 23517:8000 butschster/ray-server:latest
+docker run --pull always -p 23517:8000 -p 1025:1025 butschster/ray-server:latest
 
 # or 
 
-docker run -p 23517:8000 butschster/ray-server:v1.10.1
+docker run -p 23517:8000 -p 1025:1025 butschster/ray-server:v1.11
 ```
 
 ### Configuration
@@ -58,6 +58,10 @@ docker run -p 23517:8000 butschster/ray-server:v1.10.1
 5. Configure your .env for monolog logs
     - `LOG_CHANNEL=slack`
     - `LOG_SLACK_WEBHOOK_URL=http://127.0.0.1:23517/slack`
+5. Configure your .env for mail
+    - `MAIL_MAILER=smtp`
+    - `MAIL_HOST=127.0.0.1`
+    - `MAIL_PORT=1025`
 6. Open http://127.0.0.1:23517 url in your browser
 
 Enjoy!
@@ -76,6 +80,7 @@ Enjoy!
 2. Run composer `composer install
 3. Run npm `npm i`
 4. Run ray server `php artisan server:start --host=127.0.0.1 --port=23517`
+4. Run smtp server `php artisan smtp:start --host=127.0.0.1 --port=1025`
 5. Build npm `npm run prod`
 
 ## License
@@ -129,5 +134,6 @@ Ray server is open-sourced software licensed under the MIT license.
 - [x] Mailable
 - [x] Sentry
 - [x] Monolog
+- [x] SMTP server
 - [ ] Show WordPress errors
 - [ ] Dark theme
