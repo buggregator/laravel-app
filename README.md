@@ -1,21 +1,29 @@
-![Ray server (3)](https://user-images.githubusercontent.com/773481/130154416-cc7d84e7-086e-4f35-b136-9a9f5ee55974.png)
+![Ray server](https://user-images.githubusercontent.com/773481/131312478-7b193d7d-3540-4d0a-917e-19ac20cc56c0.png)
 
 
-# Debug your projects with Ray server
+# A server for debugging more than just Laravel applications.
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
 [![Downloads](https://img.shields.io/docker/pulls/butschster/ray-server.svg)](https://hub.docker.com/repository/docker/butschster/ray-server)
 [![Join to iur telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/rayserver)
 
-Ray server is a beautiful, lightweight web server built on Laravel that helps debugging your app. It runs without
-installation on multiple platforms.
+The RayServer is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
+installation on multiple platforms. 
 
-Ray server will help you to debug your projects with a [Ray debug tool](https://github.com/spatie/ray)
-from [spatie](https://spatie.be/). Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash
+Ray server will help you debugging your projects with the [Ray debug tool](https://github.com/spatie/ray)
+from [spatie](https://spatie.be/). The Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash
 applications. After installing one of the libraries to send information to Ray, you can use the ray function to quickly
-dump stuff. Any variable(s) that you pass to ray will be displayed. [Read more](https://spatie.be/docs/ray/v1/introduction)
+dump stuff. Any variable(s) that you pass to ray will be displayed. [Reas more](https://spatie.be/docs/ray/v1/introduction). 
 
-Code samples you can see [here](https://github.com/butschster/ray-server-test/tree/master/tests/Feature)
+Moreover the RayServer is compatible with sentry, monolog and can be used as an SMTP server. 
+
+> It is a free alternative of The Ray app for those who want to run a server without GUI, cannot afford the paid version or just like open source.
+> 
+> **But it doesn’t mean you shouldn’t support spatie’s packages!**
+
+
+You can find out more information about the RayServer [here](https://butschster.medium.com/server-for-debugging-not-only-laravel-applications-252814e2931).
+
 
 ### Features
 
@@ -23,6 +31,10 @@ Code samples you can see [here](https://github.com/butschster/ray-server-test/tr
 - Compatible with Sentry (See https://docs.sentry.io/platforms)
 - Compatible with Monolog via `\Monolog\Handler\SlackWebhookHandler`
 - Compatible with SMTP. RayServer can be used as an email testing tool.
+
+
+Code samples of usage you can find [here](https://github.com/butschster/ray-server-test/tree/master/tests/Feature)
+
 
 ### Technological stack
 
@@ -32,9 +44,11 @@ Code samples you can see [here](https://github.com/butschster/ray-server-test/tr
 - Vue
 - TailwindCSS
 
-![Ray server devices (4)](https://user-images.githubusercontent.com/773481/130154428-ad856cff-6d2e-423c-afa8-43ce579ef490.png)
+![Ray server devices](https://user-images.githubusercontent.com/773481/131312804-55e1eb5c-39e7-4623-a57a-67c172bfbc7f.png)
 
 
+
+Code samples of usage you can find [here](https://github.com/butschster/ray-server-test/tree/master/tests/Feature
 ## Docker image
 
 You can run Ray server via docker
