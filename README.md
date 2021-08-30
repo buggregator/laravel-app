@@ -1,4 +1,4 @@
-![Ray server](https://user-images.githubusercontent.com/773481/131312478-7b193d7d-3540-4d0a-917e-19ac20cc56c0.png)
+![Ray server](https://user-images.githubusercontent.com/773481/131333270-7d0ebdb3-dc48-405f-abb1-76b0a00e1d18.png)
 
 
 # A server for debugging more than just Laravel applications.
@@ -7,15 +7,17 @@
 [![Downloads](https://img.shields.io/docker/pulls/butschster/ray-server.svg)](https://hub.docker.com/repository/docker/butschster/ray-server)
 [![Join to iur telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/rayserver)
 
-The RayServer is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
+RayServer is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
 installation on multiple platforms. 
 
-Ray server will help you debugging your projects with the [Ray debug tool](https://github.com/spatie/ray)
+RayServer will help you debugging your projects with the [Ray debug tool](https://github.com/spatie/ray)
 from [spatie](https://spatie.be/). The Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash
 applications. After installing one of the libraries to send information to Ray, you can use the ray function to quickly
 dump stuff. Any variable(s) that you pass to ray will be displayed. [Reas more](https://spatie.be/docs/ray/v1/introduction). 
 
-Moreover the RayServer is compatible with sentry, monolog and can be used as an SMTP server. 
+RayServer also is an email testing tool that makes it super easy to install and configure a local email server. RayServer sets up a fake SMTP server and you can configure your preferred web applications to use RayServer’s SMTP server to send and receive emails. For instance, you can configure a local WordPress site to use RayServer for email deliveries.
+
+Moreover RayServer is compatible with sentry, monolog. 
 
 > It is a free alternative of The Ray app for those who want to run a server without GUI, cannot afford the paid version or just like open source.
 > 
