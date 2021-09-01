@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Console\StreamHandler;
 use Laravel\Octane\Swoole\ServerProcessInspector;
 use Laravel\Octane\Swoole\ServerStateFile;
 use Laravel\Octane\Swoole\SwooleExtension;
@@ -26,17 +27,18 @@ class StartSwooleCommand extends \Laravel\Octane\Commands\StartSwooleCommand
     /**
      * Handle the command.
      *
-     * @param  \Laravel\Octane\Swoole\ServerProcessInspector  $inspector
-     * @param  \Laravel\Octane\Swoole\ServerStateFile  $serverStateFile
-     * @param  \Laravel\Octane\Swoole\SwooleExtension  $extension
+     * @param \Laravel\Octane\Swoole\ServerProcessInspector $inspector
+     * @param \Laravel\Octane\Swoole\ServerStateFile $serverStateFile
+     * @param \Laravel\Octane\Swoole\SwooleExtension $extension
      * @return int
      */
     public function handle(
         ServerProcessInspector $inspector,
-        ServerStateFile $serverStateFile,
-        SwooleExtension $extension
-    ) {
-        if (! $extension->isInstalled()) {
+        ServerStateFile        $serverStateFile,
+        SwooleExtension        $extension
+    )
+    {
+        if (!$extension->isInstalled()) {
             $this->error('The Swoole extension is missing.');
 
             return 1;
@@ -48,7 +50,7 @@ class StartSwooleCommand extends \Laravel\Octane\Commands\StartSwooleCommand
             return 1;
         }
 
-        if (config('octane.swoole.ssl', false) === true && ! defined('SWOOLE_SSL')) {
+        if (config('octane.swoole.ssl', false) === true && !defined('SWOOLE_SSL')) {
             $this->error('You must configure Swoole with `--enable-openssl` to support ssl.');
 
             return 1;
@@ -60,12 +62,22 @@ class StartSwooleCommand extends \Laravel\Octane\Commands\StartSwooleCommand
 
         $server = tap(new Process([
             (new PhpExecutableFinder)->find(), 'swoole-server', $serverStateFile->path(),
-        ], realpath(__DIR__.'/../../../bin'), [
+        ], realpath(__DIR__ . '/../../../bin'), [
             'APP_ENV' => app()->environment(),
             'APP_BASE_PATH' => base_path(),
             'LARAVEL_OCTANE' => 1,
         ]))->start();
 
         return $this->runServer($server, $inspector, 'swoole');
+    }
+
+    public function handleStream($stream, $verbosity = null)
+    {
+        match ($stream['type']) {
+            'request' => $this->requestInfo($stream, $verbosity),
+            'throwable' => $this->throwableInfo($stream, $verbosity),
+            'shutdown' => $this->shutdownInfo($stream, $verbosity),
+            default => (new StreamHandler($this->output))($stream, $verbosity),
+        };
     }
 }

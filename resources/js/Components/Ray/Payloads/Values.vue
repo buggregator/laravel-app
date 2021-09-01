@@ -11,14 +11,6 @@ export default {
         payload: Object
     },
     computed: {
-        dumpId() {
-            const matches = this.value.match(/(sf\-dump\-[0-9]+)/i)
-            if (matches) {
-                return matches[0]
-            }
-
-            return null
-        },
         value() {
             return this.payload.content.values[0] || ''
         },

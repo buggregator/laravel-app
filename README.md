@@ -29,11 +29,11 @@ You can find out more information about the RayServer [here](https://butschster.
 
 ### Features
 
-- Compatible with `spatie/ray` package
+- Compatible with `symfony/var-dumper` package. RayServer can be used as a [dump server](https://symfony.com/doc/current/components/var_dumper.html#the-dump-server).
+- Compatible with `spatie/ray` package.
 - Compatible with Sentry (See https://docs.sentry.io/platforms)
 - Compatible with Monolog via `\Monolog\Handler\SlackWebhookHandler`
-- Compatible with SMTP. RayServer can be used as an email testing tool.
-
+- Compatible with SMTP. RayServer can be used as an email testing tool
 
 Code samples of usage you can find [here](https://github.com/butschster/ray-server-test/tree/master/tests/Feature)
 
@@ -42,7 +42,7 @@ Code samples of usage you can find [here](https://github.com/butschster/ray-serv
 
 - Laravel 8
 - Inertia
-- Swoole Http/Websocket server
+- Swoole Http/Websocket/TCP server
 - Vue
 - TailwindCSS
 
@@ -59,29 +59,31 @@ Run it from [Docker Hub](https://hub.docker.com/repository/docker/butschster/ray
 provided [Dockerfile](https://github.com/butschster/ray-server/blob/master/Dockerfile)
 
 ```
-docker run --pull always -p 23517:8000 -p 1025:1025 butschster/ray-server:latest
+docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/ray-server:latest
 
 # or 
 
-docker run -p 23517:8000 -p 1025:1025 butschster/ray-server:v1.11
+docker run -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/ray-server:v1.12
 ```
 
 ### Configuration
 
-1. Install `spatie/ray` or other Ray debug tool in your project
-2. Configure your .env for Ray package
+1. Configure your .env for Ray package
     - `RAY_HOST=127.0.0.1` - Ray server host
     - `RAY_PORT=23517` - Ray server port
-4. Configure your .env for Sentry package
+2. Configure your .env for Sentry package
     - `SENTRY_LARAVEL_DSN=http://sentry@127.0.0.1:23517/1` - Sentry DSN
-5. Configure your .env for monolog logs
+3. Configure your .env for monolog logs
     - `LOG_CHANNEL=slack`
     - `LOG_SLACK_WEBHOOK_URL=http://127.0.0.1:23517/slack`
-5. Configure your .env for mail
+4. Configure your .env for mail
     - `MAIL_MAILER=smtp`
     - `MAIL_HOST=127.0.0.1`
     - `MAIL_PORT=1025`
-6. Open http://127.0.0.1:23517 url in your browser
+5. Configure your .env for VarDumper
+    - `VAR_DUMPER_FORMAT=server`
+    - `VAR_DUMPER_SERVER=127.0.0.1:9912`
+5. Open http://127.0.0.1:23517 url in your browser
 
 Enjoy!
 
@@ -154,5 +156,6 @@ Ray server is open-sourced software licensed under the MIT license.
 - [x] Sentry
 - [x] Monolog
 - [x] SMTP server
+- [x] Symfony var-dumper server
 - [ ] Show WordPress errors
 - [ ] Dark theme

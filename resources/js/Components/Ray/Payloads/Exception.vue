@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="border-b border-l border-r divide-y flex-col justify-center">
-            <File :file="file" v-for="(file, i) in payload.content.frames" />
+            <File :file="file" v-for="(file, i) in payload.content.frames" :collapsed="i !== 0" />
         </div>
     </div>
 </template>

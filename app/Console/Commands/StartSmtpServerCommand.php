@@ -47,40 +47,46 @@ class StartSmtpServerCommand extends Command
                 $conn = new SmtpConnection($events, $connection);
                 $conn->ready();
 
-                $this->requestInfo([
-                    'type' => 'request',
-                    'url' => $connection->exportSocket()->fd,
-                    'method' => 'SMTP:CONNECTED',
-                    'duration' => (microtime(true) - $start) * 1000,
-                    'statusCode' => 200,
-                    'memory' => memory_get_usage(),
-                ]);
+                if (app()->environment('local', 'testing')) {
+                    $this->requestInfo([
+                        'type' => 'request',
+                        'url' => $connection->exportSocket()->fd,
+                        'method' => 'SMTP:CONNECTED',
+                        'duration' => (microtime(true) - $start) * 1000,
+                        'statusCode' => 200,
+                        'memory' => memory_get_usage(),
+                    ]);
+                }
 
                 while (true) {
                     $data = $connection->recv(1);
                     $start = microtime(true);
 
                     if ($data === '' || $data === false) {
-                        $this->requestInfo([
-                            'type' => 'request',
-                            'url' => '',
-                            'method' => 'SMTP:CLOSED',
-                            'duration' => (microtime(true) - $start) * 1000,
-                            'statusCode' => 200,
-                            'memory' => memory_get_usage(),
-                        ]);
+                        if (app()->environment('local', 'testing')) {
+                            $this->requestInfo([
+                                'type' => 'request',
+                                'url' => '',
+                                'method' => 'SMTP:CLOSED',
+                                'duration' => (microtime(true) - $start) * 1000,
+                                'statusCode' => 200,
+                                'memory' => memory_get_usage(),
+                            ]);
+                        }
                         $connection->close();
                         break;
                     }
 
-                    $this->requestInfo([
-                        'type' => 'request',
-                        'url' => '',
-                        'method' => 'SMTP:REQUEST',
-                        'duration' => (microtime(true) - $start) * 1000,
-                        'statusCode' => 200,
-                        'memory' => memory_get_usage(),
-                    ]);
+                    if (app()->environment('local', 'testing')) {
+                        $this->requestInfo([
+                            'type' => 'request',
+                            'url' => '',
+                            'method' => 'SMTP:REQUEST',
+                            'duration' => (microtime(true) - $start) * 1000,
+                            'statusCode' => 200,
+                            'memory' => memory_get_usage(),
+                        ]);
+                    }
 
                     $conn->handle($data);
                 }

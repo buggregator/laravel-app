@@ -32,5 +32,6 @@ RUN touch /app/database/database.sqlite
 
 EXPOSE 8000
 EXPOSE 1025
+EXPOSE 9912
 
-CMD php artisan migrate:fresh && /usr/bin/supervisord -c /app/supervisord.conf
+CMD php artisan migrate:fresh --force && /usr/bin/supervisord -c /app/supervisord.conf

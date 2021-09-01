@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Smtp;
 
 use App\EventsRepository;
+use App\Websocket\Client;
 use Ramsey\Uuid\Uuid;
 use Swoole\Coroutine\Server\Connection as SwooleConnection;
 
@@ -67,16 +68,13 @@ class Connection
         $parser = new MailParser();
         $message = $parser->parse($this->messageBody);
 
-        $client = new \WebSocket\Client("ws://127.0.0.1:8000");
-        $event = [
+        $this->events->store($event = [
             'type' => 'smtp',
             'uuid' => Uuid::uuid4()->toString(),
             'data' => $message->jsonSerialize()
-        ];
+        ]);
 
-        $this->events->store($event);
-        $client->text(json_encode($event));
-        $client->close();
+        (new Client())->sendEvent($event);
     }
 
     private function addRecipient(string $recipient): void

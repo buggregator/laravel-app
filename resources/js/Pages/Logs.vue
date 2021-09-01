@@ -1,31 +1,32 @@
 <template>
     <Head :title="currentScreen"/>
 
-    <div>
-        <div class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
+    <div class="flex flex-col h-screen">
+        <header class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
             <Screens/>
             <div class="p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2">
                 <Labels/>
                 <Colors/>
             </div>
-        </div>
+        </header>
 
-        <div v-if="hasEvents" class="flex flex-col">
-            <div v-for="event in events" class="border-b border-gray-100">
-                <component
-                    class="flex-grow"
-                    :is="eventComponent(event)"
-                    :event="event"
-                ></component>
+        <main v-if="hasEvents" class="flex flex-col divide-y border-b">
+            <component
+                class="flex-grow"
+                :is="eventComponent(event)"
+                :event="event"
+                v-for="event in events"
+                :key="event.uuid"
+            ></component>
+        </main>
 
-                <Event/>
-            </div>
-        </div>
-
-        <WsConnectionStatus v-else class="mt-5 mx-3 p-2 md:p-3 lg:p-4 border border-gray-300 rounded bg-gray-100"/>
-
-        <notifications/>
+        <section v-else class="flex-1 p-4 flex flex-col justify-center items-center bg-gray-50">
+            <WsConnectionStatus/>
+            <Tips/>
+        </section>
     </div>
+
+    <notifications/>
 </template>
 
 <script>
@@ -37,29 +38,32 @@ import Screens from "@/Components/Layout/Screens";
 import WsConnectionStatus from "@/Components/UI/WsConnectionStatus";
 import Labels from "@/Components/Layout/Labels";
 import Colors from "@/Components/Layout/Colors";
-
+import Tips from "@/Components/Layout/Tips";
 
 import RayEventComponent from "@/Components/Ray/Event";
 import SentryEventComponent from "@/Components/Sentry/Event";
 import SlackEventComponent from "@/Components/Slack/Event";
 import SmtpEventComponent from "@/Components/Smtp/Event";
+import VarDumpComponent from "@/Components/VarDump/Event";
 
+import RayEvent from "@/Ray/event";
 import SentryEvent from "@/Sentry/event";
 import SlackEvent from "@/Slack/event";
 import SmtpEvent from "@/Smtp/event";
+import VarDumpEvent from "@/VarDump/event";
 
 export default {
     components: {
         Colors,
         Labels,
-        WsConnectionStatus, Label,
+        WsConnectionStatus, Label, Tips,
         Screens, Head, Link,
-        RayEventComponent, SentryEventComponent, SlackEventComponent, SmtpEventComponent
+        RayEventComponent, SentryEventComponent, SlackEventComponent, SmtpEventComponent, VarDumpComponent
     },
 
     computed: {
         hasEvents() {
-            return _.size(this.events) > 0
+            return this.totalEvents > 0
         }
     },
 
@@ -67,10 +71,12 @@ export default {
         eventComponent(event) {
             if (event instanceof SentryEvent) {
                 return 'SentryEventComponent'
-            }  else if (event instanceof SlackEvent) {
+            } else if (event instanceof SlackEvent) {
                 return 'SlackEventComponent'
-            }  else if (event instanceof SmtpEvent) {
+            } else if (event instanceof SmtpEvent) {
                 return 'SmtpEventComponent'
+            } else if (event instanceof VarDumpEvent) {
+                return 'VarDumpComponent'
             }
 
             return 'RayEventComponent'
@@ -80,16 +86,12 @@ export default {
     setup() {
         const store = useStore();
 
-        let events = computed(function () {
-            return store.getters.filteredEvents
-        });
-
-        let currentScreen = computed(function () {
-            return store.state.currentScreen
-        });
+        const events = computed(() => store.getters.filteredEvents)
+        const totalEvents = computed(() => store.getters.totalEvents)
+        const currentScreen = computed(()  => store.state.currentScreen)
 
         return {
-            store, events, currentScreen
+            store, events, totalEvents, currentScreen
         }
     }
 }
