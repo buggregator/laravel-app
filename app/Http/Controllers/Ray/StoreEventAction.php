@@ -10,6 +10,7 @@ use App\WebsocketServer;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class StoreEventAction extends Controller
 {
@@ -18,7 +19,8 @@ class StoreEventAction extends Controller
         WebsocketServer  $server,
         Repository       $cache,
         EventsRepository $events,
-        EventHandler     $handler
+        EventHandler     $handler,
+        ConsoleOutput $output
     ): void
     {
         $type = $request->input('payloads.0.type');
@@ -35,5 +37,7 @@ class StoreEventAction extends Controller
 
         $events->store($event);
         $server->sendEvent($event);
+
+        $output->writeln(json_encode($event, JSON_FORCE_OBJECT|JSON_HEX_TAG));
     }
 }

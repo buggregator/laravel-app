@@ -12,6 +12,7 @@ services:
         ports:
         - 8000:8000
         - 1025:1025
+        - 9912:9912
         volumes:
             - ./:/app
         depends_on:

@@ -18,8 +18,8 @@
                 </svg>
             </div>
         </div>
-        <div class="bg-white text-gray-800 p-2 overflow-x-scroll" v-if="!collapsed">
-            <div class="flex" v-for="(line, i) in file.pre_context">
+        <div class="bg-gray-800 p-2 overflow-x-scroll" v-if="!collapsed">
+            <div class="flex text-gray-100" v-for="(line, i) in file.pre_context">
                 <div class="w-12">{{ file.lineno - (file.pre_context.length - i) }}.</div>
                 <pre>{{ line }}</pre>
             </div>
@@ -28,7 +28,7 @@
                 <div class="w-12">{{ file.lineno }}.</div>
                 <pre>{{ file.context_line }}</pre>
             </div>
-            <div class="flex" v-for="(line, i) in file.post_context">
+            <div class="flex text-gray-100" v-for="(line, i) in file.post_context">
                 <div class="w-12">{{ file.lineno + i + 1 }}.</div>
                 <pre>{{ line }}</pre>
             </div>
