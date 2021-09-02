@@ -1,4 +1,4 @@
-![Ray server](https://user-images.githubusercontent.com/773481/131333270-7d0ebdb3-dc48-405f-abb1-76b0a00e1d18.png)
+![Ray server](https://user-images.githubusercontent.com/773481/131818548-39189a7e-355a-4a9c-b783-9ae8ce627d79.png)
 
 
 # A server for debugging more than just Laravel applications.
@@ -46,8 +46,8 @@ Code samples of usage you can find [here](https://github.com/butschster/ray-serv
 - Vue
 - TailwindCSS
 
-![Ray server devices](https://user-images.githubusercontent.com/773481/131312804-55e1eb5c-39e7-4623-a57a-67c172bfbc7f.png)
-
+![Ray server devices](https://user-images.githubusercontent.com/773481/131818515-bc6c154a-4978-4a57-979e-d0f8cc99f09e.png)
+![Ray server settings (4)](https://user-images.githubusercontent.com/773481/131818546-85496772-f799-4172-ae2c-9ca6c39b11a8.png)
 
 
 Code samples of usage you can find [here](https://github.com/butschster/ray-server-test/tree/master/tests/Feature
