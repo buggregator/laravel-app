@@ -6,6 +6,11 @@
 [![Downloads](https://img.shields.io/docker/pulls/butschster/debugger.svg)](https://hub.docker.com/repository/docker/butschster/debugger)
 <!--[![Join to iur telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/rayserver)-->
 
+> I had to change the name of server from RayServer to Debugger.
+> Please use a new docker repo `butschster/debugger`
+> 
+> `docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debugger:latest`
+
 Debugger is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
 installation on multiple platforms. 
 
