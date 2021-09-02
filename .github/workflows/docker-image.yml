@@ -39,4 +39,4 @@ jobs:
         build-args:
           APP_VERSION=${{ steps.previoustag.outputs.tag }}
         tags:
-          ${{ secrets.DOCKER_HUB_USERNAME }}/ray-server:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/ray-server:${{ steps.previoustag.outputs.tag }}
+          ${{ secrets.DOCKER_HUB_USERNAME }}/debugger:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/debugger:${{ steps.previoustag.outputs.tag }}
