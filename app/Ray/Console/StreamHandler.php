@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Ray\Console;
 
+use App\Console\Handler;
 use App\Ray\Console\Handlers\CallerHandler;
 use App\Ray\Console\Handlers\CarbonHandler;
 use App\Ray\Console\Handlers\CustomHandler;
@@ -18,7 +19,6 @@ use App\Ray\Console\Handlers\MeasureHandler;
 use App\Ray\Console\Handlers\TableHandler;
 use App\Ray\Console\Handlers\TraceHandler;
 use App\Ray\Console\Handlers\ViewHandler;
-use App\Ray\Contracts\Console\Handler;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class StreamHandler implements Handler

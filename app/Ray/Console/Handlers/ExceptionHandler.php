@@ -36,11 +36,11 @@ class ExceptionHandler extends AbstractHandler
     protected function renderTrace(array $frames): void
     {
         foreach ($frames as $i => $frame) {
-            $file     = $frame['file_name'];
-            $line     = $frame['line_number'];
-            $class    = empty($frame['class']) ? '' : $frame['class'] . '::';
+            $file = $frame['file_name'];
+            $line = $frame['line_number'];
+            $class = empty($frame['class']) ? '' : $frame['class'] . '::';
             $function = $frame['method'];
-            $pos      = str_pad((string) ((int) $i + 1), 4, ' ');
+            $pos = str_pad((string)((int)$i + 1), 4, ' ');
 
             $this->render("<fg=yellow>$pos</><fg=default;options=bold>$file</>:<fg=default;options=bold>$line</>");
             $this->render("<fg=white>    $class$function</>", false);
@@ -60,7 +60,7 @@ class ExceptionHandler extends AbstractHandler
 
         $this->render('at <fg=green>' . $file . '</>' . ':<fg=green>' . $line . '</>');
 
-        $content = "<?php".str_repeat("\n", $frame['snippet'][0]['line_number'] - 1);
+        $content = "<?php" . str_repeat("\n", $frame['snippet'][0]['line_number'] - 1);
         foreach ($frame['snippet'] as $row) {
             $content .= $row['text'] . "\n";
         }

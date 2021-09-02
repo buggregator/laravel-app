@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Ray\Contracts\Console;
+namespace App\Console;
 
 interface Handler
 {

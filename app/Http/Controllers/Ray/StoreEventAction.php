@@ -20,7 +20,7 @@ class StoreEventAction extends Controller
         Repository       $cache,
         EventsRepository $events,
         EventHandler     $handler,
-        ConsoleOutput $output
+        ConsoleOutput    $output
     ): void
     {
         $type = $request->input('payloads.0.type');
@@ -38,6 +38,6 @@ class StoreEventAction extends Controller
         $events->store($event);
         $server->sendEvent($event);
 
-        $output->writeln(json_encode($event, JSON_FORCE_OBJECT|JSON_HEX_TAG));
+        $output->writeln(json_encode($event, JSON_FORCE_OBJECT | JSON_HEX_TAG));
     }
 }

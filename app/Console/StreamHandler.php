@@ -8,7 +8,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class StreamHandler
 {
     private array $handlers = [
-        'ray' => \App\Ray\Console\StreamHandler::class
+        'ray' => \App\Ray\Console\StreamHandler::class,
+        'sentry' => \App\Sentry\Console\StreamHandler::class
     ];
 
     public function __construct(private OutputInterface $output)

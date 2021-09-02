@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Ray\Console\Handlers;
 
-use App\Ray\Contracts\Console\Handler;
+use App\Console\Handler;
 use NunoMaduro\Collision\ConsoleColor;
 use Symfony\Component\Console\Output\OutputInterface;
 
