@@ -9,7 +9,7 @@ class VariableCleaner
 
     public static function clean($value, int $maxWidth = self::MAX_WIDTH): string
     {
-        $value = (string) $value;
+        $value = (string)$value;
 
         if (preg_match('/(sf\-dump\-[0-9]+)/i', $value)) {
             $value = preg_replace('/<(style|script)\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/(style|script)>/i', '', $value);
@@ -17,6 +17,10 @@ class VariableCleaner
 
         $value = strip_tags($value);
 
-        return implode(PHP_EOL, str_split($value, $maxWidth));
+        if ($maxWidth > 0) {
+            return implode(PHP_EOL, str_split($value, $maxWidth));
+        }
+
+        return $value;
     }
 }

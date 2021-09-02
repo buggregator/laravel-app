@@ -15,11 +15,26 @@ class ContextHandler extends AbstractHandler
         $this->output->table([], [
             ['date', date('r')],
             ['source', sprintf('%s on line %s', class_basename($payload['origin']['file']), $payload['origin']['line_number'])],
-            ['file', $payload['origin']['file']]
+            ['file', $this->getFilePath($payload['origin']['file'])]
         ]);
     }
 
     public function printTitle(array $payload): void
     {
+    }
+
+
+    public function shouldBeSkipped(array $payload): bool
+    {
+        return empty($payload['origin']);
+    }
+
+    public function getFilePath(string $path): string
+    {
+        if (($pos = strpos($path, 'vendor')) !== false) {
+            return '~/' . substr($path, $pos, strlen($path));
+        }
+
+        return $path;
     }
 }

@@ -7,13 +7,20 @@ class CallerHandler extends AbstractHandler
 {
     public function handle(array $payload): void
     {
+    }
+
+    public function printTitle(array $payload): void
+    {
+        parent::printTitle($payload);
+
         $frame = $payload['content']['frame'];
 
-        $this->output->table([], [
-            ['Source', sprintf('%s on line %s', class_basename($frame['file_name']), $frame['line_number'])],
-            ['Class', $frame['class'] ?? ''],
-            ['Method', $frame['method']],
-            ['File', $frame['file_name']]
-        ]);
+        $this->output->writeln(sprintf(
+            ' <fg=default;options=bold>%s:%s</> on line %s',
+            class_basename($frame['class'] ?? ''),
+            $frame['method'],
+            $frame['line_number']
+        ));
+        $this->output->writeln(sprintf(' %s', $this->color->apply('dark_gray', $frame['file_name'])));
     }
 }

@@ -25,9 +25,9 @@ class ExceptionHandler extends AbstractHandler
         parent::printTitle($payload);
 
         $this->output->writeln(sprintf('  <error> %s </error>  ', $payload['content']['class']));
-        $this->output->writeln('');
+        $this->output->newline();
         $this->output->writeln("<fg=default;options=bold>  {$payload['content']['message']}</>");
-        $this->output->writeln('');
+        $this->output->newline();
     }
 
     /**
@@ -76,7 +76,7 @@ class ExceptionHandler extends AbstractHandler
     protected function render(string $message, bool $break = true): void
     {
         if ($break) {
-            $this->output->writeln('');
+            $this->output->newline();
         }
 
         $this->output->writeln("  $message");

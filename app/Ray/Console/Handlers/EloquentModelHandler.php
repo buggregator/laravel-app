@@ -14,9 +14,19 @@ class EloquentModelHandler extends AbstractHandler
             return;
         }
 
-        $this->output->table([], [
-            ['Class', $payload['content']['class_name']],
-            ['Attributes', VariableCleaner::clean($payload['content']['attributes'])]
-        ]);
+        $this->output->writeln(VariableCleaner::clean($payload['content']['attributes'], 0));
+    }
+
+    public function printTitle(array $payload): void
+    {
+        parent::printTitle($payload);
+
+        $this->output->writeln(sprintf(' <error> %s </error>  ', $payload['content']['class_name']));
+        $this->output->newline();
+    }
+
+    public function shouldBeSkipped(array $payload): bool
+    {
+        return empty($payload['content']);
     }
 }

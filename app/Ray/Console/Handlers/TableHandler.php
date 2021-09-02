@@ -7,8 +7,6 @@ use App\Ray\Console\VariableCleaner;
 
 class TableHandler extends AbstractHandler
 {
-    const MAX_WIDTH = 130;
-
     public function handle(array $payload): void
     {
         $this->output->table(['key', 'value'], collect((array)$payload['content']['values'])->map(function ($value, $key) {
