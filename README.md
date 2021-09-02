@@ -3,8 +3,8 @@
 # A server for debugging more than just Laravel applications.
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
-[![Downloads](https://img.shields.io/docker/pulls/butschster/ray-server.svg)](https://hub.docker.com/repository/docker/butschster/ray-server)
-[![Join to iur telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/rayserver)
+[![Downloads](https://img.shields.io/docker/pulls/butschster/debugger.svg)](https://hub.docker.com/repository/docker/butschster/debugger)
+<!--[![Join to iur telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/rayserver)-->
 
 Debugger is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
 installation on multiple platforms. 
