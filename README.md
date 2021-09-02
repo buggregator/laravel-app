@@ -62,7 +62,7 @@ docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/ray-
 
 # or 
 
-docker run -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/ray-server:v1.12
+docker run -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/ray-server:v1.15
 ```
 
 ### Configuration
