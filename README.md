@@ -1,6 +1,5 @@
 ![Ray server](https://user-images.githubusercontent.com/773481/131818548-39189a7e-355a-4a9c-b783-9ae8ce627d79.png)
 
-
 # A server for debugging more than just Laravel applications.
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
@@ -9,6 +8,13 @@
 
 RayServer is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
 installation on multiple platforms. 
+
+#### Contents
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Configuration](#configuration)
+4. [Contributing](#contributing)
+5. [License](#license)
 
 ## Features
 
