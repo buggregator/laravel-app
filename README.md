@@ -22,7 +22,7 @@ VAR_DUMPER_FORMAT=server
 VAR_DUMPER_SERVER=127.0.0.1:9912
 ```
 
-### 2. SMTP server
+### 2. Fake SMTP server for catching mail
 
 The RayServer also is an email testing tool that makes it super easy to install and configure a local email server (Like [MailHog](https://github.com/mailhog/MailHog)). RayServer sets up a fake SMTP server and you can configure your preferred web applications to use RayServer’s SMTP server to send and receive emails. For instance, you can configure a local WordPress site to use RayServer for email deliveries.
 
@@ -71,6 +71,11 @@ RAY_PORT=23517      # Ray server port
 > 
 > **But it doesn’t mean you shouldn’t support spatie’s packages!**
 
+### UI
+
+The RayServer has a responsive design and a mobile device can be used as an additional screen for viewing event history. Also you can user a termial to collect dump output if you don't want to use a browser.
+
+![RayServer devices](https://user-images.githubusercontent.com/773481/131818515-bc6c154a-4978-4a57-979e-d0f8cc99f09e.png)
 
 ### Code samples
 
@@ -92,8 +97,6 @@ Code samples of configured Laravel application ready to send data to the RayServ
 - [Swoole](https://www.swoole.co.uk/) Http/Websocket/TCP server
 - [Vue](https://vuejs.org/)
 - [TailwindCSS](https://tailwindcss.com/)
-
-![RayServer devices](https://user-images.githubusercontent.com/773481/131818515-bc6c154a-4978-4a57-979e-d0f8cc99f09e.png)
 
 ## Installation
 
