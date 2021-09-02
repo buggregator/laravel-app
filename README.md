@@ -47,7 +47,6 @@ Code samples of usage you can find [here](https://github.com/butschster/ray-serv
 - TailwindCSS
 
 ![Ray server devices](https://user-images.githubusercontent.com/773481/131818515-bc6c154a-4978-4a57-979e-d0f8cc99f09e.png)
-![Ray server settings (4)](https://user-images.githubusercontent.com/773481/131818546-85496772-f799-4172-ae2c-9ca6c39b11a8.png)
 
 
 Code samples of usage you can find [here](https://github.com/butschster/ray-server-test/tree/master/tests/Feature
