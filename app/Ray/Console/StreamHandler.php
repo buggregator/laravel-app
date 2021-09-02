@@ -52,6 +52,8 @@ class StreamHandler implements Handler
 
         foreach ($stream['data']['payloads'] as $payload) {
             if (!isset($this->payloadHandlers[$payload['type']])) {
+                continue;
+
                 $handler = new DebugHandler($this->output);
             } else {
                 $handler = $this->payloadHandlers[$payload['type']];
