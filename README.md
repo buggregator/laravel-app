@@ -4,7 +4,9 @@
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
 [![Downloads](https://img.shields.io/docker/pulls/butschster/debugger.svg)](https://hub.docker.com/repository/docker/butschster/debugger)
+[![Twitter](https://img.shields.io/badge/twitter-Follow-blue)](https://twitter.com/debuggersrv)
 <!--[![Join to iur telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/rayserver)-->
+
 
 > I had to change the name of server from RayServer to Debugger.
 > Please use a new docker repo `butschster/debugger`
