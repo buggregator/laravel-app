@@ -30,7 +30,7 @@ VAR_DUMPER_SERVER=127.0.0.1:9912
 
 ### 2. Fake SMTP server for catching mail
 
-Debugger also is an email testing tool that makes it super easy to install and configure a local email server (Like [MailHog](https://github.com/mailhog/MailHog)). Debugger sets up a fake SMTP server and you can configure your preferred web applications to use RayServer’s SMTP server to send and receive emails. For instance, you can configure a local WordPress site to use Debugger for email deliveries.
+Debugger also is an email testing tool that makes it super easy to install and configure a local email server (Like [MailHog](https://github.com/mailhog/MailHog)). Debugger sets up a fake SMTP server and you can configure your preferred web applications to use Debugger’s SMTP server to send and receive emails. For instance, you can configure a local WordPress site to use Debugger for email deliveries.
 
 **Example**
 ```
