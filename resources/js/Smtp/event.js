@@ -2,7 +2,7 @@ import {Event} from "../Event"
 
 export default class extends Event {
     labels = ['smtp']
-    color = 'yellow'
+    color = 'blue'
     app = 'smtp'
 
     get serverName() {
