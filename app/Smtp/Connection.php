@@ -28,7 +28,7 @@ class Connection
     {
     }
 
-    public function handle(string $data): void
+    public function handle(string $data, \Closure $onDispatch): void
     {
         if (preg_match("/^(EHLO|HELO|MAIL FROM:)/", $data)) {
             $this->send(static::OK);
@@ -44,7 +44,7 @@ class Connection
             if ($this->endOfContentDetected($data)) {
                 $this->addToMessageBody($data);
                 $this->send(static::OK);
-                $this->dispatchMessage();
+                $this->dispatchMessage($onDispatch);
                 $this->collectingData = false;
             } else {
                 $this->addToMessageBody($data);
@@ -63,7 +63,7 @@ class Connection
         return (bool)preg_match("/\r\n\.\r\n$/", $data);
     }
 
-    private function dispatchMessage(): void
+    private function dispatchMessage(\Closure $callback): void
     {
         $parser = new MailParser();
         $message = $parser->parse($this->messageBody);
@@ -75,6 +75,7 @@ class Connection
         ]);
 
         (new Client())->sendEvent($event);
+        $callback($event);
     }
 
     private function addRecipient(string $recipient): void

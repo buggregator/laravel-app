@@ -5,24 +5,27 @@
         </h3>
         <Table>
             <TableRow title="From">
-                <template v-for="user in event.event.from">
-                    {{ user.email }} <span class="text-gray-600 font-bold" v-if="user.name">[{{ user.name }}]</span>
-                </template>
+                <Addresses :addresses=" event.event.from" />
             </TableRow>
             <TableRow title="To">
-                <template v-for="user in event.event.to">
-                    {{ user.email }} <span class="text-gray-600 font-bold" v-if="user.name">[{{ user.name }}]</span>
-                </template>
+                <Addresses :addresses=" event.event.to" />
             </TableRow>
             <TableRow v-if="event.event.cc.length" title="Cc">
-                <template v-for="user in event.event.cc">
-                    {{ user.email }} <span class="text-gray-600 font-bold" v-if="user.name">[{{ user.name }}]</span>
-                </template>
+                <Addresses :addresses=" event.event.cc" />
             </TableRow>
             <TableRow v-if="event.event.bcc.length" title="Bcc">
-                <template v-for="user in event.event.bcc">
-                    {{ user.email }} <span class="text-gray-600 font-bold" v-if="user.name">[{{ user.name }}]</span>
-                </template>
+                <Addresses :addresses=" event.event.bcc" />
+            </TableRow>
+            <TableRow v-if="event.event.reply_to.length" title="Reply to">
+                <Addresses :addresses=" event.event.reply_to" />
+            </TableRow>
+            <TableRow v-if="event.event.attachments.length" title="Attachments">
+                <div class="flex flex-col space-y-2">
+                    <div v-for="(attachment, i) in event.event.attachments">
+                        <span>{{ i +1 }}.</span> {{ attachment.name }}
+                    </div>
+                </div>
+
             </TableRow>
         </Table>
 
@@ -79,9 +82,11 @@ import Dump from "@/Components/UI//Dump";
 import Collapsed from "@/Components/UI//Collapsed";
 import Event from "../Event";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
+import Addresses from "./Addresses";
 
 export default {
     components: {
+        Addresses,
         Event, SshPre, Table, TableRow, Dump, Collapsed, TabGroup, TabList, Tab, TabPanels, TabPanel
     },
     props: {

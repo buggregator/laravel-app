@@ -24,6 +24,8 @@ class StartSwooleCommand extends \Laravel\Octane\Commands\StartSwooleCommand
         {--max-requests=500 : The number of requests to process before reloading the server}
         {--watch : Automatically reload the server when the application is modified}';
 
+    private StreamHandler $streamsHandler;
+
     /**
      * Handle the command.
      *
@@ -68,6 +70,8 @@ class StartSwooleCommand extends \Laravel\Octane\Commands\StartSwooleCommand
             'LARAVEL_OCTANE' => 1,
         ]))->start();
 
+        $this->streamsHandler = new StreamHandler($this->output, $this->getLaravel());
+
         return $this->runServer($server, $inspector, 'swoole');
     }
 
@@ -77,7 +81,7 @@ class StartSwooleCommand extends \Laravel\Octane\Commands\StartSwooleCommand
             'request' => $this->requestInfo($stream, $verbosity),
             'throwable' => $this->throwableInfo($stream, $verbosity),
             'shutdown' => $this->shutdownInfo($stream, $verbosity),
-            default => (new StreamHandler($this->output))($stream, $verbosity),
+            default => $this->streamsHandler->shouldBeSkipped($stream) ?: $this->streamsHandler->handle($stream),
         };
     }
 }

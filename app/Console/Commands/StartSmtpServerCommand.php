@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Console\StreamHandler;
 use App\EventsRepository;
 use App\Smtp\Connection as SmtpConnection;
 use Illuminate\Console\Command;
 use Laravel\Octane\Commands\Concerns\InteractsWithIO;
+use NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler;
 use Swoole\Process;
 use Swoole\Coroutine\Server\Connection;
 
@@ -20,8 +22,12 @@ class StartSmtpServerCommand extends Command
 
     protected $description = 'Run a websocket server';
 
+    private StreamHandler $streamsHandler;
+
     public function handle(EventsRepository $events)
     {
+        $this->streamsHandler = new StreamHandler($this->output, $this->getLaravel());
+
         // We use a process pool to create a Multi-process management module
         $pool = new Process\Pool(2);
         // By enabling this, each callback to WorkerStart will automatically create a coroutine for you
@@ -47,48 +53,48 @@ class StartSmtpServerCommand extends Command
                 $conn = new SmtpConnection($events, $connection);
                 $conn->ready();
 
-                if (app()->environment('local', 'testing')) {
-                    $this->requestInfo([
-                        'type' => 'request',
-                        'url' => $connection->exportSocket()->fd,
-                        'method' => 'SMTP:CONNECTED',
-                        'duration' => (microtime(true) - $start) * 1000,
-                        'statusCode' => 200,
-                        'memory' => memory_get_usage(),
-                    ]);
-                }
+                $this->handleStream([
+                    'type' => 'request',
+                    'url' => $connection->exportSocket()->fd,
+                    'method' => 'SMTP:CONNECTED',
+                    'duration' => (microtime(true) - $start) * 1000,
+                    'statusCode' => 200,
+                    'memory' => memory_get_usage(),
+                ]);
 
                 while (true) {
                     $data = $connection->recv(1);
                     $start = microtime(true);
 
                     if ($data === '' || $data === false) {
-                        if (app()->environment('local', 'testing')) {
-                            $this->requestInfo([
-                                'type' => 'request',
-                                'url' => '',
-                                'method' => 'SMTP:CLOSED',
-                                'duration' => (microtime(true) - $start) * 1000,
-                                'statusCode' => 200,
-                                'memory' => memory_get_usage(),
-                            ]);
-                        }
-                        $connection->close();
-                        break;
-                    }
-
-                    if (app()->environment('local', 'testing')) {
-                        $this->requestInfo([
+                        $this->handleStream([
                             'type' => 'request',
                             'url' => '',
-                            'method' => 'SMTP:REQUEST',
+                            'method' => 'SMTP:CLOSED',
                             'duration' => (microtime(true) - $start) * 1000,
                             'statusCode' => 200,
                             'memory' => memory_get_usage(),
                         ]);
+
+                        $connection->close();
+                        break;
                     }
 
-                    $conn->handle($data);
+                    $this->handleStream([
+                        'type' => 'request',
+                        'url' => '',
+                        'method' => 'SMTP:REQUEST',
+                        'duration' => (microtime(true) - $start) * 1000,
+                        'statusCode' => 200,
+                        'memory' => memory_get_usage(),
+                    ]);
+
+                    try {
+                        $conn->handle($data, fn(array $event) => $this->handleStream($event));
+                    } catch (\Throwable $e) {
+                        app(ExceptionHandler::class)->renderForConsole($this->output, $e);
+                    }
+
                 }
             });
 
@@ -96,5 +102,13 @@ class StartSmtpServerCommand extends Command
         });
 
         $pool->start();
+    }
+
+    public function handleStream($stream, $verbosity = null)
+    {
+        match ($stream['type']) {
+            'request' => !$this->getLaravel()->environment('local', 'testing') ?: $this->requestInfo($stream, $verbosity),
+            default => $this->streamsHandler->shouldBeSkipped($stream) ?: $this->streamsHandler->handle($stream),
+        };
     }
 }

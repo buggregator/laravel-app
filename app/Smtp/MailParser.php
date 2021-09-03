@@ -34,8 +34,8 @@ class MailParser
         $html = (string)$message->getHtmlContent();
         $text = (string)$message->getTextContent();
         /** @var AbstractHeader|null $replyToHeader */
-        $replyToHeader = $message->getHeader('reply-to');
-        $replyTo = $replyToHeader ? $replyToHeader->getRawValue() : null;
+        $replyToHeader = $message->getHeader('reply-to')->getParts()[0] ?? null;
+        $replyTo = $replyToHeader ? [['email' => $replyToHeader?->getValue(), 'name' => $replyToHeader?->getName()]] : [];
         $attachments = $this->buildAttachmentFrom(
             $message->getAllAttachmentParts()
         );

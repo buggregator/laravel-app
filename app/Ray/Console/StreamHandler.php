@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Ray\Console;
 
+use App\Attributes\Console\Stream;
 use App\Console\Handler;
 use App\Ray\Console\Handlers\CallerHandler;
 use App\Ray\Console\Handlers\CarbonHandler;
@@ -21,6 +22,7 @@ use App\Ray\Console\Handlers\TraceHandler;
 use App\Ray\Console\Handlers\ViewHandler;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[Stream(name: 'ray')]
 class StreamHandler implements Handler
 {
     private array $payloadHandlers = [
@@ -64,9 +66,9 @@ class StreamHandler implements Handler
                 continue;
             }
 
+            $handler->printContext($payload);
             $handler->printTitle($payload);
             $handler->handle($payload);
-            $handler->printContext($payload);
         }
     }
 

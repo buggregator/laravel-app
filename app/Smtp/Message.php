@@ -14,7 +14,7 @@ class Message implements \JsonSerializable
         private string  $subject,
         private string  $htmlBody,
         private string  $textBody,
-        private ?string $replyTo,
+        private array $replyTo,
         private array   $allRecipients,
         private array   $attachments
     )
