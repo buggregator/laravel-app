@@ -124,7 +124,7 @@ docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debu
 
 # or 
 
-docker run -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debugger:v1.15.2
+docker run -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debugger:v1.16
 ```
 
 ### Configuration
