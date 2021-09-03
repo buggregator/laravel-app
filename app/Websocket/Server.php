@@ -1,16 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace App;
+namespace App\Websocket;
 
-use App\Websocket\ConnectionsRepository;
-use Swoole\Http\Server;
+use Swoole\Http\Server as SwooleServer;
 
-class WebsocketServer
+class Server
 {
     public function __construct(
         private ConnectionsRepository $connections,
-        private Server                $server,
+        private SwooleServer          $server,
     )
     {
     }

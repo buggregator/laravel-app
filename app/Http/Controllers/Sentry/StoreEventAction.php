@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Sentry;
 use App\EventsRepository;
 use App\Http\Controllers\Controller;
 use App\Sentry\Contracts\EventHandler;
-use App\WebsocketServer;
+use App\Websocket\Server as WebsocketServer;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -31,7 +31,7 @@ class StoreEventAction extends Controller
         $events->store($event);
         $server->sendEvent($event);
 
-        $output->writeln(json_encode($event, JSON_FORCE_OBJECT|JSON_HEX_TAG));
+        $output->writeln(json_encode($event, JSON_FORCE_OBJECT | JSON_HEX_TAG));
     }
 }
 

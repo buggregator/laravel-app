@@ -30,6 +30,7 @@ abstract class AbstractHandler implements Handler
 
         $this->output->newline();
         $this->output->writeln($title);
+        $this->output->newline();
     }
 
     public function printContext(array $payload): void

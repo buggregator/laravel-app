@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Listeners\Websocket;
 
 use App\Events\Websocket\MessageReceived;
-use App\WebsocketServer;
+use App\Websocket\Server as WebsocketServer;
 
 class BroadcastReceivedEvent
 {

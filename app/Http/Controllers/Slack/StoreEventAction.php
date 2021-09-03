@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Slack;
 
 use App\EventsRepository;
 use App\Http\Controllers\Controller;
-use App\WebsocketServer;
+use App\Websocket\Server as WebsocketServer;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 

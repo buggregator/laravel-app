@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Ray;
 use App\EventsRepository;
 use App\Http\Controllers\Controller;
 use App\Ray\Contracts\EventHandler;
-use App\WebsocketServer;
+use App\Websocket\Server as WebsocketServer;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
