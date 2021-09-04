@@ -10,6 +10,7 @@
 
 <script>
 import SshPre from 'simple-syntax-highlighter'
+
 export default {
     components: {SshPre},
     props: ['value'],
@@ -28,9 +29,11 @@ export default {
             return typeof this.value == 'boolean'
         },
         dumpId() {
-            const matches = this.value.match(/(sf\-dump\-[0-9]+)/i)
-            if (matches) {
-                return matches[0]
+            if (typeof this.value === 'string') {
+                const matches = this.value.match(/(sf\-dump\-[0-9]+)/i)
+                if (matches) {
+                    return matches[0]
+                }
             }
 
             return null
