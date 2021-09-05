@@ -10,7 +10,8 @@ class ShowEventsAction extends Controller
     public function __invoke()
     {
         return Inertia::render('Logs', [
-            'version' => config('app.version')
+            'version' => config('app.version'),
+            'name' => config('app.name') ?? 'Debugger',
         ]);
     }
 }

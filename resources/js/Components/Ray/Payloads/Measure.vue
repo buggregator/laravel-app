@@ -6,13 +6,13 @@
 
         <Table v-else>
             <TableRow title="Total time">
-                {{ payload.content.total_time.toFixed(2) }}ms
-            </TableRow>
-            <TableRow title="Maximum memory usage">
-                {{ payload.content.max_memory_usage_during_total_time.toFixed(2) }} KB
+                {{ totalTime }} s
             </TableRow>
             <TableRow title="Time since last call">
-                {{ payload.content.time_since_last_call.toFixed(2) }}ms
+                {{ timeSinceLastCall }} s
+            </TableRow>
+            <TableRow title="Maximum memory usage">
+                {{ maxMemoryUsage }}
             </TableRow>
         </Table>
     </div>
@@ -21,10 +21,35 @@
 <script>
 import Table from "@/Components/UI/Table";
 import TableRow from "@/Components/UI/TableRow";
+
+function prettySize(bytes, separator = '', postFix = '') {
+    if (bytes) {
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.min(parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10), sizes.length - 1);
+        return `${(bytes / (1024 ** i)).toFixed(2)}${separator} ${sizes[i]}${postFix}`;
+    }
+    return 'n/a';
+}
+
+function convertMiliseconds(miliseconds) {
+    return (miliseconds / 1000).toFixed(4);
+}
+
 export default {
     components: {TableRow, Table},
     props: {
-        payload: Object
+        payload: Object,
+    },
+    computed: {
+        totalTime() {
+            return convertMiliseconds(this.payload.content.total_time)
+        },
+        timeSinceLastCall() {
+            return convertMiliseconds(this.payload.content.time_since_last_call)
+        },
+        maxMemoryUsage() {
+            return prettySize(this.payload.content.max_memory_usage_during_total_time)
+        }
     }
 }
 </script>
