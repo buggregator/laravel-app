@@ -5,7 +5,7 @@
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
 [![Downloads](https://img.shields.io/docker/pulls/butschster/debugger.svg)](https://hub.docker.com/repository/docker/butschster/debugger)
 [![Twitter](https://img.shields.io/badge/twitter-Follow-blue)](https://twitter.com/debuggersrv)
-<!--[![Join to iur telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/rayserver)-->
+[![Join to our telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/debuggersrv)
 
 
 > I had to change the name of server from RayServer to Deburger.
@@ -160,6 +160,8 @@ That's it. Now you open http://127.0.0.1:23517 url in your browser or terminal a
 Enjoy!
 
 ## Contributing
+
+There are several [projects](https://github.com/butschster/debugger/projects) in this repo with unresolved issues and it would be great if you help a community solving them.
 
 ### Server requirements
 
