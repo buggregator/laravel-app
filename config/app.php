@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Debugger'),
 
 
-    'version' => env('APP_VERSION', 'v1.0'),
+    'version' => env('APP_VERSION', 'v1.16'),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <template>
     <div class="mt-6 p-6 bg-white rounded-l text-gray-600 border">
-        <h3 class="text-xl font-bold mb-3">Ray server {{ version }}</h3>
+        <h3 class="text-xl font-bold mb-3">{{ name }} {{ version }}</h3>
         <ul class="flex flex-col space-y-2">
             <li class="flex space-x-3 items-center">
                 <svg width="25" height="25" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,11 +27,12 @@ import {computed} from "vue";
 export default {
     setup() {
         const version = computed(() => usePage().props.value.version)
+        const name = computed(() => usePage().props.value.name)
         const [host, port] = window.location.host.split(':')
 
         const sentryDsn = computed(() => `http://sentry@${host}:${port}/1`)
 
-        return {version, sentryDsn}
+        return {version, name, sentryDsn}
     }
 }
 </script>
