@@ -161,6 +161,8 @@ Enjoy!
 
 ## Contributing
 
+There are several [projects](https://github.com/butschster/debugger/projects) in this repo with unresolved issues and it would be great if you help a community solving them.
+
 ### Server requirements
 
 1. PHP 8.0
