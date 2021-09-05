@@ -25,33 +25,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[Stream(name: 'ray')]
 class StreamHandler implements Handler
 {
-    private array $payloadHandlers = [
-        'log' => LogHandler::class,
-        'table' => TableHandler::class,
-        'caller' => CallerHandler::class,
-        'trace' => TraceHandler::class,
-        'custom' => CustomHandler::class,
-        'exception' => ExceptionHandler::class,
-        'measure' => MeasureHandler::class,
-        'json_string' => JsonHandler::class,
-        'carbon' => CarbonHandler::class,
-        'eloquent_model' => EloquentModelHandler::class,
-        'executed_query' => ExecutedQueryHandler::class,
-        'job_event' => JobEventHandler::class,
-        'event' => EventHandler::class,
-        'view' => ViewHandler::class,
-    ];
+    private array $payloadHandlers = [];
 
-    public function __construct(private OutputInterface $output)
+    public function __construct(
+        private StreamHandlerConfig $config,
+        private OutputInterface     $output
+    )
     {
+        $this->payloadHandlers = $config->getHandlers();
     }
 
     public function handle(array $stream): void
     {
-        if (!isset($stream['data']['payloads'])) {
-            return;
-        }
-
         foreach ($stream['data']['payloads'] as $payload) {
             if (!isset($this->payloadHandlers[$payload['type']])) {
                 continue;
@@ -74,6 +59,10 @@ class StreamHandler implements Handler
 
     public function shouldBeSkipped(array $stream): bool
     {
-        return false;
+        if (!$this->config->isEnabled()) {
+            return true;
+        }
+
+        return !isset($stream['data']['payloads']);
     }
 }

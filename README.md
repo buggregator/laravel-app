@@ -119,12 +119,32 @@ You can run Deburger via docker from [Docker Hub](https://hub.docker.com/reposit
 provided [Dockerfile](https://github.com/butschster/ray-server/blob/master/Dockerfile)
 
 Just run on bash command 
-```
+```bash
 docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debugger:latest
 
 # or 
 
 docker run -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debugger:v1.16
+```
+
+### Docker compose
+
+```yaml
+// docker-compose.yml
+version: "2"
+services:
+    debugger:
+        image: butschster/debugger:latest
+        environment:
+            DB_CONNECTION: pgsql
+            DB_HOST: db
+            DB_DATABASE: homestead
+            DB_USERNAME: homestead
+            DB_PASSWORD: secret
+        ports:
+        - 23517:8000
+        - 1025:1025
+        - 9912:9912
 ```
 
 ### Configuration

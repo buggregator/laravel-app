@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\EventsRepository;
+use App\TCP\Server;
+use App\VarDumper\StreamHandlerConfig;
+use Closure;
 use Illuminate\Console\Command;
 use Laravel\Octane\Commands\Concerns\InteractsWithIO;
-use Swoole\Process;
 use Swoole\Coroutine\Server\Connection;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor;
@@ -21,80 +23,104 @@ class StartDumpServerCommand extends Command
                     {--port= : The port the server should be available on}';
 
     protected $description = 'Run a websocket server';
+    private \App\VarDumper\Connection $connection;
 
-    public function handle(EventsRepository $events)
+    public function handle(EventsRepository $events, StreamHandlerConfig $config)
     {
-        // We use a process pool to create a Multi-process management module
-        $pool = new Process\Pool(1);
-        // By enabling this, each callback to WorkerStart will automatically create a coroutine for you
-        $pool->set(['enable_coroutine' => true]);
+        $this->connection = new \App\VarDumper\Connection($events);
 
-        $descriptor = new CliDescriptor(new CliDumper());
+        $server = new Server(
+            $this->option('host') ?: '0.0.0.0',
+            $this->option('port') ?: 9912,
+            'Var dumper'
+        );
 
-        // Creates a Co\run context for you because enable_coroutine = true...
-        $pool->on('WorkerStart', function ($pool, $id) use ($events, $descriptor) {
-            $this->info('Var dumper server started...');
-
-            $port = $this->option('port') ?: 9912;
-            $host = $this->option('host') ?: '0.0.0.0';
-
-            $server = new \Swoole\Coroutine\Server($host, $port, false, true);
-
-            Process::signal(SIGTERM, function () use ($server) {
-                $server->shutdown();
-            });
-
-            // Receive a new connection request and automatically create a coroutine context
-            $server->handle(function (Connection $connection) use ($events, $descriptor) {
-                $start = microtime(true);
-
-                $connection = new \App\VarDumper\Connection($events, $connection);
-                $clientId = $connection->clientId();
-
-                if (app()->environment('local', 'testing')) {
-                    $this->requestInfo([
-                        'type' => 'request',
-                        'url' => $clientId,
-                        'method' => 'VAR-DUMP:CONNECTED',
-                        'duration' => (microtime(true) - $start) * 1000,
-                        'statusCode' => 200,
-                        'memory' => memory_get_usage(),
-                    ]);
-                }
-
-                $connection->handleMessage(function (array $payload) use ($descriptor, $clientId, $start) {
-                    try {
-                        [$data, $context] = $payload;
-                        $descriptor->describe(new SymfonyStyle($this->input, $this->output), $data, $context, $clientId);
-                    } catch (\Throwable $e) {
-                        $this->error($e->getMessage());
-                    }
-                }, function (string $error) {
-                    $this->error($error);
-                });
-
-
-                $connection->close();
-                if (app()->environment('local', 'testing')) {
-                    $this->requestInfo([
-                        'type' => 'request',
-                        'url' => '',
-                        'method' => 'VAR-DUMP:CLOSED',
-                        'duration' => (microtime(true) - $start) * 1000,
-                        'statusCode' => 200,
-                        'memory' => memory_get_usage(),
-                    ]);
-                }
-            });
-
-            $server->start();
-        });
-
-        $pool->start();
+        $server
+            ->onReceive($this->onReceive($config))
+            ->onConnect($this->onConnect())
+            ->onClose($this->onClose())
+            ->run($this->output);
     }
 
-    private function parseData(string $data): array
+    public function handleStream($stream, $verbosity = null)
     {
-        return array_filter(explode("\n", $data));
+        match ($stream['type']) {
+            'request' => !$this->getLaravel()->environment('local', 'testing') ?: $this->requestInfo($stream, $verbosity),
+        };
+    }
+
+    private function onReceive(StreamHandlerConfig $config): Closure
+    {
+        $descriptor = new CliDescriptor(new CliDumper());
+
+        return function (Connection $conn, string $data, float $start) use ($config, $descriptor) {
+
+            $this->handleStream([
+                'type' => 'request',
+                'url' => '',
+                'method' => 'VAR-DUMP:DATA',
+                'duration' => (microtime(true) - $start) * 1000,
+                'statusCode' => 200,
+                'memory' => memory_get_usage(),
+            ]);
+
+            $this->connection->handleMessage($data, function (array $payload) use ($config, $descriptor, $start) {
+
+                if (!$config->isEnabled()) {
+                    return;
+                }
+
+                try {
+                    [$data, $context] = $payload;
+
+                    unset($context['cli']);
+
+                    $descriptor->describe(
+                        new SymfonyStyle($this->input, $this->output),
+                        $data,
+                        $context,
+                        $this->connection->clientId()
+                    );
+                } catch (\Throwable $e) {
+                    $this->error($e->getMessage());
+                }
+
+
+            }, function (string $error) {
+
+                $this->error($error);
+
+            });
+        };
+    }
+
+    private function onConnect(): Closure
+    {
+        return function (Connection $conn, float $start) {
+            $this->connection->ready($conn);
+
+            $this->handleStream([
+                'type' => 'request',
+                'url' => $this->connection->clientId(),
+                'method' => 'VAR-DUMP:CONNECTED',
+                'duration' => (microtime(true) - $start) * 1000,
+                'statusCode' => 200,
+                'memory' => memory_get_usage(),
+            ]);
+        };
+    }
+
+    private function onClose(): Closure
+    {
+        return function (Connection $conn, float $start) {
+            $this->handleStream([
+                'type' => 'request',
+                'url' => '',
+                'method' => 'VAR-DUMP:CLOSED',
+                'duration' => (microtime(true) - $start) * 1000,
+                'statusCode' => 200,
+                'memory' => memory_get_usage(),
+            ]);
+        };
     }
 }

@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[Stream(name: 'sentry')]
 class StreamHandler implements Handler
 {
-    public function __construct(private OutputInterface $output)
+    public function __construct(private StreamHandlerConfig $config, private OutputInterface $output)
     {
     }
 
@@ -80,6 +80,10 @@ class StreamHandler implements Handler
 
     public function shouldBeSkipped(array $payload): bool
     {
+        if (!$this->config->isEnabled()) {
+            return true;
+        }
+
         return !isset($payload['data']['exception']['values'][0]);
     }
 

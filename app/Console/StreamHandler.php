@@ -46,7 +46,9 @@ class StreamHandler implements Handler
         /** @var Stream $stream */
         $stream = $attributes[0]->newInstance();
 
-        $this->handlers[$stream->getName()] = $class->newInstance($this->output);
+        $this->handlers[$stream->getName()] = $this->app->make($className, [
+            'output' => $this->output
+        ]);
     }
 
     private function fullQualifiedClassNameFromFile(SplFileInfo $file): string
@@ -79,6 +81,6 @@ class StreamHandler implements Handler
             return true;
         }
 
-        return false;
+        return $this->handlers[$payload['type']]->shouldBeSkipped($payload);
     }
 }

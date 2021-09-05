@@ -20,11 +20,9 @@ class Connection
 
     /** @var string[] */
     private array $recipients = [];
+    private SwooleConnection $connection;
 
-    public function __construct(
-        private EventsRepository $events,
-        private SwooleConnection $connection
-    )
+    public function __construct(private EventsRepository $events)
     {
     }
 
@@ -52,9 +50,11 @@ class Connection
         }
     }
 
-    public function ready(): void
+    public function ready(SwooleConnection $connection): void
     {
+        $this->connection = $connection;
         $this->collectingData = false;
+
         $this->send(static::READY, 'mailamie');
     }
 

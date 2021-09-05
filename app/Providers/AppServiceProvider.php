@@ -16,12 +16,12 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(Ray\Contracts\EventHandler::class, function () {
-            return new Ray\EventHandler($this->app, config('server.ray.event_handlers'));
+            return new Ray\EventHandler($this->app, []);
         });
 
 
         $this->app->bind(Sentry\Contracts\EventHandler::class, function () {
-            return new Sentry\EventHandler($this->app, config('server.sentry.event_handlers'));
+            return new Sentry\EventHandler($this->app, []);
         });
     }
 

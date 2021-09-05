@@ -5,6 +5,7 @@ namespace App\VarDumper;
 
 use App\EventsRepository;
 use App\Websocket\Client;
+use Closure;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\VarDumper\Cloner\Data;
 use Symfony\Component\VarDumper\Cloner\Stub;
@@ -12,9 +13,10 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
 class Connection
 {
+    private \Swoole\Coroutine\Server\Connection $connection;
+
     public function __construct(
-        private EventsRepository                    $events,
-        private \Swoole\Coroutine\Server\Connection $connection
+        private EventsRepository $events
     )
     {
     }
@@ -24,15 +26,18 @@ class Connection
         return $this->connection->exportSocket()->fd;
     }
 
+    public function ready(\Swoole\Coroutine\Server\Connection $connection)
+    {
+        $this->connection = $connection;
+    }
+
     public function close(): void
     {
         $this->connection->close();
     }
 
-    public function handleMessage(\Closure $onMessage, \Closure $onError): void
+    public function handleMessage(string $content, Closure $onMessage, Closure $onError): void
     {
-        $content = '';
-
         while (true) {
             $data = $this->connection->recv(1);
 
@@ -61,6 +66,7 @@ class Connection
             }
 
             $onMessage($payload);
+
             $this->events->store($event = [
                 'type' => 'var-dump',
                 'uuid' => Uuid::uuid4()->toString(),

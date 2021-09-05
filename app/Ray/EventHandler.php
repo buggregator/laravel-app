@@ -7,7 +7,7 @@ use Illuminate\Contracts\Foundation\Application;
 
 class EventHandler implements Contracts\EventHandler
 {
-    public function __construct(private Application $application, private array $handlers)
+    public function __construct(private Application $application, private array $handlers = [])
     {
     }
 

@@ -11,8 +11,12 @@ class Client
 
     public function sendEvent(array $event): void
     {
-        $client = new \WebSocket\Client($this->server);
-        $client->text(json_encode($event));
-        $client->close();
+        try {
+            $client = new \WebSocket\Client($this->server);
+            $client->text(json_encode($event));
+            $client->close();
+        } catch (\Throwable $e) {
+            report($e);
+        }
     }
 }
