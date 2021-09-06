@@ -51,5 +51,10 @@ return [
         'cli' => [
             'enabled' => (bool)env('CLI_VAR_DUMPER_STREAM', true),
         ]
+    ],
+    'monolog' => [
+        'cli' => [
+            'enabled' => (bool) env('CLI_MONOLOG_STREAM', true),
+        ]
     ]
 ];

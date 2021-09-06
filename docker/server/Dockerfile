@@ -17,5 +17,6 @@ WORKDIR /app
 EXPOSE 8000
 EXPOSE 1025
 EXPOSE 9912
+EXPOSE 9913
 
 CMD php artisan migrate:fresh --force && /usr/bin/supervisord -c /app/supervisord.conf

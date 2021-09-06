@@ -70,6 +70,7 @@ class Connection
 
         $this->events->store($event = [
             'type' => 'smtp',
+            'timestamp' => time(),
             'uuid' => Uuid::uuid4()->toString(),
             'data' => $message->jsonSerialize()
         ]);

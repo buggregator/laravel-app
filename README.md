@@ -7,11 +7,12 @@
 [![Twitter](https://img.shields.io/badge/twitter-Follow-blue)](https://twitter.com/debuggersrv)
 [![Join to our telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/debuggersrv)
 
-
+<!--
 > I had to change the name of server from RayServer to Debugger.
 > Please use a new docker repo `butschster/debugger`
 > 
-> `docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debugger:latest`
+> `docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 -p 9913:9913 butschster/debugger:latest`
+-->
 
 Debugger is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
 installation on multiple platforms. 
@@ -54,7 +55,7 @@ Debugger can be used to receive Sentry reports from your application. Debugger i
 
 ### 4. Compatible with [Monolog](https://github.com/Seldaek/monolog)
 
-Debugger can receive logs from `monolog/monolog` package via `\Monolog\Handler\SlackWebhookHandler` handler.
+Debugger can receive logs from `monolog/monolog` package via `\Monolog\Handler\SlackWebhookHandler` or `\Monolog\Handler\SocketHandler` handler.
 
 **Example**
 ```
@@ -120,11 +121,33 @@ provided [Dockerfile](https://github.com/butschster/ray-server/blob/master/Docke
 
 Just run on bash command 
 ```bash
-docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debugger:latest
+docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 -p 9913:9913 butschster/debugger:latest
+# --pull always - optional option checks latest version on every running. You can omit it
 
-# or 
+# or specific version
+docker run -p 23517:8000 -p 1025:1025 -p 9912:9912 -p 9913:9913 butschster/debugger:v1.18
 
-docker run -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debugger:v1.16
+# You can omit unused ports if you use, for example, only var-dumper
+docker run --pull always -p 9912:9912 butschster/debugger:latest
+```
+
+> You can omit unused ports
+
+
+If you don't want to see dump output in your terminal, you can disable it through ENV variables:
+
+```
+CLI_SMTP_STREAM=false
+CLI_VAR_DUMPER_STREAM=false
+CLI_SENTRY_STREAM=false
+CLI_RAY_STREAM=false
+CLI_MONOLOG_STREAM=false
+```
+
+**Example**
+
+```bash
+docker run --pull always --env CLI_SMTP_STREAM=false --env CLI_SENTRY_STREAM=false -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debugger:latest
 ```
 
 ### Docker compose
@@ -145,6 +168,7 @@ services:
         - 23517:8000
         - 1025:1025
         - 9912:9912
+        - 9913:9913
 ```
 
 ### Configuration
@@ -170,14 +194,48 @@ RAY_HOST=127.0.0.1  # Debugger host
 RAY_PORT=23517      # Debugger port
 ```
 5. Configure your .env for monolog logs
+
+**Socket**
+
+Add a new channel to config file `config/logging.php`
+
+```php
+'channels' => [
+     ...
+
+    'socket' => [
+        'driver' => 'monolog',
+        'level' => env('LOG_LEVEL', 'debug'),
+        'handler' => \Monolog\Handler\SocketHandler::class,
+        'formatter' => \Monolog\Formatter\JsonFormatter::class,
+        'handler_with' => [
+            'connectionString' => env('LOG_SOCKET_URL', '127.0.0.1:9913'),
+        ],
+    ],
+]
+```
+
+the set default channel to `socket`
+
+```
+LOG_CHANNEL=socket
+LOG_SOCKET_URL=127.0.0.1:9913
+```
+
+**Slack**
 ```
 LOG_CHANNEL=slack
 LOG_SLACK_WEBHOOK_URL=http://127.0.0.1:23517/slack
 ```
 
+
 That's it. Now you open http://127.0.0.1:23517 url in your browser or terminal and collect dump output from your application.
 
 Enjoy!
+
+
+---
+
 
 ## Contributing
 
@@ -197,7 +255,12 @@ There are several [projects](https://github.com/butschster/debugger/projects) in
 4. Run HTTP server `php artisan server:start --host=127.0.0.1 --port=23517`
 5. Run SMTP server `php artisan smtp:start --host=127.0.0.1 --port=1025`
 6. Run var-dumper server `php artisan dump-server:start --host=127.0.0.1 --port=9912`
+6. Run monolog server `php artisan monolog:start --host=127.0.0.1 --port=9913`
 7. Build npm `npm run prod`
+
+
+---
+
 
 ## License
 

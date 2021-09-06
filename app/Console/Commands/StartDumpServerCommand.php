@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 
 use App\EventsRepository;
 use App\TCP\Server;
+use App\VarDumper\Connection as VarDumperConnection;
 use App\VarDumper\StreamHandlerConfig;
 use Closure;
 use Illuminate\Console\Command;
@@ -22,12 +23,12 @@ class StartDumpServerCommand extends Command
                     {--host= : The IP address the server should bind to}
                     {--port= : The port the server should be available on}';
 
-    protected $description = 'Run a websocket server';
-    private \App\VarDumper\Connection $connection;
+    protected $description = 'Run var-dumper server';
+    private VarDumperConnection $connection;
 
     public function handle(EventsRepository $events, StreamHandlerConfig $config)
     {
-        $this->connection = new \App\VarDumper\Connection($events);
+        $this->connection = new VarDumperConnection($events);
 
         $server = new Server(
             $this->option('host') ?: '0.0.0.0',

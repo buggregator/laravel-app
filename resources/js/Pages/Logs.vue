@@ -45,12 +45,14 @@ import SentryEventComponent from "@/Components/Sentry/Event";
 import SlackEventComponent from "@/Components/Slack/Event";
 import SmtpEventComponent from "@/Components/Smtp/Event";
 import VarDumpComponent from "@/Components/VarDump/Event";
+import MonologComponent from "@/Components/Monolog/Event";
 
 import RayEvent from "@/Ray/event";
 import SentryEvent from "@/Sentry/event";
 import SlackEvent from "@/Slack/event";
 import SmtpEvent from "@/Smtp/event";
 import VarDumpEvent from "@/VarDump/event";
+import MonologEvent from "@/Monolog/event";
 
 export default {
     components: {
@@ -58,7 +60,8 @@ export default {
         Labels,
         WsConnectionStatus, Label, Tips,
         Screens, Head, Link,
-        RayEventComponent, SentryEventComponent, SlackEventComponent, SmtpEventComponent, VarDumpComponent
+        RayEventComponent, SentryEventComponent, SlackEventComponent,
+        SmtpEventComponent, VarDumpComponent, MonologComponent
     },
 
     computed: {
@@ -77,6 +80,8 @@ export default {
                 return 'SmtpEventComponent'
             } else if (event instanceof VarDumpEvent) {
                 return 'VarDumpComponent'
+            } else if (event instanceof MonologEvent) {
+                return 'MonologComponent'
             }
 
             return 'RayEventComponent'

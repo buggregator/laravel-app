@@ -1,15 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\VarDumper;
+namespace App\Monolog;
 
 use App\EventsRepository;
 use App\Websocket\Client;
 use Closure;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\VarDumper\Cloner\Data;
-use Symfony\Component\VarDumper\Cloner\Stub;
-use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
 class Connection
 {
@@ -52,7 +49,7 @@ class Connection
         $messages = array_filter(explode("\n", $content));
 
         foreach ($messages as $message) {
-            $payload = @unserialize(base64_decode($message), ['allowed_classes' => [Data::class, Stub::class]]);
+            $payload = json_decode($message, true);
 
             // Impossible to decode the message, give up.
             if (false === $payload) {
@@ -60,38 +57,15 @@ class Connection
                 continue;
             }
 
-            if (!is_array($payload) || count($payload) < 2 || !$payload[0] instanceof Data || !is_array($payload[1])) {
-                $onError('Invalid payload from [' . $this->clientId() . '] client. Expected an array of two elements (Data $data, array $context)');
-                continue;
-            }
-
-            $onMessage($payload);
-
-            $this->events->store($event = [
-                'type' => 'var-dump',
-                'uuid' => Uuid::uuid4()->toString(),
+            $onMessage($event = [
+                'type' => 'monolog',
                 'timestamp' => time(),
-                'data' => [
-                    'payload' => [
-                        'type' => $payload[0]->getType(),
-                        'value' => $this->convertToPrimitive($payload[0])
-                    ],
-                    'context' => $payload[1]
-                ]
+                'uuid' => Uuid::uuid4()->toString(),
+                'data' => $payload
             ]);
 
+            $this->events->store($event);
             (new Client())->sendEvent($event);
         }
-    }
-
-    public static function convertToPrimitive(Data $data)
-    {
-        if (in_array($data->getType(), ['string', 'boolean'])) {
-            return $data->getValue();
-        }
-
-        $dumper = new HtmlDumper();
-        return $dumper->dump($data, true);
-
     }
 }

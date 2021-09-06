@@ -23,7 +23,7 @@ class Server
         private string $host,
         private int    $port,
         private string $name,
-        private int    $pool = 2
+        private int    $pool = 1
     )
     {
     }
