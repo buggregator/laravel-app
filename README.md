@@ -1,4 +1,4 @@
-![Deburger](https://user-images.githubusercontent.com/773481/131818548-39189a7e-355a-4a9c-b783-9ae8ce627d79.png)
+![Debugger](https://user-images.githubusercontent.com/773481/131818548-39189a7e-355a-4a9c-b783-9ae8ce627d79.png)
 
 # A server for debugging more than just Laravel applications.
 
@@ -8,12 +8,12 @@
 [![Join to our telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/debuggersrv)
 
 
-> I had to change the name of server from RayServer to Deburger.
+> I had to change the name of server from RayServer to Debugger.
 > Please use a new docker repo `butschster/debugger`
 > 
 > `docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 butschster/debugger:latest`
 
-Deburger is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
+Debugger is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
 installation on multiple platforms. 
 
 #### Contents
@@ -27,7 +27,7 @@ installation on multiple platforms.
 
 ### 1. Symfony [VarDumper server](https://symfony.com/doc/current/components/var_dumper.html#the-dump-server)
 
-The `dump()` and `dd()` functions output its contents in the same browser window or console terminal as your own application. Sometimes mixing the real output with the debug output can be confusing. That’s why this the Deburger can be used to collect all the dumped data. Deburger can display dump output in the browser as well as in a terminal (console output).
+The `dump()` and `dd()` functions output its contents in the same browser window or console terminal as your own application. Sometimes mixing the real output with the debug output can be confusing. That’s why this the Debugger can be used to collect all the dumped data. Debugger can display dump output in the browser as well as in a terminal (console output).
 
 **Example**
 ```
@@ -37,7 +37,7 @@ VAR_DUMPER_SERVER=127.0.0.1:9912
 
 ### 2. Fake SMTP server for catching mail
 
-Deburger also is an email testing tool that makes it super easy to install and configure a local email server (Like [MailHog](https://github.com/mailhog/MailHog)). Deburger sets up a fake SMTP server and you can configure your preferred web applications to use Deburger’s SMTP server to send and receive emails. For instance, you can configure a local WordPress site to use Deburger for email deliveries.
+Debugger also is an email testing tool that makes it super easy to install and configure a local email server (Like [MailHog](https://github.com/mailhog/MailHog)). Debugger sets up a fake SMTP server and you can configure your preferred web applications to use Debugger’s SMTP server to send and receive emails. For instance, you can configure a local WordPress site to use Debugger for email deliveries.
 
 **Example**
 ```
@@ -48,13 +48,13 @@ MAIL_PORT=1025
 
 ### 3. Compatible with Sentry
 
-Deburger can be used to receive Sentry reports from your application. Deburger is a lightweight alternative for local development. Just configure Sentry DSN to send data to Deburger. It can display dump output in the browser as well as in a terminal (console output). 
+Debugger can be used to receive Sentry reports from your application. Debugger is a lightweight alternative for local development. Just configure Sentry DSN to send data to Debugger. It can display dump output in the browser as well as in a terminal (console output). 
 
 **Simple example** `SENTRY_LARAVEL_DSN=http://sentry@127.0.0.1:23517/1`.
 
 ### 4. Compatible with [Monolog](https://github.com/Seldaek/monolog)
 
-Deburger can receive logs from `monolog/monolog` package via `\Monolog\Handler\SlackWebhookHandler` handler.
+Debugger can receive logs from `monolog/monolog` package via `\Monolog\Handler\SlackWebhookHandler` handler.
 
 **Example**
 ```
@@ -64,8 +64,8 @@ LOG_SLACK_WEBHOOK_URL=http://127.0.0.1:23517/slack
 
 ### 5. Spatie [Ray debug tool](https://github.com/spatie/ray)
 
-Deburger is compatible with `spatie/ray` package. The Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash
-applications. After installing one of the libraries, you can use the ray function to quickly dump stuff. Any variable(s) that you pass will be sent to the Deburger. Deburger can display dump output in the browser as well as in a terminal (console output). 
+Debugger is compatible with `spatie/ray` package. The Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash
+applications. After installing one of the libraries, you can use the ray function to quickly dump stuff. Any variable(s) that you pass will be sent to the Debugger. Debugger can display dump output in the browser as well as in a terminal (console output). 
 
 **Supported features**: Simple data, Colors, Sizes, Labels, New screen, Clear all, Caller, Trace, Pause, Counter, Class name of an object, Measure,
 Json, Xml, Carbon, File, Table, Image, Html, Text, Notifications, Phpinfo, Exception, Show queries, Count queries, Show events,
@@ -86,13 +86,13 @@ RAY_PORT=23517      # Ray server port
 
 ### UI
 
-Deburger has a responsive design and a mobile device can be used as an additional screen for viewing event history. Also you can user a termial to collect dump output if you don't want to use a browser.
+Debugger has a responsive design and a mobile device can be used as an additional screen for viewing event history. Also you can user a termial to collect dump output if you don't want to use a browser.
 
-![Deburger devices](https://user-images.githubusercontent.com/773481/131818515-bc6c154a-4978-4a57-979e-d0f8cc99f09e.png)
+![Debugger devices](https://user-images.githubusercontent.com/773481/131818515-bc6c154a-4978-4a57-979e-d0f8cc99f09e.png)
 
 ### Code samples
 
-Code samples of configured Laravel application ready to send data to Deburger you can find [here](https://github.com/butschster/ray-server-test/tree/master/tests/Feature).
+Code samples of configured Laravel application ready to send data to Debugger you can find [here](https://github.com/butschster/ray-server-test/tree/master/tests/Feature).
 
 ### Articles
 
@@ -115,7 +115,7 @@ Code samples of configured Laravel application ready to send data to Deburger yo
 
 ### Docker image
 
-You can run Deburger via docker from [Docker Hub](https://hub.docker.com/repository/docker/butschster/debugger) or using the
+You can run Debugger via docker from [Docker Hub](https://hub.docker.com/repository/docker/butschster/debugger) or using the
 provided [Dockerfile](https://github.com/butschster/ray-server/blob/master/Dockerfile)
 
 Just run on bash command 
@@ -166,8 +166,8 @@ SENTRY_LARAVEL_DSN=http://sentry@127.0.0.1:23517/1
 ```
 4. Configure your .env for Ray package
 ```
-RAY_HOST=127.0.0.1  # Deburger host
-RAY_PORT=23517      # Deburger port
+RAY_HOST=127.0.0.1  # Debugger host
+RAY_PORT=23517      # Debugger port
 ```
 5. Configure your .env for monolog logs
 ```
@@ -201,4 +201,4 @@ There are several [projects](https://github.com/butschster/debugger/projects) in
 
 ## License
 
-Deburger is open-sourced software licensed under the MIT license.
+Debugger is open-sourced software licensed under the MIT license.
