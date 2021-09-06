@@ -1,5 +1,3 @@
-![Debugger](https://user-images.githubusercontent.com/773481/131818548-39189a7e-355a-4a9c-b783-9ae8ce627d79.png)
-
 # A server for debugging more than just Laravel applications.
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
@@ -15,14 +13,25 @@
 -->
 
 Debugger is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
-installation on multiple platforms. 
+installation on multiple platforms via docker and supports symfony var-dumper, monolog, sentry, smtp and spatie ray package.
 
 #### Contents
 1. [Features](#features)
+   - [Symfony VarDumper server](#1-symfony-vardumper-server)
+   - [Fake SMTP server](#2-fake-smtp-server-for-catching-mail)
+   - [Sentry server](#3-compatible-with-sentry)
+   - [Monolog server](#4-compatible-with-monolog)
+   - [Spatie Ray debug tool](5-spatie-ray-debug-tool)
 2. [Installation](#installation)
+   - [Docker image](#docker-image)
+   - [Docker compose](#docker-compose)
 3. [Configuration](#configuration)
 4. [Contributing](#contributing)
 5. [License](#license)
+
+---
+
+![Debugger](https://user-images.githubusercontent.com/773481/131818548-39189a7e-355a-4a9c-b783-9ae8ce627d79.png)
 
 ## Features
 
