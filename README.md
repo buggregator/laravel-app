@@ -55,7 +55,7 @@ Debugger can be used to receive Sentry reports from your application. Debugger i
 
 ### 4. Compatible with [Monolog](https://github.com/Seldaek/monolog)
 
-Debugger can receive logs from `monolog/monolog` package via `\Monolog\Handler\SlackWebhookHandler` or `\Monolog\Handler\SocketHandler` handler.
+Debugger can receive logs from `monolog/monolog` package via `\Monolog\Handler\SlackWebhookHandler` or `\Monolog\Handler\SocketHandler` handler. Debugger can display dump output in the browser as well as in a terminal (console output).
 
 **Example**
 ```
