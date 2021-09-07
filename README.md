@@ -21,7 +21,7 @@ installation on multiple platforms via docker and supports symfony var-dumper, m
    - [Fake SMTP server](#2-fake-smtp-server-for-catching-mail)
    - [Sentry server](#3-compatible-with-sentry)
    - [Monolog server](#4-compatible-with-monolog)
-   - [Spatie Ray debug tool](5-spatie-ray-debug-tool)
+   - [Spatie Ray debug tool](#5-spatie-ray-debug-tool)
 2. [Installation](#installation)
    - [Docker image](#docker-image)
    - [Docker compose](#docker-compose)
