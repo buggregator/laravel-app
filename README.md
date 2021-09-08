@@ -82,7 +82,7 @@ Json, Xml, Carbon, File, Table, Image, Html, Text, Notifications, Phpinfo, Excep
 Show jobs, Show cache, Model, Show views, Markdown, Collections, Env, Response, Request, Ban, Charles, Remove, Hide/Show events,
 Application log, Show Http client requests, Mailable
 
-[Reas more](https://spatie.be/docs/ray/v1/introduction) about `spatie/ray` package.
+[Read more](https://spatie.be/docs/ray/v1/introduction) about `spatie/ray` package.
 
 **Example**
 ```
