@@ -51,6 +51,10 @@ return [
             'connection' => 'default',
         ],
 
+        'swoole' => [
+            'driver' => 'swoole',
+        ],
+
         'log' => [
             'driver' => 'log',
         ],

@@ -1,7 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-use Laravel\Octane\ApplicationFactory;
 use Laravel\Octane\RequestContext;
 use Laravel\Octane\Stream;
 use Laravel\Octane\Swoole\Handlers\OnManagerStart;
@@ -82,7 +81,7 @@ $server->on('managerstart', fn() => $bootstrap($serverState) && (new OnManagerSt
 */
 
 require_once __DIR__ . '/../vendor/laravel/octane/bin/WorkerState.php';
-require_once __DIR__ . '/../app/Websocket/Worker.php';
+require_once __DIR__ . '/../app/Application/Websocket/Worker.php';
 
 $workerState = new WorkerState;
 

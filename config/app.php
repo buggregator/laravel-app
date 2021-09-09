@@ -166,20 +166,26 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
+         * Modules Service Providers...
          */
+        Modules\Monolog\ServiceProvider::class,
+        Modules\VarDumper\ServiceProvider::class,
+        Modules\RemoteServers\ServiceProvider::class,
+        Modules\Smtp\ServiceProvider::class,
+        Modules\Ray\ServiceProvider::class,
+        Modules\Sentry\ServiceProvider::class,
+        Modules\Events\ServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        Interfaces\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        App\Providers\FortifyServiceProvider::class,
-        App\Providers\JetstreamServiceProvider::class,
-
+        Interfaces\Providers\RouteServiceProvider::class,
+        Interfaces\Providers\FortifyServiceProvider::class,
+        Interfaces\Providers\JetstreamServiceProvider::class,
     ],
 
     /*
