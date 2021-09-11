@@ -5,5 +5,5 @@ namespace App\Contracts;
 
 interface WebsocketClient
 {
-    public function sendEvent(array $event): void;
+    public function sendEvent(string $topic, array $event): void;
 }

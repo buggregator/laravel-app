@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Events;
 
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
 class EventReceived implements ShouldBroadcastNow
@@ -16,8 +17,8 @@ class EventReceived implements ShouldBroadcastNow
         return $this->payload;
     }
 
-    public function broadcastOn(): string
+    public function broadcastOn(): Channel
     {
-        return 'event';
+        return new Channel('event');
     }
 }

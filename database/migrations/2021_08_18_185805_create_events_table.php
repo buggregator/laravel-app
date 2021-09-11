@@ -15,7 +15,8 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->json('event');
+            $table->string('event');
+            $table->json('payload');
             $table->timestamp('created_at');
         });
     }

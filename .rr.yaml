@@ -1,0 +1,50 @@
+rpc:
+  listen: tcp://127.0.0.1:6001
+
+server:
+  command: "php ./bin/rr-worker start"
+  relay: pipes
+  relay_timeout: "20s"
+
+http:
+  address: 0.0.0.0:8080
+  middleware: [ "headers", "gzip", "websockets" ]
+  pool:
+    max_jobs: 64 # feel free to change this
+    supervisor:
+      exec_ttl: 60s
+  headers:
+    response:
+      X-Powered-By: "RoadRunner"
+  static:
+    dir: "public"
+    forbid: [ ".php" ]
+
+websockets:
+  broker: default
+  path: "/ws"
+
+broadcast:
+  default:
+    driver: memory
+
+amqp:
+  addr: amqp://admin:admin@rabbitmq:5672/
+
+jobs:
+  num_pollers: 10
+  pipeline_size: 100000
+  pool:
+    num_workers: 10
+    max_jobs: 0
+    allocate_timeout: 60s
+    destroy_timeout: 60s
+  pipelines:
+    default:
+      driver: memory
+  consume: [ "default" ]
+
+logs:
+  level: debug
+  encoding: console
+  mode: development

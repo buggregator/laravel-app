@@ -16,8 +16,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         EventReceived::class => [
-            StoreEventToDatabase::class,
             SendToConsole::class,
+            StoreEventToDatabase::class,
         ]
     ];
 }

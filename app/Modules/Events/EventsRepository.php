@@ -11,8 +11,9 @@ class EventsRepository implements EventsRepositoryContract
     public function store(array $event): void
     {
         Event::create([
-            'id' => $event['uuid'],
-            'event' => $event
+            'id' => $event['payload']['uuid'],
+            'event' => $event['event'],
+            'payload' => $event['payload']
         ]);
     }
 
@@ -24,7 +25,10 @@ class EventsRepository implements EventsRepositoryContract
     public function all(): array
     {
         return Event::oldest()->get()->map(function (Event $event) {
-            return array_merge($event->event, ['timestamp' => $event->created_at->timestamp]);
+            return [
+                'event' => $event->event,
+                'payload' => array_merge($event->payload, ['timestamp' => $event->created_at->timestamp])
+            ];
         })->all();
     }
 

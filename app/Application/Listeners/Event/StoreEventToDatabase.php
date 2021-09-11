@@ -17,6 +17,9 @@ class StoreEventToDatabase
 
     public function handle(EventReceived $event)
     {
-        $this->events->store($event->payload);
+        $this->events->store([
+            'event' => $event::class,
+            'payload' => $event->payload
+        ]);
     }
 }

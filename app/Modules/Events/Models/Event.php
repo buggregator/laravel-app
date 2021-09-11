@@ -13,6 +13,7 @@ class Event extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'event' => 'json'
+        'event' => 'string',
+        'payload' => 'json'
     ];
 }

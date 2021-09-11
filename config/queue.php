@@ -42,6 +42,11 @@ return [
             'after_commit' => false,
         ],
 
+        'roadrunner' => [
+            'driver' => 'roadrunner',
+            'queue' => 'default',
+        ],
+
         'beanstalkd' => [
             'driver' => 'beanstalkd',
             'host' => 'localhost',

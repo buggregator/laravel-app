@@ -4,7 +4,7 @@ import ReconnectingWebSocket from 'reconnecting-websocket';
 import EventFactory from "./EventFactory";
 
 function createWsConnection(host, port) {
-    return new ReconnectingWebSocket(`ws://${host}:${port}/`, [], {
+    return new ReconnectingWebSocket(`ws://${host}:${port}/ws`, [], {
         connectionTimeout: 3000,
         maxRetries: 10,
     })
@@ -13,9 +13,10 @@ function createWsConnection(host, port) {
 function listenEvents(host, port, callback) {
     const socket = createWsConnection(host, port)
 
-    socket.onmessage = callback
+    socket.onmessage = event => callback(event)
 
     socket.addEventListener('open', () => {
+        socket.send(`{"command":"join", "topics":["event"]}`)
         store.commit('ws/connect')
     });
 
@@ -30,12 +31,16 @@ export function init() {
     const [host, port] = window.location.host.split(':')
 
     listenEvents(host, port, function (e) {
-        const event = EventFactory.create(
-            JSON.parse(e.data)
-        )
+        const data = JSON.parse(e.data)
 
-        if (event) {
-            store.commit('pushEvent', event)
+        if (data.topic === 'event') {
+            const event = EventFactory.create(
+                JSON.parse(data.payload.payload) || {type: 'null'}
+            )
+
+            if (event) {
+                store.commit('pushEvent', event)
+            }
         }
     })
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Interfaces\Websocket\Controllers\ConnectAction;
 use Modules\Events\Http\Controllers as Events;
 use Modules\Ray\Http\Controllers as Ray;
 use Modules\Sentry\Http\Controllers as Sentry;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', ShowEventsAction::class);
 
+Route::get('ws', ConnectAction::class);
 Route::post('/', Ray\StoreEventAction::class);
 Route::get('/_availability_check', Ray\CheckAvailabilityAction::class);
 Route::get('/locks/{hash}', Ray\Locks\CheckAction::class);

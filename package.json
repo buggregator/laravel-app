@@ -13,6 +13,7 @@
         "@inertiajs/inertia": "^0.10.0",
         "@inertiajs/inertia-vue3": "^0.5.1",
         "@inertiajs/progress": "^0.2.6",
+        "@spiralscout/websockets": "0.0.5",
         "@tailwindcss/forms": "^0.2.1",
         "@tailwindcss/typography": "^0.3.0",
         "@vue/compiler-sfc": "^3.0.5",
@@ -35,6 +36,7 @@
         "uuid": "^8.3.2",
         "vue-markdown": "^2.2.4",
         "vue3-markdown-it": "^1.0.9",
-        "vuex": "^4.0.2"
+        "vuex": "^4.0.2",
+        "ziggy-js": "^1.4.0"
     }
 }
