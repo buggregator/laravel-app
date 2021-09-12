@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Events\EventReceived;
+use App\Events\Websocket\Joined;
+use App\Listeners\Event\SendEventsAfterChannelJoin;
 use App\Listeners\Event\SendToConsole;
 use App\Listeners\Event\StoreEventToDatabase;
 use Illuminate\Auth\Events\Registered;
@@ -18,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
         EventReceived::class => [
             SendToConsole::class,
             StoreEventToDatabase::class,
+        ],
+        Joined::class => [
+            SendEventsAfterChannelJoin::class
         ]
     ];
 }

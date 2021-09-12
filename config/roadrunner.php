@@ -54,7 +54,6 @@ return [
 
         Events\AfterLoopIterationEvent::class => [
             ...Defaults::afterLoopIteration(),
-            \App\Listeners\Application\TerminateApplicationListener::class,
             Listeners\RunGarbageCollectorListener::class, // keep the memory usage low
         ],
 

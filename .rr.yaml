@@ -28,9 +28,6 @@ broadcast:
   default:
     driver: memory
 
-amqp:
-  addr: amqp://admin:admin@rabbitmq:5672/
-
 jobs:
   num_pollers: 10
   pipeline_size: 100000

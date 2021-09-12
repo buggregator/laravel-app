@@ -25,10 +25,7 @@ class EventsRepository implements EventsRepositoryContract
     public function all(): array
     {
         return Event::oldest()->get()->map(function (Event $event) {
-            return [
-                'event' => $event->event,
-                'payload' => array_merge($event->payload, ['timestamp' => $event->created_at->timestamp])
-            ];
+            return array_merge($event->payload, ['timestamp' => $event->created_at->timestamp]);
         })->all();
     }
 

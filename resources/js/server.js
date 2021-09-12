@@ -1,48 +1,23 @@
 import {store} from "./store";
 import SfdumpFunc from './Utils/dumper'
-import ReconnectingWebSocket from 'reconnecting-websocket';
+import Broadcast from './RoadRunner/Broadcast'
 import EventFactory from "./EventFactory";
 
-function createWsConnection(host, port) {
-    return new ReconnectingWebSocket(`ws://${host}:${port}/ws`, [], {
-        connectionTimeout: 3000,
-        maxRetries: 10,
-    })
-}
-
-function listenEvents(host, port, callback) {
-    const socket = createWsConnection(host, port)
-
-    socket.onmessage = event => callback(event)
-
-    socket.addEventListener('open', () => {
-        socket.send(`{"command":"join", "topics":["event"]}`)
-        store.commit('ws/connect')
-    });
-
-    socket.addEventListener('close', () => {
-        store.commit('ws/disconnect')
-    });
-}
-
+const [host, port] = window.location.host.split(':')
+window.ws = new Broadcast({
+    host: `ws://${host}:${port}/ws`,
+    connectionTimeout: 3000,
+    maxRetries: 10,
+})
 
 export function init() {
     window.Sfdump = SfdumpFunc(window.document)
-    const [host, port] = window.location.host.split(':')
 
-    listenEvents(host, port, function (e) {
-        const data = JSON.parse(e.data)
+    ws
+        .onConnect(() => store.commit('ws/connect'))
+        .onDisconnect(() => store.commit('ws/disconnect'))
 
-        if (data.topic === 'event') {
-            const event = EventFactory.create(
-                JSON.parse(data.payload.payload) || {type: 'null'}
-            )
-
-            if (event) {
-                store.commit('pushEvent', event)
-            }
-        }
-    })
+    EventFactory.init()
 }
 
 

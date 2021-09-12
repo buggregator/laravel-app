@@ -2,10 +2,7 @@
 
 namespace Interfaces\Websocket\Controllers;
 
-use App\Contracts\EventsRepository;
-use App\Events\EventReceived;
 use Illuminate\Contracts\Broadcasting\Broadcaster;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Interfaces\Http\Controllers\Controller;
@@ -13,10 +10,8 @@ use Interfaces\Http\Controllers\Controller;
 class ConnectAction extends Controller
 {
     public function __invoke(
-        Request          $request,
-        EventsRepository $events,
-        Broadcaster      $broadcaster,
-        Application      $app
+        Request     $request,
+        Broadcaster $broadcaster,
     ): JsonResponse
     {
         $response = new JsonResponse([]);
@@ -30,12 +25,6 @@ class ConnectAction extends Controller
                     $broadcaster->auth($request)
                 );
             }
-
-//            $app->terminating(static function () use ($channelName, $events, $broadcaster) {
-//                foreach ($events->all() as $e) {
-//                    $broadcaster->broadcast([$channelName], EventReceived::class, $e);
-//                }
-//            });
         }
 
         return $response;
