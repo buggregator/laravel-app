@@ -30,6 +30,9 @@ RUN cat /app/.env
 # Create a sqlite database
 RUN touch /app/database/database.sqlite
 
-EXPOSE 8080
+EXPOSE 8000
+EXPOSE 1025
+EXPOSE 9912
+EXPOSE 9913
 
 CMD php artisan migrate:fresh --force && /usr/bin/supervisord -c /app/supervisord.conf

@@ -2,8 +2,6 @@ version: "2"
 services:
     buggregator:
         image: butschster/buggregator:latest
-        ports:
-            - 23517:8000
 
     php:
         build: "./docker/server"
@@ -15,10 +13,10 @@ services:
             DB_USERNAME: homestead
             DB_PASSWORD: secret
         ports:
-            - 8080:8080
-        #        - 1025:1025
-        #        - 9912:9912
-        #        - 9913:9913
+            - 8000:8000
+            - 1025:1025
+            - 9912:9912
+            - 9913:9913
         volumes:
             - ./:/app
         depends_on:
