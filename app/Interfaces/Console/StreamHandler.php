@@ -4,11 +4,14 @@ declare(strict_types=1);
 namespace Interfaces\Console;
 
 use App\Attributes\Console\Stream;
+use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Str;
 use NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler;
 use ReflectionClass;
 use SplFileInfo;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 
@@ -47,7 +50,10 @@ class StreamHandler implements Handler
         $stream = $attributes[0]->newInstance();
 
         $this->handlers[$stream->getName()] = $this->app->make($className, [
-            'output' => $this->output
+            'output' => new OutputStyle(
+                new ArgvInput(),
+                $this->output
+            )
         ]);
     }
 

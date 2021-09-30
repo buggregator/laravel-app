@@ -38,7 +38,7 @@ class StartServerCommand extends Command
 
         $server = new Server(
             $this->option('host') ?: '0.0.0.0',
-            $this->option('port') ?: 9913,
+            (int) ($this->option('port') ?: 9913),
             'Monolog'
         );
 

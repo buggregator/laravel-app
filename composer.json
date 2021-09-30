@@ -18,6 +18,7 @@
         "php-http/message": "^1.11",
         "spiral/roadrunner-broadcast": "1.0.x-dev",
         "spiral/roadrunner-jobs": "^2.0",
+        "spiral/roadrunner-kv": "^2.1",
         "spiral/roadrunner-laravel": "^5.2",
         "textalk/websocket": "^1.5",
         "tightenco/ziggy": "^1.0",

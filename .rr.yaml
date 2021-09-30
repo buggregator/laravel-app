@@ -47,6 +47,11 @@ websockets:
 broadcast:
   default:
     driver: memory
+    config: {}
+
+kv:
+  session:
+    driver: memory
 
 jobs:
   num_pollers: 10
@@ -62,6 +67,6 @@ jobs:
   consume: [ "default" ]
 
 logs:
-  level: debug
-  encoding: console
-  mode: development
+  level: info
+  mode: raw
+  output: stdout

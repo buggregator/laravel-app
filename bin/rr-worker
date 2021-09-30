@@ -79,4 +79,9 @@ $app->add(new \Spiral\RoadRunnerLaravel\Console\Commands\StartCommand(
     $base_path
 ));
 
-$app->run();
+$output = new Symfony\Component\Console\Output\ConsoleOutput;
+
+$app->run(
+    $input = new Symfony\Component\Console\Input\ArgvInput,
+    $output->getErrorOutput()
+);

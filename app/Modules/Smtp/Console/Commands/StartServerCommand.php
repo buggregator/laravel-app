@@ -32,9 +32,10 @@ class StartServerCommand extends Command
 
         $server = new Server(
             $this->option('host') ?: '0.0.0.0',
-            $this->option('port') ?: 1025,
+            (int) ($this->option('port') ?: 1025),
             'SMTP'
         );
+
         $server
             ->onReceive($this->onReceive())
             ->onConnect($this->onConnect())

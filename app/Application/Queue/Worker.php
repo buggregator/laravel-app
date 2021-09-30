@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Queue;
 
@@ -12,8 +13,6 @@ use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\MaxAttemptsExceededException;
 use Illuminate\Queue\WorkerOptions;
 use Illuminate\Support\Carbon;
-use Spiral\Goridge\Relay;
-use Spiral\RoadRunner\Environment;
 use Spiral\RoadRunnerLaravel\Application\FactoryInterface as ApplicationFactory;
 use Spiral\RoadRunnerLaravel\WorkerInterface;
 use Spiral\RoadRunnerLaravel\WorkerOptionsInterface;

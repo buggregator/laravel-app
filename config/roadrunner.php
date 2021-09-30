@@ -5,6 +5,14 @@ use Spiral\RoadRunnerLaravel\Defaults;
 use Spiral\RoadRunnerLaravel\Listeners;
 
 return [
+    'rpc' => [
+        'host' => env('RPC_HOST', 'tcp://127.0.0.1:6001')
+    ],
+
+    'session' => [
+        'storage' => 'session'
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Force HTTPS Schema Usage
@@ -32,6 +40,7 @@ return [
     'listeners' => [
         Events\BeforeLoopStartedEvent::class => [
             ...Defaults::beforeLoopStarted(),
+            \App\Listeners\RoadRunner\RegisterConsoleStreamHandlerListener::class,
             // Listeners\SetupTelescopeListener::class, // for <https://github.com/laravel/telescope>
         ],
 
@@ -40,7 +49,7 @@ return [
             // Listeners\ResetLaravelScoutListener::class,     // for <https://github.com/laravel/scout>
             // Listeners\ResetLaravelSocialiteListener::class, // for <https://github.com/laravel/socialite>
             Listeners\ResetInertiaListener::class,          // for <https://github.com/inertiajs/inertia-laravel>
-            \App\Listeners\RoadRunner\ResetGeneratedRoutesListener::class,
+            Listeners\ResetZiggyListener::class,            // for <https://github.com/tighten/ziggy>
         ],
 
         Events\BeforeRequestHandlingEvent::class => [

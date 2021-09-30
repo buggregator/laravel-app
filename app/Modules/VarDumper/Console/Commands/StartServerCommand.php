@@ -18,7 +18,7 @@ class StartServerCommand extends Command
 {
     use InteractsWithIO;
 
-    protected $signature = 'dump-server:start
+    protected $signature = 'var-dumper:start
                     {--host= : The IP address the server should bind to}
                     {--port= : The port the server should be available on}';
 
@@ -31,7 +31,7 @@ class StartServerCommand extends Command
 
         $server = new Server(
             $this->option('host') ?: '0.0.0.0',
-            $this->option('port') ?: 9912,
+            (int) ($this->option('port') ?: 9912),
             'Var dumper'
         );
 
@@ -76,7 +76,7 @@ class StartServerCommand extends Command
                     unset($context['cli']);
 
                     $descriptor->describe(
-                        new SymfonyStyle($this->input, $this->output),
+                        new SymfonyStyle($this->input, $this->output->getErrorStyle()),
                         $data,
                         $context,
                         $this->connection->clientId()
