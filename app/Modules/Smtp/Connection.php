@@ -49,6 +49,7 @@ class Connection
     public function ready(SwooleConnection $connection): void
     {
         $this->connection = $connection;
+        $this->messageBody = '';
         $this->collectingData = false;
 
         $this->send(static::READY, 'mailamie');

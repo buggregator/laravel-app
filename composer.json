@@ -16,6 +16,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "php-http/message": "^1.11",
+        "spatie/laravel-event-sourcing": "^5.0",
         "spiral/roadrunner-broadcast": "1.0.x-dev",
         "spiral/roadrunner-jobs": "^2.0",
         "spiral/roadrunner-kv": "^2.1",

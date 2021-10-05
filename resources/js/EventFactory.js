@@ -33,6 +33,10 @@ export default {
 
 
             if (event) {
+                if (event instanceof SmtpEvent) {
+                    store.commit('smtp/pushEvent', event)
+                }
+
                 store.commit('pushEvent', event)
             }
         })

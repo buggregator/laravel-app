@@ -35,7 +35,7 @@ class RoadRunnerQueue extends Queue implements QueueContract
             $queue,
             null,
             function ($payload, $queue) {
-                return $this->laterRaw(100, $payload, $queue);
+                return $this->pushRaw($payload, $queue);
             }
         );
     }

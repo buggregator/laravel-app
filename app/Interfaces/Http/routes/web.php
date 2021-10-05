@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', ShowEventsAction::class);
 
+Route::get('/mail', Modules\Smtp\Http\Controllers\ListAction::class)->name('smtp');
+Route::get('/mail/{uuid}', Modules\Smtp\Http\Controllers\ShowAction::class)->name('smtp.show');
+Route::delete('/mail/{uuid}', Modules\Smtp\Http\Controllers\DeleteAction::class);
+Route::get('/mail/{uuid}/html', Modules\Smtp\Http\Controllers\ShowHtmlAction::class);
+
 Route::get('ws', ConnectAction::class)->middleware(ChannelJoined::class);
 Route::post('/', Ray\StoreEventAction::class);
 Route::get('/_availability_check', Ray\CheckAvailabilityAction::class);

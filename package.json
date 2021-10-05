@@ -36,6 +36,8 @@
         "uuid": "^8.3.2",
         "vue-markdown": "^2.2.4",
         "vue3-markdown-it": "^1.0.9",
+        "vue3-perfect-scrollbar": "^1.5.5",
+        "vuescroll": "^4.17.3",
         "vuex": "^4.0.2",
         "ziggy-js": "^1.4.0"
     }

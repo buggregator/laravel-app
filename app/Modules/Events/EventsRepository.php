@@ -8,25 +8,42 @@ use Modules\Events\Models\Event;
 
 class EventsRepository implements EventsRepositoryContract
 {
-    public function store(array $event): void
+    public function find(string $uuid): ?array
+    {
+        $event = Event::find($uuid);
+
+        if (!$event) {
+            return null;
+        }
+
+        return array_merge($event->payload, ['timestamp' => $event->created_at->timestamp]);
+    }
+
+    public function store(array $event): string|int
     {
         Event::create([
-            'id' => $event['payload']['uuid'],
-            'event' => $event['event'],
-            'payload' => $event['payload']
+            'uuid' => $event['uuid'],
+            'type' => $event['type'],
+            'payload' => $event
         ]);
+
+        return $event['uuid'];
     }
 
     public function delete(string $uuid): void
     {
-        Event::where('id', $uuid)->delete();
+        Event::where('uuid', $uuid)->delete();
     }
 
-    public function all(): array
+    public function all(string ...$type): array
     {
-        return Event::oldest()->get()->map(function (Event $event) {
-            return array_merge($event->payload, ['timestamp' => $event->created_at->timestamp]);
-        })->all();
+        return Event::oldest()
+            ->whereIn('type', $type)
+            ->get()
+            ->map(function (Event $event) {
+                return array_merge($event->payload, ['timestamp' => $event->created_at->timestamp]);
+            })
+            ->toArray();
     }
 
     public function clear(): void

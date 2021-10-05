@@ -4,38 +4,14 @@ rpc:
 server:
   command: "php ./bin/rr-worker start"
   relay: pipes
-  relay_timeout: "20s"
-
-service:
-  monolog:
-    command: "php artisan monolog:start --host=0.0.0.0 --port=9913"
-    process_num: 1
-    exec_timeout: 0
-    remain_after_exit: true
-    restart_sec: 1
-  var-dumper:
-    command: "php artisan var-dumper:start --host=0.0.0.0 --port=9912"
-    process_num: 1
-    exec_timeout: 0
-    remain_after_exit: true
-    restart_sec: 1
-  smtp:
-    command: "php artisan smtp:start --host=0.0.0.0 --port=1025"
-    process_num: 1
-    exec_timeout: 0
-    remain_after_exit: true
-    restart_sec: 1
 
 http:
   address: 0.0.0.0:8000
-  middleware: [ "headers", "gzip", "websockets" ]
+  middleware: [ "gzip", "websockets" ]
   pool:
     max_jobs: 64 # feel free to change this
     supervisor:
       exec_ttl: 60s
-  headers:
-    response:
-      X-Powered-By: "RoadRunner"
   static:
     dir: "public"
     forbid: [ ".php" ]
@@ -52,21 +28,43 @@ broadcast:
 kv:
   session:
     driver: memory
+    config: {}
 
 jobs:
-  num_pollers: 10
-  pipeline_size: 100000
-  pool:
-    num_workers: 10
-    max_jobs: 0
-    allocate_timeout: 60s
-    destroy_timeout: 60s
+  consume: [ "default", "events" ]
   pipelines:
     default:
       driver: memory
-  consume: [ "default" ]
+    events:
+      driver: memory
 
 logs:
   level: info
   mode: raw
   output: stdout
+
+service:
+  monolog:
+    command: "php artisan monolog:start --host=0.0.0.0 --port=9913"
+    process_num: 1
+    exec_timeout: 0
+    remain_after_exit: true
+    restart_sec: 1
+    line_ending: "\n"
+    output: stdout
+  var-dumper:
+    command: "php artisan var-dumper:start --host=0.0.0.0 --port=9912"
+    process_num: 1
+    exec_timeout: 0
+    remain_after_exit: true
+    restart_sec: 1
+    line_ending: "\n"
+    output: stdout
+  smtp:
+    command: "php artisan smtp:start --host=0.0.0.0 --port=1025"
+    process_num: 1
+    exec_timeout: 0
+    remain_after_exit: true
+    restart_sec: 1
+    line_ending: "\n"
+    output: stdout

@@ -1,5 +1,6 @@
 <?php
 
+use Spiral\RoadRunner\Environment\Mode;
 use Spiral\RoadRunnerLaravel\Events;
 use Spiral\RoadRunnerLaravel\Defaults;
 use Spiral\RoadRunnerLaravel\Listeners;
@@ -114,5 +115,21 @@ return [
         ...Defaults::providersToReset(),
         Illuminate\Auth\AuthServiceProvider::class,             // is not required for Laravel >= v8.35
         Illuminate\Pagination\PaginationServiceProvider::class, // is not required for Laravel >= v8.35
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Worker Classes
+    |--------------------------------------------------------------------------
+    |
+    | Here you can override the worker class for processing different kinds of
+    | jobs, that received from the RoadRunner daemon.
+    |
+    */
+
+    'workers' => [
+        Mode::MODE_HTTP => \Spiral\RoadRunnerLaravel\Worker::class,
+        Mode::MODE_JOBS => \App\Queue\Worker::class,
+        // Mode::MODE_TEMPORAL => ...,
     ],
 ];

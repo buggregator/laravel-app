@@ -66,21 +66,9 @@ $app = new \Symfony\Component\Console\Application(
     \Composer\InstalledVersions::getPrettyVersion('spiral/roadrunner-laravel') ?? 'unknown'
 );
 
-$env = Environment::fromGlobals();
-
-$worker = match ($env->getMode()) {
-    Mode::MODE_JOBS => new \App\Queue\Worker(),
-    default => new \Spiral\RoadRunnerLaravel\Worker()
-};
-
-
-$app->add(new \Spiral\RoadRunnerLaravel\Console\Commands\StartCommand(
-    $worker,
-    $base_path
-));
+$app->add(new \Spiral\RoadRunnerLaravel\Console\Commands\StartCommand($base_path));
 
 $output = new Symfony\Component\Console\Output\ConsoleOutput;
-
 $app->run(
     $input = new Symfony\Component\Console\Input\ArgvInput,
     $output->getErrorOutput()

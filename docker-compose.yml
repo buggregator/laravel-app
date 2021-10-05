@@ -1,8 +1,5 @@
 version: "2"
 services:
-    buggregator:
-        image: butschster/buggregator:latest
-
     php:
         build: "./docker/server"
         #restart: unless-stopped
@@ -21,7 +18,6 @@ services:
             - ./:/app
         depends_on:
             - db
-            - buggregator
 
     db:
         image: postgres
@@ -29,17 +25,5 @@ services:
             POSTGRES_USER: homestead
             POSTGRES_DB: homestead
             POSTGRES_PASSWORD: secret
-
-#    rabbitmq:
-#        image: rabbitmq:3-management-alpine
-#        environment:
-#            - RABBITMQ_DEFAULT_USER=admin
-#            - RABBITMQ_DEFAULT_PASS=admin
-
-    adminer:
-        image: adminer
-        restart: unless-stopped
         ports:
-            - 8011:8080
-        depends_on:
-            - db
+            - 5432:5432
