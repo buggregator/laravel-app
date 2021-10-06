@@ -2,6 +2,7 @@
 <?php
 
 define('LARAVEL_START', microtime(true));
+putenv('TERM_PROGRAM=Hyper');
 
 /*
 |--------------------------------------------------------------------------
@@ -32,11 +33,9 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 
-$output = new Symfony\Component\Console\Output\ConsoleOutput;
-
 $status = $kernel->handle(
     $input = new Symfony\Component\Console\Input\ArgvInput,
-    $output->getErrorOutput()
+    new Symfony\Component\Console\Output\StreamOutput(STDERR)
 );
 
 

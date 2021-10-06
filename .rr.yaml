@@ -4,6 +4,8 @@ rpc:
 server:
   command: "php ./bin/rr-worker start"
   relay: pipes
+  env:
+    TERM_PROGRAM: Hyper
 
 http:
   address: 0.0.0.0:8000
@@ -41,30 +43,15 @@ jobs:
 logs:
   level: info
   mode: raw
-  output: stdout
+  line_ending: "\r"
 
 service:
   monolog:
     command: "php artisan monolog:start --host=0.0.0.0 --port=9913"
     process_num: 1
-    exec_timeout: 0
-    remain_after_exit: true
-    restart_sec: 1
-    line_ending: "\n"
-    output: stdout
   var-dumper:
     command: "php artisan var-dumper:start --host=0.0.0.0 --port=9912"
     process_num: 1
-    exec_timeout: 0
-    remain_after_exit: true
-    restart_sec: 1
-    line_ending: "\n"
-    output: stdout
   smtp:
     command: "php artisan smtp:start --host=0.0.0.0 --port=1025"
     process_num: 1
-    exec_timeout: 0
-    remain_after_exit: true
-    restart_sec: 1
-    line_ending: "\n"
-    output: stdout

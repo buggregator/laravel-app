@@ -59,6 +59,7 @@ if (\is_file(__DIR__ . '/../bootstrap/app.php')) {
 |
 | Symfony console component is a nice wrapper around worker CLI options.
 |
+
 */
 
 $app = new \Symfony\Component\Console\Application(
@@ -68,8 +69,7 @@ $app = new \Symfony\Component\Console\Application(
 
 $app->add(new \Spiral\RoadRunnerLaravel\Console\Commands\StartCommand($base_path));
 
-$output = new Symfony\Component\Console\Output\ConsoleOutput;
 $app->run(
     $input = new Symfony\Component\Console\Input\ArgvInput,
-    $output->getErrorOutput()
+    new Symfony\Component\Console\Output\StreamOutput(STDERR)
 );
