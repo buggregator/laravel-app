@@ -8,6 +8,13 @@
      */
 
 /*!
+   * clipboard.js v2.0.6
+   * https://clipboardjs.com/
+   * 
+   * Licensed MIT © Zeno Rocha
+   */
+
+/*!
  * vuex v4.0.2
  * (c) 2021 Evan You
  * @license MIT

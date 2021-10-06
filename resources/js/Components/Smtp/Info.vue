@@ -39,14 +39,14 @@
                 </HtmlPreview>
             </TabPanel>
             <TabPanel>
-                <ssh-pre language="html" class="max-w-full">
+                <CodeSnippet language="html" class="max-w-full">
                     {{ event.event.html }}
-                </ssh-pre>
+                </CodeSnippet>
             </TabPanel>
             <TabPanel>
-                <ssh-pre language="html">
+                <CodeSnippet language="html">
                     {{ event.event.raw }}
-                </ssh-pre>
+                </CodeSnippet>
             </TabPanel>
             <TabPanel>
                 <div>
@@ -91,11 +91,11 @@
 </template>
 
 <script>
-import SshPre from 'simple-syntax-highlighter'
+import CodeSnippet from "@/Components/UI/CodeSnippet"
 import Table from "@/Components/UI/Table";
 import TableRow from "@/Components/UI/TableRow";
-import Dump from "@/Components/UI//Dump";
-import Collapsed from "@/Components/UI//Collapsed";
+import Dump from "@/Components/UI/Dump";
+import Collapsed from "@/Components/UI/Collapsed";
 import HtmlPreview from "@/Components/UI/HtmlPreview";
 import Tab from "@/Components/UI/TabGroup/Tab";
 import {TabGroup, TabList, TabPanels, TabPanel} from '@headlessui/vue'
@@ -103,7 +103,7 @@ import Addresses from "@/Components/Smtp/Addresses";
 
 export default {
     components: {
-        SshPre, Dump, Collapsed, HtmlPreview,
+        CodeSnippet, Dump, Collapsed, HtmlPreview,
         TabGroup, TabList, Tab, TabPanels, TabPanel, Table, TableRow, Addresses
     },
     props: {

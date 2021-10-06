@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Host from "@/Components/UI//Host";
+import Host from "@/Components/UI/Host";
 import Event from "../Event";
 import Exception from "./Payloads/Exception";
 

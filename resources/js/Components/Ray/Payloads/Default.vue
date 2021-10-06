@@ -1,16 +1,16 @@
 <template>
     <div>
-        <ssh-pre language="json">
+        <CodeSnippet language="json">
             {{ json }}
-        </ssh-pre>
+        </CodeSnippet>
     </div>
 </template>
 
 <script>
-import SshPre from 'simple-syntax-highlighter'
+import CodeSnippet from "@/Components/UI/CodeSnippet"
 
 export default {
-    components: {SshPre},
+    components: {CodeSnippet},
     name: "Default",
     props: {
         payload: Object

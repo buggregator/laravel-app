@@ -1,7 +1,7 @@
 <template>
-    <ssh-pre v-if="isBool" language="php">
+    <CodeSnippet v-if="isBool" language="php">
         {{ value }}
-    </ssh-pre>
+    </CodeSnippet>
     <div v-else v-html="cleanHtml"
          class="text-blue-700 break-all"
          :class="{'bg-gray-800 rounded p-2 text-xs': dumpId}"
@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import SshPre from 'simple-syntax-highlighter'
+import CodeSnippet from "@/Components/UI/CodeSnippet"
 
 export default {
-    components: {SshPre},
+    components: {CodeSnippet},
     props: ['value'],
     data() {
         return {

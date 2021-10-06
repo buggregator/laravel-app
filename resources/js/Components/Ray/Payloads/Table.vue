@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import Dump from "@/Components/UI//Dump";
-import Table from "@/Components/UI//Table";
-import TableRow from "@/Components/UI//TableRow";
+import Dump from "@/Components/UI/Dump";
+import Table from "@/Components/UI/Table";
+import TableRow from "@/Components/UI/TableRow";
 
 export default {
     components: {TableRow, Table, Dump},
