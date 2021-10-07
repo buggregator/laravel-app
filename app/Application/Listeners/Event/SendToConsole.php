@@ -11,7 +11,7 @@ class SendToConsole
     public function handle(EventReceived $event)
     {
         if ($event->sendToConsole) {
-            app(Handler::class)->handle($event->payload);
+            app(Handler::class)->handle($event->toArray());
         }
     }
 }

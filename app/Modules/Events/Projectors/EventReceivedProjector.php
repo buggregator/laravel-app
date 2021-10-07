@@ -15,6 +15,6 @@ class EventReceivedProjector extends Projector implements ShouldQueue
 
     public function onEventReceived(EventReceived $event)
     {
-        $this->events->store($event->payload);
+        $this->events->store($event->toArray());
     }
 }

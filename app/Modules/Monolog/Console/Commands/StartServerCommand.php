@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Modules\Monolog\Console\Commands;
 
-use App\Events\EventReceived;
 use Illuminate\Contracts\Events\Dispatcher;
 use Interfaces\Console\StreamHandler;
 use Modules\Monolog\Connection as MonologConnection;
@@ -63,9 +62,6 @@ class StartServerCommand extends Command
 
             $this->connection->handleMessage($data, function (array $event) {
                 $this->handleStream($event);
-
-                $this->events->dispatch(new EventReceived($event));
-
             }, function (string $error) {
                 $this->error($error);
             });

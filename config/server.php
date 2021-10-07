@@ -43,5 +43,10 @@ return [
         'cli' => [
             'enabled' => (bool) env('CLI_MONOLOG_STREAM', true),
         ]
+    ],
+    'inspector' => [
+        'cli' => [
+            'enabled' => (bool) env('CLI_INSPECTOR_STREAM', true),
+        ]
     ]
 ];

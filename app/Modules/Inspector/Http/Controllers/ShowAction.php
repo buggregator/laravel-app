@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Modules\Smtp\Http\Controllers;
+namespace Modules\Inspector\Http\Controllers;
 
 use App\Contracts\EventsRepository;
-use Illuminate\Support\Arr;
+use Inertia\Inertia;
 use Interfaces\Http\Controllers\Controller;
 use Ramsey\Uuid\UuidInterface;
 
-class ShowHtmlAction extends Controller
+class ShowAction extends Controller
 {
     public function __invoke(EventsRepository $events, UuidInterface $uuid)
     {
@@ -17,6 +17,9 @@ class ShowHtmlAction extends Controller
             abort(404);
         }
 
-        return Arr::get($event, 'data.html');
+        return Inertia::render('Inspector/Show', [
+            'events' => $events->all('inspector'),
+            'event' => $event
+        ]);
     }
 }

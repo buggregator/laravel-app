@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Modules\Smtp\Http\Controllers;
+namespace Modules\Inspector\Http\Controllers;
 
 use App\Contracts\EventsRepository;
 use Inertia\Inertia;
@@ -11,8 +11,8 @@ class ListAction extends Controller
 {
     public function __invoke(EventsRepository $events)
     {
-        return Inertia::render('Smtp/Index', [
-            'events' => $events->all('smtp'),
+        return Inertia::render('Inspector/Index', [
+            'events' => $events->all('inspector'),
         ]);
     }
 }

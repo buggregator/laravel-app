@@ -5,12 +5,13 @@ namespace Modules\Events;
 
 use App\Contracts\EventsRepository as EventsRepositoryContract;
 use Modules\Events\Models\Event;
+use Ramsey\Uuid\UuidInterface;
 
 class EventsRepository implements EventsRepositoryContract
 {
-    public function find(string $uuid): ?array
+    public function find(UuidInterface $uuid): ?array
     {
-        $event = Event::find($uuid);
+        $event = Event::find($uuid->toString());
 
         if (!$event) {
             return null;
@@ -19,7 +20,7 @@ class EventsRepository implements EventsRepositoryContract
         return array_merge($event->payload, ['timestamp' => $event->created_at->timestamp]);
     }
 
-    public function store(array $event): string|int
+    public function store(array $event): string
     {
         Event::create([
             'uuid' => $event['uuid'],
@@ -30,15 +31,15 @@ class EventsRepository implements EventsRepositoryContract
         return $event['uuid'];
     }
 
-    public function delete(string $uuid): void
+    public function delete(UuidInterface $uuid): void
     {
-        Event::where('uuid', $uuid)->delete();
+        Event::where('uuid', $uuid->toString())->delete();
     }
 
     public function all(string ...$type): array
     {
         return Event::oldest()
-            ->whereIn('type', $type)
+            ->when(!empty($type), fn ($query) => $query->where('type', $type))
             ->get()
             ->map(function (Event $event) {
                 return array_merge($event->payload, ['timestamp' => $event->created_at->timestamp]);

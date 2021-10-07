@@ -3,13 +3,15 @@ declare(strict_types=1);
 
 namespace App\Contracts;
 
+use Ramsey\Uuid\UuidInterface;
+
 interface EventsRepository
 {
-    public function find(string $uuid): ?array;
+    public function find(UuidInterface $uuid): ?array;
 
-    public function store(array $event): string|int;
+    public function store(array $event): string;
 
-    public function delete(string $uuid): void;
+    public function delete(UuidInterface $uuid): void;
 
     public function all(string ...$type): array;
 

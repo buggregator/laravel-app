@@ -21,7 +21,7 @@ class EventServiceProvider extends ServiceProvider
             SendToConsole::class,
         ],
         Joined::class => [
-            SendEventsAfterChannelJoin::class
+            //SendEventsAfterChannelJoin::class
         ]
     ];
 }

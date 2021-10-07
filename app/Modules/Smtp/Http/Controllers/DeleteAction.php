@@ -5,10 +5,11 @@ namespace Modules\Smtp\Http\Controllers;
 
 use App\Contracts\EventsRepository;
 use Interfaces\Http\Controllers\Controller;
+use Ramsey\Uuid\UuidInterface;
 
 class DeleteAction extends Controller
 {
-    public function __invoke(EventsRepository $events, string $uuid)
+    public function __invoke(EventsRepository $events, UuidInterface $uuid)
     {
         $event = $events->find($uuid);
         if (!$event) {

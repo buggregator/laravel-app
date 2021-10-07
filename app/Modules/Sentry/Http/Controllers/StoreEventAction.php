@@ -27,10 +27,7 @@ class StoreEventAction extends Controller
         $event = $handler->handle(json_decode($stream->getContents(), true));
 
         $events->dispatch(
-            new EventReceived(
-                ['type' => 'sentry', 'uuid' => Uuid::uuid4()->toString(), 'data' => $event],
-                true
-            )
+            new EventReceived('sentry', $event, true)
         );
     }
 }

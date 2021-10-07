@@ -5,7 +5,6 @@ namespace Modules\Smtp;
 
 use App\Events\EventReceived;
 use Modules\Smtp\Mail\Parser;
-use Ramsey\Uuid\Uuid;
 use Swoole\Coroutine\Server\Connection as SwooleConnection;
 
 class Connection
@@ -65,14 +64,10 @@ class Connection
         $parser = new Parser();
         $message = $parser->parse($this->messageBody);
 
-        $callback($event = [
-            'type' => 'smtp',
-            'timestamp' => time(),
-            'uuid' => Uuid::uuid4()->toString(),
-            'data' => $message->jsonSerialize()
-        ]);
+        $data = $message->jsonSerialize();
 
-        event(new EventReceived($event));
+        event($event = new EventReceived('smtp', $data));
+        $callback($event->toArray());
     }
 
     private function addRecipient(string $recipient): void

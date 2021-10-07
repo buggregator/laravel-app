@@ -35,10 +35,7 @@ class StoreEventAction extends Controller
         $event = $handler->handle($request->all());
 
         $events->dispatch(
-            new EventReceived(
-                ['type' => 'ray', 'uuid' => Uuid::uuid4()->toString(), 'data' => $event],
-                true
-            )
+            new EventReceived('ray', $event, true)
         );
     }
 }

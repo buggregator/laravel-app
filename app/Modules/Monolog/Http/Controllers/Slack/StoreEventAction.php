@@ -16,9 +16,7 @@ class StoreEventAction extends Controller
         Dispatcher $events,
     ): void
     {
-        $events->dispatch(new EventReceived(
-            ['type' => 'slack', 'uuid' => Uuid::uuid4()->toString(), 'data' => $request->all()]
-        ));
+        $events->dispatch(new EventReceived('slack', $request->all()));
     }
 }
 

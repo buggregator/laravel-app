@@ -5,7 +5,6 @@ namespace Modules\VarDumper;
 
 use App\Events\EventReceived;
 use Closure;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\VarDumper\Cloner\Data;
 use Symfony\Component\VarDumper\Cloner\Stub;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
@@ -60,17 +59,12 @@ class Connection
 
             $onMessage($payload);
 
-            event(new EventReceived([
-                'type' => 'var-dump',
-                'uuid' => Uuid::uuid4()->toString(),
-                'timestamp' => time(),
-                'data' => [
-                    'payload' => [
-                        'type' => $payload[0]->getType(),
-                        'value' => $this->convertToPrimitive($payload[0])
-                    ],
-                    'context' => $payload[1]
-                ]
+            event(new EventReceived( 'var-dump', [
+                'payload' => [
+                    'type' => $payload[0]->getType(),
+                    'value' => $this->convertToPrimitive($payload[0])
+                ],
+                'context' => $payload[1]
             ]));
         }
     }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Monolog;
 
+use App\Events\EventReceived;
 use Closure;
 use Ramsey\Uuid\Uuid;
 use Swoole\Coroutine\Server\Connection as SwooleConnection;
@@ -50,12 +51,9 @@ class Connection
                 continue;
             }
 
-            $onMessage($event = [
-                'type' => 'monolog',
-                'timestamp' => time(),
-                'uuid' => Uuid::uuid4()->toString(),
-                'data' => $payload
-            ]);
+            event($event = new EventReceived('monolog', $payload));
+            $onMessage($event->toArray());
+
         }
     }
 }
