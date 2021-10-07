@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Events\Models;
 
+use App\Models\UuidCasts;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
@@ -14,6 +15,7 @@ class Event extends Model
     protected $guarded = [];
 
     protected $casts = [
+        'uuid' => UuidCasts::class,
         'event' => 'string',
         'payload' => 'json'
     ];

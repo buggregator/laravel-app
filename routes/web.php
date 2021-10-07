@@ -40,5 +40,4 @@ Route::get('/inspector/{uuid}', Inspector\ShowAction::class)->name('inspector.sh
 
 // Sentry
 Route::post('api/{projectId}/store', Sentry\StoreEventAction::class);
-Route::post('api/{projectId}/envelope', function (\Illuminate\Http\Request $request) {
-});
+Route::post('api/{projectId}/envelope', function (\Illuminate\Http\Request $request) {});

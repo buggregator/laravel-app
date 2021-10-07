@@ -7,16 +7,23 @@ use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 
 class EventReceived extends ShouldBeStored implements ShouldBroadcastNow, Arrayable
 {
+    public string $uuid;
+    public int $timestamp;
+
     public function __construct(
         public string $type,
         public array  $payload,
         public bool   $sendToConsole = false
     )
     {
+        $this->timestamp = time();
+        $this->uuid = Uuid::uuid4()->toString();
     }
 
     public function broadcastWith(): array
@@ -34,8 +41,8 @@ class EventReceived extends ShouldBeStored implements ShouldBroadcastNow, Arraya
         return [
             'type' => $this->type,
             'data' => $this->payload,
-            'uuid' => Str::uuid()->toString(),
-            'timestamp' => time()
+            'uuid' => $this->uuid,
+            'timestamp' => $this->timestamp
         ];
     }
 }
