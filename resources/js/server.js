@@ -3,11 +3,11 @@ import SfdumpFunc from './Utils/dumper'
 import Broadcast from './RoadRunner/Broadcast'
 import EventFactory from "./EventFactory";
 
-const [host, port] = window.location.host.split(':')
+const host = window.location.host
 const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
 
 window.ws = new Broadcast({
-    host: `${protocol}//${host}:${port}/ws`,
+    host: `${protocol}//${host}/ws`,
     connectionTimeout: 3000,
     maxRetries: 10,
 })
