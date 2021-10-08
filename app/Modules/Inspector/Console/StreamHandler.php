@@ -34,7 +34,8 @@ class StreamHandler implements Handler
             ['memory peak', ($requestData['memory_peak'] ?? 0) . ' mb'],
         ]);
 
-        $statusCode = (int)$requestData['result'];
+        $statusCode = (int)$requestData['result'] ?? 0;
+
         $style = match (true) {
             $statusCode >= 400 && $statusCode < 500 => 'bg_yellow',
             $statusCode >= 300 && $statusCode < 400 => 'bg_light_blue',
