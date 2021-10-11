@@ -19,6 +19,15 @@ services:
         depends_on:
             - db
 
+    node:
+        image: node:14-bullseye-slim
+        volumes:
+            - ./:/app:rw
+        working_dir: /app
+        command: >
+            bash -c "npm install
+            && npm run watch"
+
     db:
         image: postgres
         environment:
