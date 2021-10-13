@@ -1,13 +1,23 @@
 <template>
     <div :title="title">
-        <svg v-if="wsConnected" class="animate-spin text-white" width="100%" height="100%"
-             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="#3b82f6" stroke-width="4"></circle>
-            <path class="opacity-75" fill="#3b82f6" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        <svg v-if="wsConnected" xmlns="http://www.w3.org/2000/svg"
+             style="margin: auto; background: transparent; display: block; shape-rendering: auto;" width="100%"
+             height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <circle cx="28" cy="75" r="11" fill="#0055a5">
+                <animate attributeName="fill-opacity" repeatCount="indefinite" dur="1.1764705882352942s" values="0;1;1"
+                         keyTimes="0;0.2;1" begin="0s"></animate>
+            </circle>
+            <path d="M28 47A28 28 0 0 1 56 75" fill="none" stroke="#2d78bc" stroke-width="10">
+                <animate attributeName="stroke-opacity" repeatCount="indefinite" dur="1.1764705882352942s"
+                         values="0;1;1" keyTimes="0;0.2;1" begin="0.11764705882352942s"></animate>
+            </path>
+            <path d="M28 25A50 50 0 0 1 78 75" fill="none" stroke="#45aee7" stroke-width="10">
+                <animate attributeName="stroke-opacity" repeatCount="indefinite" dur="1.1764705882352942s"
+                         values="0;1;1" keyTimes="0;0.2;1" begin="0.23529411764705885s"></animate>
+            </path>
         </svg>
-        <svg v-else xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 478.125 478.125">
-            <path fill="red" d="M201.654 127.525h-31.9c-10.557 0-19.125 8.645-19.125 19.125v184.9c0 10.558 8.645 19.125 19.125 19.125h31.9c10.557 0 19.125-8.645 19.125-19.125v-184.9c0-10.556-8.568-19.125-19.125-19.125zM308.448 127.525h-31.9c-10.558 0-19.125 8.645-19.125 19.125v184.9c0 10.558 8.645 19.125 19.125 19.125h31.9c10.557 0 19.125-8.645 19.125-19.125v-184.9c0-10.556-8.644-19.125-19.125-19.125z"/>
-            <path fill="red" d="M239.062 0C107.023 0 0 107.023 0 239.062s107.023 239.062 239.062 239.062 239.062-107.023 239.062-239.062S371.102 0 239.062 0zm.23 409.811c-94.171 0-170.519-76.424-170.519-170.519S145.197 68.773 239.292 68.773s170.519 76.424 170.519 170.519-76.271 170.519-170.519 170.519z"/>
+        <svg v-else xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1000 1000" xml:space="preserve">
+            <g><path fill="#F43F3F" d="M370.1,257.7c-131.9,25-258,88.5-360.1,190.4l98,97.8c76.5-76.4,169.9-125.8,268.2-148.1L370.1,257.7z M175.2,612.9l95.2,95c34-33.9,73.7-58.8,116-74.5l-6-139C305.2,514.5,234.2,554,175.2,612.9z M616.5,255.3l-6,139.6C713.6,415.7,812,466,892,545.8l98-97.8C884.4,342.7,753.3,278.4,616.5,255.3z M432.8,735.9c-37.1,37-37.1,97.1,0,134.1c37.1,37,97.3,37,134.4,0c37.1-37,37.1-97.1,0-134.1C530.1,698.8,469.9,698.8,432.8,735.9z M600.3,628.8c47.3,15.3,91.7,41.7,129.3,79.1l95.2-95C762.3,550.6,686.4,510,606.3,491L600.3,628.8z M534.7,632.5l23.1-530.3H430.7l23.1,530.3H534.7z"/></g>
         </svg>
     </div>
 </template>
