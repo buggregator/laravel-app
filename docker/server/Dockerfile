@@ -14,9 +14,11 @@ RUN docker-php-ext-install pdo pdo_pgsql
 
 WORKDIR /app
 
+RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
+
 EXPOSE 8000
 EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
 
-CMD php artisan migrate:fresh --force && ./rr serve -c ./.rr.yaml
+CMD composer install && php artisan migrate:fresh --force && ./rr serve -c ./.rr.yaml
