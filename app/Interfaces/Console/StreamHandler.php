@@ -11,9 +11,9 @@ use NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler;
 use ReflectionClass;
 use SplFileInfo;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
+use Termwind\Termwind;
 
 class StreamHandler implements Handler
 {
@@ -23,6 +23,30 @@ class StreamHandler implements Handler
     {
         $files = (new Finder())->files()->name('*.php')->in($app->basePath('app'));
         collect($files)->each(fn(SplFileInfo $file) => $this->registerStreamHandler($file));
+    }
+
+    public function handle(array $payload): void
+    {
+        Termwind::renderUsing($this->output);
+
+        try {
+            $this->handlers[$payload['type']]->handle($payload);
+        } catch (\Throwable $e) {
+            app(ExceptionHandler::class)->renderForConsole($this->output, $e);
+        }
+    }
+
+    public function shouldBeSkipped(array $payload): bool
+    {
+        if (!isset($payload['type'])) {
+            return true;
+        }
+
+        if (!isset($this->handlers[$payload['type']])) {
+            return true;
+        }
+
+        return $this->handlers[$payload['type']]->shouldBeSkipped($payload);
     }
 
     private function registerStreamHandler(SplFileInfo $file)
@@ -59,34 +83,13 @@ class StreamHandler implements Handler
 
     private function fullQualifiedClassNameFromFile(SplFileInfo $file): string
     {
-        $class = trim(Str::replaceFirst($this->app->basePath(), '', $file->getRealPath()), DIRECTORY_SEPARATOR);
+        $path = Str::replaceFirst($this->app->basePath(), '', $file->getRealPath());
+        $class = trim($path, DIRECTORY_SEPARATOR);
 
         return str_replace(
             [DIRECTORY_SEPARATOR, 'App\\Application\\', 'App\\'],
             ['\\', 'App\\', ''],
             ucfirst(Str::replaceLast('.php', '', $class))
         );
-    }
-
-    public function handle(array $payload): void
-    {
-        try {
-            $this->handlers[$payload['type']]->handle($payload);
-        } catch (\Throwable $e) {
-            app(ExceptionHandler::class)->renderForConsole($this->output, $e);
-        }
-    }
-
-    public function shouldBeSkipped(array $payload): bool
-    {
-        if (!isset($payload['type'])) {
-            return true;
-        }
-
-        if (!isset($this->handlers[$payload['type']])) {
-            return true;
-        }
-
-        return $this->handlers[$payload['type']]->shouldBeSkipped($payload);
     }
 }

@@ -13,4 +13,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             StartServerCommand::class
         ]);
     }
+
+    public function boot()
+    {
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'monolog');
+    }
 }
