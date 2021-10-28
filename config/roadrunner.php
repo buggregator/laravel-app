@@ -14,6 +14,10 @@ return [
         'storage' => 'session'
     ],
 
+    'cache' => [
+        'storage' => 'cache'
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Force HTTPS Schema Usage
@@ -130,6 +134,7 @@ return [
     'workers' => [
         Mode::MODE_HTTP => \Spiral\RoadRunnerLaravel\Worker::class,
         Mode::MODE_JOBS => \App\Queue\Worker::class,
+        'tcp' => \App\TCP\Worker::class,
         // Mode::MODE_TEMPORAL => ...,
     ],
 ];

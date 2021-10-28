@@ -4,6 +4,12 @@
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/spiral/roadrunner-tcp"
+        }
+    ],
     "require": {
         "php": "^8.0",
         "facade/ignition": "^2.5",
@@ -17,9 +23,10 @@
         "laravel/tinker": "^2.5",
         "php-http/message": "^1.11",
         "spatie/laravel-event-sourcing": "^5.0",
-        "spiral/roadrunner-broadcast": "1.0.x-dev",
+        "spiral/roadrunner-broadcast": "dev-master",
         "spiral/roadrunner-jobs": "^2.0",
         "spiral/roadrunner-kv": "^2.1",
+        "spiral/roadrunner-tcp": "*",
         "spiral/roadrunner-laravel": "^5.2",
         "textalk/websocket": "^1.5",
         "tightenco/ziggy": "^1.0",

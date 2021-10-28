@@ -10,13 +10,22 @@ server:
 http:
   address: 0.0.0.0:8000
   middleware: [ "gzip", "websockets" ]
-  pool:
-    max_jobs: 64 # feel free to change this
-    supervisor:
-      exec_ttl: 60s
   static:
     dir: "public"
     forbid: [ ".php" ]
+  pool:
+    num_workers: 2
+
+tcp:
+  servers:
+    monolog:
+      addr: tcp://0.0.0.0:9913
+    var-dumper:
+      addr: tcp://0.0.0.0:9912
+    smtp:
+      addr: tcp://0.0.0.0:1025
+  pool:
+    num_workers: 6
 
 websockets:
   broker: default
@@ -31,6 +40,9 @@ kv:
   session:
     driver: memory
     config: {}
+  cache:
+    driver: memory
+    config: {}
 
 jobs:
   consume: [ "default", "events" ]
@@ -39,19 +51,10 @@ jobs:
       driver: memory
     events:
       driver: memory
+  pool:
+    num_workers: 2
 
 logs:
   level: info
   mode: raw
   line_ending: "\r"
-
-service:
-  monolog:
-    command: "php artisan monolog:start --host=0.0.0.0 --port=9913"
-    process_num: 1
-  var-dumper:
-    command: "php artisan var-dumper:start --host=0.0.0.0 --port=9912"
-    process_num: 1
-  smtp:
-    command: "php artisan smtp:start --host=0.0.0.0 --port=1025"
-    process_num: 1

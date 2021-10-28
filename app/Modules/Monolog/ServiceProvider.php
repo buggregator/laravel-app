@@ -3,14 +3,13 @@ declare(strict_types=1);
 
 namespace Modules\Monolog;
 
-use Modules\Monolog\Console\Commands\StartServerCommand;
+use App\TCP\Kernel;
+use Modules\Monolog\Console\TcpHandler;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
-    public function register()
+    public function boot(): void
     {
-        $this->commands([
-            StartServerCommand::class
-        ]);
+        $this->app[Kernel::class]->addHandler('monolog', TcpHandler::class);
     }
 }

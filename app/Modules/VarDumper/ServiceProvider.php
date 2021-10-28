@@ -3,14 +3,13 @@ declare(strict_types=1);
 
 namespace Modules\VarDumper;
 
-use Modules\VarDumper\Console\Commands\StartServerCommand;
+use App\TCP\Kernel;
+use Modules\VarDumper\Console\TcpHandler;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
-    public function register()
+    public function boot(): void
     {
-        $this->commands([
-            StartServerCommand::class
-        ]);
+        $this->app[Kernel::class]->addHandler('var-dumper', TcpHandler::class);
     }
 }

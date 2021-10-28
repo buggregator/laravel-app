@@ -11,7 +11,6 @@ use NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler;
 use ReflectionClass;
 use SplFileInfo;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 
@@ -70,6 +69,10 @@ class StreamHandler implements Handler
 
     public function handle(array $payload): void
     {
+        if ($this->shouldBeSkipped($payload)) {
+            return;
+        }
+
         try {
             $this->handlers[$payload['type']]->handle($payload);
         } catch (\Throwable $e) {
