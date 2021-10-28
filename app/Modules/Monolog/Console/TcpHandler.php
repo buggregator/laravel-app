@@ -10,6 +10,7 @@ use App\TCP\Handler;
 use App\TCP\Response;
 use Illuminate\Contracts\Events\Dispatcher;
 use Spiral\RoadRunner\Tcp\Request;
+use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class TcpHandler implements Handler
@@ -23,7 +24,7 @@ class TcpHandler implements Handler
 
     public function handle(Request $request, OutputInterface $output): Response
     {
-        if ($request->event === Request::EVENT_CONNECTED) {
+        if ($request->event === TcpWorkerInterface::EVENT_CONNECTED) {
             return new ContinueRead();
         }
 

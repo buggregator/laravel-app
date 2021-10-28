@@ -12,6 +12,7 @@ use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
 use Modules\Smtp\Mail\Parser;
 use Spiral\RoadRunner\Tcp\Request;
+use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class TcpHandler implements Handler
@@ -36,9 +37,9 @@ class TcpHandler implements Handler
 
         $response = new CloseConnection();
 
-        if ($request->event === Request::EVENT_CONNECTED) {
+        if ($request->event === TcpWorkerInterface::EVENT_CONNECTED) {
             $response = $this->send(static::READY, 'mailamie');
-        } elseif ($request->event === Request::EVENT_CLOSED) {
+        } elseif ($request->event === TcpWorkerInterface::EVENT_CLOSED) {
             $this->cache->delete($cacheKey);
             return new CloseConnection();
         } elseif (preg_match("/^(EHLO|HELO|MAIL FROM:)/", $request->body)) {

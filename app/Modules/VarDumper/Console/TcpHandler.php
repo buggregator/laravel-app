@@ -10,6 +10,7 @@ use App\TCP\Handler;
 use App\TCP\Response;
 use Illuminate\Contracts\Events\Dispatcher;
 use Spiral\RoadRunner\Tcp\Request;
+use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -27,7 +28,7 @@ class TcpHandler implements Handler
 
     public function handle(Request $request, OutputInterface $output): Response
     {
-        if ($request->event === Request::EVENT_CONNECTED) {
+        if ($request->event === TcpWorkerInterface::EVENT_CONNECTED) {
             return new ContinueRead();
         }
 
@@ -65,12 +66,7 @@ class TcpHandler implements Handler
         $context['cli']['identifier'] = $request->connectionUuid;
         $context['cli']['command_line'] = $request->remoteAddr;
 
-        $descriptor->describe(
-            new SymfonyStyle(new ArrayInput([]), $output),
-            $data,
-            $context,
-            0
-        );
+        $descriptor->describe(new SymfonyStyle(new ArrayInput([]), $output), $data, $context, 0);
     }
 
     private function fireEvent(array $payload): void
@@ -87,7 +83,7 @@ class TcpHandler implements Handler
     private function convertToPrimitive(Data $data): string|null
     {
         if (in_array($data->getType(), ['string', 'boolean'])) {
-            return $data->getValue();
+            return (string) $data->getValue();
         }
 
         $dumper = new HtmlDumper();

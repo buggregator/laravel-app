@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\TCP;
 
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Events\Dispatcher as EventsDispatcher;
 use Illuminate\Support\Facades\Facade;
@@ -41,7 +42,12 @@ class Worker implements WorkerInterface
 
         $tcpWorker = new TcpWorker($worker);
 
-        $this->output->writeln('<info>TCP worker started</info>');
+        /** @var ConfigRepository $config */
+        $config = $app->make(ConfigRepository::class);
+
+        if ($this->isDebugModeEnabled($config)) {
+            $this->output->writeln('<info>TCP worker started</info>');
+        }
 
         while ($request = $tcpWorker->waitRequest()) {
             if ($options->getRefreshApp()) {
@@ -52,7 +58,6 @@ class Worker implements WorkerInterface
 
             /** @var Kernel $tcpKernel */
             $tcpKernel = $sandbox[Kernel::class];
-
             $this->setApplicationInstance($sandbox);
 
             try {
@@ -106,5 +111,10 @@ class Worker implements WorkerInterface
         $events = $app->make(EventsDispatcher::class);
 
         $events->dispatch($event);
+    }
+
+    protected function isDebugModeEnabled(ConfigRepository $config): bool
+    {
+        return $config->get('app.debug', false) === true;
     }
 }
