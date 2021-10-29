@@ -21,6 +21,7 @@
         "laravel/octane": "^1.0",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
+        "nunomaduro/termwind": "dev-master",
         "php-http/message": "^1.11",
         "spatie/laravel-event-sourcing": "^5.0",
         "spiral/roadrunner-broadcast": "dev-master",

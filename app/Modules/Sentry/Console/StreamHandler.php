@@ -5,14 +5,15 @@ namespace Modules\Sentry\Console;
 
 use App\Attributes\Console\Stream;
 use Interfaces\Console\Handler;
-use NunoMaduro\Collision\Highlighter;
-use Symfony\Component\Console\Output\OutputInterface;
+use Termwind\HtmlRenderer;
 
 #[Stream(name: 'sentry')]
 class StreamHandler implements Handler
 {
-    public function __construct(private StreamHandlerConfig $config, private OutputInterface $output)
-    {
+    public function __construct(
+        private StreamHandlerConfig $config,
+        private HtmlRenderer $renderer
+    ){
     }
 
     public function handle(array $payload): void
@@ -22,20 +23,36 @@ class StreamHandler implements Handler
         }
     }
 
+    private function renderException(array $exception): void
+    {
+        $frames = array_reverse($exception['stacktrace']['frames']);
+        $editorFrame = array_shift($frames);
+
+        $this->renderer->render(
+            (string) view('sentry::console.output', [
+                'date' => date('r'),
+                'type' => $exception['type'],
+                'message' => $exception['value'],
+                'trace' => iterator_to_array($this->prepareTrace($frames)),
+                'codeSnippet' => $this->renderCodeSnippet($editorFrame),
+                'line' => (int)$editorFrame['lineno']
+            ])
+        );
+    }
+
     /**
      * Renders the trace of the exception.
      */
-    protected function renderTrace(array $frames): void
+    protected function prepareTrace(array $frames): \Generator
     {
         foreach ($frames as $i => $frame) {
             $file = $frame['filename'];
             $line = $frame['lineno'];
             $class = empty($frame['class']) ? '' : $frame['class'] . '::';
             $function = $frame['function'] ?? '';
-            $pos = str_pad((string)((int)$i + 1), 4, ' ');
+            $pos = ((int) $i + 1);
 
-            $this->render("<fg=yellow>$pos</><fg=default;options=bold>$file</>:<fg=default;options=bold>$line</>");
-            $this->render("<fg=white>    $class$function</>", false);
+            yield $pos => ['file' => $file, 'line' => $line, 'class' => $class, 'function' => $function];
         }
     }
 
@@ -43,15 +60,8 @@ class StreamHandler implements Handler
      * Renders the editor containing the code that was the
      * origin of the exception.
      */
-    protected function renderEditor(array $frame): void
+    protected function renderCodeSnippet(array $frame): string
     {
-        $highlighter = new Highlighter();
-
-        $file = $frame['filename'];
-        $line = (int)$frame['lineno'];
-
-        $this->render('at <fg=green>' . $file . '</>' . ':<fg=green>' . $line . '</>');
-
         $content = "<?php" . str_repeat("\n", $frame['lineno'] - count($frame['pre_context']) - 1);
         foreach ($frame['pre_context'] as $row) {
             $content .= $row . "\n";
@@ -61,21 +71,7 @@ class StreamHandler implements Handler
             $content .= $row . "\n";
         }
 
-        $this->output->writeln(
-            $highlighter->highlight($content, $line)
-        );
-    }
-
-    /**
-     * Renders an message into the console.
-     */
-    protected function render(string $message, bool $break = true): void
-    {
-        if ($break) {
-            $this->output->newline();
-        }
-
-        $this->output->writeln("  $message");
+        return $content;
     }
 
     public function shouldBeSkipped(array $payload): bool
@@ -85,35 +81,5 @@ class StreamHandler implements Handler
         }
 
         return !isset($payload['data']['exception']['values'][0]);
-    }
-
-    private function renderException(array $exception): void
-    {
-        $this->output->table([], [
-            ['date', date('r')],
-            ['class', $exception['type']],
-        ]);
-
-        $this->output->writeln(sprintf(
-            '  <fg=white;bg=green;options=bold> %s </>',
-            'Sentry'
-        ));
-
-        $this->output->newline();
-
-        $this->output->writeln(sprintf('  <error> %s </error>  ', $exception['type']));
-        $this->output->newline();
-        $this->output->writeln("<fg=default;options=bold>  {$exception['value']}</>");
-        $this->output->newline();
-
-        $data = [];
-
-        $frames = array_reverse($exception['stacktrace']['frames']);
-        $editorFrame = array_shift($frames);
-
-        $this->renderEditor($editorFrame);
-        $this->renderTrace($frames);
-
-        $this->output->writeln(implode("\n", $data));
     }
 }

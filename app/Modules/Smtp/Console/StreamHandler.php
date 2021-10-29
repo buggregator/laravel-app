@@ -6,60 +6,50 @@ namespace Modules\Smtp\Console;
 use App\Attributes\Console\Stream;
 use Interfaces\Console\Handler;
 use Symfony\Component\Console\Output\OutputInterface;
+use Termwind\HtmlRenderer;
 
 #[Stream(name: 'smtp')]
 class StreamHandler implements Handler
 {
-    public function __construct(private StreamHandlerConfig $config, private OutputInterface $output)
-    {
+    public function __construct(
+        private StreamHandlerConfig $config,
+        private OutputInterface $output,
+        private HtmlRenderer $renderer,
+    ){
     }
 
     public function handle(array $payload): void
     {
-        $this->output->table([], [
-            ['date', date('r')],
-            ['id', $payload['data']['id']],
-        ]);
-
-        $this->output->writeln(sprintf(
-            '  <fg=white;bg=blue;options=bold> %s </>',
-            'SMTP'
-        ));
-
-        $this->output->newline();
-
-        if (isset($payload['data']['subject'])) {
-            $this->output->writeln("  Subject: <fg=default;options=bold>  {$payload['data']['subject']}</>");
-        }
-
-        $data = [];
+        $addresses = [];
         foreach (['from', 'to', 'cc', 'bcc', 'reply_to'] as $type) {
-            if ($result = $this->prepareUsers($payload, $type)) {
-                $data[] = [$type, $result];
+            if (($users = $this->prepareUsers($payload, $type)) !== []) {
+                $addresses[$type] = $users;
             }
         }
 
+        $attachments = [];
         foreach ($payload['data']['attachments'] ?? [] as $i => $attachment) {
-            $data[] = ['attachment ' . $i + 1 . '.', sprintf('%s', $attachment['name'])];
+            $attachments[] = $attachment['name'];
         }
 
-        $this->output->table([], $data);
-
-        $this->output->newline();
-        if (!empty($payload['data']['text'])) {
-            $this->output->writeln($payload['data']['text']);
-        }
-
+        $this->renderer->render((string) view('smtp::stream.output', [
+            'id' => $payload['data']['id'],
+            'date' => date('r'),
+            'subject' => $payload['data']['subject'],
+            'addresses' => $addresses,
+            'attachments' => $attachments,
+            'body' => $payload['data']['text'],
+        ]));
     }
 
-    protected function prepareUsers(array $payload, string $key): ?string
+    protected function prepareUsers(array $payload, string $key): array
     {
-        $string = [];
+        $users = [];
         foreach ($payload['data'][$key] as $user) {
-            $string[] = sprintf('%s <%s>', $user['name'], $user['email']);
+            $users[] = $user;
         }
 
-        return empty($string) ? null : implode("\n", $string);
+        return $users;
     }
 
     public function shouldBeSkipped(array $payload): bool
