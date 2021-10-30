@@ -166,12 +166,6 @@ version: "2"
 services:
     debugger:
         image: butschster/buggregator:latest
-        environment:
-            DB_CONNECTION: pgsql
-            DB_HOST: db
-            DB_DATABASE: homestead
-            DB_USERNAME: homestead
-            DB_PASSWORD: secret
         ports:
         - 23517:8000
         - 1025:1025
