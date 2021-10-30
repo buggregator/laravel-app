@@ -13,4 +13,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             return new EventHandler($this->app, []);
         });
     }
+
+    public function boot(): void
+    {
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'ray');
+    }
 }

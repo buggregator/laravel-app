@@ -7,6 +7,7 @@ use App\Attributes\Console\Stream;
 use Interfaces\Console\Handler;
 use Modules\Ray\Console\Handlers\DebugHandler;
 use Symfony\Component\Console\Output\OutputInterface;
+use Termwind\HtmlRenderer;
 
 #[Stream(name: 'ray')]
 class StreamHandler implements Handler
@@ -15,7 +16,7 @@ class StreamHandler implements Handler
 
     public function __construct(
         private StreamHandlerConfig $config,
-        private OutputInterface     $output
+        private HtmlRenderer        $renderer
     )
     {
         $this->payloadHandlers = $config->getHandlers();
@@ -27,18 +28,16 @@ class StreamHandler implements Handler
             if (!isset($this->payloadHandlers[$payload['type']])) {
                 continue;
 
-                $handler = new DebugHandler($this->output);
+                //$handler = new DebugHandler($this->output);
             } else {
                 $handler = $this->payloadHandlers[$payload['type']];
-                $handler = new $handler($this->output);
+                $handler = new $handler($this->renderer);
             }
 
             if ($handler->shouldBeSkipped($payload)) {
                 continue;
             }
 
-            $handler->printContext($payload);
-            $handler->printTitle($payload);
             $handler->handle($payload);
         }
     }

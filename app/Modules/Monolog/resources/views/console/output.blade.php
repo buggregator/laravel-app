@@ -10,14 +10,14 @@
         </tr>
     </table>
 
-    <h1 class="font-bold text-color-white mt-1 mb-2">
+    <h1 class="font-bold text-white my-1">
         <span class="bg-blue px-1">MONOLOG</span>
-        <span class="px-1 {{ $levelColor }}">{{ $level }}</span>
+        <span class="px-1 bg-{{ $levelColor }}">{{ $level }}</span>
     </h1>
 
     <div class="mb-1">
         @foreach($messages as $message)
-            <p class="font-bold">{{ $message }}</p>
+        <div class="font-bold text-{{ $levelColor }}-500">{{ $message }}</div>
         @endforeach
     </div>
 </div>

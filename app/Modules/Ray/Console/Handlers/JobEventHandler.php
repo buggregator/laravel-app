@@ -7,18 +7,11 @@ use Modules\Ray\Console\VariableCleaner;
 
 class JobEventHandler extends AbstractHandler
 {
-    public function handle(array $payload): void
+    protected function makeData(array $payload): array
     {
-        $this->output->writeln(
-            VariableCleaner::clean($payload['content']['job'], 0)
-        );
-    }
-
-    public function printTitle(array $payload): void
-    {
-        parent::printTitle($payload);
-
-        $this->output->writeln(sprintf(' <error> %s </error>  ', $payload['content']['event_name']));
-        $this->output->newline();
+        return [
+            'event' =>  $payload['content']['event_name'],
+            'job' => VariableCleaner::clean($payload['content']['job'], 0)
+        ];
     }
 }

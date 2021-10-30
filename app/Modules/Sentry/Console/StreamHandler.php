@@ -12,8 +12,9 @@ class StreamHandler implements Handler
 {
     public function __construct(
         private StreamHandlerConfig $config,
-        private HtmlRenderer $renderer
-    ){
+        private HtmlRenderer        $renderer
+    )
+    {
     }
 
     public function handle(array $payload): void
@@ -26,16 +27,15 @@ class StreamHandler implements Handler
     private function renderException(array $exception): void
     {
         $frames = array_reverse($exception['stacktrace']['frames']);
-        $editorFrame = array_shift($frames);
+        $editorFrame = reset($frames);
 
         $this->renderer->render(
-            (string) view('sentry::console.output', [
+            (string)view('sentry::console.output', [
                 'date' => date('r'),
                 'type' => $exception['type'],
                 'message' => $exception['value'],
                 'trace' => iterator_to_array($this->prepareTrace($frames)),
                 'codeSnippet' => $this->renderCodeSnippet($editorFrame),
-                'line' => (int)$editorFrame['lineno']
             ])
         );
     }
@@ -50,9 +50,20 @@ class StreamHandler implements Handler
             $line = $frame['lineno'];
             $class = empty($frame['class']) ? '' : $frame['class'] . '::';
             $function = $frame['function'] ?? '';
-            $pos = ((int) $i + 1);
+            $pos = str_pad((string)((int)$i + 1), 4, ' ');
 
-            yield $pos => ['file' => $file, 'line' => $line, 'class' => $class, 'function' => $function];
+            yield $pos => [
+                'file' => $file,
+                'line' => $line,
+                'class' => $class,
+                'function' => $function
+            ];
+
+            if ($i >= 10) {
+                yield $pos => '+ more ' . count($frames) - 10 . ' frames';
+
+                break;
+            }
         }
     }
 
@@ -60,9 +71,12 @@ class StreamHandler implements Handler
      * Renders the editor containing the code that was the
      * origin of the exception.
      */
-    protected function renderCodeSnippet(array $frame): string
+    protected function renderCodeSnippet(array $frame): array
     {
-        $content = "<?php" . str_repeat("\n", $frame['lineno'] - count($frame['pre_context']) - 1);
+        $line = (int)$frame['lineno'];
+        $startLine = $line - count($frame['pre_context']);
+
+        $content = '';
         foreach ($frame['pre_context'] as $row) {
             $content .= $row . "\n";
         }
@@ -71,7 +85,12 @@ class StreamHandler implements Handler
             $content .= $row . "\n";
         }
 
-        return $content;
+        return [
+            'file' => $frame['filename'],
+            'line' => $line,
+            'start_line' => $startLine,
+            'content' => $content
+        ];
     }
 
     public function shouldBeSkipped(array $payload): bool

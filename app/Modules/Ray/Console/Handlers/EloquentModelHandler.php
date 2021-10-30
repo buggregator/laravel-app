@@ -7,26 +7,16 @@ use Modules\Ray\Console\VariableCleaner;
 
 class EloquentModelHandler extends AbstractHandler
 {
-    public function handle(array $payload): void
+    protected function makeData(array $payload): array
     {
-        if (empty($payload['content'])) {
-            $this->output->writeln('Empty data.');
-            return;
-        }
-
-        $this->output->writeln(VariableCleaner::clean($payload['content']['attributes'], 0));
-    }
-
-    public function printTitle(array $payload): void
-    {
-        parent::printTitle($payload);
-
-        $this->output->writeln(sprintf(' <error> %s </error>  ', $payload['content']['class_name']));
-        $this->output->newline();
+        return [
+            'class' => $payload['content']['class_name'],
+            'attributes' => VariableCleaner::clean($payload['content']['attributes'], 0)
+        ];
     }
 
     public function shouldBeSkipped(array $payload): bool
     {
-        return empty($payload['content']);
+        return empty($payload['content']) || parent::shouldBeSkipped($payload);
     }
 }

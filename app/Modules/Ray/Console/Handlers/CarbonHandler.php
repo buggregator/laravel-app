@@ -5,12 +5,15 @@ namespace Modules\Ray\Console\Handlers;
 
 class CarbonHandler extends AbstractHandler
 {
-    public function handle(array $payload): void
+    protected function makeData(array $payload): array
     {
-        $this->output->table([], [
-            ['Formatted', $payload['content']['formatted']],
-            ['Timezone', $payload['content']['timezone']],
-            ['Timestamp', $payload['content']['timestamp']]
-        ]);
+        return [
+            'color' => 'magenta',
+            'data' => [
+                'Formatted' => $payload['content']['formatted'],
+                'Timezone' => $payload['content']['timezone'],
+                'Timestamp' => $payload['content']['timestamp']
+            ]
+        ];
     }
 }

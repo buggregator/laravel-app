@@ -21,10 +21,10 @@ class StreamHandler implements Handler
     public function handle(array $payload): void
     {
         $levelColor = match (strtolower($payload['data']['level_name'])) {
-            'notice' , 'info' => 'bg-blue-400',
-            'warning' => 'bg-yellow',
-            'critical', 'error', 'alert', 'emergency' => 'bg-red',
-            default => 'bg-black'
+            'notice' , 'info' => 'blue',
+            'warning' => 'yellow',
+            'critical', 'error', 'alert', 'emergency' => 'red',
+            default => 'gray'
         };
 
         $this->renderer->render(
@@ -37,7 +37,7 @@ class StreamHandler implements Handler
             ])
         );
 
-        // IT can't be sent to HTML
+        // It can't be sent to HTML
         if (!empty($payload['data']['context'])) {
             dump($payload['data']['context']);
         }

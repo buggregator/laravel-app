@@ -23,30 +23,8 @@ class StreamHandler implements Handler
     {
         $files = (new Finder())->files()->name('*.php')->in($app->basePath('app'));
         collect($files)->each(fn(SplFileInfo $file) => $this->registerStreamHandler($file));
-    }
 
-    public function handle(array $payload): void
-    {
-        Termwind::renderUsing($this->output);
-
-        try {
-            $this->handlers[$payload['type']]->handle($payload);
-        } catch (\Throwable $e) {
-            app(ExceptionHandler::class)->renderForConsole($this->output, $e);
-        }
-    }
-
-    public function shouldBeSkipped(array $payload): bool
-    {
-        if (!isset($payload['type'])) {
-            return true;
-        }
-
-        if (!isset($this->handlers[$payload['type']])) {
-            return true;
-        }
-
-        return $this->handlers[$payload['type']]->shouldBeSkipped($payload);
+        Termwind::renderUsing($output);
     }
 
     private function registerStreamHandler(SplFileInfo $file)

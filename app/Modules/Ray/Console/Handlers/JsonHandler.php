@@ -5,8 +5,10 @@ namespace Modules\Ray\Console\Handlers;
 
 class JsonHandler extends AbstractHandler
 {
-    public function handle(array $payload): void
+    protected function makeData(array $payload): array
     {
-        dump(json_decode($payload['content']['value'], true));
+        return [
+            'json' => json_encode(json_decode($payload['content']['value']), JSON_PRETTY_PRINT)
+        ];
     }
 }

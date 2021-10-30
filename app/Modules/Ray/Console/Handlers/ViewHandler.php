@@ -7,18 +7,11 @@ use Modules\Ray\Console\VariableCleaner;
 
 class ViewHandler extends AbstractHandler
 {
-    public function handle(array $payload): void
+    protected function makeData(array $payload): array
     {
-        $this->output->writeln(
-            VariableCleaner::clean($payload['content']['data'], 0)
-        );
-    }
-
-    public function printTitle(array $payload): void
-    {
-        parent::printTitle($payload);
-
-        $this->output->writeln(sprintf(' <error> %s </error>  ', $payload['content']['view_path_relative_to_project_root']));
-        $this->output->newline();
+        return [
+            'path' =>  $payload['content']['view_path_relative_to_project_root'],
+            'data' => VariableCleaner::clean($payload['content']['data'], 0)
+        ];
     }
 }

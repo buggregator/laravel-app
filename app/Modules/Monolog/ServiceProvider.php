@@ -11,10 +11,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot(): void
     {
         $this->app[Kernel::class]->addHandler('monolog', TcpHandler::class);
-    }
 
-    public function boot()
-    {
         $this->loadViewsFrom(__DIR__.'/resources/views', 'monolog');
     }
 }

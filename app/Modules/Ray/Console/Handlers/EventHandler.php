@@ -7,19 +7,12 @@ use Modules\Ray\Console\VariableCleaner;
 
 class EventHandler extends AbstractHandler
 {
-    public function handle(array $payload): void
+    protected function makeData(array $payload): array
     {
-        if (isset($payload['content']['event'])) {
-            $this->output->writeln(
-                VariableCleaner::clean($payload['content']['event'], 0)
-            );
-        }
-
-        if (isset($payload['content']['payload'])) {
-            $this->output->writeln(
-                VariableCleaner::clean($payload['content']['payload'], 0)
-            );
-        }
+        return [
+            'event' => isset($payload['content']['event']) ? VariableCleaner::clean($payload['content']['event'], 0) : null,
+            'payload' => isset($payload['content']['payload']) ? VariableCleaner::clean($payload['content']['payload'], 0) : null,
+        ];
     }
 
     public function printTitle(array $payload): void

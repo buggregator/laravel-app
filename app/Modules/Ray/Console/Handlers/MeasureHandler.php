@@ -7,27 +7,16 @@ use Symfony\Component\Console\Helper\Helper;
 
 class MeasureHandler extends AbstractHandler
 {
-    public function handle(array $payload): void
+    protected function makeData(array $payload): array
     {
-        if ($payload['content']['is_new_timer']) {
-            return;
-        }
-
-        $this->output->table([], [
-            ['Total time', $this->covertMsToSeconds($payload['content']['total_time']) . ' s'],
-            ['Maximum memory usage', Helper::formatMemory((int)$payload['content']['max_memory_usage_during_total_time'])],
-            ['Time since last call', $this->covertMsToSeconds($payload['content']['time_since_last_call']) . ' s']
-        ]);
-    }
-
-    public function printTitle(array $payload): void
-    {
-        parent::printTitle($payload);
-
-
-        if ($payload['content']['is_new_timer']) {
-            $this->output->writeln(' <fg=default;options=bold>Start measuring performance...</>');
-        }
+        return [
+            'isNew' => $payload['content']['is_new_timer'],
+            'name' => $payload['content']['name'],
+            'totalTime' => $this->covertMsToSeconds($payload['content']['total_time']),
+            'memoryUsage' => Helper::formatMemory((int)$payload['content']['max_memory_usage_during_total_time']),
+            'timeSinceLastCall' => $this->covertMsToSeconds($payload['content']['time_since_last_call']),
+            'memoryUsageSinceLastCall' => Helper::formatMemory((int)$payload['content']['max_memory_usage_since_last_call']),
+        ];
     }
 
     private function covertMsToSeconds(int|float $ms): string

@@ -4,45 +4,54 @@ declare(strict_types=1);
 namespace Modules\Ray\Console\Handlers;
 
 use Interfaces\Console\Handler;
-use NunoMaduro\Collision\ConsoleColor;
-use Symfony\Component\Console\Output\OutputInterface;
+use Termwind\HtmlRenderer;
 
 abstract class AbstractHandler implements Handler
 {
-    protected ConsoleColor $color;
-
-    public function __construct(protected OutputInterface $output)
+    public function __construct(protected HtmlRenderer $renderer)
     {
-        $this->color = new ConsoleColor();
+
     }
 
-    public function printTitle(array $payload): void
+    protected function getViewName(array $payload): string
     {
-        $title = sprintf(
-            ' <fg=white;bg=green;options=bold> %s </><fg=white;bg=black;options=bold> %s </>',
-            'RAY',
-            ucfirst(str_replace(['-', '_'], ' ', $payload['type']))
+        return 'ray::console.' . $payload['type'];
+    }
+
+    public function handle(array $payload): void
+    {
+        $data = $this->makeData($payload);
+
+        $this->renderer->render(
+            (string)view('ray::console.output', [
+                'date' => date('r'),
+                'source' => sprintf('%s on line %s', class_basename($payload['origin']['file']), $payload['origin']['line_number']),
+                'file' => $this->getFilePath($payload['origin']['file']),
+                'type' => ucfirst(str_replace(['-', '_'], ' ', $payload['type'])),
+                'color' => $data['color'] ?? 'black',
+                'label' => $payload['content']['label'] ?? null,
+                'content' => view($this->getViewName($payload), $data)
+            ])
         );
-
-        if (isset($payload['content']['label'])) {
-            $title .= sprintf(' <fg=white;bg=blue> %s </>  ', $payload['content']['label']);
-        }
-
-        $this->output->newline();
-        $this->output->writeln($title);
-        $this->output->newline();
-    }
-
-    public function printContext(array $payload): void
-    {
-        $handler = new ContextHandler($this->output);
-        if (!$handler->shouldBeSkipped($payload)) {
-            $handler->handle($payload);
-        }
     }
 
     public function shouldBeSkipped(array $payload): bool
     {
-        return false;
+        if (!view()->exists($this->getViewName($payload))) {
+            var_dump($this->getViewName($payload));
+        }
+
+        return !view()->exists($this->getViewName($payload));
+    }
+
+    abstract protected function makeData(array $payload): array;
+
+    private function getFilePath(string $path): string
+    {
+        if (($pos = strpos($path, 'vendor')) !== false) {
+            return '~/' . substr($path, $pos, strlen($path));
+        }
+
+        return $path;
     }
 }

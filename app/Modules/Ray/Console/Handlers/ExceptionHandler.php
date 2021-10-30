@@ -7,33 +7,24 @@ use NunoMaduro\Collision\Highlighter;
 
 class ExceptionHandler extends AbstractHandler
 {
-    public function handle(array $payload): void
-    {
-        $data = [];
 
+    protected function makeData(array $payload): array
+    {
         $frames = $payload['content']['frames'];
-        $editorFrame = array_shift($frames);
+        $editorFrame = reset($frames);
 
-        $this->renderEditor($editorFrame);
-        $this->renderTrace($frames);
-
-        $this->output->writeln(implode("\n", $data));
-    }
-
-    public function printTitle(array $payload): void
-    {
-        parent::printTitle($payload);
-
-        $this->output->writeln(sprintf('  <error> %s </error>  ', $payload['content']['class']));
-        $this->output->newline();
-        $this->output->writeln("<fg=default;options=bold>  {$payload['content']['message']}</>");
-        $this->output->newline();
+        return [
+            'type' => $payload['content']['class'],
+            'message' => $payload['content']['message'],
+            'trace' => iterator_to_array($this->prepareTrace($frames)),
+            'codeSnippet' => $this->renderCodeSnippet($editorFrame),
+        ];
     }
 
     /**
      * Renders the trace of the exception.
      */
-    protected function renderTrace(array $frames): void
+    protected function prepareTrace(array $frames): \Generator
     {
         foreach ($frames as $i => $frame) {
             $file = $frame['file_name'];
@@ -42,8 +33,18 @@ class ExceptionHandler extends AbstractHandler
             $function = $frame['method'];
             $pos = str_pad((string)((int)$i + 1), 4, ' ');
 
-            $this->render("<fg=yellow>$pos</><fg=default;options=bold>$file</>:<fg=default;options=bold>$line</>");
-            $this->render("<fg=white>    $class$function</>", false);
+            yield $pos => [
+                'file' => $file,
+                'line' => $line,
+                'class' => $class,
+                'function' => $function
+            ];
+
+            if ($i >= 10) {
+                yield $pos => '+ more ' . count($frames) - 10 . ' frames';
+
+                break;
+            }
         }
     }
 
@@ -51,34 +52,22 @@ class ExceptionHandler extends AbstractHandler
      * Renders the editor containing the code that was the
      * origin of the exception.
      */
-    protected function renderEditor(array $frame): void
+    protected function renderCodeSnippet(array $frame): array
     {
-        $highlighter = new Highlighter();
-
         $file = $frame['file_name'];
         $line = (int)$frame['line_number'];
 
-        $this->render('at <fg=green>' . $file . '</>' . ':<fg=green>' . $line . '</>');
-
-        $content = "<?php" . str_repeat("\n", $frame['snippet'][0]['line_number'] - 1);
+        $content = '';
+        $startLine = $frame['snippet'][0]['line_number'] ?? $line;
         foreach ($frame['snippet'] as $row) {
             $content .= $row['text'] . "\n";
         }
 
-        $this->output->writeln(
-            $highlighter->highlight($content, $line)
-        );
-    }
-
-    /**
-     * Renders an message into the console.
-     */
-    protected function render(string $message, bool $break = true): void
-    {
-        if ($break) {
-            $this->output->newline();
-        }
-
-        $this->output->writeln("  $message");
+        return [
+            'file' => $file,
+            'line' => $line,
+            'start_line' =>  $startLine,
+            'content' => $content
+        ];
     }
 }

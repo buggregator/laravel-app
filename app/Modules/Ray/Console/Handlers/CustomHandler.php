@@ -7,7 +7,7 @@ use Modules\Ray\Console\VariableCleaner;
 
 class CustomHandler extends AbstractHandler
 {
-    public function handle(array $payload): void
+    protected function makeData(array $payload): array
     {
         $value = $payload['content']['content'];
 
@@ -19,12 +19,12 @@ class CustomHandler extends AbstractHandler
                 $value = str_replace(['<br>', '<br />'], "\n", $value);
                 $value = htmlspecialchars_decode($value);
             }
-
-            foreach (explode("\n", $value) as $line) {
-                $this->output->writeln($line);
-            }
         } else {
-            dump($value);
+            $value = json_encode($value);
         }
+
+        return [
+            'string' => $value
+        ];
     }
 }
