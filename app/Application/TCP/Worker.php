@@ -49,10 +49,6 @@ class Worker implements WorkerInterface
         /** @var ConfigRepository $config */
         $config = $app->make(ConfigRepository::class);
 
-        if ($this->isDebugModeEnabled($config)) {
-            $this->output->writeln('<info>TCP worker started</info>');
-        }
-
         $this->fireEvent($app, new Events\BeforeLoopStartedEvent($app));
 
         while ($request = $tcpWorker->waitRequest()) {

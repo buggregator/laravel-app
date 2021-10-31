@@ -30,8 +30,6 @@ export default {
 
         ws.listen('event', 'EventReceived', (payload) => {
             const event = this.create(payload.payload)
-
-
             if (event) {
                 if (event instanceof SmtpEvent) {
                     store.commit('smtp/pushEvent', event)
