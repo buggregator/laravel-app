@@ -8,7 +8,7 @@
                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,1H5A5.006,5.006,0,0,0,0,6V18a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V6A5.006,5.006,0,0,0,19,1ZM5,3H19a3,3,0,0,1,2.78,1.887l-7.658,7.659a3.007,3.007,0,0,1-4.244,0L2.22,4.887A3,3,0,0,1,5,3ZM19,21H5a3,3,0,0,1-3-3V7.5L8.464,13.96a5.007,5.007,0,0,0,7.072,0L22,7.5V18A3,3,0,0,1,19,21Z"/></svg>
             </Link>
             <Link href="/terminal" class="p-3 md:p-4 lg:p-5 block hover:bg-blue-500 hover:text-white" :class="{'bg-blue-500 text-white': this.$page.url.startsWith('/terminal'), 'text-blue-500': !this.$page.url.startsWith('/terminal')}">
-                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"><path d="M486.4 21.3H25.6C11.5 21.4 0 32.8 0 46.9V465c0 14.1 11.5 25.6 25.6 25.6h460.8c14.1 0 25.6-11.5 25.6-25.6V46.9c0-14.1-11.5-25.5-25.6-25.6zm-8.5 435.2H34.1v-401h443.7v401z"/><path d="M106.6 280.1 185 192l-78.4-88.1-25.5 22.7 58.2 65.4-58.2 65.5zM213.3 234.7h136.5v34.1H213.3z"/></svg>
+                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 22"><path fill-rule="evenodd" d="M19 2H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3ZM5 0a5 5 0 0 0-5 5v12a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5H5Z"/><path fill-rule="evenodd" d="m11.1 15 .3-.6.6-.2h5.1c.3 0 .5 0 .6.2.2.2.3.4.3.7 0 .2 0 .5-.3.6-.1.2-.3.3-.6.3H12a.8.8 0 0 1-.6-.3 1 1 0 0 1-.3-.6ZM6.3 6.4a.9.9 0 0 1 .6-.3.8.8 0 0 1 .6.3l3.4 3.6a1 1 0 0 1 .2.6 1 1 0 0 1-.2.7l-3.4 3.6-.6.3a.8.8 0 0 1-.6-.3 1 1 0 0 1-.3-.6c0-.3 0-.5.3-.7l2.8-3-2.8-3A1 1 0 0 1 6 7a1 1 0 0 1 .3-.6Z" /></svg>
             </Link>
         </div>
 

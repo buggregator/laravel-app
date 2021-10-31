@@ -1,4 +1,4 @@
-<div class="mt-2">
+<div class="mb-2">
     <table>
         <tr>
             <th>date</th>

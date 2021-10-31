@@ -29,32 +29,36 @@ export default {
         this.term.clear()
     },
     mounted() {
-        this.term = new Terminal()
+        if (!this.terminalInit) {
+            this.term = new Terminal()
 
-        const fitAddon = new FitAddon()
-        this.term.loadAddon(fitAddon)
+            const fitAddon = new FitAddon()
+            this.term.loadAddon(fitAddon)
 
-        this.term.open(document.getElementById('terminal'))
+            this.term.open(document.getElementById('terminal'))
+            fitAddon.fit()
 
-        ws.listen('terminal', 'Websocket\\TerminalWrite', (payload) => {
-            payload.payload.message.split("\n").forEach((line) => this.term.writeln(line))
-        })
+            ws.listen('terminal', 'Websocket\\TerminalWrite', (payload) => {
+                payload.payload.message.split("\n").forEach((line) => this.term.writeln(line))
+            })
+
+            this.terminalInit = true;
+        }
 
         this.messages.forEach(msg => this.term.writeln(msg))
 
-        fitAddon.fit()
     },
 }
 </script>
 
 <style>
-    .xterm {
-        height: 100%;
-        padding: 15px;
-        overflow: hidden;
-    }
+.xterm {
+    height: 100%;
+    padding: 15px;
+    overflow: hidden;
+}
 
-    .xterm-viewport {
-        width: 100% !important;
-    }
+.xterm-viewport {
+    width: 100% !important;
+}
 </style>
