@@ -19,11 +19,11 @@ http:
 tcp:
   servers:
     monolog:
-      addr: tcp://0.0.0.0:9913
+      addr: 0.0.0.0:9913
     var-dumper:
-      addr: tcp://0.0.0.0:9912
+      addr: 0.0.0.0:9912
     smtp:
-      addr: tcp://0.0.0.0:1025
+      addr: 0.0.0.0:1025
   pool:
     num_workers: 6
 
