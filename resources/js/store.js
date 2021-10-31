@@ -21,6 +21,21 @@ const ws = {
     }
 }
 
+const terminal = {
+    namespaced: true,
+    state: () => ({
+        messages: []
+    }),
+    mutations: {
+        clear(state) {
+            state.messages = []
+        },
+        push(state, message) {
+            state.messages.push(message)
+        },
+    }
+}
+
 const smtp = {
     namespaced: true,
     state: () => ({
@@ -52,7 +67,7 @@ const smtp = {
 
 export const store = createStore({
     modules: {
-        ws, smtp
+        ws, smtp, terminal
     },
 
     state() {

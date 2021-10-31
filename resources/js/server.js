@@ -2,6 +2,7 @@ import {store} from "./store";
 import SfdumpFunc from './Utils/dumper'
 import Broadcast from './RoadRunner/Broadcast'
 import EventFactory from "./EventFactory";
+import TerminalFactory from "./TerminalFactory";
 
 const host = window.location.host
 const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
@@ -20,6 +21,7 @@ export function init() {
         .onDisconnect(() => store.commit('ws/disconnect'))
 
     EventFactory.init()
+    TerminalFactory.init()
 }
 
 

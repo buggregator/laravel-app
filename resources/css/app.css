@@ -3,6 +3,7 @@
 @import 'tailwindcss/utilities';
 @import 'simple-syntax-highlighter/dist/sshpre.css';
 @import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
+@import "xterm/css/xterm.css";
 
 .ssh-pre {
     margin-top: 0 !important;
