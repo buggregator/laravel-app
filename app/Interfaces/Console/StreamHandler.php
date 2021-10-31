@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Interfaces\Console;
 
 use App\Attributes\Console\Stream;
+use App\Websocket\BrowserOutput;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Str;
@@ -24,7 +25,7 @@ class StreamHandler implements Handler
         $files = (new Finder())->files()->name('*.php')->in($app->basePath('app'));
         collect($files)->each(fn(SplFileInfo $file) => $this->registerStreamHandler($file));
 
-        Termwind::renderUsing($output);
+        Termwind::renderUsing(new BrowserOutput($output));
     }
 
     private function registerStreamHandler(SplFileInfo $file)

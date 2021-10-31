@@ -7,6 +7,7 @@ use Modules\Ray\Http\Controllers as Ray;
 use Modules\Sentry\Http\Controllers as Sentry;
 use Modules\Inspector\Http\Controllers as Inspector;
 use Modules\Smtp\Http\Controllers as Smtp;
+use Modules\Terminal\Http\Controllers as Terminal;
 use Modules\Monolog\Http\Controllers\Slack;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,6 @@ Route::get('/inspector/{uuid}', Inspector\ShowAction::class)->name('inspector.sh
 // Sentry
 Route::post('api/{projectId}/store', Sentry\StoreEventAction::class);
 Route::post('api/{projectId}/envelope', function (\Illuminate\Http\Request $request) {});
+
+// Terminal
+Route::get('/terminal', Terminal\ListAction::class)->name('terminal');
