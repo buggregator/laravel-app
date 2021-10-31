@@ -57,6 +57,10 @@ return [
             Listeners\ResetZiggyListener::class,            // for <https://github.com/tighten/ziggy>
         ],
 
+        \App\Events\Tcp\BeforeLoopIterationEvent::class => [
+            ...Defaults::beforeLoopIteration(),
+        ],
+
         Events\BeforeRequestHandlingEvent::class => [
             ...Defaults::beforeRequestHandling(),
             Listeners\InjectStatsIntoRequestListener::class,
@@ -64,9 +68,15 @@ return [
 
         Events\AfterRequestHandlingEvent::class => [
             ...Defaults::afterRequestHandling(),
+            \App\Listeners\Request\SendRequestDebugToConsole::class,
         ],
 
         Events\AfterLoopIterationEvent::class => [
+            ...Defaults::afterLoopIteration(),
+            Listeners\RunGarbageCollectorListener::class, // keep the memory usage low
+        ],
+
+        \App\Events\Tcp\AfterLoopIterationEvent::class => [
             ...Defaults::afterLoopIteration(),
             Listeners\RunGarbageCollectorListener::class, // keep the memory usage low
         ],

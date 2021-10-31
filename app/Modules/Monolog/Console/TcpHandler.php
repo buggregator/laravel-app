@@ -7,6 +7,7 @@ use App\Events\EventReceived;
 use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
 use App\TCP\Handler;
+use App\TCP\RespondMessage;
 use App\TCP\Response;
 use Illuminate\Contracts\Events\Dispatcher;
 use Spiral\RoadRunner\Tcp\Request;
@@ -34,7 +35,7 @@ class TcpHandler implements Handler
             $payload = json_decode($message, true);
 
             // Impossible to decode the message, give up.
-            if (false === $payload) {
+            if (!$payload) {
                 throw new \RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
             }
 

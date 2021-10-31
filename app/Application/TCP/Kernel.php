@@ -46,14 +46,6 @@ class Kernel implements Handler
         }
     }
 
-    /**
-     * Call the terminate method
-     */
-    public function terminate(Request $request, Response $response): void
-    {
-        $this->app->terminate();
-    }
-
     public function addHandler(string $server, string $handler): void
     {
         $this->handlers[$server] = $handler;
@@ -74,6 +66,14 @@ class Kernel implements Handler
         $handler = $this->app->make($this->handlers[$request->server]);
 
         return $handler->handle($request, $output);
+    }
+
+    /**
+     * Call the terminate method
+     */
+    public function terminate(Request $request, Response $response): void
+    {
+        $this->app->terminate();
     }
 
     /**

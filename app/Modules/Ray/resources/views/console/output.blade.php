@@ -18,7 +18,7 @@
         <span class="bg-blue px-1">RAY</span>
         <span class="px-1 bg-{{ $color }}">{{ $type }}</span>
         @if($label)
-            <span class="bg-gray px-1">{{ $label }}</span>
+            <span class="bg-yellow px-1">{{ $label }}</span>
         @endif
     </h1>
 

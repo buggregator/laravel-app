@@ -28,7 +28,7 @@ abstract class AbstractHandler implements Handler
                 'source' => sprintf('%s on line %s', class_basename($payload['origin']['file']), $payload['origin']['line_number']),
                 'file' => $this->getFilePath($payload['origin']['file']),
                 'type' => ucfirst(str_replace(['-', '_'], ' ', $payload['type'])),
-                'color' => $data['color'] ?? 'black',
+                'color' => $data['color'] ?? 'gray',
                 'label' => $payload['content']['label'] ?? null,
                 'content' => view($this->getViewName($payload), $data)
             ])
@@ -37,10 +37,6 @@ abstract class AbstractHandler implements Handler
 
     public function shouldBeSkipped(array $payload): bool
     {
-        if (!view()->exists($this->getViewName($payload))) {
-            var_dump($this->getViewName($payload));
-        }
-
         return !view()->exists($this->getViewName($payload));
     }
 

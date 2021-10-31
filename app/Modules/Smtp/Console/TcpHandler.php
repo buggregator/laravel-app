@@ -32,14 +32,16 @@ class TcpHandler implements Handler
 
     public function handle(Request $request, OutputInterface $output): Response
     {
+        if ($request->event === TcpWorkerInterface::EVENT_CONNECTED) {
+            return $this->send(static::READY, 'mailamie');
+        }
+
         $cacheKey = 'smtp:' . $request->connectionUuid;
         $message = $this->cache->get($cacheKey, []);
 
         $response = new CloseConnection();
 
-        if ($request->event === TcpWorkerInterface::EVENT_CONNECTED) {
-            $response = $this->send(static::READY, 'mailamie');
-        } elseif ($request->event === TcpWorkerInterface::EVENT_CLOSED) {
+        if ($request->event === TcpWorkerInterface::EVENT_CLOSED) {
             $this->cache->delete($cacheKey);
             return new CloseConnection();
         } elseif (preg_match("/^(EHLO|HELO|MAIL FROM:)/", $request->body)) {

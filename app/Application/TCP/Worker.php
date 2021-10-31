@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\TCP;
 
+use App\Events\Tcp\AfterLoopIterationEvent;
+use App\Events\Tcp\BeforeLoopIterationEvent;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -12,12 +14,14 @@ use Interfaces\Console\StreamHandler;
 use Spiral\RoadRunner\Payload;
 use Spiral\RoadRunner\Tcp\TcpWorker;
 use Spiral\RoadRunnerLaravel\Application\FactoryInterface as ApplicationFactory;
+use Spiral\RoadRunnerLaravel\Events;
 use Spiral\RoadRunnerLaravel\WorkerInterface;
 use Spiral\RoadRunnerLaravel\WorkerOptionsInterface;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
 use Throwable;
+use function Termwind\render;
 
 class Worker implements WorkerInterface
 {
@@ -49,7 +53,11 @@ class Worker implements WorkerInterface
             $this->output->writeln('<info>TCP worker started</info>');
         }
 
+        $this->fireEvent($app, new Events\BeforeLoopStartedEvent($app));
+
         while ($request = $tcpWorker->waitRequest()) {
+            $startTime = microtime(true);
+
             if ($options->getRefreshApp()) {
                 $sandbox = $this->createApplication($options, $worker);
             } else {
@@ -60,7 +68,16 @@ class Worker implements WorkerInterface
             $tcpKernel = $sandbox[Kernel::class];
             $this->setApplicationInstance($sandbox);
 
+            if ($this->isDebugModeEnabled($config)) {
+                render((string)view('console.tcp.request', [
+                    'request' => $request,
+                    'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),
+                ]));
+            }
+
             try {
+                $this->fireEvent($sandbox, new BeforeLoopIterationEvent($sandbox));
+
                 $response = $tcpKernel->handle($request, $this->output);
             } catch (Throwable $e) {
                 $this->exceptions->renderForConsole($this->output, $e);
@@ -73,6 +90,17 @@ class Worker implements WorkerInterface
                 $tcpWorker->getWorker()->respond(
                     new Payload($response->getBody(), $response->getContext())
                 );
+
+                if ($this->isDebugModeEnabled($config)) {
+                    render((string)view('console.tcp.response', [
+                        'request' => $request,
+                        'response' => $response,
+                        'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),
+                        'duration' => number_format(round(microtime(true) - $startTime, 4), 4, '.', '')
+                    ]));
+                }
+
+                $this->fireEvent($sandbox, new AfterLoopIterationEvent($sandbox));
 
                 unset($response, $request, $sandbox);
             }
