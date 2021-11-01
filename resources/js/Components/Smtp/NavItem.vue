@@ -2,7 +2,6 @@
     <Link :href="`/mail/${event.uuid}`"
           class="block border-b text-sm hover:bg-white flex items-stretch"
           :class="{ 'bg-white': isActive, 'bg-gray-50': !isActive }"
-          :only="['event']"
     >
 
         <div class="w-1 self-stretch flex-none rounded-r" :class="{ 'bg-blue-500': isActive }"></div>
