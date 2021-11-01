@@ -18,8 +18,8 @@ class ShowAction extends Controller
         }
 
         return Inertia::render('Smtp/Show', [
-            'events' => fn() => $events->all('smtp'),
-            'event' => $event
+            'event' => $event,
+            'events' => $events->all('smtp'),
         ]);
     }
 }
