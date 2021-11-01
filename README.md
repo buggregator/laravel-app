@@ -1,19 +1,11 @@
-# A server for debugging more than just Laravel applications.
+# A server for debugging PHP applications and more.
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
 [![Downloads](https://img.shields.io/docker/pulls/butschster/buggregator.svg)](https://hub.docker.com/repository/docker/butschster/buggregator)
 [![Twitter](https://img.shields.io/badge/twitter-Follow-blue)](https://twitter.com/buggregator)
 [![Join to our telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/joinchat/xATnNI69zXQ0MWIy)
 
-<!--
-> I had to change the name of server from RayServer to Buggregator.
-> Please use a new docker repo `butschster/debugger`
-> 
-> `docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 -p 9913:9913 butschster/debugger:latest`
--->
-
-Buggregator is a beautiful, lightweight web server built on Laravel and VueJs that helps debugging your app. It runs without
-installation on multiple platforms via docker and supports symfony var-dumper, monolog, sentry, smtp and spatie ray package.
+Buggregator is a beautiful, lightweight app built on Laravel and VueJs with [RoadRunner](https://github.com/spiral/roadrunner) underhood, that helps debugging mostly PHP app without extra packages. It runs without installation on multiple platforms via docker and supports [symfony var-dumper](#1-symfony-vardumper-server), [monolog](#4-compatible-with-monolog), [sentry](#3-compatible-with-sentry), [smtp](#2-fake-smtp-server-for-catching-mail) and [spatie ray package](#5-spatie-ray-debug-tool).
 
 #### Contents
 1. [Features](#features)
@@ -33,7 +25,7 @@ installation on multiple platforms via docker and supports symfony var-dumper, m
 
 ![Buggregator](https://user-images.githubusercontent.com/773481/131818548-39189a7e-355a-4a9c-b783-9ae8ce627d79.png)
 
-## Features
+## Killer features
 
 ### 1. Symfony [VarDumper server](https://symfony.com/doc/current/components/var_dumper.html#the-dump-server)
 
@@ -117,7 +109,7 @@ Code samples of configured Laravel application ready to send data to Buggregator
 
 - [Laravel 8](https://laravel.com/)
 - [InertiaJs](https://inertiajs.com/)
-- [Swoole](https://www.swoole.co.uk/) Http/Websocket/TCP server
+- [RoadRunner](https://roadrunner.dev/) Http, Websocket, TCP, Queue, Cache server in one bottle
 - [Vue](https://vuejs.org/)
 - [TailwindCSS](https://tailwindcss.com/)
 
@@ -252,19 +244,15 @@ There are several [projects](https://github.com/buggregator/app/projects) in thi
 ### Server requirements
 
 1. PHP 8.0
-2. Swoole 4.7
-3. NodeJS
+2. NodeJS
 
 ### Installation
 
 1. Clone repository
 2. Run composer `composer install
-3. Run npm `npm i`
-4. Run HTTP server `php artisan server:start --host=127.0.0.1 --port=23517`
-5. Run SMTP server `php artisan smtp:start --host=127.0.0.1 --port=1025`
-6. Run var-dumper server `php artisan dump-server:start --host=127.0.0.1 --port=9912`
-6. Run monolog server `php artisan monolog:start --host=127.0.0.1 --port=9913`
-7. Build npm `npm run prod`
+3. Run RoadRunner server `./rr serve`
+4. Run npm `npm i`
+5. Build npm `npm run prod`
 
 
 ---
