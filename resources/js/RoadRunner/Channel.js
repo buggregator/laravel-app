@@ -81,11 +81,17 @@ export default class Channel {
                 }
             };
 
-            this.ws.onmessage = this.events[event]
+            this.ws.addEventListener('message', this.events[event])
         }
 
         this.listeners[event].push(callback);
 
         return this;
+    }
+
+    unsubscribe() {
+        this.events.forEach(
+            callback => this.ws.removeEventListener('message', callback)
+        )
     }
 }
