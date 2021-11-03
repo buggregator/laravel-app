@@ -8,6 +8,7 @@ use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
 use App\TCP\Handler;
 use App\TCP\Response;
+use App\Websocket\BrowserOutput;
 use Illuminate\Contracts\Events\Dispatcher;
 use Spiral\RoadRunner\Tcp\Request;
 use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
@@ -22,7 +23,8 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
 class TcpHandler implements Handler
 {
-    public function __construct(private Dispatcher $events, private StreamHandlerConfig $config)
+    public function __construct(
+        private Dispatcher $events, private StreamHandlerConfig $config)
     {
     }
 
@@ -47,7 +49,7 @@ class TcpHandler implements Handler
             }
 
             $this->fireEvent($payload);
-            $this->sendToConsole($request, $payload, $output);
+            $this->sendToConsole($request, $payload, new BrowserOutput($output));
         }
 
         return new CloseConnection();
