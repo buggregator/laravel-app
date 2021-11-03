@@ -242,8 +242,9 @@ There are several [projects](https://github.com/buggregator/app/projects) in thi
 
 ### Installation
 
-1. Clone repository
-2. Run composer `composer install
+1. Clone repository `git clone https://github.com/buggregator/app.git`
+2. Run composer `composer install`
+3. Download RoadRunner binary `vendor/bin/rr get-binary`
 3. Run RoadRunner server `./rr serve`
 4. Run npm `npm i`
 5. Build npm `npm run prod`
