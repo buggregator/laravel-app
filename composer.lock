@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9cfdc3082de84f33cd2ae2ab1a542e8",
+    "content-hash": "30e18ca36200f15c75c29185f54eb2d0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4918,16 +4918,16 @@
         },
         {
             "name": "spiral/roadrunner-cli",
-            "version": "v2.0.11",
+            "version": "v2.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/roadrunner-cli.git",
-                "reference": "4e805b544cb6e30d513222a3624f11dbb843582e"
+                "reference": "1364e26627e71c3204161ab22f7dc7405e325d48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/roadrunner-cli/zipball/4e805b544cb6e30d513222a3624f11dbb843582e",
-                "reference": "4e805b544cb6e30d513222a3624f11dbb843582e",
+                "url": "https://api.github.com/repos/spiral/roadrunner-cli/zipball/1364e26627e71c3204161ab22f7dc7405e325d48",
+                "reference": "1364e26627e71c3204161ab22f7dc7405e325d48",
                 "shasum": ""
             },
             "require": {
@@ -4975,9 +4975,9 @@
             "description": "RoadRunner: Command Line Interface",
             "support": {
                 "issues": "https://github.com/spiral/roadrunner-cli/issues",
-                "source": "https://github.com/spiral/roadrunner-cli/tree/v2.0.11"
+                "source": "https://github.com/spiral/roadrunner-cli/tree/v2.0.12"
             },
-            "time": "2021-10-05T08:50:03+00:00"
+            "time": "2021-11-02T09:03:48+00:00"
         },
         {
             "name": "spiral/roadrunner-http",
