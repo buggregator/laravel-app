@@ -1,8 +1,8 @@
 <template>
     <div>
-        <ssh-pre language="sql" class="border-b-0">
+        <CodeSnippet language="sql" class="border-b-0">
             {{ formattedSql }}
-        </ssh-pre>
+        </CodeSnippet>
         <Table>
             <TableRow title="Connection name">
                 {{ this.payload.content.connection_name }}
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import SshPre from 'simple-syntax-highlighter'
-import Table from "@/Components/UI//Table";
-import TableRow from "@/Components/UI//TableRow";
+import CodeSnippet from "@/Components/UI/CodeSnippet"
+import Table from "@/Components/UI/Table";
+import TableRow from "@/Components/UI/TableRow";
 
 export default {
-    components: {TableRow, Table, SshPre},
+    components: {TableRow, Table, CodeSnippet},
     props: {
         payload: Object
     },

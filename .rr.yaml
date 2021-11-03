@@ -1,0 +1,60 @@
+rpc:
+  listen: tcp://127.0.0.1:6001
+
+server:
+  command: "php ./bin/rr-worker start"
+  relay: pipes
+  env:
+    TERM_PROGRAM: Hyper
+
+http:
+  address: 0.0.0.0:8000
+  middleware: [ "gzip", "websockets" ]
+  static:
+    dir: "public"
+    forbid: [ ".php" ]
+  pool:
+    num_workers: 2
+
+tcp:
+  servers:
+    monolog:
+      addr: 0.0.0.0:9913
+    var-dumper:
+      addr: 0.0.0.0:9912
+    smtp:
+      addr: 0.0.0.0:1025
+  pool:
+    num_workers: 6
+
+websockets:
+  broker: default
+  path: "/ws"
+
+broadcast:
+  default:
+    driver: memory
+    config: {}
+
+kv:
+  session:
+    driver: memory
+    config: {}
+  cache:
+    driver: memory
+    config: {}
+
+jobs:
+  consume: [ "default", "events" ]
+  pipelines:
+    default:
+      driver: memory
+    events:
+      driver: memory
+  pool:
+    num_workers: 2
+
+logs:
+  level: info
+  mode: raw
+  line_ending: "\r"

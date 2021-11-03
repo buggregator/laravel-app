@@ -5,6 +5,10 @@ export default class extends Event {
     color = 'blue'
     app = 'smtp'
 
+    get subject() {
+        return this.event.subject
+    }
+
     get serverName() {
         return this.event.server_name
     }

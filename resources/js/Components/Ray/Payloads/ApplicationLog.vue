@@ -1,13 +1,13 @@
 <template>
-    <ssh-pre>
+    <CodeSnippet>
         {{ payload.content.value }}
-    </ssh-pre>
+    </CodeSnippet>
 </template>
 
 <script>
-import SshPre from 'simple-syntax-highlighter'
+import CodeSnippet from "@/Components/UI/CodeSnippet"
 export default {
-    components: {SshPre},
+    components: {CodeSnippet},
     props: {
         payload: Object
     }

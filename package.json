@@ -13,6 +13,7 @@
         "@inertiajs/inertia": "^0.10.0",
         "@inertiajs/inertia-vue3": "^0.5.1",
         "@inertiajs/progress": "^0.2.6",
+        "@spiralscout/websockets": "0.0.5",
         "@tailwindcss/forms": "^0.2.1",
         "@tailwindcss/typography": "^0.3.0",
         "@vue/compiler-sfc": "^3.0.5",
@@ -35,7 +36,13 @@
         "simple-syntax-highlighter": "^2.0.6",
         "uuid": "^8.3.2",
         "vue-markdown": "^2.2.4",
+        "vue3-clipboard": "^1.0.0",
         "vue3-markdown-it": "^1.0.9",
-        "vuex": "^4.0.2"
+        "vue3-perfect-scrollbar": "^1.5.5",
+        "vuescroll": "^4.17.3",
+        "vuex": "^4.0.2",
+        "xterm": "^4.14.1",
+        "xterm-addon-fit": "^0.5.0",
+        "ziggy-js": "^1.4.0"
     }
 }

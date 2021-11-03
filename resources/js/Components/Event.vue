@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import Label from "@/Components/UI//Label";
+import Label from "@/Components/UI/Label";
 import {useStore} from "vuex";
 
 export default {

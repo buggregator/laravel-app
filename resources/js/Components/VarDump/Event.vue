@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Dump from "@/Components/UI//Dump";
+import Dump from "@/Components/UI/Dump";
 import Event from "../Event";
 import Origin from "../Ray/Origin";
 

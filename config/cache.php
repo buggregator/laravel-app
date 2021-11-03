@@ -37,6 +37,10 @@ return [
             'driver' => 'apc',
         ],
 
+        'roadrunner' => [
+            'driver' => 'roadrunner',
+        ],
+
         'array' => [
             'driver' => 'array',
             'serialize' => false,

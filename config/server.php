@@ -1,39 +1,27 @@
 <?php
 
-use App\Ray\Console\Handlers\CallerHandler;
-use App\Ray\Console\Handlers\CarbonHandler;
-use App\Ray\Console\Handlers\CustomHandler;
-use App\Ray\Console\Handlers\EloquentModelHandler;
-use App\Ray\Console\Handlers\EventHandler;
-use App\Ray\Console\Handlers\ExceptionHandler;
-use App\Ray\Console\Handlers\ExecutedQueryHandler;
-use App\Ray\Console\Handlers\JobEventHandler;
-use App\Ray\Console\Handlers\JsonHandler;
-use App\Ray\Console\Handlers\LogHandler;
-use App\Ray\Console\Handlers\MeasureHandler;
-use App\Ray\Console\Handlers\TableHandler;
-use App\Ray\Console\Handlers\TraceHandler;
-use App\Ray\Console\Handlers\ViewHandler;
+use Modules\Ray\Console\Handlers;
 
 return [
     'ray' => [
         'cli' => [
             'enabled' => (bool)env('CLI_RAY_STREAM', true),
             'handlers' => [
-                'log' => LogHandler::class,
-                'table' => TableHandler::class,
-                'caller' => CallerHandler::class,
-                'trace' => TraceHandler::class,
-                'custom' => CustomHandler::class,
-                'exception' => ExceptionHandler::class,
-                'measure' => MeasureHandler::class,
-                'json_string' => JsonHandler::class,
-                'carbon' => CarbonHandler::class,
-                'eloquent_model' => EloquentModelHandler::class,
-                'executed_query' => ExecutedQueryHandler::class,
-                'job_event' => JobEventHandler::class,
-                'event' => EventHandler::class,
-                'view' => ViewHandler::class,
+                'log' => Handlers\LogHandler::class,
+                'table' => Handlers\TableHandler::class,
+                'caller' => Handlers\CallerHandler::class,
+                'trace' => Handlers\TraceHandler::class,
+                'custom' => Handlers\CustomHandler::class,
+                'exception' => Handlers\ExceptionHandler::class,
+                'measure' => Handlers\MeasureHandler::class,
+                'json_string' => Handlers\JsonHandler::class,
+                'carbon' => Handlers\CarbonHandler::class,
+                'eloquent_model' => Handlers\EloquentModelHandler::class,
+                'executed_query' => Handlers\ExecutedQueryHandler::class,
+                'job_event' => Handlers\JobEventHandler::class,
+                'event' => Handlers\EventHandler::class,
+                'view' => Handlers\ViewHandler::class,
+                'notify' => Handlers\NotifyHandler::class
             ]
         ]
     ],
@@ -55,6 +43,11 @@ return [
     'monolog' => [
         'cli' => [
             'enabled' => (bool) env('CLI_MONOLOG_STREAM', true),
+        ]
+    ],
+    'inspector' => [
+        'cli' => [
+            'enabled' => (bool) env('CLI_INSPECTOR_STREAM', true),
         ]
     ]
 ];

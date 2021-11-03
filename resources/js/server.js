@@ -1,43 +1,27 @@
 import {store} from "./store";
 import SfdumpFunc from './Utils/dumper'
-import ReconnectingWebSocket from 'reconnecting-websocket';
+import Broadcast from './RoadRunner/Broadcast'
 import EventFactory from "./EventFactory";
+import TerminalFactory from "./TerminalFactory";
 
-function createWsConnection(host, port) {
-    return new ReconnectingWebSocket(`ws://${host}:${port}/`, [], {
-        connectionTimeout: 3000,
-        maxRetries: 10,
-    })
-}
+const host = window.location.host
+const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
 
-function listenEvents(host, port, callback) {
-    const socket = createWsConnection(host, port)
-
-    socket.onmessage = callback
-
-    socket.addEventListener('open', () => {
-        store.commit('ws/connect')
-    });
-
-    socket.addEventListener('close', () => {
-        store.commit('ws/disconnect')
-    });
-}
-
+window.ws = new Broadcast({
+    host: `${protocol}//${host}/ws`,
+    connectionTimeout: 3000,
+    maxRetries: 10,
+})
 
 export function init() {
     window.Sfdump = SfdumpFunc(window.document)
-    const [host, port] = window.location.host.split(':')
 
-    listenEvents(host, port, function (e) {
-        const event = EventFactory.create(
-            JSON.parse(e.data)
-        )
+    ws
+        .onConnect(() => store.commit('ws/connect'))
+        .onDisconnect(() => store.commit('ws/disconnect'))
 
-        if (event) {
-            store.commit('pushEvent', event)
-        }
-    })
+    EventFactory.init()
+    TerminalFactory.init()
 }
 
 

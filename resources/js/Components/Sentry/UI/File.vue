@@ -37,10 +37,7 @@
 </template>
 
 <script>
-import SshPre from 'simple-syntax-highlighter'
-
 export default {
-    components: {SshPre},
     props: {
         file: Object,
         collapsed: {

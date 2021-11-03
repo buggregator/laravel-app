@@ -13,9 +13,9 @@
         </div>
 
         <Collapsed class="mt-3" v-if="payload.content.content" title="HTML">
-            <ssh-pre language="html">
+            <CodeSnippet language="html">
                 {{ payload.content.content }}
-            </ssh-pre>
+            </CodeSnippet>
         </Collapsed>
 
         <div v-if="payload.content.json" class="mt-3">
@@ -28,12 +28,12 @@
 </template>
 
 <script>
-import SshPre from 'simple-syntax-highlighter'
+import CodeSnippet from "@/Components/UI/CodeSnippet"
 import Dump from "@/Components/UI/Dump";
-import Collapsed from "@/Components/UI//Collapsed";
+import Collapsed from "@/Components/UI/Collapsed";
 
 export default {
-    components: {Collapsed, Dump, SshPre},
+    components: {Collapsed, Dump, CodeSnippet},
     props: {
         payload: Object
     }

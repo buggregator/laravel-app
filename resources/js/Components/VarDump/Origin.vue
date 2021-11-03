@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Label from "@/Components/UI//Label";
+import Label from "@/Components/UI/Label";
 export default {
     components: {Label},
     props: {

@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import Host from "@/Components/UI//Host";
-import Label from "@/Components/UI//Label";
+import Host from "@/Components/UI/Host";
+import Label from "@/Components/UI/Label";
 export default {
     components: {Label, Host},
     props: {

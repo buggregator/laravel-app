@@ -4,6 +4,7 @@ import SlackEvent from "./Slack/event";
 import MonologEvent from "./Monolog/event";
 import SmtpEvent from "./Smtp/event";
 import VarDumpEvent from "./VarDump/event";
+import {store} from "./store";
 
 const eventTypes = {
     ray: json => {
@@ -20,6 +21,27 @@ const eventTypes = {
 }
 
 export default {
+    subscribed: false,
+
+    init() {
+        if (this.subscribed) {
+            return;
+        }
+
+        ws.listen('event', 'EventReceived', (payload) => {
+            const event = this.create(payload.payload)
+            if (event) {
+                if (event instanceof SmtpEvent) {
+                    store.commit('smtp/pushEvent', event)
+                }
+
+                store.commit('pushEvent', event)
+            }
+        })
+
+        this.subscribed = true
+    },
+
     create(json) {
         const type = json.type.toLowerCase()
         if (eventTypes.hasOwnProperty(type)) {

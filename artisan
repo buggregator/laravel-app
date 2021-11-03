@@ -2,6 +2,7 @@
 <?php
 
 define('LARAVEL_START', microtime(true));
+putenv('TERM_PROGRAM=Hyper');
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +35,9 @@ $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 
 $status = $kernel->handle(
     $input = new Symfony\Component\Console\Input\ArgvInput,
-    new Symfony\Component\Console\Output\ConsoleOutput
+    new Symfony\Component\Console\Output\StreamOutput(STDERR)
 );
+
 
 /*
 |--------------------------------------------------------------------------

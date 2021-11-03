@@ -21,9 +21,53 @@ const ws = {
     }
 }
 
+const terminal = {
+    namespaced: true,
+    state: () => ({
+        messages: []
+    }),
+    mutations: {
+        clear(state) {
+            state.messages = []
+        },
+        push(state, message) {
+            state.messages.push(message)
+        },
+    }
+}
+
+const smtp = {
+    namespaced: true,
+    state: () => ({
+        events: [],
+        event: null
+    }),
+    mutations: {
+        clearEvents(state) {
+            state.events = []
+        },
+        pushEvent(state, event) {
+            if (state.events.find(e => event.uuid == e.uuid)) {
+                return
+            }
+
+            state.events.unshift(event)
+        },
+        openEvent(state, event) {
+            state.event = event
+        },
+        deleteEvent(state, event) {
+            state.events = state.events.filter(e => event.uuid == e.uuid)
+        },
+        closeEvent(state) {
+            state.event = null
+        }
+    }
+}
+
 export const store = createStore({
     modules: {
-        ws
+        ws, smtp, terminal
     },
 
     state() {
@@ -33,7 +77,7 @@ export const store = createStore({
             availableColors: ['gray', 'purple', 'green', 'orange', 'red', 'blue', 'pink'],
             selectedLabels: [],
             selectedColors: [],
-            events: {}
+            events: {},
         }
     },
     getters: {

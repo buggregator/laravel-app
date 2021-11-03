@@ -2,8 +2,75 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import 'simple-syntax-highlighter/dist/sshpre.css';
+@import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
+@import "xterm/css/xterm.css";
 
 .ssh-pre {
     margin-top: 0 !important;
     @apply p-2 md:px-3 lg:px-4 text-2xs sm:text-xs md:text-sm rounded-none border;
+}
+
+.device-desktop {
+    @apply w-full h-full border rounded-md;
+}
+
+.device-desktop > div {
+    @apply w-full h-full rounded-md bg-white;
+}
+
+.device-tablet {
+    @apply justify-center border-2 rounded-3xl px-5;
+}
+
+.device-tablet > div {
+    height: 1024px;
+    width: 768px;
+}
+
+.device-tablet:after {
+    @apply border bg-gray-100 rounded-full block w-12 h-12 my-4;
+    content: "";
+}
+
+.device-mobile {
+    @apply justify-center border-2 rounded-3xl px-3;
+}
+
+.device-mobile > div {
+    height: 568px;
+    width: 320px;
+}
+
+.device-tablet:before,
+.device-mobile:before {
+    @apply border bg-gray-100 rounded-full block w-3 h-3 my-2;
+    content: "";
+}
+
+.device-mobile:after {
+    @apply border bg-gray-100 rounded-full block w-8 h-8 my-3;
+    content: "";
+}
+
+.device-desktop,
+.device-tablet,
+.device-mobile {
+    @apply flex flex-col items-center;
+}
+
+.device-desktop,
+.device-tablet,
+.device-mobile {
+    @apply transition-all ease-in duration-300 bg-gray-50;
+}
+
+.device-tablet > div,
+.device-mobile > div {
+    @apply border rounded-md bg-white;
+}
+
+.device-desktop iframe,
+.device-tablet iframe,
+.device-mobile iframe {
+    @apply rounded-md w-full h-full;
 }

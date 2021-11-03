@@ -1,13 +1,13 @@
 <template>
     <Event :event="event">
         <div class="text-xs break-all">
-            <ssh-pre class="border-b-0 mt-2">
+            <CodeSnippet class="border-b-0 mt-2">
                 {{ event.text }}
-            </ssh-pre>
+            </CodeSnippet>
 
-            <ssh-pre v-if="hasPayloads" language="json" class="border-b-0">
+            <CodeSnippet v-if="hasPayloads" language="json" class="border-b-0">
                 {{ event.payloads }}
-            </ssh-pre>
+            </CodeSnippet>
 
             <Table v-if="hasFields">
                 <TableRow :title="key" v-for="(value, key) in fields">
@@ -19,13 +19,13 @@
 </template>
 
 <script>
-import SshPre from 'simple-syntax-highlighter'
-import Table from "@/Components/UI//Table";
-import TableRow from "@/Components/UI//TableRow";
-import Event from "../Event";
+import CodeSnippet from "@/Components/UI/CodeSnippet"
+import Table from "@/Components/UI/Table"
+import TableRow from "@/Components/UI/TableRow"
+import Event from "../Event"
 
 export default {
-    components: {Event, TableRow, Table, SshPre},
+    components: {Event, TableRow, Table, CodeSnippet},
     props: {
         event: Object,
     },

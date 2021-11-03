@@ -1,9 +1,9 @@
 <template>
     <Event :event="event">
         <div class="text-xs break-all">
-            <ssh-pre class="border-b-0">
+            <CodeSnippet class="border-b-0">
                 {{ event.text }}
-            </ssh-pre>
+            </CodeSnippet>
             <Table v-if="hasFields">
                 <TableRow :title="field.title" v-for="field in fields">
                     <div v-html="value(field.value)"></div>
@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import SshPre from 'simple-syntax-highlighter'
-import Table from "@/Components/UI//Table";
-import TableRow from "@/Components/UI//TableRow";
+import CodeSnippet from "@/Components/UI/CodeSnippet"
+import Table from "@/Components/UI/Table";
+import TableRow from "@/Components/UI/TableRow";
 import Event from "../Event";
 
 export default {
-    components: {Event, TableRow, Table, SshPre},
+    components: {Event, TableRow, Table, CodeSnippet},
     props: {
         event: Object,
     },
