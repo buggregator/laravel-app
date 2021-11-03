@@ -69,9 +69,10 @@ export default {
     setup() {
         const store = useStore();
         const messages = computed(() => store.state.terminal.messages)
+        const terminalInit = false
 
         return {
-            messages, store
+            messages, store, terminalInit
         }
     },
     destroyed() {
@@ -106,7 +107,7 @@ export default {
                             this.prompt();
                             break;
                         case '\r': // Enter
-                            this.runCommand( command);
+                            this.runCommand(command);
                             command = '';
                             break;
                         case '\u007F': // Backspace (DEL)
@@ -150,8 +151,16 @@ export default {
             this.term.write('\r\n$ ');
         },
         sendMessages(messages) {
-            messages.forEach(msg => this.term.writeln(msg))
-            this.prompt()
+            const isEmpty = messages.filter(line => line !== '').length === 0
+
+            messages.forEach(msg => {
+                this.term.write('\b\b')
+                this.term.writeln(msg)
+            })
+
+            if (!isEmpty) {
+                this.prompt()
+            }
         }
     }
 }

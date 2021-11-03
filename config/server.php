@@ -21,6 +21,7 @@ return [
                 'job_event' => Handlers\JobEventHandler::class,
                 'event' => Handlers\EventHandler::class,
                 'view' => Handlers\ViewHandler::class,
+                'notify' => Handlers\NotifyHandler::class
             ]
         ]
     ],

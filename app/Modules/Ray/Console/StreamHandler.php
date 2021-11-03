@@ -28,7 +28,7 @@ class StreamHandler implements Handler
             if (!isset($this->payloadHandlers[$payload['type']])) {
                 continue;
 
-                //$handler = new DebugHandler($this->output);
+                //$handler = new DebugHandler($this->renderer);
             } else {
                 $handler = $this->payloadHandlers[$payload['type']];
                 $handler = new $handler($this->renderer);
