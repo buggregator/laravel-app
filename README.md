@@ -31,7 +31,8 @@ Buggregator is a beautiful, lightweight app built on Laravel and VueJs with [Roa
 
 The `dump()` and `dd()` functions output its contents in the same browser window or console terminal as your own application. Sometimes mixing the real output with the debug output can be confusing. That’s why this Buggregator can be used to collect all the dumped data. Buggregator can display dump output in the browser as well as in a terminal (console output).
 
-**Example**
+#### Settings
+**Env variables**
 ```
 VAR_DUMPER_FORMAT=server
 VAR_DUMPER_SERVER=127.0.0.1:9912
@@ -41,8 +42,10 @@ VAR_DUMPER_SERVER=127.0.0.1:9912
 
 Buggregator also is an email testing tool that makes it super easy to install and configure a local email server (Like [MailHog](https://github.com/mailhog/MailHog)). Buggregator sets up a fake SMTP server and you can configure your preferred web applications to use Buggregator’s SMTP server to send and receive emails. For instance, you can configure a local WordPress site to use Buggregator for email deliveries.
 
-**Example**
+#### Settings
+**Env variables**
 ```
+// Laravel
 MAIL_MAILER=smtp
 MAIL_HOST=127.0.0.1
 MAIL_PORT=1025
@@ -50,18 +53,79 @@ MAIL_PORT=1025
 
 ### 3. Compatible with Sentry
 
-Buggregator can be used to receive Sentry reports from your application. Buggregator is a lightweight alternative for local development. Just configure Sentry DSN to send data to Buggregator. It can display dump output in the browser as well as in a terminal (console output). 
+Buggregator can be used to receive Sentry reports from your application. Buggregator is a lightweight alternative for local development. 
+Just configure Sentry DSN to send data to Buggregator. It can display dump output in the browser as well as in a terminal (console output). 
 
-**Simple example** `SENTRY_LARAVEL_DSN=http://sentry@127.0.0.1:23517/1`.
+
+#### Settings
+
+**Env variables**
+```
+// Laravel
+SENTRY_LARAVEL_DSN=http://sentry@127.0.0.1:23517/1
+```
 
 ### 4. Compatible with [Monolog](https://github.com/Seldaek/monolog)
 
-Buggregator can receive logs from `monolog/monolog` package via `\Monolog\Handler\SlackWebhookHandler` or `\Monolog\Handler\SocketHandler` handler. Buggregator can display dump output in the browser as well as in a terminal (console output).
+Buggregator can receive logs from `monolog/monolog` package via `\Monolog\Handler\SlackWebhookHandler` or `\Monolog\Handler\SocketHandler` handler.
+Buggregator can display dump output in the browser as well as in a terminal (console output).
 
-**Example**
+#### Settings
+
+**Env variables**
 ```
+// Laravel via slack
 LOG_CHANNEL=slack
 LOG_SLACK_WEBHOOK_URL=http://127.0.0.1:23517/slack
+```
+
+**Laravel log config**
+```php
+// config/logging.php
+return [
+    // ...
+    
+    'default' => env('LOG_CHANNEL', 'stack'),
+        
+    'channels' => [
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => ['single', 'socket'],
+            'ignore_exceptions' => false,
+        ],
+        'socket' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => \Monolog\Handler\SocketHandler::class,
+            'formatter' => \Monolog\Formatter\JsonFormatter::class,
+            'handler_with' => [
+                'connectionString' => env('LOG_SOCKET_URL', '127.0.0.1:9913'),
+            ],
+        ],
+    ],
+];
+```
+
+** Monolog settings**
+
+Install monolog `composer require monolog/monolog`
+
+```php
+<?php
+
+use Monolog\Logger;
+use Monolog\Handler\SocketHandler;
+use Monolog\Formatter\JsonFormatter;
+
+// create a log channel
+$log = new Logger('buggregator');
+$handler = new SocketHandler('127.0.0.1:9913');
+$handler->setFormatter(new JsonFormatter());
+$log->pushHandler($handler);
+
+// Send records to the Buggregator
+$log->warning('Foo');
+$log->error('Bar');
 ```
 
 ### 5. Spatie [Ray debug tool](https://github.com/spatie/ray)
@@ -76,8 +140,11 @@ Application log, Show Http client requests, Mailable
 
 [Read more](https://spatie.be/docs/ray/v1/introduction) about `spatie/ray` package.
 
-**Example**
+#### Settings
+
+**Env variables**
 ```
+// Laravel
 RAY_HOST=127.0.0.1  # Ray server host
 RAY_PORT=23517      # Ray server port
 ```
