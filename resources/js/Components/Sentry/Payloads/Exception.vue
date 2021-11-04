@@ -8,7 +8,7 @@
                 {{ payload.value }}
             </div>
         </div>
-        <div class="border-b border-l border-r flex-col justify-center">
+        <div class="border-b border-l border-r flex-col justify-center" v-if="frames > 0">
             <File :file="file" v-for="(file, i) in stacktrace" :collapsed="i !== 0"/>
         </div>
     </div>
@@ -20,11 +20,15 @@ import File from "../UI/File";
 export default {
     components: {File},
     props: {
-        payload: Object
+        payload: Object,
+        frames: {
+            type: Number,
+            default: () => 0
+        }
     },
     computed: {
         stacktrace() {
-            return this.payload.stacktrace.frames.reverse()
+            return this.payload.stacktrace.frames.reverse().slice(0, this.frames)
         }
     }
 }
