@@ -1,34 +1,35 @@
 <template>
     <div>
-        <div class="p-3 py-2 bg-gray-100 border rounded-t">
-            <h3 class="text-gray-800 mb-1">
-                <code class="font-semibold">{{ payload.type }}</code>
+        <Link as="div" :href="route('sentry.show', event.uuid)" class="cursor-pointer pb-2">
+            <h3 class="text-blue-800 mb-1 font-semibold">
+                {{ event.payload.type }}
             </h3>
             <div class="text-gray-600 text-sm break-all">
-                {{ payload.value }}
+                {{ event.payload.value }}
             </div>
-        </div>
-        <div class="border-b border-l border-r flex-col justify-center" v-if="frames > 0">
+        </Link>
+        <div class="border flex-col justify-center" v-if="frames > 0">
             <File :file="file" v-for="(file, i) in stacktrace" :collapsed="i !== 0"/>
         </div>
     </div>
 </template>
 
 <script>
+import {Link} from '@inertiajs/inertia-vue3'
 import File from "../UI/File";
 
 export default {
-    components: {File},
+    components: {File, Link},
     props: {
-        payload: Object,
+        event: Object,
         frames: {
             type: Number,
-            default: () => 0
+            default: () => 5
         }
     },
     computed: {
         stacktrace() {
-            return this.payload.stacktrace.frames.reverse().slice(0, this.frames)
+            return this.event.stacktrace.slice(0, this.frames)
         }
     }
 }

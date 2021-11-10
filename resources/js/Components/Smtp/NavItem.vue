@@ -30,7 +30,7 @@ export default {
     },
     computed: {
         url() {
-            return `/mail/${this.event.uuid}`
+            return route('smtp.show', this.event.uuid)
         },
         date() {
             return this.event.date.format('HH:mm:ss')

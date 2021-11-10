@@ -1,7 +1,7 @@
 <template>
     <MainLayout title="SMTP">
         <div ref="header" class="border-b flex items-center gap-x-2 text-xs font-semibold px-4 py-2">
-            <Link class="text-gray-600" href="/mail">Mailbox</Link>
+            <Link class="text-gray-600" :href="route('smtp')">Mailbox</Link>
             <div class="h-1 w-1">
                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330"><path d="M251 154 101 4a15 15 0 1 0-22 22l140 139L79 304a15 15 0 0 0 22 22l150-150a15 15 0 0 0 0-22z"/></svg>
             </div>

@@ -1,6 +1,6 @@
 <template>
     <Event :event="event">
-        <Exception v-for="e in event.payloads" :payload="e" />
+        <Exception :event="event" />
         <Host :name="event.serverName" />
     </Event>
 </template>
@@ -14,6 +14,9 @@ export default {
     components: {Event, Exception, Host},
     props: {
         event: Object
+    },
+    mounted() {
+        console.log(this.event)
     }
 }
 </script>

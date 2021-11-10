@@ -1,7 +1,10 @@
 <template>
     <MainLayout title="SMTP">
-        <main class="divide-y divide-gray-300">
-            <ListItem v-for="event in events" class="p-5" :event="event" />
+        <main class="m-3">
+            <h1 class="text-2xl font-bold mb-3">Sentry issue</h1>
+            <div class="divide-y border-2">
+                <ListItem v-for="event in events" :event="event" />
+            </div>
         </main>
     </MainLayout>
 </template>

@@ -42,6 +42,7 @@ Route::get('/inspector/{uuid}', Inspector\ShowAction::class)->name('inspector.sh
 // Sentry
 Route::get('/sentry', Sentry\ListAction::class)->name('sentry');
 Route::get('/sentry/{uuid}', Sentry\ShowAction::class)->name('sentry.show');
+Route::get('/sentry/{uuid}/json', Sentry\ShowJsonAction::class)->name('sentry.show.json');
 Route::delete('/sentry/{uuid}', Sentry\DeleteAction::class)->name('sentry.delete');
 
 Route::post('api/{projectId}/store', Sentry\StoreEventAction::class);

@@ -1,6 +1,6 @@
 <template>
     <div class="text-xs cursor-pointer" @click="collapsed = !collapsed">
-        <div class="border-b bg-gray-50 p-1 px-3 flex space-x-2 justify-between items-start">
+        <div class="border-b bg-purple-50 py-2 px-3 flex space-x-2 justify-between items-start">
             <div class="text-gray-700 break-all font-semibold">
                 {{ file.filename }}
                 <span v-if="file.function" class="text-gray-400">in</span>
@@ -19,18 +19,18 @@
             </div>
         </div>
         <div class="bg-gray-800 p-2 overflow-x-scroll" v-if="!collapsed">
-            <div class="flex text-gray-100" v-for="(line, i) in file.pre_context">
-                <div class="w-12">{{ file.lineno - (file.pre_context.length - i) }}.</div>
-                <pre>{{ line }}</pre>
+            <div class="flex" v-for="(line, i) in file.pre_context">
+                <div class="w-12 text-gray-500">{{ file.lineno - (file.pre_context.length - i) }}.</div>
+                <pre class="text-gray-100">{{ line }}</pre>
             </div>
 
             <div class="flex bg-pink-800 text-white">
                 <div class="w-12">{{ file.lineno }}.</div>
                 <pre>{{ file.context_line }}</pre>
             </div>
-            <div class="flex text-gray-100" v-for="(line, i) in file.post_context">
-                <div class="w-12">{{ file.lineno + i + 1 }}.</div>
-                <pre>{{ line }}</pre>
+            <div class="flex" v-for="(line, i) in file.post_context">
+                <div class="w-12 text-gray-500">{{ file.lineno + i + 1 }}.</div>
+                <pre class="text-gray-100">{{ line }}</pre>
             </div>
         </div>
     </div>
