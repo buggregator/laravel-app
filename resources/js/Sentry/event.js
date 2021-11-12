@@ -56,7 +56,7 @@ export default class extends Event {
     }
 
     get breadcrumbs() {
-        return this.event.breadcrumbs.values[0] || {}
+        return this.event.breadcrumbs.values || []
     }
 
     get location() {

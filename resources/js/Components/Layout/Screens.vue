@@ -12,7 +12,6 @@
                 <div v-else class="w-4 h-4 cursor-pointer rounded-full border-2 border-blue-400" @click="switchScreen(screen)"></div>
             </template>
 
-
             <button class="w-4 h-4 flex text-xs font-bold items-center justify-center cursor-pointer rounded-full border-2 border-gray-300 text-gray-300"
                     @click="newScreen">
                 +

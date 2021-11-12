@@ -14,9 +14,6 @@ export default {
     components: {Event, Exception, Host},
     props: {
         event: Object
-    },
-    mounted() {
-        console.log(this.event)
     }
 }
 </script>

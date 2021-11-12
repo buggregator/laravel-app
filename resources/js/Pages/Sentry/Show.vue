@@ -12,58 +12,11 @@
                 <h1 class="text-2xl font-bold flex items-center">
                     {{ event.payload.type }} <a :href="route('sentry.show.json', event.id)" target="_blank" class="text-sm text-blue-800 ml-5">[JSON]</a>
                 </h1>
-                <div class="text-gray-700">
-                    {{ event.payload.value }}
-                    <span class="mx-2">|</span>
-                    <span>{{ date }}</span>
-                </div>
+                <p class="text-gray-700">{{ event.payload.value }}</p>
+                <p class="text-gray-500 text-sm mt-3">{{ date }}</p>
             </header>
-            <section class="py-5 px-4 md:px-6 lg:px-8 border-b">
-                <h3 class="text-gray-400 font-bold uppercase text-sm mb-5">tags</h3>
 
-                <div class="flex space-x-5 mb-5">
-                    <div v-if="event.runtime" class="border rounded px-4 pb-2 pt-1">
-                        <span class="text-gray-500 text-xs font-bold">runtime</span>
-                        <h4 class="font-bold">{{ event.runtime.name }}</h4>
-                        <p class="text-sm">Version: {{ event.runtime.version }}</p>
-                    </div>
-
-                    <div v-if="event.os" class="border rounded px-4 pb-2 pt-1">
-                        <span class="text-gray-500 text-xs font-bold">os</span>
-                        <h4 class="font-bold">{{ event.os.name }}</h4>
-                        <p class="text-sm">Version: {{ event.os.version }}</p>
-                    </div>
-
-                    <div v-if="event.sdk" class="border rounded px-4 pb-2 pt-1">
-                        <span class="text-gray-500 text-xs font-bold">sdk</span>
-                        <h4 class="font-bold">{{ event.sdk.name }}</h4>
-                        <p class="text-sm">Version: {{ event.sdk.version }}</p>
-                    </div>
-                </div>
-
-                <div class="flex space-x-3">
-                   <div class="flex border rounded text-xs items-center">
-                       <div class="px-3 py-1 border-r">env</div>
-                       <div class="px-3 py-1 bg-gray-100 font-semibold">{{ event.environment }}</div>
-                   </div>
-                    <div class="flex border rounded text-xs items-center">
-                        <div class="px-3 py-1 border-r">logger</div>
-                        <div class="px-3 py-1 bg-gray-100 font-semibold">{{ event.logger }}</div>
-                    </div>
-                    <div class="flex border rounded text-xs items-center">
-                        <div class="px-3 py-1 border-r">os</div>
-                        <div class="px-3 py-1 bg-gray-100 font-semibold">{{ event.os.name }} {{ event.os.version }}</div>
-                    </div>
-                    <div class="flex border rounded text-xs items-center">
-                        <div class="px-3 py-1 border-r">runtime</div>
-                        <div class="px-3 py-1 bg-gray-100 font-semibold">{{ event.runtime.name }} {{ event.runtime.version }}</div>
-                    </div>
-                    <div class="flex border rounded text-xs items-center">
-                        <div class="px-3 py-1 border-r">server name</div>
-                        <div class="px-3 py-1 bg-gray-100 font-semibold">{{ event.serverName }}</div>
-                    </div>
-                </div>
-            </section>
+            <Tags :event="event" />
 
             <section class="py-5 px-4 md:px-6 lg:px-8 border-b">
                 <h3 class="text-gray-400 font-bold uppercase text-sm mb-5">exception</h3>
@@ -74,28 +27,13 @@
                 <div class="text-gray-600 break-all mb-5">
                     {{ event.payload.value }}
                 </div>
-                <File :file="file" v-for="(file, i) in stacktrace" :collapsed="i !== 0"/>
+                <div class="border border-purple-200">
+                    <File :file="file" v-for="(file, i) in stacktrace" :collapsed="i !== 0"/>
+                </div>
             </section>
 
-            <section class="py-5 px-4 md:px-6 lg:px-8 border-b">
-                <h3 class="text-gray-400 font-bold uppercase text-sm mb-5">breadcrumbs</h3>
-
-
-            </section>
-
-            <section class="py-5 px-4 md:px-6 lg:px-8 border-b" v-if="event.request">
-                <h3 class="text-gray-400 font-bold uppercase text-sm mb-5">request</h3>
-
-                <h3 class="text-gray-900 mb-1 text-lg font-medium">
-                    <strong>{{ event.request.method }}</strong> {{ event.request.url }}
-                </h3>
-
-                <Table>
-                    <TableRow :title="title" v-for="(value, title) in event.request.headers">
-                        {{ value[0] || value}}
-                    </TableRow>
-                </Table>
-            </section>
+            <Breadcrumbs :event="event" />
+            <Request :event="event" />
         </main>
     </MainLayout>
 </template>
@@ -107,19 +45,13 @@ import {useStore} from "vuex";
 import EventFactory from "@/EventFactory";
 import {Link} from '@inertiajs/inertia-vue3'
 import File from "@/Components/Sentry/UI/File";
-import Table from "@/Components/UI/Table";
-import TableRow from "@/Components/UI/TableRow";
-
+import Tags from "@/Components/Sentry/Show/Tags";
+import Breadcrumbs from "@/Components/Sentry/Show/Breadcrumbs";
+import Request from "@/Components/Sentry/Show/Request";
 export default {
     components: {
-        MainLayout, Link, File, Table, TableRow
-    },
-    data() {
-        return {
-            tags: {
-
-            }
-        }
+        MainLayout, Link, File,
+        Tags, Breadcrumbs, Request,
     },
     setup() {
         const store = useStore();

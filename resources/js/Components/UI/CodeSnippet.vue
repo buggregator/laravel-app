@@ -45,11 +45,7 @@ export default {
             })
 
             copyText(text, undefined, (error, event) => {
-                if (error) {
-                    console.log(error)
-                } else {
-                    console.log(event)
-                }
+
             })
         }
     }

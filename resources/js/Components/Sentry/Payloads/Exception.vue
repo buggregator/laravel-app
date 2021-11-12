@@ -8,7 +8,7 @@
                 {{ event.payload.value }}
             </div>
         </Link>
-        <div class="border flex-col justify-center" v-if="frames > 0">
+        <div class="border border-purple-200 flex-col justify-center" v-if="frames > 0">
             <File :file="file" v-for="(file, i) in stacktrace" :collapsed="i !== 0"/>
         </div>
     </div>
