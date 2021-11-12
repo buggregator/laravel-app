@@ -31,8 +31,8 @@ Route::post('slack', Slack\StoreEventAction::class);
 // SMTP
 Route::get('/mail', Smtp\ListAction::class)->name('smtp');
 Route::get('/mail/{uuid}', Smtp\ShowAction::class)->name('smtp.show');
-Route::delete('/mail/{uuid}', Smtp\DeleteAction::class);
-Route::get('/mail/{uuid}/html', Smtp\ShowHtmlAction::class);
+Route::delete('/mail/{uuid}', Smtp\DeleteAction::class)->name('smtp.delete');
+Route::get('/mail/{uuid}/html', Smtp\ShowHtmlAction::class)->name('smtp.show.html');
 
 // Inspector
 Route::post('inspector', Inspector\StoreEventAction::class);
@@ -40,6 +40,11 @@ Route::get('/inspector', Inspector\ListAction::class)->name('inspector');
 Route::get('/inspector/{uuid}', Inspector\ShowAction::class)->name('inspector.show');
 
 // Sentry
+Route::get('/sentry', Sentry\ListAction::class)->name('sentry');
+Route::get('/sentry/{uuid}', Sentry\ShowAction::class)->name('sentry.show');
+Route::get('/sentry/{uuid}/json', Sentry\ShowJsonAction::class)->name('sentry.show.json');
+Route::delete('/sentry/{uuid}', Sentry\DeleteAction::class)->name('sentry.delete');
+
 Route::post('api/{projectId}/store', Sentry\StoreEventAction::class);
 Route::post('api/{projectId}/envelope', function (\Illuminate\Http\Request $request) {});
 

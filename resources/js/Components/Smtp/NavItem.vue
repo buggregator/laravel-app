@@ -9,11 +9,9 @@
             <h3 class="font-semibold" :class="{ 'font-bold': isActive }">{{ event.event.subject }}</h3>
             <div class="flex justify-between text-xs text-gray-500">
                 <span>
-                    to: {{ event.event.to[0].email }}
+                    <strong>To:</strong> {{ event.event.to[0].email }}
                 </span>
-                <span>
-                    {{ date }}
-                </span>
+                <span>{{ date }}</span>
             </div>
         </div>
 
@@ -30,10 +28,10 @@ export default {
     },
     computed: {
         url() {
-            return `/mail/${this.event.uuid}`
+            return route('smtp.show', this.event.uuid)
         },
         date() {
-            return this.event.date.format('HH:mm:ss')
+            return this.event.date.fromNow()
         },
         isActive() {
             return this.$page.url.startsWith(this.url)

@@ -1,6 +1,6 @@
 <template>
     <Event :event="event">
-        <Exception v-for="e in event.payloads" :payload="e" />
+        <Exception :event="event" />
         <Host :name="event.serverName" />
     </Event>
 </template>

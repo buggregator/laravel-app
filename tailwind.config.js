@@ -8,7 +8,7 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
-            borderWidth: ['hover'],
+            borderWidth: ['hover', 'first'],
             ringWidth: ['hover'],
         }
     },
