@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Cache;
+namespace Infrastructure\RoadRunner\Cache;
 
 use Illuminate\Cache\Lock;
 use Spiral\RoadRunner\KeyValue\StorageInterface;

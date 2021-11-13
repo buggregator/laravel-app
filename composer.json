@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": "^8.0",
+        "cycle/orm": "2.0.x-dev",
         "facade/ignition": "^2.5",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -45,6 +46,7 @@
         "psr-4": {
             "App\\": "app/Application",
             "Interfaces\\": "app/Interfaces",
+            "Infrastructure\\": "app/Infrastructure",
             "Modules\\": "app/Modules",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"

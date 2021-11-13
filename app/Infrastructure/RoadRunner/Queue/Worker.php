@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Queue;
+namespace Infrastructure\RoadRunner\Queue;
 
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Contracts\Debug\ExceptionHandler;

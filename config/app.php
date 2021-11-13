@@ -166,6 +166,14 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+         * Infrastructure Service Providers...
+         */
+        Infrastructure\RoadRunner\TCP\TCPServiceProvider::class,
+        Infrastructure\RoadRunner\Session\SessionServiceProvider::class,
+        Infrastructure\RoadRunner\Queue\QueueServiceProvider::class,
+        Infrastructure\RoadRunner\Cache\CacheServiceProvider::class,
+
+        /*
          * Modules Service Providers...
          */
         Modules\Monolog\ServiceProvider::class,

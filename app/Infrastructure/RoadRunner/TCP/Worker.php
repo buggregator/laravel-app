@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\TCP;
+namespace Infrastructure\RoadRunner\TCP;
 
-use App\Events\Tcp\AfterLoopIterationEvent;
-use App\Events\Tcp\BeforeLoopIterationEvent;
+use Infrastructure\RoadRunner\TCP\Events\AfterLoopIterationEvent;
+use Infrastructure\RoadRunner\TCP\Events\BeforeLoopIterationEvent;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -61,7 +61,7 @@ class Worker implements WorkerInterface
             }
 
             /** @var Kernel $tcpKernel */
-            $tcpKernel = $sandbox[Kernel::class];
+            $tcpKernel = $sandbox[\App\Contracts\TCP\Kernel::class];
             $this->setApplicationInstance($sandbox);
 
             if ($this->isDebugModeEnabled($config)) {
@@ -88,7 +88,7 @@ class Worker implements WorkerInterface
                 );
 
                 if ($this->isDebugModeEnabled($config)) {
-                    render((string)view('console.tcp.response', [
+                    render((string) view('console.tcp.response', [
                         'request' => $request,
                         'response' => $response,
                         'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),

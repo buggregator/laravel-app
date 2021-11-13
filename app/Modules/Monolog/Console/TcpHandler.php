@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace Modules\Monolog\Console;
 
+use App\Contracts\TCP\Handler;
 use App\Events\EventReceived;
 use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
-use App\TCP\Handler;
-use App\TCP\RespondMessage;
-use App\TCP\Response;
+use App\Contracts\TCP\Response;
 use Illuminate\Contracts\Events\Dispatcher;
 use Spiral\RoadRunner\Tcp\Request;
 use Spiral\RoadRunner\Tcp\TcpWorkerInterface;

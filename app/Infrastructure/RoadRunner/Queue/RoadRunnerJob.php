@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Queue;
+namespace Infrastructure\RoadRunner\Queue;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Queue\Job as JobContract;

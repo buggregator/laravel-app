@@ -1,13 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace App\TCP;
+namespace Infrastructure\RoadRunner\TCP;
 
+use App\Contracts\TCP\Response;
 use Spiral\RoadRunner\Tcp\Request;
 use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Kernel implements Handler
+class Kernel implements \App\Contracts\TCP\Kernel
 {
     /**
      * @var array<non-empty-string, non-empty-string>

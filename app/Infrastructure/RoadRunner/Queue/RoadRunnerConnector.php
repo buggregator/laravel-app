@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Queue;
+namespace Infrastructure\RoadRunner\Queue;
 
 use Illuminate\Contracts\Queue\Queue;
 use Illuminate\Queue\Connectors\ConnectorInterface;

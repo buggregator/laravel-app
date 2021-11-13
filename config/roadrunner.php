@@ -57,7 +57,7 @@ return [
             Listeners\ResetZiggyListener::class,            // for <https://github.com/tighten/ziggy>
         ],
 
-        \App\Events\Tcp\BeforeLoopIterationEvent::class => [
+        \App\Contracts\TCP\Events\BeforeLoopIterationEvent::class => [
             ...Defaults::beforeLoopIteration(),
         ],
 
@@ -76,7 +76,7 @@ return [
             Listeners\RunGarbageCollectorListener::class, // keep the memory usage low
         ],
 
-        \App\Events\Tcp\AfterLoopIterationEvent::class => [
+        \App\Contracts\TCP\Events\AfterLoopIterationEvent::class => [
             ...Defaults::afterLoopIteration(),
             Listeners\RunGarbageCollectorListener::class, // keep the memory usage low
         ],
@@ -143,8 +143,8 @@ return [
 
     'workers' => [
         Mode::MODE_HTTP => \Spiral\RoadRunnerLaravel\Worker::class,
-        Mode::MODE_JOBS => \App\Queue\Worker::class,
-        'tcp' => \App\TCP\Worker::class,
+        Mode::MODE_JOBS => \Infrastructure\RoadRunner\Queue\Worker::class,
+        'tcp' => \Infrastructure\RoadRunner\TCP\Worker::class,
         // Mode::MODE_TEMPORAL => ...,
     ],
 ];

@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Modules\Smtp\Console;
 
+use App\Contracts\TCP\Handler;
 use App\Events\EventReceived;
 use App\TCP\CloseConnection;
-use App\TCP\Handler;
 use App\TCP\RespondMessage;
-use App\TCP\Response;
+use App\Contracts\TCP\Response;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
 use Modules\Smtp\Mail\Parser;

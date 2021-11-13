@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\VarDumper;
 
-use App\TCP\Kernel;
+use App\Contracts\TCP\Kernel;
 use Modules\VarDumper\Console\TcpHandler;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider

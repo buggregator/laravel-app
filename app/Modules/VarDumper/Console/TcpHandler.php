@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Modules\VarDumper\Console;
 
+use App\Contracts\TCP\Handler;
 use App\Events\EventReceived;
 use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
-use App\TCP\Handler;
-use App\TCP\Response;
+use App\Contracts\TCP\Response;
 use App\Websocket\BrowserOutput;
 use Illuminate\Contracts\Events\Dispatcher;
 use Spiral\RoadRunner\Tcp\Request;

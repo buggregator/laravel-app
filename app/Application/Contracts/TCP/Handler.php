@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\TCP;
+namespace App\Contracts\TCP;
 
 use Spiral\RoadRunner\Tcp\Request;
 use Symfony\Component\Console\Output\OutputInterface;

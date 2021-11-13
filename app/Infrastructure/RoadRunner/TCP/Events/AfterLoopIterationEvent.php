@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Events\Tcp;
+namespace Infrastructure\RoadRunner\TCP\Events;
 
 use Illuminate\Contracts\Foundation\Application;
 use Spiral\RoadRunnerLaravel\Events\Contracts\WithApplication;

@@ -5,7 +5,6 @@ namespace App\Providers;
 
 use App\Events\EventReceived;
 use App\Events\Websocket\Joined;
-use App\Listeners\Event\SendEventsAfterChannelJoin;
 use App\Listeners\Event\SendToConsole;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
