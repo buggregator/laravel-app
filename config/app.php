@@ -172,6 +172,9 @@ return [
         Infrastructure\RoadRunner\Session\SessionServiceProvider::class,
         Infrastructure\RoadRunner\Queue\QueueServiceProvider::class,
         Infrastructure\RoadRunner\Cache\CacheServiceProvider::class,
+        Infrastructure\CycleOrm\DatabaseServiceProvider::class,
+        Infrastructure\CycleOrm\SchemaServiceProvider::class,
+        Infrastructure\CycleOrm\CycleOrmServiceProvider::class,
 
         /*
          * Modules Service Providers...

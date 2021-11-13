@@ -12,7 +12,10 @@
     ],
     "require": {
         "php": "^8.0",
+        "cycle/annotated": "2.0.x-dev",
         "cycle/orm": "2.0.x-dev",
+        "cycle/schema-migrations-generator": "dev-master",
+        "cycle/schema-renderer": "^1.0",
         "facade/ignition": "^2.5",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",

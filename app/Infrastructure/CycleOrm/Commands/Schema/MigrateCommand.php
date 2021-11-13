@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+namespace Infrastructure\CycleOrm\Commands\Schema;
+
+use Cycle\Migrations\Migrator;
+use Illuminate\Console\Command;
+
+class MigrateCommand extends Command
+{
+    protected $signature = 'cycle:schema:migrate';
+    protected $description = 'Run cycle orm migrations';
+
+    public function handle(Migrator $migrator)
+    {
+        if (!$migrator->isConfigured()) {
+            $migrator->configure();
+        }
+
+        while (($migration = $migrator->run()) !== null) {
+            $this->info('Migrate ' . $migration->getState()->getName());
+        }
+    }
+}
