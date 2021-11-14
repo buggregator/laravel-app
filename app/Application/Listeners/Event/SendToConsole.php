@@ -10,7 +10,7 @@ class SendToConsole
 {
     public function handle(EventReceived $event)
     {
-        if ($event->sendToConsole) {
+        if ($event->sendToConsole && app()->has(Handler::class)) {
             app(Handler::class)->handle($event->toArray());
         }
     }

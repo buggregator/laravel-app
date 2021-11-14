@@ -172,28 +172,31 @@ return [
         Infrastructure\RoadRunner\Session\SessionServiceProvider::class,
         Infrastructure\RoadRunner\Queue\QueueServiceProvider::class,
         Infrastructure\RoadRunner\Cache\CacheServiceProvider::class,
+        Infrastructure\RoadRunner\Broadcast\BroadcastServiceProvider::class,
         Infrastructure\CycleOrm\DatabaseServiceProvider::class,
         Infrastructure\CycleOrm\SchemaServiceProvider::class,
         Infrastructure\CycleOrm\CycleOrmServiceProvider::class,
+        Infrastructure\Bus\BusServiceProvider::class,
+        Infrastructure\EventSauce\EventSauceServiceProvider::class,
 
         /*
          * Modules Service Providers...
          */
+        Modules\Events\ServiceProvider::class,
         Modules\Monolog\ServiceProvider::class,
         Modules\VarDumper\ServiceProvider::class,
         Modules\RemoteServers\ServiceProvider::class,
         Modules\Smtp\ServiceProvider::class,
         Modules\Ray\ServiceProvider::class,
         Modules\Sentry\ServiceProvider::class,
-        Modules\Events\ServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        Interfaces\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\DomainServiceProvider::class,
         Interfaces\Providers\RouteServiceProvider::class,
         Interfaces\Providers\FortifyServiceProvider::class,
         Interfaces\Providers\JetstreamServiceProvider::class,

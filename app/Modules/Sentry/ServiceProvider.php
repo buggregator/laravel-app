@@ -5,7 +5,7 @@ namespace Modules\Sentry;
 
 use Modules\Sentry\Contracts\EventHandler as EventHandlerContract;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+final class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register()
     {

@@ -18,7 +18,7 @@ final class DatabaseServiceProvider extends ServiceProvider
                 new DatabaseConfig(config('cycle.database'))
             );
 
-            $manager->setLogger($app[LoggerInterface::class]);
+            $manager->setLogger($app['log']->driver(config('cycle.database.logger')));
 
             return $manager;
         });

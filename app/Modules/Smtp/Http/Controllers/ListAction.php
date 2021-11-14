@@ -12,7 +12,7 @@ class ListAction extends Controller
     public function __invoke(EventsRepository $events)
     {
         return Inertia::render('Smtp/Index', [
-            'events' => $events->all('smtp'),
+            'events' => $events->findAll('smtp'),
         ]);
     }
 }

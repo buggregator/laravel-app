@@ -1,7 +1,9 @@
 <?php
 
+use App\Domain\Entity\ExtendedTypecast;
 use Cycle\Database;
 use Cycle\ORM\Mapper\Mapper;
+use Cycle\ORM\Parser\Typecast;
 use Cycle\ORM\SchemaInterface as Schema;
 use Cycle\ORM\Select\Source;
 
@@ -11,7 +13,7 @@ return [
 
         'cache' => [
             'storage' => env('DB_SCHEMA_CACHE_DRIVER', 'file'),
-            'enabled' => (bool) env('DB_SCHEMA_CACHE', false),
+            'enabled' => (bool)env('DB_SCHEMA_CACHE', false),
         ],
 
         /*
@@ -34,19 +36,25 @@ return [
             Schema::REPOSITORY => \Infrastructure\CycleOrm\Repository::class,
             Schema::SOURCE => Source::class,
             Schema::SCOPE => null,
-            Schema::TYPECAST_HANDLER => null,
+            Schema::TYPECAST_HANDLER => [
+                Typecast::class,
+                ExtendedTypecast::class,
+            ],
         ],
 
         'tokenizer' => [
             'directories' => [
                 base_path('app/Modules'),
                 base_path('app/Application'),
+                base_path('app/Infrastructure'),
             ],
             'exclude' => ['vendor', 'tests']
         ]
     ],
 
     'database' => [
+
+        'logger' => env('DB_LOGGER', 'stack'),
 
         /*
         |--------------------------------------------------------------------------

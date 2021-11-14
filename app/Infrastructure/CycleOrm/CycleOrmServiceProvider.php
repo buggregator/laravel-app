@@ -21,6 +21,8 @@ final class CycleOrmServiceProvider extends ServiceProvider
         $this->initContainer();
         $this->initFactory();
         $this->initOrm();
+
+
     }
 
     private function initContainer(): void
@@ -53,8 +55,8 @@ final class CycleOrmServiceProvider extends ServiceProvider
                 $app[SchemaInterface::class]
             );
 
-            $app[SpiralContainer::class]
-                ->bind(TransactionInterface::class, new Transaction($orm));
+            $app[SpiralContainer::class]->bind(TransactionInterface::class, $transaction = new Transaction($orm));
+            $app->instance(TransactionInterface::class, $transaction);
 
             return $orm;
         });

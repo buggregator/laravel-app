@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Modules\Monolog\Console;
 
+use App\Commands\HandleReceivedEvent;
+use App\Contracts\Command\CommandBus;
 use App\Contracts\TCP\Handler;
-use App\Events\EventReceived;
 use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
 use App\Contracts\TCP\Response;
-use Illuminate\Contracts\Events\Dispatcher;
 use Spiral\RoadRunner\Tcp\Request;
 use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class TcpHandler implements Handler
 {
     public function __construct(
-        private Dispatcher                        $events,
+        private CommandBus                        $commands,
         private \Interfaces\Console\StreamHandler $streamHandler
     )
     {
@@ -38,8 +38,11 @@ class TcpHandler implements Handler
                 throw new \RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
             }
 
-            $this->events->dispatch($event = new EventReceived('monolog', $payload));
-            $this->streamHandler->handle($event->toArray());
+            $this->commands->dispatch(
+                $command = new HandleReceivedEvent('monolog', $payload)
+            );
+
+            $this->streamHandler->handle($command->toArray());
         }
 
         return new CloseConnection();

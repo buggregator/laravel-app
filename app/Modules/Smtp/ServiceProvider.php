@@ -6,7 +6,7 @@ namespace Modules\Smtp;
 use App\Contracts\TCP\Kernel;
 use Modules\Smtp\Console\TcpHandler;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+final class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function boot(): void
     {

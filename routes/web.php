@@ -2,7 +2,7 @@
 
 use Interfaces\Websocket\Controllers\ConnectAction;
 use Interfaces\Websocket\Middleware\ChannelJoined;
-use Modules\Events\Http\Controllers as Events;
+use Modules\Events\Interfaces\Http\Controllers as Events;
 use Modules\Ray\Http\Controllers as Ray;
 use Modules\Sentry\Http\Controllers as Sentry;
 use Modules\Inspector\Http\Controllers as Inspector;
@@ -19,7 +19,7 @@ Route::delete('/event/{uuid}', Events\DeleteEventAction::class);
 Route::get('ws', ConnectAction::class)->middleware(ChannelJoined::class);
 
 // Ray
-Route::post('/', Ray\StoreEventAction::class);
+Route::post('/', Ray\StoreEventAction::class)->name('ray.event.store');
 Route::get('/_availability_check', Ray\CheckAvailabilityAction::class);
 Route::get('/locks/{hash}', Ray\Locks\CheckAction::class);
 Route::delete('/locks/{hash}', Ray\Locks\DeleteAction::class);
@@ -45,7 +45,7 @@ Route::get('/sentry/{uuid}', Sentry\ShowAction::class)->name('sentry.show');
 Route::get('/sentry/{uuid}/json', Sentry\ShowJsonAction::class)->name('sentry.show.json');
 Route::delete('/sentry/{uuid}', Sentry\DeleteAction::class)->name('sentry.delete');
 
-Route::post('api/{projectId}/store', Sentry\StoreEventAction::class);
+Route::post('api/{projectId}/store', Sentry\StoreEventAction::class)->name('sentry.event.store');
 Route::post('api/{projectId}/envelope', function (\Illuminate\Http\Request $request) {});
 
 // Terminal

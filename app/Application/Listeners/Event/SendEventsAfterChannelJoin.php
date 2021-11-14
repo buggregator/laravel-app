@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Listeners\Event;
 
-use App\Contracts\EventsRepository;
 use App\Events\EventReceived;
 use App\Events\Websocket\Joined;
 use Illuminate\Contracts\Broadcasting\Broadcaster;
@@ -11,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\Broadcaster;
 class SendEventsAfterChannelJoin
 {
     public function __construct(
-        private EventsRepository $events,
+        private EventRepository $events,
         private Broadcaster      $broadcaster,
     )
     {
@@ -23,7 +22,7 @@ class SendEventsAfterChannelJoin
             return;
         }
 
-        foreach ($this->events->all() as $e) {
+        foreach ($this->events->findAll() as $e) {
             $this->broadcaster->broadcast([$joined->channel], EventReceived::class, $e);
         }
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Interfaces\Console;
 
 use App\Attributes\Console\Stream;
+use App\Attributes\Locator;
 use App\Websocket\BrowserOutput;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Foundation\Application;
@@ -20,56 +21,30 @@ class StreamHandler implements Handler
 {
     private array $handlers = [];
 
-    public function __construct(private OutputInterface $output, private Application $app)
+    public function __construct(
+        private OutputInterface $output,
+        private Application     $app,
+        private Locator         $attributesLocator
+    )
     {
-        $files = (new Finder())->files()->name('*.php')->in($app->basePath('app'));
-        collect($files)->each(fn(SplFileInfo $file) => $this->registerStreamHandler($file));
+        foreach ($attributesLocator->findClassAttributes('app', Stream::class) as $class => $attributes) {
+            $this->processAttributes($class, $attributes);
+        }
 
         Termwind::renderUsing(new BrowserOutput($output));
     }
 
-    private function registerStreamHandler(SplFileInfo $file)
+    private function processAttributes(\ReflectionClass $class, array $attributes): void
     {
-        $fullyQualifiedClassName = $this->fullQualifiedClassNameFromFile($file);
-
-        $this->processAttributes($fullyQualifiedClassName);
-    }
-
-    private function processAttributes(string $className): void
-    {
-        if (!class_exists($className)) {
-            return;
-        }
-
-        $class = new ReflectionClass($className);
-
-        $attributes = $class->getAttributes(Stream::class);
-
-        if (!count($attributes)) {
-            return;
-        }
-
         /** @var Stream $stream */
         $stream = $attributes[0]->newInstance();
 
-        $this->handlers[$stream->getName()] = $this->app->make($className, [
+        $this->handlers[$stream->getName()] = $this->app->make($class->getName(), [
             'output' => new OutputStyle(
                 new ArgvInput(),
                 $this->output
             )
         ]);
-    }
-
-    private function fullQualifiedClassNameFromFile(SplFileInfo $file): string
-    {
-        $path = Str::replaceFirst($this->app->basePath(), '', $file->getRealPath());
-        $class = trim($path, DIRECTORY_SEPARATOR);
-
-        return str_replace(
-            [DIRECTORY_SEPARATOR, 'App\\Application\\', 'App\\'],
-            ['\\', 'App\\', ''],
-            ucfirst(Str::replaceLast('.php', '', $class))
-        );
     }
 
     public function handle(array $payload): void

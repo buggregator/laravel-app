@@ -12,7 +12,7 @@ class ListAction extends Controller
     public function __invoke(EventsRepository $events)
     {
         return Inertia::render('Inspector/Index', [
-            'events' => $events->all('inspector'),
+            'events' => $events->findAll('inspector'),
         ]);
     }
 }

@@ -12,13 +12,13 @@ class ShowAction extends Controller
 {
     public function __invoke(EventsRepository $events, UuidInterface $uuid)
     {
-        $event = $events->find($uuid);
+        $event = $events->findByPK($uuid);
         if (!$event) {
             abort(404);
         }
 
         return Inertia::render('Inspector/Show', [
-            'events' => $events->all('inspector'),
+            'events' => $events->findAll('inspector'),
             'event' => $event
         ]);
     }

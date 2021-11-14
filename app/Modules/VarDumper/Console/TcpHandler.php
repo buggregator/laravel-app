@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Modules\VarDumper\Console;
 
+use App\Commands\HandleReceivedEvent;
 use App\Contracts\TCP\Handler;
-use App\Events\EventReceived;
+use App\Contracts\Command\CommandBus;
 use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
 use App\Contracts\TCP\Response;
 use App\Websocket\BrowserOutput;
-use Illuminate\Contracts\Events\Dispatcher;
 use Spiral\RoadRunner\Tcp\Request;
 use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -24,7 +24,7 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 class TcpHandler implements Handler
 {
     public function __construct(
-        private Dispatcher $events, private StreamHandlerConfig $config)
+        private CommandBus $commands, private StreamHandlerConfig $config)
     {
     }
 
@@ -73,19 +73,21 @@ class TcpHandler implements Handler
 
     private function fireEvent(array $payload): void
     {
-        $this->events->dispatch(new EventReceived('var-dump', [
-            'payload' => [
-                'type' => $payload[0]->getType(),
-                'value' => $this->convertToPrimitive($payload[0])
-            ],
-            'context' => $payload[1]
-        ]));
+        $this->commands->dispatch(
+            new HandleReceivedEvent('var-dump', [
+                'payload' => [
+                    'type' => $payload[0]->getType(),
+                    'value' => $this->convertToPrimitive($payload[0])
+                ],
+                'context' => $payload[1]
+            ])
+        );
     }
 
     private function convertToPrimitive(Data $data): string|null
     {
         if (in_array($data->getType(), ['string', 'boolean'])) {
-            return (string) $data->getValue();
+            return (string)$data->getValue();
         }
 
         $dumper = new HtmlDumper();

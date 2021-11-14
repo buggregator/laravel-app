@@ -3,19 +3,18 @@ declare(strict_types=1);
 
 namespace Modules\Sentry\Http\Controllers;
 
-use App\Events\EventReceived;
-use Illuminate\Contracts\Events\Dispatcher;
+use App\Commands\HandleReceivedEvent;
+use App\Contracts\Command\CommandBus;
 use Interfaces\Http\Controllers\Controller;
 use Modules\Sentry\Contracts\EventHandler;
 use Illuminate\Http\Request;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class StoreEventAction extends Controller
 {
     public function __invoke(
         Request       $request,
-        Dispatcher    $events,
+        CommandBus    $commands,
         EventHandler  $handler,
         ConsoleOutput $output
     ): void
@@ -26,8 +25,8 @@ class StoreEventAction extends Controller
 
         $event = $handler->handle(json_decode($stream->getContents(), true));
 
-        $events->dispatch(
-            new EventReceived('sentry', $event, true)
+        $commands->dispatch(
+            new HandleReceivedEvent('sentry', $event, true)
         );
     }
 }

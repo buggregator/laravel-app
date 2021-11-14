@@ -5,7 +5,7 @@ namespace Modules\Ray;
 
 use Modules\Ray\Contracts\EventHandler as EventHandlerContract;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+final class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register()
     {

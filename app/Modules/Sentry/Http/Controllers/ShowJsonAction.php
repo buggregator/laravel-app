@@ -12,7 +12,7 @@ class ShowJsonAction extends Controller
 {
     public function __invoke(EventsRepository $events, UuidInterface $uuid)
     {
-        $event = $events->find($uuid);
+        $event = $events->findByPK($uuid);
         if (!$event) {
             abort(404);
         }

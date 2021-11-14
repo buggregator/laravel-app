@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Modules\Smtp\Console;
 
+use App\Commands\HandleReceivedEvent;
 use App\Contracts\TCP\Handler;
-use App\Events\EventReceived;
 use App\TCP\CloseConnection;
 use App\TCP\RespondMessage;
 use App\Contracts\TCP\Response;
 use Illuminate\Contracts\Cache\Repository;
-use Illuminate\Contracts\Events\Dispatcher;
+use App\Contracts\Command\CommandBus;
 use Modules\Smtp\Mail\Parser;
 use Spiral\RoadRunner\Tcp\Request;
 use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
@@ -23,7 +23,7 @@ class TcpHandler implements Handler
     const START_MAIL_INPUT = 354;
 
     public function __construct(
-        private Dispatcher                        $events,
+        private CommandBus                        $commands,
         private \Interfaces\Console\StreamHandler $streamHandler,
         private Repository                        $cache
     )
@@ -84,8 +84,10 @@ class TcpHandler implements Handler
         $message = (new Parser)->parse($message);
 
         $data = $message->jsonSerialize();
-        $this->events->dispatch($event = new EventReceived('smtp', $data));
-        $this->streamHandler->handle($event->toArray());
+        $this->commands->dispatch(
+            $command = new HandleReceivedEvent('smtp', $data)
+        );
+        $this->streamHandler->handle($command->toArray());
     }
 
     private function endOfContentDetected(string $data): bool

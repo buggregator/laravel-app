@@ -12,14 +12,14 @@ class ShowAction extends Controller
 {
     public function __invoke(EventsRepository $events, UuidInterface $uuid)
     {
-        $event = $events->find($uuid);
+        $event = $events->findByPK($uuid);
         if (!$event) {
             abort(404);
         }
 
         return Inertia::render('Smtp/Show', [
             'event' => $event,
-            'events' => $events->all('smtp'),
+            'events' => $events->findAll('smtp'),
         ]);
     }
 }
