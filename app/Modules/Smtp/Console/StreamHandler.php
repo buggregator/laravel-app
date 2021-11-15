@@ -28,7 +28,7 @@ class StreamHandler implements Handler
         }
 
         $attachments = [];
-        foreach ($payload['data']['attachments'] ?? [] as $i => $attachment) {
+        foreach ($payload['data']['attachments'] ?? [] as $attachment) {
             $attachments[] = $attachment['name'];
         }
 

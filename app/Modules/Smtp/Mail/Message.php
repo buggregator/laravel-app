@@ -36,16 +36,6 @@ class Message implements \JsonSerializable
     }
 
     /**
-     * @return string[]
-     */
-    private function getAttachmentNames(): array
-    {
-        return array_map(function (Attachment $attachment) {
-            return $attachment->getFilename();
-        }, $this->attachments);
-    }
-
-    /**
      * BCCs are recipients passed as RCPTs but not
      * in the body of the mail.
      * @return string[]

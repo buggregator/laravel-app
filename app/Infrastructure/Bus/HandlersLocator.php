@@ -26,7 +26,7 @@ final class HandlersLocator implements HandlersLocatorInterface
     )
     {
         foreach ($attributesLocator->findClassMethodsAttributes('app', CommandHandler::class) as $class => $attributes) {
-            $this->processCommandHandlerAttributes($class, $attributes);
+            $this->processCommandHandlerAttributes($class);
         }
 
         foreach ($attributesLocator->findClassMethodsAttributes('app', QueryHandler::class) as $class => $attributes) {
@@ -102,7 +102,7 @@ final class HandlersLocator implements HandlersLocatorInterface
     /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    private function processCommandHandlerAttributes(\ReflectionMethod $method, array $attributes): void
+    private function processCommandHandlerAttributes(\ReflectionMethod $method): void
     {
         foreach ($method->getParameters() as $parameter) {
             if (is_a($parameter->getType()->getName(), Command::class, true)) {

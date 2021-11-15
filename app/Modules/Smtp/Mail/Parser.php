@@ -11,11 +11,6 @@ use ZBateson\MailMimeParser\Message\MessagePart;
 
 class Parser
 {
-    public function __construct()
-    {
-
-    }
-
     public function parse(string $body, array $allRecipients = []): Message
     {
         $message = ParseMessage::from($body, true);
