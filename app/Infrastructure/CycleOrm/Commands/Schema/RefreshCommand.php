@@ -6,7 +6,7 @@ namespace Infrastructure\CycleOrm\Commands\Schema;
 use Illuminate\Console\Command;
 use Infrastructure\CycleOrm\SchemaManager;
 
-class RefreshCommand extends Command
+final class RefreshCommand extends Command
 {
     protected $signature = 'cycle:schema:refresh';
     protected $description = 'Refresh database schema';

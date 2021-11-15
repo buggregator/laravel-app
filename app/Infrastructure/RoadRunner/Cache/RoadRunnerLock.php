@@ -6,7 +6,7 @@ namespace Infrastructure\RoadRunner\Cache;
 use Illuminate\Cache\Lock;
 use Spiral\RoadRunner\KeyValue\StorageInterface;
 
-class RoadRunnerLock extends Lock
+final class RoadRunnerLock extends Lock
 {
     public function __construct(private StorageInterface $storage, string $name, int $seconds, string|null $owner = null)
     {

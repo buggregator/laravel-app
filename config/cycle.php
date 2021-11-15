@@ -54,7 +54,7 @@ return [
 
     'database' => [
 
-        'logger' => env('DB_LOGGER', 'stack'),
+        'logger' => env('DB_LOGGER', 'null'),
 
         /*
         |--------------------------------------------------------------------------

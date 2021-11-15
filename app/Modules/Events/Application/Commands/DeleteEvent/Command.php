@@ -7,9 +7,7 @@ use App\Domain\ValueObjects\Uuid;
 
 class Command implements \App\Contracts\Command\Command
 {
-    /**
-     * TODO: should be read only
-     */
+    // TODO: use readonly property
     public function __construct(
         public Uuid $uuid
     )

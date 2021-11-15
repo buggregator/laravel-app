@@ -21,7 +21,9 @@ class Repository extends BaseRepository
 
     public function findAll(array $scope = [], array $orderBy = []): Collection
     {
-        return $this->newCollection($this->select()->where($scope)->orderBy($orderBy)->fetchAll());
+        return $this->newCollection(
+            $this->select()->where($scope)->orderBy($orderBy)->fetchAll()
+        );
     }
 
     private function newCollection(array $items): Collection

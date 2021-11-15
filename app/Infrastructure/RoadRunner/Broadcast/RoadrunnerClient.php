@@ -7,7 +7,7 @@ use App\Contracts\WebsocketClient;
 use Spiral\Goridge\RPC\RPC;
 use Spiral\RoadRunner\Broadcast\Broadcast;
 
-class RoadrunnerClient implements WebsocketClient
+final class RoadrunnerClient implements WebsocketClient
 {
     public function __construct(private $host)
     {

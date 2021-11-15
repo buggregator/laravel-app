@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Modules\Events\Application\Commands\StoreEvent;
 
+use App\Domain\ValueObjects\Uuid;
+use Cycle\ORM\TransactionInterface;
 use Modules\Events\Application\Commands\StoreEvent\Command;
 use Modules\Events\Application\Commands\StoreEvent\Handler;
 use Modules\Events\Domain\Event;
-use Modules\Events\Domain\EventRepository;
-use Ramsey\Uuid\Uuid;
 use Tests\DatabaseTestCase;
 
 class HandlerTest extends DatabaseTestCase
@@ -16,21 +16,23 @@ class HandlerTest extends DatabaseTestCase
     {
         $command = new Command(
             type: 'test',
-            uuid: $uuid = Uuid::uuid4(),
+            uuid: $uuid = Uuid::generate(),
             date: $date = new \DateTimeImmutable(),
             payload: ['foo' => 'bar']
         );
 
-        $repository = \Mockery::mock(EventRepository::class);
-        $repository->shouldReceive('store')->once()->withArgs(
+        $transaction = \Mockery::mock(TransactionInterface::class);
+        $transaction->shouldReceive('persist')->once()->withArgs(
             fn(Event $event) =>
             $event->getUuid()->equals($uuid)
-            && $event->getEvent() === 'test'
+            && $event->getType() === 'test'
             && $event->getDate() === $date
             && (string) $event->getPayload() === '{"foo":"bar"}'
         );
 
-        $handler = new Handler($repository);
+        $transaction->shouldReceive('run')->once();
+
+        $handler = new Handler($transaction);
         $handler->handle($command);
     }
 }

@@ -30,7 +30,7 @@ final class HandlersLocator implements HandlersLocatorInterface
         }
 
         foreach ($attributesLocator->findClassMethodsAttributes('app', QueryHandler::class) as $class => $attributes) {
-            $this->processQueryHandlerAttributes($class, $attributes);
+            $this->processQueryHandlerAttributes($class);
         }
     }
 
@@ -89,7 +89,6 @@ final class HandlersLocator implements HandlersLocatorInterface
 
     /**
      * @param array{0: class-string, 1: non-empty-string} $handler
-     * @return HandlerDescriptor
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     private function buildHandlerDescriptor(array $handler): HandlerDescriptor
@@ -101,8 +100,6 @@ final class HandlersLocator implements HandlersLocatorInterface
     }
 
     /**
-     * @param \ReflectionMethod $method
-     * @param \ReflectionAttribute[] $attributes
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     private function processCommandHandlerAttributes(\ReflectionMethod $method, array $attributes): void
@@ -118,11 +115,9 @@ final class HandlersLocator implements HandlersLocatorInterface
     }
 
     /**
-     * @param \ReflectionMethod $method
-     * @param \ReflectionAttribute[] $attributes
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    private function processQueryHandlerAttributes(\ReflectionMethod $method, array $attributes): void
+    private function processQueryHandlerAttributes(\ReflectionMethod $method): void
     {
         foreach ($method->getParameters() as $parameter) {
             if (is_a($parameter->getType()->getName(), Query::class, true)) {

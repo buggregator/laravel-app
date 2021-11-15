@@ -6,7 +6,7 @@ namespace Tests\Feature\Http;
 use Modules\Events\Domain\Event;
 use Tests\DatabaseTestCase;
 
-class StoreRayEvent extends DatabaseTestCase
+class RayEventsTest extends DatabaseTestCase
 {
     public function testEventShouldBeStored()
     {
@@ -24,7 +24,7 @@ class StoreRayEvent extends DatabaseTestCase
         /** @var \Modules\Events\Domain\Event $event */
         $event = $this->getRepositoryFor(Event::class)->findAll()->first();
 
-        $this->assertSame('ray', $event->getEvent());
+        $this->assertSame('ray', $event->getType());
         $this->assertSame($payload, $event->getPayload()->toArray());
     }
 }

@@ -6,7 +6,7 @@ namespace Infrastructure\RoadRunner\TCP;
 use App\Contracts\TCP\Kernel as KernelContract;
 use Illuminate\Support\ServiceProvider;
 
-class TCPServiceProvider extends ServiceProvider
+final class TCPServiceProvider extends ServiceProvider
 {
     public function register()
     {

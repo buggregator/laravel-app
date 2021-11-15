@@ -12,7 +12,6 @@ trait DatabaseTransactions
         $database = $this->app->make(DatabaseProviderInterface::class)->database();
 
         $driver = $database->getDriver();
-        $driver->connect();
         $driver->beginTransaction();
 
         $this->beforeApplicationDestroyed(function () use ($driver) {

@@ -4,23 +4,27 @@ declare(strict_types=1);
 namespace Modules\Events\Application\Commands\DeleteEvent;
 
 use App\Contracts\Command\CommandHandler;
+use Cycle\ORM\TransactionInterface;
 use Modules\Events\Domain\EventRepository;
 use Modules\Events\Exceptions\EventNotFoundException;
 
 class Handler implements CommandHandler
 {
-    public function __construct(private EventRepository $events)
-    {
+    public function __construct(
+        private EventRepository $events,
+        private TransactionInterface $transaction
+    ) {
     }
 
     #[\App\Attributes\CommandBus\CommandHandler]
     public function __invoke(Command $command): void
     {
-        $event = $this->events->findByPK($command->uuid->toString());
+        $event = $this->events->findByPK((string) $command->uuid);
         if (!$event) {
             throw new EventNotFoundException();
         }
 
-        $this->events->delete($event);
+        $this->transaction->delete($event);
+        $this->transaction->run();
     }
 }

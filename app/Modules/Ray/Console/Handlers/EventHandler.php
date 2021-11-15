@@ -14,12 +14,4 @@ class EventHandler extends AbstractHandler
             'payload' => isset($payload['content']['payload']) ? VariableCleaner::clean($payload['content']['payload'], 0) : null,
         ];
     }
-
-    public function printTitle(array $payload): void
-    {
-        parent::printTitle($payload);
-
-        $this->output->writeln(sprintf(' <error> %s </error>  ', $payload['content']['name']));
-        $this->output->newline();
-    }
 }

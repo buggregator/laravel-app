@@ -7,9 +7,9 @@ use Illuminate\Broadcasting\BroadcastManager;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
-class BroadcastServiceProvider extends ServiceProvider
+final class BroadcastServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
        $this->app[BroadcastManager::class]
            ->extend('roadrunner', fn (Application $app, array $config) => new RoadRunnerBroadcaster(

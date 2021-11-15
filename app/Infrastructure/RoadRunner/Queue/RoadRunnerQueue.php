@@ -16,7 +16,7 @@ use Spiral\RoadRunner\Jobs\DTO\V1\Stats;
 use Spiral\RoadRunner\Jobs\Jobs;
 use Spiral\RoadRunner\Jobs\QueueInterface;
 
-class RoadRunnerQueue extends Queue implements QueueContract
+final class RoadRunnerQueue extends Queue implements QueueContract
 {
     public function __construct(
         private Jobs         $jobs,
@@ -71,16 +71,9 @@ class RoadRunnerQueue extends Queue implements QueueContract
 
     /**
      * Push a raw job onto the queue after a delay.
-     *
-     * @param DateTimeInterface|\DateInterval|int $delay
-     * @param string $payload
-     * @param string|null $queue
-     * @return mixed
      */
-    private function laterRaw($delay, $payload, $queue = null): string
+    private function laterRaw(DateTimeInterface|\DateInterval|int $delay, array $payload, ?string $queue = null): string
     {
-        assert(is_array($payload), 'Payload should be an array');
-
         $queue = $this->getQueue($queue);
 
         $task = $queue->dispatch(
@@ -108,9 +101,6 @@ class RoadRunnerQueue extends Queue implements QueueContract
 
     /**
      * Get the "available at" UNIX timestamp.
-     *
-     * @param DateTimeInterface|\DateInterval|int $delay
-     * @return int
      */
     protected function availableAt($delay = 0): int
     {

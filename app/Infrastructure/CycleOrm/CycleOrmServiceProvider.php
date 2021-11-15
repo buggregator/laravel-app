@@ -22,13 +22,15 @@ final class CycleOrmServiceProvider extends ServiceProvider
         $this->initFactory();
         $this->initOrm();
 
-
+        $this->app->bind(TransactionInterface::class, Transaction::class);
     }
 
     private function initContainer(): void
     {
         $this->app->singleton(SpiralContainer::class, static function($app) {
             $container = new SpiralContainer();
+            $container->bind(TransactionInterface::class, Transaction::class);
+            $container->bind(ORMInterface::class, fn() => $app[ORMInterface::class]);
 
             return $container;
         });
@@ -50,15 +52,10 @@ final class CycleOrmServiceProvider extends ServiceProvider
     private function initOrm(): void
     {
         $this->app->singleton(ORMInterface::class, static function ($app) {
-            $orm = new \Cycle\ORM\ORM(
+            return new \Cycle\ORM\ORM(
                 $app[FactoryInterface::class],
                 $app[SchemaInterface::class]
             );
-
-            $app[SpiralContainer::class]->bind(TransactionInterface::class, $transaction = new Transaction($orm));
-            $app->instance(TransactionInterface::class, $transaction);
-
-            return $orm;
         });
     }
 }

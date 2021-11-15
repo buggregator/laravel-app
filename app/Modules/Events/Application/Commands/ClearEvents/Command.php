@@ -5,9 +5,7 @@ namespace Modules\Events\Application\Commands\ClearEvents;
 
 class Command implements \App\Contracts\Command\Command
 {
-    /**
-     * TODO: should be read only
-     */
+    // TODO: use readonly property
     public function __construct(
         public ?string $type = null
     )

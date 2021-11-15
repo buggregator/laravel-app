@@ -8,9 +8,7 @@ use App\Domain\ValueObjects\Uuid;
 
 class DeleteEvent implements Command
 {
-    /**
-     * TODO: should be read only
-     */
+    // TODO: use readonly property
     public function __construct(
         public Uuid $uuid
     )

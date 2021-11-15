@@ -7,6 +7,7 @@ use App\Commands\FindAllEvents;
 use App\Contracts\Query\QueryBus;
 use Inertia\Inertia;
 use Interfaces\Http\Controllers\Controller;
+use Modules\Events\Interfaces\Http\Resources\EventResource;
 
 class ListAction extends Controller
 {

@@ -36,7 +36,7 @@ final class EventProcess implements AggregateRoot
         $this->date = Carbon::createFromTimestamp($event->timestamp)->toDateTimeImmutable();
     }
 
-    public function deleted(): self
+    public function delete(): self
     {
         $this->recordThat(
             new EventWasDeleted($this->aggregateRootId())
@@ -48,6 +48,11 @@ final class EventProcess implements AggregateRoot
     public function applyEventWasDeleted(EventWasDeleted $event): void
     {
         $this->deleted = true;
+    }
+
+    public function isDeleted(): bool
+    {
+        return $this->deleted;
     }
 
     public function type(): string

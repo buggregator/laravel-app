@@ -14,7 +14,7 @@ final class Json
         return json_encode($this->data);
     }
 
-    public static function typecast(string $value, DatabaseInterface $db): self
+    public static function cast(string $value, DatabaseInterface $db): self
     {
         return new static(json_decode($value, true));
     }

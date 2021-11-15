@@ -18,12 +18,12 @@ use Symfony\Component\Messenger\Middleware\HandleMessageMiddleware;
 
 final class BusServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function register(): void
     {
         $this->registerBusHandlers();
     }
 
-    public function boot()
+    public function boot(): void
     {
         $this->registerCommandBus();
         $this->registerEventBus();

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Infrastructure\EventSauce\Persistance;
 
 use App\Domain\Entity\Json;
-use Cycle\Database\DatabaseProviderInterface;
+use App\Domain\ValueObjects\Uuid;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\TransactionInterface;
 use EventSauce\EventSourcing\AggregateRootId;
@@ -14,7 +14,6 @@ use EventSauce\EventSourcing\Serialization\MessageSerializer;
 use Generator;
 use Infrastructure\EventSauce\Domain\Entities\Event;
 use Infrastructure\EventSauce\Domain\EventRepository;
-use Ramsey\Uuid\Uuid;
 
 class CycleOrmMessageRepository implements EventRepository
 {
@@ -22,9 +21,7 @@ class CycleOrmMessageRepository implements EventRepository
         private ORMInterface         $orm,
         private TransactionInterface $transaction,
         private MessageSerializer    $serializer
-    )
-    {
-
+    ) {
     }
 
     public function persist(Message ...$messages): void
@@ -34,9 +31,9 @@ class CycleOrmMessageRepository implements EventRepository
 
             $eventId = isset($payload['headers'][Header::EVENT_ID])
                 ? Uuid::fromString($payload['headers'][Header::EVENT_ID])
-                : Uuid::uuid4();
+                : Uuid::generate();
 
-            $this->orm->getRepository(Event::class)->store(
+            $this->transaction->persist(
                 entity: new Event(
                     $eventId,
                     $payload['headers'][Header::EVENT_TYPE],
@@ -44,7 +41,7 @@ class CycleOrmMessageRepository implements EventRepository
                     $payload['headers'][Header::AGGREGATE_ROOT_VERSION] ?? 0,
                     new Json($payload)
                 ),
-                run: false
+                mode: TransactionInterface::MODE_ENTITY_ONLY
             );
         }
 

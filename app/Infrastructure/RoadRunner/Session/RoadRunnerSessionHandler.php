@@ -6,7 +6,7 @@ namespace Infrastructure\RoadRunner\Session;
 use Psr\SimpleCache\CacheInterface;
 use SessionHandlerInterface;
 
-class RoadRunnerSessionHandler implements SessionHandlerInterface
+final class RoadRunnerSessionHandler implements SessionHandlerInterface
 {
     public function __construct(private CacheInterface $storage, private int $minutes)
     {

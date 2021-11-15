@@ -12,10 +12,10 @@ final class ConsumerLocator
 {
     private array $consumers = [];
 
-    public function __construct(private Locator $attributesLocator,)
+    public function __construct(private Locator $attributesLocator)
     {
         foreach ($attributesLocator->findClassAttributes('app', Projector::class) as $class => $attributes) {
-            $this->processProjectors($class, $attributes);
+            $this->processProjectors($class);
         }
     }
 
@@ -32,7 +32,7 @@ final class ConsumerLocator
         }
     }
 
-    private function processProjectors(\ReflectionClass $class, array $attributes)
+    private function processProjectors(\ReflectionClass $class)
     {
         foreach ($class->getMethods() as $method) {
             foreach ($method->getParameters() as $parameter) {

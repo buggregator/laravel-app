@@ -15,13 +15,11 @@ final class Locator
     }
 
     /**
-     * @param string $directory
-     * @param string $attribute
      * @return  array<\ReflectionClass, \ReflectionAttribute[]>
      */
     public function findClassAttributes(string $directory, string $attribute): \Generator
     {
-        foreach ($this->findClasses($directory) as $className => $class) {
+        foreach ($this->findClasses($directory) as $class) {
             $attributes = $class->getAttributes($attribute);
 
             if (!count($attributes)) {
@@ -33,13 +31,11 @@ final class Locator
     }
 
     /**
-     * @param string $directory
-     * @param string $attribute
      * @return  array<\ReflectionMethod, \ReflectionAttribute[]>
      */
     public function findClassMethodsAttributes(string $directory, string $attribute): \Generator
     {
-        foreach ($this->findClasses($directory) as $className => $class) {
+        foreach ($this->findClasses($directory) as $class) {
             $methods = $class->getMethods();
 
             foreach ($methods as $method) {

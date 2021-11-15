@@ -23,7 +23,7 @@ class EventProjector implements Projector
         $this->bus->dispatch(
             new StoreEventCommand(
                 $event->type,
-                $event->uuid->toObject(),
+                $event->uuid,
                 Carbon::createFromTimestamp($event->timestamp)->toDateTimeImmutable(),
                 $event->payload
             )

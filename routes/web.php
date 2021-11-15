@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 
 // Events
 Route::get('/', Events\ListAction::class);
-Route::delete('/events', Events\ClearEventsAction::class);
-Route::delete('/event/{uuid}', Events\DeleteEventAction::class);
+Route::delete('/events', Events\ClearEventsAction::class)->name('events');
+Route::get('/event/{uuid}/json', Events\ShowJsonAction::class)->name('event.show.json');
+Route::delete('/event/{uuid}', Events\DeleteEventAction::class)->name('event.delete');
 
 Route::get('ws', ConnectAction::class)->middleware(ChannelJoined::class);
 
@@ -42,7 +43,8 @@ Route::get('/inspector/{uuid}', Inspector\ShowAction::class)->name('inspector.sh
 // Sentry
 Route::get('/sentry', Sentry\ListAction::class)->name('sentry');
 Route::get('/sentry/{uuid}', Sentry\ShowAction::class)->name('sentry.show');
-Route::get('/sentry/{uuid}/json', Sentry\ShowJsonAction::class)->name('sentry.show.json');
+// TODO: deprecated
+Route::get('/sentry/{uuid}/json', Events\ShowJsonAction::class)->name('sentry.show.json');
 Route::delete('/sentry/{uuid}', Sentry\DeleteAction::class)->name('sentry.delete');
 
 Route::post('api/{projectId}/store', Sentry\StoreEventAction::class)->name('sentry.event.store');

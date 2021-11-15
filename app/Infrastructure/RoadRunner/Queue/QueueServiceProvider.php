@@ -5,9 +5,9 @@ namespace Infrastructure\RoadRunner\Queue;
 
 use Illuminate\Support\ServiceProvider;
 
-class QueueServiceProvider extends ServiceProvider
+final class QueueServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->app['queue']->extend('roadrunner', fn() => new RoadRunnerConnector);
     }

@@ -11,7 +11,7 @@ use Modules\IncommingEvents\Domain\EventProcess;
  * @method EventProcess retrieve(AggregateRootId $id)
  * @method void persist(EventProcess $event)
  */
-final class EventProcessAggregateRootRepository extends AggregateRootRepository
+class EventProcessAggregateRootRepository extends AggregateRootRepository
 {
     protected string $aggregateRoot = EventProcess::class;
 }

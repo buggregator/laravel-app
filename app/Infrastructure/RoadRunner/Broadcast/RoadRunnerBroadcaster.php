@@ -8,7 +8,7 @@ use Illuminate\Broadcasting\Broadcasters\Broadcaster;
 use Illuminate\Broadcasting\Broadcasters\UsePusherChannelConventions;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class RoadRunnerBroadcaster extends Broadcaster
+final class RoadRunnerBroadcaster extends Broadcaster
 {
     use UsePusherChannelConventions;
 

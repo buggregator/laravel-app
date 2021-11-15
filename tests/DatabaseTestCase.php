@@ -21,9 +21,7 @@ class DatabaseTestCase extends TestCase
                 $response = new BufferedOutput();
 
                 $this->app[Kernel::class]->call('db:wipe', [], $response);
-                $this->app[Kernel::class]->call('cycle:schema:migrate', [], $response);
 
-                echo $response->fetch();
                 static::$dbInitialized = true;
             }
         });

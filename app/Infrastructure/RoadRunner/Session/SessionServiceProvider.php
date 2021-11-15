@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Spiral\Goridge\RPC\RPC;
 use Spiral\RoadRunner\KeyValue\Factory;
 
-class SessionServiceProvider extends ServiceProvider
+final class SessionServiceProvider extends ServiceProvider
 {
     public function boot()
     {

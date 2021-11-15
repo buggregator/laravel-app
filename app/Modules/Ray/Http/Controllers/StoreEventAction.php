@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Modules\Ray\Http\Controllers;
 
+use App\Commands\ClearEvents;
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
 use Interfaces\Http\Controllers\Controller;
@@ -29,7 +30,7 @@ class StoreEventAction extends Controller
             $cache->put($hash, 1, now()->addMinutes(5));
         } elseif ($type === Payload::TYPE_CLEAR_ALL) {
             // TODO fix this
-            // $events->clear();
+            $commands->dispatch(new ClearEvents('ray'));
         }
 
         $event = $handler->handle($request->all());

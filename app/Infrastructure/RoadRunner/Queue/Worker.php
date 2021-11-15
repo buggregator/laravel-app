@@ -19,7 +19,7 @@ use Spiral\RoadRunnerLaravel\WorkerOptionsInterface;
 use Throwable;
 use Spiral\RoadRunner\Jobs\Consumer;
 
-class Worker implements WorkerInterface
+final class Worker implements WorkerInterface
 {
     /** Laravel application factory. */
     protected ApplicationFactory $appFactory;

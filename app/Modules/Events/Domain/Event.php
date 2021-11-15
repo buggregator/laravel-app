@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Modules\Events\Domain;
 
 use App\Domain\Entity\Json;
+use App\Domain\ValueObjects\Uuid;
 use Cycle\Annotated\Annotation\Column;
 use Cycle\Annotated\Annotation\Entity;
 use Modules\Events\Persistance\CycleOrmEventRepository;
@@ -17,12 +18,12 @@ class Event
     /**  @internal */
     public function __construct(
         #[Column(primary: true, type: 'string(36)', typecast: 'uuid')]
-        private UuidInterface $uuid,
+        private Uuid $uuid,
 
         #[Column(type: 'string')]
-        private string $event,
+        private string $type,
 
-        #[Column(type: 'json', typecast: Json::class)]
+        #[Column(type: 'json', typecast: [Json::class, 'cast'])]
         private Json $payload,
 
         #[Column(type: 'datetime')]
@@ -31,14 +32,14 @@ class Event
     {
     }
 
-    public function getUuid(): UuidInterface
+    public function getUuid(): Uuid
     {
         return $this->uuid;
     }
 
-    public function getEvent(): string
+    public function getType(): string
     {
-        return $this->event;
+        return $this->type;
     }
 
     public function getPayload(): Json

@@ -11,7 +11,7 @@ use Infrastructure\EventSauce\Persistance\CycleOrmMessageRepository;
 
 final class EventSauceServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function register(): void
     {
         $this->app->bind(MessageSerializer::class, function () {
             return new ConstructingMessageSerializer();

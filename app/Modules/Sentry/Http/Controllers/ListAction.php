@@ -12,10 +12,8 @@ class ListAction extends Controller
 {
     public function __invoke(QueryBus $bus)
     {
-        $events = $bus->ask(new FindAllEvents(type: 'sentry'));
-
         return Inertia::render('Sentry/Index', [
-            'events' => $events,
+            'events' => $bus->ask(new FindAllEvents(type: 'sentry')),
         ]);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Contracts\Cache\LockProvider;
 use Illuminate\Support\InteractsWithTime;
 use Spiral\RoadRunner\KeyValue\StorageInterface;
 
-class RoadRunnerStore extends TaggableStore implements LockProvider
+final class RoadRunnerStore extends TaggableStore implements LockProvider
 {
     use InteractsWithTime;
 
@@ -94,33 +94,24 @@ class RoadRunnerStore extends TaggableStore implements LockProvider
 
     /**
      * Set the cache key prefix.
-     *
-     * @param  string  $prefix
-     * @return void
      */
-    public function setPrefix(string $prefix)
+    public function setPrefix(string $prefix): void
     {
         $this->prefix = ! empty($prefix) ? $prefix.':' : '';
     }
 
     /**
      * Get the expiration time of the key.
-     *
-     * @param  int  $seconds
-     * @return int
      */
-    protected function calculateExpiration(int $seconds)
+    protected function calculateExpiration(int $seconds): int
     {
         return $this->toTimestamp($seconds);
     }
 
     /**
      * Get the UNIX timestamp for the given number of seconds.
-     *
-     * @param  int  $seconds
-     * @return int
      */
-    protected function toTimestamp(int $seconds)
+    protected function toTimestamp(int $seconds): int
     {
         return $seconds > 0 ? $this->availableAt($seconds) : 0;
     }

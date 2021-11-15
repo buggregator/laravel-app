@@ -6,7 +6,7 @@ namespace Infrastructure\CycleOrm\Commands\Schema;
 use Cycle\Migrations\Migrator;
 use Illuminate\Console\Command;
 
-class MigrateCommand extends Command
+final class MigrateCommand extends Command
 {
     protected $signature = 'cycle:schema:migrate';
     protected $description = 'Run cycle orm migrations';

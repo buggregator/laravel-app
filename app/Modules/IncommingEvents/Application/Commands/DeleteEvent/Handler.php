@@ -17,7 +17,7 @@ class Handler implements CommandHandler
     public function __invoke(DeleteEvent $command): void
     {
         $event = $this->repository->retrieve($command->uuid);
-        $event->deleted();
+        $event->delete();
         $this->repository->persist($event);
     }
 }

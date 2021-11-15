@@ -8,8 +8,5 @@ use Modules\Events\Domain\EventRepository;
 
 class CycleOrmEventRepository extends Repository implements EventRepository
 {
-    public function deleteAll(?string $type = null): void
-    {
-        // TODO: Implement deleteAll() method.
-    }
+
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Tests\Feature\Modules\Events\Domain;
 
 use App\Domain\Entity\Json;
+use App\Domain\ValueObjects\Uuid;
 use Modules\Events\Domain\Event;
-use Ramsey\Uuid\Uuid;
 use Tests\DatabaseTestCase;
 
 class EventTest extends DatabaseTestCase
@@ -14,7 +14,7 @@ class EventTest extends DatabaseTestCase
     {
         $repository = $this->getRepositoryFor(Event::class);
 
-        $uuid = Uuid::uuid4();
+        $uuid = Uuid::generate();
 
         $event = new Event($uuid, 'test', new Json([
             'foo' => 'bar'
@@ -29,7 +29,7 @@ class EventTest extends DatabaseTestCase
             $uuid->equals($foundEvent->getUuid())
         );
 
-        $this->assertSame($event->getEvent(), $foundEvent->getEvent());
+        $this->assertSame($event->getType(), $foundEvent->getType());
         $this->assertSame((string) $event->getPayload(), (string) $foundEvent->getPayload());
     }
 

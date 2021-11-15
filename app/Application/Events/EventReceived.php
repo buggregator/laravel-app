@@ -35,7 +35,7 @@ class EventReceived implements ShouldBroadcastNow, Arrayable
         return [
             'type' => $this->type,
             'data' => $this->payload,
-            'uuid' => $this->uuid->toString(),
+            'uuid' => (string) $this->uuid,
             'timestamp' => $this->timestamp
         ];
     }

@@ -5,6 +5,7 @@ namespace Modules\Events\Application\Queries\FindAllEvents;
 
 use App\Commands\FindAllEvents;
 use App\Contracts\Query\QueryHandler;
+use Modules\Events\Application\Resources\EventCollection;
 use Modules\Events\Domain\EventRepository;
 
 class Handler implements QueryHandler
@@ -19,9 +20,11 @@ class Handler implements QueryHandler
     {
         $scope = [];
         if ($query->type) {
-            $scope['event'] = $query->type;
+            $scope['type'] = $query->type;
         }
 
-        return $this->events->findAll($scope);
+        return EventCollection::make(
+            $this->events->findAll($scope)
+        );
     }
 }

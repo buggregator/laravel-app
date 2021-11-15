@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Spiral\Goridge\RPC\RPC;
 use Spiral\RoadRunner\KeyValue\Factory;
 
-class CacheServiceProvider extends ServiceProvider
+final class CacheServiceProvider extends ServiceProvider
 {
     public function register()
     {

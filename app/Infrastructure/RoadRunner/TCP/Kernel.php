@@ -8,7 +8,7 @@ use Spiral\RoadRunner\Tcp\Request;
 use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Kernel implements \App\Contracts\TCP\Kernel
+final class Kernel implements \App\Contracts\TCP\Kernel
 {
     /**
      * @var array<non-empty-string, non-empty-string>

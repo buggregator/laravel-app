@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
+use App\Domain\ValueObjects\Uuid;
 use Cycle\Database\DatabaseInterface;
 use Cycle\ORM\Parser\TypecastInterface;
-use Ramsey\Uuid\Uuid;
 
 final class ExtendedTypecast implements TypecastInterface
 {

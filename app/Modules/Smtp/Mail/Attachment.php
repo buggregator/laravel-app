@@ -11,7 +11,7 @@ class Attachment
 
     public function __construct(private ?string $filename, private string $content, private string $type)
     {
-        $this->id = Uuid::uuid4()->toString();
+        $this->id = (string) Uuid::uuid4();
     }
 
     public function getFilename(): string

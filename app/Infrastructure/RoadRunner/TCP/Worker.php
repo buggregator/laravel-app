@@ -23,7 +23,7 @@ use Symfony\Component\Console\Output\StreamOutput;
 use Throwable;
 use function Termwind\render;
 
-class Worker implements WorkerInterface
+final class Worker implements WorkerInterface
 {
     /** Laravel application factory. */
     protected ApplicationFactory $appFactory;

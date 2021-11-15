@@ -7,5 +7,5 @@ use Cycle\ORM\RepositoryInterface;
 
 interface EventRepository extends RepositoryInterface
 {
-    public function deleteAll(?string $type = null): void;
+
 }

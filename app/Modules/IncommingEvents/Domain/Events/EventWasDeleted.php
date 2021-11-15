@@ -8,16 +8,16 @@ use EventSauce\EventSourcing\Serialization\SerializablePayload;
 
 class EventWasDeleted implements SerializablePayload
 {
-    // TODO: should be read only
+    // TODO: use readonly property
     public function __construct(
-        public Uuid   $uuid
+        public Uuid $uuid
     )
     {}
 
     public function toPayload(): array
     {
         return [
-            'uuid' => $this->uuid->toString(),
+            'uuid' => (string) $this->uuid,
         ];
     }
 

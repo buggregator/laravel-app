@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use Cycle\Schema\Renderer\OutputSchemaRenderer;
 use Infrastructure\CycleOrm\SchemaManager;
 
-class RenderCommand extends Command
+final class RenderCommand extends Command
 {
     protected $signature = 'cycle:schema:render';
     protected $description = 'Render CycleORM schemas';

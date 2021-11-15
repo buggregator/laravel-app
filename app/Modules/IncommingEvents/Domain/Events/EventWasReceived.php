@@ -8,21 +8,19 @@ use EventSauce\EventSourcing\Serialization\SerializablePayload;
 
 final class EventWasReceived implements SerializablePayload
 {
-    // TODO: should be read only
+    // TODO: use readonly property
     public function __construct(
         public Uuid   $uuid,
         public string $type,
         public array  $payload,
         public int    $timestamp
-    )
-    {
-
+    ) {
     }
 
     public function toPayload(): array
     {
         return [
-            'uuid' => $this->uuid->toString(),
+            'uuid' => (string) $this->uuid,
             'type' => $this->type,
             'payload' => $this->payload,
             'timestamp' => $this->timestamp
