@@ -9,13 +9,14 @@ use Modules\IncommingEvents\Persistance\EventProcessAggregateRootRepository;
 
 class Handler implements CommandHandler
 {
-    public function __construct(private EventProcessAggregateRootRepository $repository)
-    {
+    public function __construct(
+        private EventProcessAggregateRootRepository $repository
+    ) {
     }
 
-    #[\App\Attributes\CommandBus\CommandHandler]
+    // #[\App\Attributes\CommandBus\CommandHandler]
     public function __invoke(ClearEvents $command): void
     {
-        $this->repository->retrieve();
+
     }
 }

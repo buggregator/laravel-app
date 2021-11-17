@@ -7,7 +7,7 @@ use App\Domain\Entity\Json;
 use App\Domain\ValueObjects\Uuid;
 use Cycle\Annotated\Annotation\Column;
 use Cycle\Annotated\Annotation\Entity;
-use Modules\Events\Persistance\CycleOrmEventRepository;
+use Modules\Events\Persistence\CycleOrmEventRepository;
 use Ramsey\Uuid\UuidInterface;
 
 #[Entity(

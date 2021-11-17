@@ -6,18 +6,21 @@ namespace Modules\Events\Interfaces\Http\Controllers;
 use App\Commands\FindEventByUuid;
 use App\Contracts\Query\QueryBus;
 use App\Domain\ValueObjects\Uuid;
+use App\Exceptions\EntityNotFoundException;
 use Interfaces\Http\Controllers\Controller;
-use Ramsey\Uuid\UuidInterface;
+use Spatie\RouteAttributes\Attributes\Get;
 
 class ShowJsonAction extends Controller
 {
-    public function __invoke(QueryBus $bus, UuidInterface $uuid)
+    #[Get(uri: '/event/{uuid}/json', name: 'event.show.json')]
+    public function __invoke(QueryBus $bus, Uuid $uuid)
     {
-        $event = $bus->ask(new FindEventByUuid(new Uuid($uuid)));
-        if (!$event) {
-            abort(404);
-        }
+        try {
+            $event = $bus->ask(new FindEventByUuid($uuid));
 
-        return $event;
+            return $event;
+        } catch (EntityNotFoundException $e) {
+            abort(404, $e->getMessage());
+        }
     }
 }

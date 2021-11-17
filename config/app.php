@@ -177,7 +177,7 @@ return [
         Infrastructure\CycleOrm\SchemaServiceProvider::class,
         Infrastructure\CycleOrm\CycleOrmServiceProvider::class,
         Infrastructure\Bus\BusServiceProvider::class,
-        Infrastructure\EventSauce\EventSauceServiceProvider::class,
+        // Infrastructure\EventSauce\EventSauceServiceProvider::class,
 
         /*
          * Modules Service Providers...

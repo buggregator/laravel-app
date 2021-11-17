@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace Modules\IncommingEvents\Domain\Events;
 
 use App\Domain\ValueObjects\Uuid;
+use App\Contracts\EventSource\Event;
 use EventSauce\EventSourcing\Serialization\SerializablePayload;
 
-final class EventWasReceived implements SerializablePayload
+final class EventWasReceived implements Event
 {
     // TODO: use readonly property
     public function __construct(

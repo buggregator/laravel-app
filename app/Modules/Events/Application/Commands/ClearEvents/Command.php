@@ -8,7 +8,6 @@ class Command implements \App\Contracts\Command\Command
     // TODO: use readonly property
     public function __construct(
         public ?string $type = null
-    )
-    {
+    ) {
     }
 }

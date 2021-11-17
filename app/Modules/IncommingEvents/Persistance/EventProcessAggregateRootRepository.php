@@ -14,4 +14,9 @@ use Modules\IncommingEvents\Domain\EventProcess;
 class EventProcessAggregateRootRepository extends AggregateRootRepository
 {
     protected string $aggregateRoot = EventProcess::class;
+
+    public function retrieveAll(): object
+    {
+
+    }
 }

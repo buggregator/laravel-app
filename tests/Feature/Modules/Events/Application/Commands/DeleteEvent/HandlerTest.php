@@ -6,6 +6,7 @@ namespace Modules\Events\Application\Commands\DeleteEvent;
 use App\Domain\Entity\Json;
 use App\Domain\ValueObjects\Uuid;
 use Cycle\ORM\TransactionInterface;
+use Illuminate\Contracts\Events\Dispatcher;
 use Modules\Events\Domain\Event;
 use Modules\Events\Domain\EventRepository;
 use Tests\TestCase;
@@ -26,7 +27,7 @@ class HandlerTest extends TestCase
         $transaction->shouldReceive('delete')->once()->with($event);
         $transaction->shouldReceive('run')->once();
 
-        $handler = new Handler($repository, $transaction);
+        $handler = new Handler($repository, \Mockery::mock(Dispatcher::class), $transaction);
         $handler($command);
     }
 

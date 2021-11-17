@@ -11,6 +11,7 @@ use Cycle\Annotated\Annotation\Entity;
 #[Entity(role: 'stored_events')]
 class Event
 {
+    /**  @internal */
     public function __construct(
         #[Column(name: 'event_id', type: 'string(36)', typecast: 'uuid', primary: true)]
         private Uuid $id,

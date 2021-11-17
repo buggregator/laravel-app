@@ -1,22 +1,40 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Events\Interfaces\Http\Controllers;
 
 use App\Commands\FindAllEvents;
 use App\Contracts\Query\QueryBus;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Interfaces\Http\Controllers\Controller;
-use Modules\Events\Interfaces\Http\Resources\EventResource;
+use Modules\Events\Exceptions\ActionNotFoundException;
+use Modules\Events\Interfaces\Http\ActionMap;
+use Spatie\RouteAttributes\Attributes\Get;
 
 class ListAction extends Controller
 {
-    public function __invoke(QueryBus $bus)
+    #[Get(uri: '/', name: 'events')]
+    public function __invoke(Request $request, QueryBus $bus, ActionMap $actionMap)
     {
-        return Inertia::render('Events', [
-            'events' => $bus->ask(new FindAllEvents()),
+        $request->validate([
+            'type' => 'sometimes|required|alpha_dash',
+        ]);
+
+        $action = 'Events';
+        if ($request->type) {
+            try {
+                $action = $actionMap->getForType($request->type, 'index');
+            } catch (ActionNotFoundException $e) {
+                abort(403, $e->getMessage());
+            }
+        }
+
+        return Inertia::render($action, [
+            'events' => $bus->ask(new FindAllEvents(type: $request->type)),
             'version' => config('app.version'),
-            'name' => config('app.name') ?? 'Buggregator',
+            'name' => config('app.name'),
         ]);
     }
 }

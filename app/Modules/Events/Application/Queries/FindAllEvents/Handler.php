@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Events\Application\Queries\FindAllEvents;
@@ -10,9 +11,9 @@ use Modules\Events\Domain\EventRepository;
 
 class Handler implements QueryHandler
 {
-    public function __construct(private EventRepository $events)
-    {
-
+    public function __construct(
+        private EventRepository $events
+    ) {
     }
 
     #[\App\Attributes\QueryBus\QueryHandler]

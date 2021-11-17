@@ -12,6 +12,7 @@ use Cycle\ORM\SchemaInterface;
 use Cycle\ORM\Transaction;
 use Cycle\ORM\TransactionInterface;
 use Illuminate\Support\ServiceProvider;
+use Infrastructure\CycleOrm\Auth\UserProvider;
 use Spiral\Core\Container as SpiralContainer;
 
 final class CycleOrmServiceProvider extends ServiceProvider
@@ -21,8 +22,8 @@ final class CycleOrmServiceProvider extends ServiceProvider
         $this->initContainer();
         $this->initFactory();
         $this->initOrm();
-
         $this->app->bind(TransactionInterface::class, Transaction::class);
+        $this->registerAuthUserProvider();
     }
 
     private function initContainer(): void
@@ -55,6 +56,18 @@ final class CycleOrmServiceProvider extends ServiceProvider
             return new \Cycle\ORM\ORM(
                 $app[FactoryInterface::class],
                 $app[SchemaInterface::class]
+            );
+        });
+    }
+
+    private function registerAuthUserProvider(): void
+    {
+        $this->app['auth']->provider('cycle', function ($app, $config) {
+            return new UserProvider(
+                $app[ORMInterface::class],
+                $app[TransactionInterface::class],
+                $config['model'],
+                $app['hash'],
             );
         });
     }

@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\EventSauce;
 
 use App\Attributes\Locator;
 use App\Attributes\Projectors\Projector;
+use App\Contracts\EventSource\Event;
 use EventSauce\EventSourcing\Message;
-use EventSauce\EventSourcing\Serialization\SerializablePayload;
 
 final class ConsumerLocator
 {
@@ -36,10 +37,10 @@ final class ConsumerLocator
     {
         foreach ($class->getMethods() as $method) {
             foreach ($method->getParameters() as $parameter) {
-                if (is_a($parameter->getType()->getName(), SerializablePayload::class, true)) {
+                if (is_a($parameter->getType()->getName(), Event::class, true)) {
                     $this->consumers[$parameter->getType()->getName()][] = [
                         $method->getDeclaringClass()->getName(),
-                        $method->getName()
+                        $method->getName(),
                     ];
                 }
             }

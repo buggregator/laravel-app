@@ -78,7 +78,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "Spatie\\RouteAttributes\\RouteAttributesServiceProvider"
+            ]
         }
     },
     "config": {

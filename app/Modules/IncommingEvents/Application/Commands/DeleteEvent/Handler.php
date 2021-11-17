@@ -13,7 +13,7 @@ class Handler implements CommandHandler
     {
     }
 
-    #[\App\Attributes\CommandBus\CommandHandler]
+    // #[\App\Attributes\CommandBus\CommandHandler]
     public function __invoke(DeleteEvent $command): void
     {
         $event = $this->repository->retrieve($command->uuid);

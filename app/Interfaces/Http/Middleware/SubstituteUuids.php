@@ -1,13 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Interfaces\Http\Middleware;
 
+use App\Domain\ValueObjects\Uuid;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Reflector;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use ReflectionParameter;
 
 class SubstituteUuids
@@ -20,7 +20,7 @@ class SubstituteUuids
         // Filter only parameters type-hinted with Ramsey\Uuid\UuidInterface
         /** @var ReflectionParameter[] $parameters */
         $parameters = array_filter($route->signatureParameters(), function ($p) {
-            return Reflector::getParameterClassName($p) === UuidInterface::class;
+            return Reflector::getParameterClassName($p) === Uuid::class;
         });
 
         foreach ($parameters as $parameter) {

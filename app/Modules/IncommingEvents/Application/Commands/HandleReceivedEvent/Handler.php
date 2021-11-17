@@ -15,7 +15,7 @@ final class Handler implements CommandHandler
     {
     }
 
-    #[\App\Attributes\CommandBus\CommandHandler]
+    // #[\App\Attributes\CommandBus\CommandHandler]
     public function __invoke(HandleReceivedEvent $command): void
     {
         $this->repository->persist(

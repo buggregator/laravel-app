@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\Feature\Modules\IncommingEvent\Domain;
@@ -10,6 +11,15 @@ use Tests\DatabaseTestCase;
 
 class EventProcessTest extends DatabaseTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        if (!$this->app->has(EventProcessAggregateRootRepository::class)) {
+            $this->markTestSkipped('EventSauce is disabled.');
+        }
+    }
+
     public function testFireReceivedEvent()
     {
         $repository = $this->app[EventProcessAggregateRootRepository::class];
