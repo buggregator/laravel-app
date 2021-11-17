@@ -17,9 +17,7 @@ class ShowJsonAction extends Controller
     public function __invoke(QueryBus $bus, Uuid $uuid)
     {
         try {
-            $event = $bus->ask(new FindEventByUuid($uuid));
-
-            return $event;
+            return $bus->ask(new FindEventByUuid($uuid));
         } catch (EntityNotFoundException $e) {
             abort(404, $e->getMessage());
         }
