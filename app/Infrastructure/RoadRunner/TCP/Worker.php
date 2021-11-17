@@ -1,15 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\RoadRunner\TCP;
 
-use Infrastructure\RoadRunner\TCP\Events\AfterLoopIterationEvent;
-use Infrastructure\RoadRunner\TCP\Events\BeforeLoopIterationEvent;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Events\Dispatcher as EventsDispatcher;
+use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 use Illuminate\Support\Facades\Facade;
+use Infrastructure\RoadRunner\TCP\Events\AfterLoopIterationEvent;
+use Infrastructure\RoadRunner\TCP\Events\BeforeLoopIterationEvent;
 use Interfaces\Console\StreamHandler;
 use Spiral\RoadRunner\Payload;
 use Spiral\RoadRunner\Tcp\TcpWorker;
@@ -17,11 +19,10 @@ use Spiral\RoadRunnerLaravel\Application\FactoryInterface as ApplicationFactory;
 use Spiral\RoadRunnerLaravel\Events;
 use Spiral\RoadRunnerLaravel\WorkerInterface;
 use Spiral\RoadRunnerLaravel\WorkerOptionsInterface;
-use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
-use Throwable;
 use function Termwind\render;
+use Throwable;
 
 final class Worker implements WorkerInterface
 {
@@ -65,7 +66,7 @@ final class Worker implements WorkerInterface
             $this->setApplicationInstance($sandbox);
 
             if ($this->isDebugModeEnabled($config)) {
-                render((string)view('console.tcp.request', [
+                render((string) view('console.tcp.request', [
                     'request' => $request,
                     'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),
                 ]));
@@ -92,7 +93,7 @@ final class Worker implements WorkerInterface
                         'request' => $request,
                         'response' => $response,
                         'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),
-                        'duration' => number_format(round(microtime(true) - $startTime, 4), 4, '.', '')
+                        'duration' => number_format(round(microtime(true) - $startTime, 4), 4, '.', ''),
                     ]));
                 }
 

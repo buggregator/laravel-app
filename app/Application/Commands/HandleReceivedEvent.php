@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Commands;
@@ -13,10 +14,9 @@ final class HandleReceivedEvent implements Command
 
     public function __construct(
         public string $type,
-        public array  $payload,
+        public array $payload,
         public bool $sendToConsole = false
-    )
-    {
+    ) {
         $this->uuid = Uuid::generate();
         $this->timestamp = time();
     }
@@ -27,7 +27,7 @@ final class HandleReceivedEvent implements Command
             'type' => $this->type,
             'data' => $this->payload,
             'uuid' => (string) $this->uuid,
-            'timestamp' => $this->timestamp
+            'timestamp' => $this->timestamp,
         ];
     }
 }

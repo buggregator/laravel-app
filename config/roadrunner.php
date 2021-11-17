@@ -1,21 +1,21 @@
 <?php
 
 use Spiral\RoadRunner\Environment\Mode;
-use Spiral\RoadRunnerLaravel\Events;
 use Spiral\RoadRunnerLaravel\Defaults;
+use Spiral\RoadRunnerLaravel\Events;
 use Spiral\RoadRunnerLaravel\Listeners;
 
 return [
     'rpc' => [
-        'host' => env('RPC_HOST', 'tcp://127.0.0.1:6001')
+        'host' => env('RPC_HOST', 'tcp://127.0.0.1:6001'),
     ],
 
     'session' => [
-        'storage' => 'session'
+        'storage' => 'session',
     ],
 
     'cache' => [
-        'storage' => 'cache'
+        'storage' => 'cache',
     ],
 
     /*
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'force_https' => (bool)env('APP_FORCE_HTTPS', false),
+    'force_https' => (bool) env('APP_FORCE_HTTPS', false),
 
     /*
     |--------------------------------------------------------------------------

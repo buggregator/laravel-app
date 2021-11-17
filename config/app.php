@@ -15,7 +15,6 @@ return [
 
     'name' => env('APP_NAME', 'Debugger'),
 
-
     'version' => env('APP_VERSION', 'v1.16'),
 
     /*

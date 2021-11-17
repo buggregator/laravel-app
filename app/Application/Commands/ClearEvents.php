@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Commands;
@@ -10,7 +11,6 @@ class ClearEvents implements Command
     // TODO: use readonly property
     public function __construct(
         public ?string $type = null
-    )
-    {
+    ) {
     }
 }

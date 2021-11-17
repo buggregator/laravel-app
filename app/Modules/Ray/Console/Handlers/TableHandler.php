@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
@@ -16,14 +17,14 @@ class TableHandler extends AbstractHandler
 
         return [
             'label' => $payload['content']['label'] ?? null,
-            'rows' => collect((array)$payload['content']['values'])->mapWithKeys(function ($value, $key) use($keyWidth, $valueWidth) {
+            'rows' => collect((array) $payload['content']['values'])->mapWithKeys(function ($value, $key) use ($keyWidth, $valueWidth) {
                 $key = nl2br(VariableCleaner::clean($key, (int) $keyWidth));
-                $value =  nl2br(VariableCleaner::clean($value, (int) $valueWidth));
+                $value = nl2br(VariableCleaner::clean($value, (int) $valueWidth));
 
                 return [
-                    $key => $value
+                    $key => $value,
                 ];
-            })->toArray()
+            })->toArray(),
         ];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Listeners\Event;
@@ -11,9 +12,8 @@ class SendEventsAfterChannelJoin
 {
     public function __construct(
         private EventRepository $events,
-        private Broadcaster      $broadcaster,
-    )
-    {
+        private Broadcaster $broadcaster,
+    ) {
     }
 
     public function handle(Joined $joined)

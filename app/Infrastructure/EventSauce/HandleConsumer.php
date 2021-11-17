@@ -1,11 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\EventSauce;
 
 use App\Contracts\EventSource\Projector;
 use EventSauce\EventSourcing\Message;
-use EventSauce\EventSourcing\MessageConsumer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Queue\ShouldQueue;

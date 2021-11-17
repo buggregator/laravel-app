@@ -31,7 +31,7 @@ class Handler implements CommandHandler
 
         // TODO: make more optimized
         $this->events->findAll($scope)->each(
-            fn(Event $event) => $this->transaction->delete($event)
+            fn (Event $event) => $this->transaction->delete($event)
         );
 
         $this->transaction->run();

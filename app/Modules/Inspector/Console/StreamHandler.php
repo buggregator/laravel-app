@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Inspector\Console;
@@ -15,12 +16,10 @@ class StreamHandler implements Handler
 {
     public function __construct(
         private StreamHandlerConfig $config,
-        private OutputInterface     $output,
-        private ConsoleColor        $color,
-    )
-    {
+        private OutputInterface $output,
+        private ConsoleColor $color,
+    ) {
     }
-
 
     public function handle(array $payload): void
     {
@@ -30,11 +29,11 @@ class StreamHandler implements Handler
         $this->output->table([], [
             ['date', Carbon::createFromTimestamp($requestData['timestamp'])->format('r')],
             ['hostname', $requestData['host']['hostname'] ?? $requestData['host']['ip']],
-            ['duration', ($requestData['duration'] ?? 0) . ' ms'],
-            ['memory peak', ($requestData['memory_peak'] ?? 0) . ' mb'],
+            ['duration', ($requestData['duration'] ?? 0).' ms'],
+            ['memory peak', ($requestData['memory_peak'] ?? 0).' mb'],
         ]);
 
-        $statusCode = (int)$requestData['result'] ?? 0;
+        $statusCode = (int) $requestData['result'] ?? 0;
 
         $style = match (true) {
             $statusCode >= 400 && $statusCode < 500 => 'bg_yellow',
@@ -45,16 +44,15 @@ class StreamHandler implements Handler
 
         $this->output->writeln(sprintf(
             '  <fg=white;bg=blue;options=bold> %s </>%s',
-            'INSPECTOR', $this->color->apply($style, ' ' .$statusCode . ' : ' . Response::$statusTexts[$statusCode])
+            'INSPECTOR', $this->color->apply($style, ' '.$statusCode.' : '.Response::$statusTexts[$statusCode])
         ));
-
 
         $this->output->newLine();
     }
 
     public function shouldBeSkipped(array $payload): bool
     {
-        if (!$this->config->isEnabled()) {
+        if (! $this->config->isEnabled()) {
             return true;
         }
 

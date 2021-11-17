@@ -8,5 +8,4 @@ use Cycle\ORM\RepositoryInterface;
 
 interface UserRepository extends RepositoryInterface
 {
-
 }

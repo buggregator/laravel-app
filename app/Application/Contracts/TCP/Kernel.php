@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Contracts\TCP;
@@ -10,7 +11,7 @@ interface Kernel extends Handler
     public function addHandler(string $server, string $handler): void;
 
     /**
-     * Call the terminate method
+     * Call the terminate method.
      */
     public function terminate(Request $request, Response $response): void;
 }

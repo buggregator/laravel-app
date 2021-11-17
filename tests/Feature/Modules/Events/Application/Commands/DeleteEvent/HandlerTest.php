@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Events\Application\Commands\DeleteEvent;
@@ -30,5 +31,4 @@ class HandlerTest extends TestCase
         $handler = new Handler($repository, \Mockery::mock(Dispatcher::class), $transaction);
         $handler($command);
     }
-
 }

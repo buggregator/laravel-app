@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\EventSauce;
@@ -25,9 +26,8 @@ abstract class AggregateRootRepository implements AggregateRootRepositoryContrac
         private EventBus $eventBus,
         private Dispatcher $queueBus,
         private ConsumerLocator $consumers,
-    )
-    {
-        if (!is_a($this->aggregateRoot, AggregateRoot::class, true)) {
+    ) {
+        if (! is_a($this->aggregateRoot, AggregateRoot::class, true)) {
             throw new LogicException('You have to set an aggregate root before the repository can be initialized.');
         }
 

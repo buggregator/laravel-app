@@ -24,9 +24,9 @@ class Handler implements CommandHandler
     #[\App\Attributes\CommandBus\CommandHandler]
     public function __invoke(Command $command): void
     {
-        $event = $this->events->findByPK((string)$command->uuid);
+        $event = $this->events->findByPK((string) $command->uuid);
 
-        if (!$event) {
+        if (! $event) {
             throw new EntityNotFoundException('Event with given uuid is not found.');
         }
 

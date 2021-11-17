@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Events\Domain;
@@ -8,7 +9,6 @@ use App\Domain\ValueObjects\Uuid;
 use Cycle\Annotated\Annotation\Column;
 use Cycle\Annotated\Annotation\Entity;
 use Modules\Events\Persistence\CycleOrmEventRepository;
-use Ramsey\Uuid\UuidInterface;
 
 #[Entity(
     repository: CycleOrmEventRepository::class
@@ -28,8 +28,7 @@ class Event
 
         #[Column(type: 'datetime')]
         private \DateTimeImmutable $date
-    )
-    {
+    ) {
     }
 
     public function getUuid(): Uuid

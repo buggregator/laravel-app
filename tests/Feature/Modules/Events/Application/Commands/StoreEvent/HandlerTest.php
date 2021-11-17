@@ -25,10 +25,10 @@ class HandlerTest extends DatabaseTestCase
 
         $transaction = \Mockery::mock(TransactionInterface::class);
         $transaction->shouldReceive('persist')->once()->withArgs(
-            fn(Event $event) => $event->getUuid()->equals($uuid)
+            fn (Event $event) => $event->getUuid()->equals($uuid)
                 && $event->getType() === 'test'
                 && $event->getDate() === $date
-                && (string)$event->getPayload() === '{"foo":"bar"}'
+                && (string) $event->getPayload() === '{"foo":"bar"}'
         );
 
         $transaction->shouldReceive('run')->once();

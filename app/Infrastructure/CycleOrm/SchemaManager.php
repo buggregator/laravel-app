@@ -1,34 +1,34 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\CycleOrm;
 
+use Cycle\Annotated;
 use Cycle\Database\DatabaseProviderInterface;
+use Cycle\Migrations\Migrator;
 use Cycle\ORM\Schema as ORMSchema;
 use Cycle\ORM\SchemaInterface;
-use Cycle\Annotated;
+use Cycle\Schema;
 use Cycle\Schema\Generator\Migrations\GenerateMigrations;
 use Psr\SimpleCache\CacheInterface;
 use Spiral\Tokenizer\ClassLocator;
-use Cycle\Migrations\Migrator;
-use Cycle\Schema;
 
 final class SchemaManager
 {
     private const SCHEMA_STORAGE_KEY = 'cycle.schema';
 
     public function __construct(
-        private ClassLocator              $classLocator,
+        private ClassLocator $classLocator,
         private DatabaseProviderInterface $database,
-        private CacheInterface            $cache,
-        private Migrator                  $migrator
-    )
-    {
+        private CacheInterface $cache,
+        private Migrator $migrator
+    ) {
     }
 
     public function isSyncMode(): bool
     {
-        return (bool)config('cycle.schema.sync');
+        return (bool) config('cycle.schema.sync');
     }
 
     public function createSchema(): SchemaInterface
@@ -46,7 +46,7 @@ final class SchemaManager
         return (new Schema\Compiler())->compile(
             new Schema\Registry($this->database),
             $this->getSchemaGenerators($migrate),
-            (array)config('cycle.schema.defaults')
+            (array) config('cycle.schema.defaults')
         );
     }
 
@@ -81,13 +81,13 @@ final class SchemaManager
 
     private function getSchema(): array
     {
-        if (!config('cycle.schema.cache.enabled')) {
+        if (! config('cycle.schema.cache.enabled')) {
             return $this->compileSchema(true);
         }
 
         return $this->cache->rememberForever(
             self::SCHEMA_STORAGE_KEY,
-            fn() => $this->compileSchema(true)
+            fn () => $this->compileSchema(true)
         );
     }
 }

@@ -18,7 +18,7 @@ final class ActionMap
     {
         $action = $this->config->get('server.'.$type.'.http.'.$action);
 
-        if (!$action) {
+        if (! $action) {
             throw new ActionNotFoundException(sprintf('Action for event type [%s] not found.', $type));
         }
 

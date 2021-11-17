@@ -1,13 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
 
-use NunoMaduro\Collision\Highlighter;
-
 class ExceptionHandler extends AbstractHandler
 {
-
     protected function makeData(array $payload): array
     {
         $frames = $payload['content']['frames'];
@@ -29,19 +27,19 @@ class ExceptionHandler extends AbstractHandler
         foreach ($frames as $i => $frame) {
             $file = $frame['file_name'];
             $line = $frame['line_number'];
-            $class = empty($frame['class']) ? '' : $frame['class'] . '::';
+            $class = empty($frame['class']) ? '' : $frame['class'].'::';
             $function = $frame['method'];
-            $pos = str_pad((string)((int)$i + 1), 4, ' ');
+            $pos = str_pad((string) ((int) $i + 1), 4, ' ');
 
             yield $pos => [
                 'file' => $file,
                 'line' => $line,
                 'class' => $class,
-                'function' => $function
+                'function' => $function,
             ];
 
             if ($i >= 10) {
-                yield $pos => '+ more ' . count($frames) - 10 . ' frames';
+                yield $pos => '+ more '.count($frames) - 10 .' frames';
 
                 break;
             }
@@ -55,19 +53,19 @@ class ExceptionHandler extends AbstractHandler
     protected function renderCodeSnippet(array $frame): array
     {
         $file = $frame['file_name'];
-        $line = (int)$frame['line_number'];
+        $line = (int) $frame['line_number'];
 
         $content = '';
         $startLine = $frame['snippet'][0]['line_number'] ?? $line;
         foreach ($frame['snippet'] as $row) {
-            $content .= $row['text'] . "\n";
+            $content .= $row['text']."\n";
         }
 
         return [
             'file' => $file,
             'line' => $line,
             'start_line' =>  $startLine,
-            'content' => $content
+            'content' => $content,
         ];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\CycleOrm\Commands\Schema;
@@ -13,12 +14,12 @@ final class MigrateCommand extends Command
 
     public function handle(Migrator $migrator)
     {
-        if (!$migrator->isConfigured()) {
+        if (! $migrator->isConfigured()) {
             $migrator->configure();
         }
 
         while (($migration = $migrator->run()) !== null) {
-            $this->info('Migrate ' . $migration->getState()->getName());
+            $this->info('Migrate '.$migration->getState()->getName());
         }
     }
 }

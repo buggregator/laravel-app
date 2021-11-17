@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Events\Projectors;
@@ -6,8 +7,8 @@ namespace Modules\Events\Projectors;
 use App\Contracts\Command\CommandBus;
 use App\Contracts\EventSource\Projector;
 use Illuminate\Support\Carbon;
-use Modules\Events\Application\Commands\StoreEvent\Command as StoreEventCommand;
 use Modules\Events\Application\Commands\DeleteEvent\Command as DeleteEventCommand;
+use Modules\Events\Application\Commands\StoreEvent\Command as StoreEventCommand;
 use Modules\IncommingEvents\Domain\Events\EventWasDeleted;
 use Modules\IncommingEvents\Domain\Events\EventWasReceived;
 

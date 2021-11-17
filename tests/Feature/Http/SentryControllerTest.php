@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\Feature\Http;
@@ -16,7 +17,7 @@ class SentryControllerTest extends DatabaseTestCase
             \GuzzleHttp\Psr7\Utils::streamFor(json_encode(['foo' => 'bar']))
         );
 
-        $this->call('POST', route('sentry.event.store', 1), content: (string)$stream);
+        $this->call('POST', route('sentry.event.store', 1), content: (string) $stream);
 
         /** @var \Modules\Events\Domain\Event $event */
         $event = $this->getRepositoryFor(Event::class)->findAll()->first();
@@ -60,7 +61,6 @@ class SentryControllerTest extends DatabaseTestCase
                 ],
             ])->assertJsonCount(1, 'props.events.data');
     }
-
 
     public function testGetEventByUuid()
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Interfaces\Console;
@@ -8,13 +9,9 @@ use App\Attributes\Locator;
 use App\Websocket\BrowserOutput;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\Str;
 use NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler;
-use ReflectionClass;
-use SplFileInfo;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\Finder;
 use Termwind\Termwind;
 
 class StreamHandler implements Handler
@@ -23,10 +20,9 @@ class StreamHandler implements Handler
 
     public function __construct(
         private OutputInterface $output,
-        private Application     $app,
-        private Locator         $attributesLocator
-    )
-    {
+        private Application $app,
+        private Locator $attributesLocator
+    ) {
         foreach ($attributesLocator->findClassAttributes('app', Stream::class) as $class => $attributes) {
             $this->processAttributes($class, $attributes);
         }
@@ -43,7 +39,7 @@ class StreamHandler implements Handler
             'output' => new OutputStyle(
                 new ArgvInput(),
                 $this->output
-            )
+            ),
         ]);
     }
 
@@ -62,11 +58,11 @@ class StreamHandler implements Handler
 
     public function shouldBeSkipped(array $payload): bool
     {
-        if (!isset($payload['type'])) {
+        if (! isset($payload['type'])) {
             return true;
         }
 
-        if (!isset($this->handlers[$payload['type']])) {
+        if (! isset($this->handlers[$payload['type']])) {
             return true;
         }
 

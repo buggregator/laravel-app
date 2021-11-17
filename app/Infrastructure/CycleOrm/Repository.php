@@ -1,21 +1,21 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\CycleOrm;
 
+use Cycle\ORM\Select;
 use Cycle\ORM\Select\Repository as BaseRepository;
 use Cycle\ORM\Transaction;
 use Cycle\ORM\TransactionInterface;
-use Cycle\ORM\Select;
 use Illuminate\Support\Collection;
 
 class Repository extends BaseRepository
 {
     public function __construct(
-        Select                       $select,
+        Select $select,
         private TransactionInterface $transaction
-    )
-    {
+    ) {
         parent::__construct($select);
     }
 
@@ -54,5 +54,4 @@ class Repository extends BaseRepository
             $this->transaction->run(); // transaction is clean after run
         }
     }
-
 }

@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
 
     private function registerRoutesFromAttributes(): void
     {
-        if (!$this->shouldRegisterRoutes()) {
+        if (! $this->shouldRegisterRoutes()) {
             return;
         }
 
@@ -51,13 +51,13 @@ class RouteServiceProvider extends ServiceProvider
 
         collect(config('route-attributes.directories'))
             ->each(
-                fn(string $directory) => $routeRegistrar->registerDirectory($directory)
+                fn (string $directory) => $routeRegistrar->registerDirectory($directory)
             );
     }
 
     private function shouldRegisterRoutes(): bool
     {
-        if (!config('route-attributes.enabled')) {
+        if (! config('route-attributes.enabled')) {
             return false;
         }
 

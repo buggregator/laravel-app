@@ -15,7 +15,7 @@ class EventProcessTest extends DatabaseTestCase
     {
         parent::setUp();
 
-        if (!$this->app->has(EventProcessAggregateRootRepository::class)) {
+        if (! $this->app->has(EventProcessAggregateRootRepository::class)) {
             $this->markTestSkipped('EventSauce is disabled.');
         }
     }

@@ -4,9 +4,9 @@ use Modules\Ray\Console\Handlers;
 
 return [
     'ray' => [
-        'http_check_status' => (int)env('HTTP_CHECK_STATUS', 200),
+        'http_check_status' => (int) env('HTTP_CHECK_STATUS', 200),
         'cli' => [
-            'enabled' => (bool)env('CLI_RAY_STREAM', true),
+            'enabled' => (bool) env('CLI_RAY_STREAM', true),
             'handlers' => [
                 'log' => Handlers\LogHandler::class,
                 'table' => Handlers\TableHandler::class,
@@ -32,7 +32,7 @@ return [
             'show' => 'Sentry/Show',
         ],
         'cli' => [
-            'enabled' => (bool)env('CLI_SENTRY_STREAM', true),
+            'enabled' => (bool) env('CLI_SENTRY_STREAM', true),
         ],
     ],
     'smtp' => [
@@ -41,17 +41,17 @@ return [
             'show' => 'Smtp/Show',
         ],
         'cli' => [
-            'enabled' => (bool)env('CLI_SMTP_STREAM', true),
+            'enabled' => (bool) env('CLI_SMTP_STREAM', true),
         ],
     ],
     'var-dumper' => [
         'cli' => [
-            'enabled' => (bool)env('CLI_VAR_DUMPER_STREAM', true),
+            'enabled' => (bool) env('CLI_VAR_DUMPER_STREAM', true),
         ],
     ],
     'monolog' => [
         'cli' => [
-            'enabled' => (bool)env('CLI_MONOLOG_STREAM', true),
+            'enabled' => (bool) env('CLI_MONOLOG_STREAM', true),
         ],
     ],
     'inspector' => [
@@ -60,7 +60,7 @@ return [
             'show' => 'Inspector/Show',
         ],
         'cli' => [
-            'enabled' => (bool)env('CLI_INSPECTOR_STREAM', true),
+            'enabled' => (bool) env('CLI_INSPECTOR_STREAM', true),
         ],
     ],
 ];

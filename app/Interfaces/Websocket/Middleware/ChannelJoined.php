@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Interfaces\Websocket\Middleware;
@@ -6,7 +7,6 @@ namespace Interfaces\Websocket\Middleware;
 use App\Events\Websocket\Joined;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ChannelJoined
 {
@@ -17,7 +17,7 @@ class ChannelJoined
 
     public function terminate(Request $request, $response): void
     {
-        if (!$request->attributes->has('ws:joinTopics')) {
+        if (! $request->attributes->has('ws:joinTopics')) {
             return;
         }
 

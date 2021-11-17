@@ -6,8 +6,8 @@ namespace Modules\Monolog\Interfaces\Http\Controllers\Slack;
 
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
-use Interfaces\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Interfaces\Http\Controllers\Controller;
 use Spatie\RouteAttributes\Attributes\Post;
 
 class StoreEventAction extends Controller
@@ -22,4 +22,3 @@ class StoreEventAction extends Controller
         );
     }
 }
-

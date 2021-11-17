@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\EventSauce;
@@ -13,10 +14,9 @@ final class QueueMessageDispatcher implements MessageDispatcher
     private ?string $queue = null;
 
     public function __construct(
-        private Dispatcher      $dispatcher,
+        private Dispatcher $dispatcher,
         private ConsumerLocator $consumers
-    )
-    {
+    ) {
     }
 
     public function dispatch(Message ...$messages): void

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\Bus\Query;
@@ -17,8 +18,7 @@ final class MessengerQueryBus implements QueryBus
 
     public function __construct(
         private MessageBusInterface $bus
-    )
-    {
+    ) {
     }
 
     public function ask(Query $query)

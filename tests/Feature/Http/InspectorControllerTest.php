@@ -14,7 +14,7 @@ class InspectorControllerTest extends DatabaseTestCase
     public function testEventShouldBeStored()
     {
         $content = base64_encode(json_encode(
-            $payload = ['foo' => 'bar',]
+            $payload = ['foo' => 'bar']
         ));
 
         $headers = [
@@ -73,7 +73,6 @@ class InspectorControllerTest extends DatabaseTestCase
                 ],
             ])->assertJsonCount(1, 'props.events.data');
     }
-
 
     public function testGetEventByUuid()
     {

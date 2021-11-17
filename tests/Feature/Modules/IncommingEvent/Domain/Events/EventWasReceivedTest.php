@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\Feature\Modules\IncommingEvent\Domain\Events;
@@ -22,7 +23,7 @@ class EventWasReceivedTest extends TestCase
             'uuid' => $uuid->toString(),
             'type' => 'test',
             'payload' => ['foo' => 'bar'],
-            'timestamp' => 12345
+            'timestamp' => 12345,
         ], $event->toPayload());
     }
 
@@ -32,7 +33,7 @@ class EventWasReceivedTest extends TestCase
             'uuid' => $uuid = Uuid::generate()->toString(),
             'type' => 'test',
             'payload' => ['foo' => 'bar'],
-            'timestamp' => 12345
+            'timestamp' => 12345,
         ]);
 
         $this->assertSame($uuid, $event->uuid->toString());

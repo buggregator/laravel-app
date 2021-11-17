@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Ray\Interfaces\Http\Controllers\Locks;
 
-use Interfaces\Http\Controllers\Controller;
 use Illuminate\Contracts\Cache\Repository;
+use Interfaces\Http\Controllers\Controller;
 use Spatie\RouteAttributes\Attributes\Get;
 
 class CheckAction extends Controller
@@ -15,12 +15,13 @@ class CheckAction extends Controller
     {
         $lock = $cache->get($hash);
 
-        if (!$lock) {
+        if (! $lock) {
             abort(404);
         }
 
         if (is_array($lock)) {
             $cache->forget($hash);
+
             return $lock;
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Smtp\Mail;
@@ -7,18 +8,17 @@ class Message implements \JsonSerializable
 {
     public function __construct(
         private ?string $id,
-        private string  $raw,
-        private array   $sender,
-        private array   $recipients,
-        private array   $ccs,
-        private string  $subject,
-        private string  $htmlBody,
-        private string  $textBody,
+        private string $raw,
+        private array $sender,
+        private array $recipients,
+        private array $ccs,
+        private string $subject,
+        private string $htmlBody,
+        private string $textBody,
         private array $replyTo,
-        private array   $allRecipients,
-        private array   $attachments
-    )
-    {
+        private array $allRecipients,
+        private array $attachments
+    ) {
     }
 
     /**
@@ -30,7 +30,7 @@ class Message implements \JsonSerializable
             return [
                 'id' => $attachment->getId(),
                 'name' => $attachment->getFilename(),
-                'url' => "/api/messages/{$this->id}/attachments/{$attachment->getId()}"
+                'url' => "/api/messages/{$this->id}/attachments/{$attachment->getId()}",
             ];
         }, $this->attachments);
     }
@@ -38,6 +38,7 @@ class Message implements \JsonSerializable
     /**
      * BCCs are recipients passed as RCPTs but not
      * in the body of the mail.
+     *
      * @return string[]
      */
     private function getBccs(): array
@@ -48,6 +49,7 @@ class Message implements \JsonSerializable
                     return false;
                 }
             }
+
             return true;
         }));
     }
@@ -65,7 +67,7 @@ class Message implements \JsonSerializable
             'text' => $this->textBody,
             'html' => $this->htmlBody,
             'raw' => $this->raw,
-            'attachments' => $this->attachmentsToArray()
+            'attachments' => $this->attachmentsToArray(),
         ];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\EventSauce\Persistance;
@@ -18,9 +19,9 @@ use Infrastructure\EventSauce\Domain\EventRepository;
 class CycleOrmMessageRepository implements EventRepository
 {
     public function __construct(
-        private ORMInterface         $orm,
+        private ORMInterface $orm,
         private TransactionInterface $transaction,
-        private MessageSerializer    $serializer
+        private MessageSerializer $serializer
     ) {
     }
 
@@ -65,7 +66,7 @@ class CycleOrmMessageRepository implements EventRepository
         $collection = $this->orm->getRepository(Event::class)
             ->findAll([
                 'aggregateId' => $id->toString(),
-                'version' => ['>' => $aggregateRootVersion]
+                'version' => ['>' => $aggregateRootVersion],
             ], ['version' => 'ASC']);
 
         foreach ($collection as $event) {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\IncommingEvents\Persistance;
@@ -17,6 +18,5 @@ class EventProcessAggregateRootRepository extends AggregateRootRepository
 
     public function retrieveAll(): object
     {
-
     }
 }

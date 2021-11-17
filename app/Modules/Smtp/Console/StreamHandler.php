@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Smtp\Console;
@@ -15,7 +16,7 @@ class StreamHandler implements Handler
         private StreamHandlerConfig $config,
         private OutputInterface $output,
         private HtmlRenderer $renderer,
-    ){
+    ) {
     }
 
     public function handle(array $payload): void
@@ -54,10 +55,10 @@ class StreamHandler implements Handler
 
     public function shouldBeSkipped(array $payload): bool
     {
-        if (!$this->config->isEnabled()) {
+        if (! $this->config->isEnabled()) {
             return true;
         }
 
-        return !isset($payload['data']);
+        return ! isset($payload['data']);
     }
 }

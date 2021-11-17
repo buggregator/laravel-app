@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Events;
@@ -11,13 +12,12 @@ use Illuminate\Contracts\Support\Arrayable;
 class EventReceived implements ShouldBroadcastNow, Arrayable
 {
     public function __construct(
-        public Uuid   $uuid,
+        public Uuid $uuid,
         public string $type,
-        public array  $payload,
-        public int    $timestamp,
-        public bool   $sendToConsole = false
-    )
-    {
+        public array $payload,
+        public int $timestamp,
+        public bool $sendToConsole = false
+    ) {
     }
 
     public function broadcastWith(): array
@@ -36,7 +36,7 @@ class EventReceived implements ShouldBroadcastNow, Arrayable
             'type' => $this->type,
             'data' => $this->payload,
             'uuid' => (string) $this->uuid,
-            'timestamp' => $this->timestamp
+            'timestamp' => $this->timestamp,
         ];
     }
 }

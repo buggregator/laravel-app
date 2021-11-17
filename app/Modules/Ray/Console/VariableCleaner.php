@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ray\Console;
@@ -24,7 +25,7 @@ class VariableCleaner
     public static function clean($value, int|null $maxWidth = null): string
     {
         $maxWidth = is_null($maxWidth) ? terminal()->width() : $maxWidth;
-        $value = (string)$value;
+        $value = (string) $value;
 
         if (preg_match('/(sf\-dump\-[0-9]+)/i', $value)) {
             $value = preg_replace('/<(style|script)\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/(style|script)>/i', '', $value);

@@ -22,5 +22,5 @@ return [
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Interfaces\Http\Middleware\SubstituteUuids::class,
 
-    ]
+    ],
 ];

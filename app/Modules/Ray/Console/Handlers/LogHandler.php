@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
@@ -21,7 +22,7 @@ class LogHandler extends AbstractHandler
         }
 
         return [
-            'rows' => $rows
+            'rows' => $rows,
         ];
     }
 }

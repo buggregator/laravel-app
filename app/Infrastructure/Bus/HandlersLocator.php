@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\Bus;
@@ -21,10 +22,9 @@ final class HandlersLocator implements HandlersLocatorInterface
 
     public function __construct(
         private Application $app,
-        private Locator     $attributesLocator,
+        private Locator $attributesLocator,
 
-    )
-    {
+    ) {
         foreach ($attributesLocator->findClassMethodsAttributes('app', CommandHandler::class) as $class => $attributes) {
             $this->processCommandHandlerAttributes($class);
         }
@@ -47,7 +47,7 @@ final class HandlersLocator implements HandlersLocatorInterface
             foreach ($handlers[$type] ?? [] as $handler) {
                 $handlerDescriptor = $this->buildHandlerDescriptor($handler);
 
-                if (!$this->shouldHandle($envelope, $handlerDescriptor)) {
+                if (! $this->shouldHandle($envelope, $handlerDescriptor)) {
                     continue;
                 }
 
@@ -88,14 +88,15 @@ final class HandlersLocator implements HandlersLocatorInterface
     }
 
     /**
-     * @param array{0: class-string, 1: non-empty-string} $handler
+     * @param  array{0: class-string, 1: non-empty-string}  $handler
+     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     private function buildHandlerDescriptor(array $handler): HandlerDescriptor
     {
         return new HandlerDescriptor([
             $this->app->make($handler[0]),
-            $handler[1]
+            $handler[1],
         ]);
     }
 
@@ -108,7 +109,7 @@ final class HandlersLocator implements HandlersLocatorInterface
             if (is_a($parameter->getType()->getName(), Command::class, true)) {
                 $this->commandHandlers[$parameter->getType()->getName()][] = [
                     $method->getDeclaringClass()->getName(),
-                    $method->getName()
+                    $method->getName(),
                 ];
             }
         }
@@ -123,7 +124,7 @@ final class HandlersLocator implements HandlersLocatorInterface
             if (is_a($parameter->getType()->getName(), Query::class, true)) {
                 $this->queryHandlers[$parameter->getType()->getName()][] = [
                     $method->getDeclaringClass()->getName(),
-                    $method->getName()
+                    $method->getName(),
                 ];
             }
         }

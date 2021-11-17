@@ -6,5 +6,4 @@ namespace Modules\Events\Exceptions;
 
 class ActionNotFoundException extends \DomainException
 {
-
 }

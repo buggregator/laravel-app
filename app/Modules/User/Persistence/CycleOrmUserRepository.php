@@ -9,5 +9,4 @@ use Modules\User\Domain\UserRepository;
 
 class CycleOrmUserRepository extends Repository implements UserRepository
 {
-
 }

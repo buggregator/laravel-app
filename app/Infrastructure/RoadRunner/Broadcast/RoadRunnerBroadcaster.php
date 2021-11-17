@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\RoadRunner\Broadcast;
@@ -22,7 +23,7 @@ final class RoadRunnerBroadcaster extends Broadcaster
 
         if (empty($request->channel_name)
             || ($this->isGuardedChannel($request->channel_name)
-                && !$this->retrieveUser($request, $channelName))) {
+                && ! $this->retrieveUser($request, $channelName))) {
             throw new AccessDeniedHttpException;
         }
 
@@ -67,4 +68,3 @@ final class RoadRunnerBroadcaster extends Broadcaster
         }
     }
 }
-

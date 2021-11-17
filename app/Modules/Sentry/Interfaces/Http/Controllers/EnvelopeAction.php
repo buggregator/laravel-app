@@ -15,4 +15,3 @@ class EnvelopeAction extends Controller
         // Fake action
     }
 }
-

@@ -18,7 +18,7 @@ class RayControllerTest extends DatabaseTestCase
                 'payloads' => [
                     [
                         'type' => 'test',
-                        'content' => ['foo' => 'bar',],
+                        'content' => ['foo' => 'bar'],
                     ],
                 ],
             ]

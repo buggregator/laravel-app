@@ -47,7 +47,7 @@ final class UserProvider implements \Illuminate\Contracts\Auth\UserProvider
     {
         $criteria = [];
         foreach ($credentials as $key => $value) {
-            if (!Str::contains($key, 'password')) {
+            if (! Str::contains($key, 'password')) {
                 $criteria[$key] = $value;
             }
         }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\IncommingEvents\Application\Commands\ClearEvents;
@@ -17,6 +18,5 @@ class Handler implements CommandHandler
     // #[\App\Attributes\CommandBus\CommandHandler]
     public function __invoke(ClearEvents $command): void
     {
-
     }
 }

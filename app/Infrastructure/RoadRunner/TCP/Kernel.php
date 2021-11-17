@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\RoadRunner\TCP;
 
 use App\Contracts\TCP\Response;
-use Spiral\RoadRunner\Tcp\Request;
 use Illuminate\Contracts\Foundation\Application;
+use Spiral\RoadRunner\Tcp\Request;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class Kernel implements \App\Contracts\TCP\Kernel
@@ -30,11 +31,10 @@ final class Kernel implements \App\Contracts\TCP\Kernel
     ];
 
     /**
-     * Create a new TCP kernel instance
+     * Create a new TCP kernel instance.
      */
     public function __construct(private Application $app)
     {
-
     }
 
     /**
@@ -60,7 +60,7 @@ final class Kernel implements \App\Contracts\TCP\Kernel
         $this->app->instance(Request::class, $request);
         $this->bootstrap();
 
-        if (!isset($this->handlers[$request->server])) {
+        if (! isset($this->handlers[$request->server])) {
             throw new \RuntimeException("Handler for server [$request->server] not found.");
         }
 
@@ -70,7 +70,7 @@ final class Kernel implements \App\Contracts\TCP\Kernel
     }
 
     /**
-     * Call the terminate method
+     * Call the terminate method.
      */
     public function terminate(Request $request, Response $response): void
     {

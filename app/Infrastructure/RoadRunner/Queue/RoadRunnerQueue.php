@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\RoadRunner\Queue;
@@ -19,11 +20,10 @@ use Spiral\RoadRunner\Jobs\QueueInterface;
 final class RoadRunnerQueue extends Queue implements QueueContract
 {
     public function __construct(
-        private Jobs         $jobs,
+        private Jobs $jobs,
         private RPCInterface $rpc,
         private              $default = 'default',
-    )
-    {
+    ) {
     }
 
     /** @inheritDoc */
@@ -115,7 +115,7 @@ final class RoadRunnerQueue extends Queue implements QueueContract
     {
         $queue = $this->jobs->connect($queue ?? $this->default);
 
-        if (!$this->getStats($queue->getName())->getReady()) {
+        if (! $this->getStats($queue->getName())->getReady()) {
             $queue->resume();
         }
 

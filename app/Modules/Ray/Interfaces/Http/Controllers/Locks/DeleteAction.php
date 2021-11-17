@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Ray\Interfaces\Http\Controllers\Locks;
 
-use Interfaces\Http\Controllers\Controller;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Request;
+use Interfaces\Http\Controllers\Controller;
 use Spatie\RouteAttributes\Attributes\Delete;
 
 class DeleteAction extends Controller
@@ -16,7 +16,7 @@ class DeleteAction extends Controller
     {
         $cache->put($hash, [
             'active' => false,
-            'stop_execution' => (bool)$request->stop_execution,
+            'stop_execution' => (bool) $request->stop_execution,
         ]);
     }
 }

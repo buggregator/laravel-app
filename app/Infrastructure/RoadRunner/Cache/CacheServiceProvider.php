@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\RoadRunner\Cache;
@@ -15,6 +16,7 @@ final class CacheServiceProvider extends ServiceProvider
         $this->app->booting(function () {
             Cache::extend('roadrunner', function ($app) {
                 $factory = new Factory(RPC::create(config('roadrunner.rpc.host')));
+
                 return Cache::repository(new RoadRunnerStore(
                     $factory->select(config('roadrunner.cache.storage', 'cache'))
                 ));

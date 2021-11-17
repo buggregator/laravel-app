@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\ValueObjects;
@@ -15,7 +16,7 @@ final class Uuid implements AggregateRootId, \Stringable
 
     public function __construct(private ?UuidInterface $uuid = null)
     {
-        if (!$uuid) {
+        if (! $uuid) {
             // TODO use uuid with timestamp support
             $this->uuid = \Ramsey\Uuid\Uuid::uuid4();
         }

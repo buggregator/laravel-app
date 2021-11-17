@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\Feature\Modules\Events\Domain;
@@ -17,7 +18,7 @@ class EventTest extends DatabaseTestCase
         $uuid = Uuid::generate();
 
         $event = new Event($uuid, 'test', new Json([
-            'foo' => 'bar'
+            'foo' => 'bar',
         ]), new \DateTimeImmutable());
 
         $this->persistEntity($event);
@@ -32,5 +33,4 @@ class EventTest extends DatabaseTestCase
         $this->assertSame($event->getType(), $foundEvent->getType());
         $this->assertSame((string) $event->getPayload(), (string) $foundEvent->getPayload());
     }
-
 }

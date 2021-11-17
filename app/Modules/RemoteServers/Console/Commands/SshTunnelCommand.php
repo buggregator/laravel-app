@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\RemoteServers\Console\Commands;
@@ -17,6 +18,5 @@ class SshTunnelCommand extends Command
 
     public function handle()
     {
-        
     }
 }

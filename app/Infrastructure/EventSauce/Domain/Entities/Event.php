@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\EventSauce\Domain\Entities;
@@ -27,9 +28,8 @@ class Event
 
         #[Column(type: 'json', typecast: [Json::class, 'cast'])]
         private Json $payload
-    )
-    {}
-
+    ) {
+    }
 
     public function getPayload(): Json
     {

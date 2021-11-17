@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\RoadRunner\Queue;
@@ -36,7 +37,7 @@ class RoadRunnerJob extends Job implements JobContract
     /** @inheritDoc */
     public function attempts(): int
     {
-        return (int)$this->task->getHeaderLine('attempts');
+        return (int) $this->task->getHeaderLine('attempts');
     }
 
     /** @inheritDoc */
@@ -55,7 +56,6 @@ class RoadRunnerJob extends Job implements JobContract
         $this->task
             ->withHeader('attempts', $attempts + 1)
             ->fail($e->getMessage());
-
 
         parent::failed($e);
     }

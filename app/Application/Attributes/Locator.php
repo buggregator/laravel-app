@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Attributes;
@@ -15,14 +16,14 @@ final class Locator
     }
 
     /**
-     * @return  array<\ReflectionClass, \ReflectionAttribute[]>
+     * @return array<\ReflectionClass, \ReflectionAttribute[]>
      */
     public function findClassAttributes(string $directory, string $attribute): \Generator
     {
         foreach ($this->findClasses($directory) as $class) {
             $attributes = $class->getAttributes($attribute);
 
-            if (!count($attributes)) {
+            if (! count($attributes)) {
                 continue;
             }
 
@@ -31,7 +32,7 @@ final class Locator
     }
 
     /**
-     * @return  array<\ReflectionMethod, \ReflectionAttribute[]>
+     * @return array<\ReflectionMethod, \ReflectionAttribute[]>
      */
     public function findClassMethodsAttributes(string $directory, string $attribute): \Generator
     {
@@ -41,7 +42,7 @@ final class Locator
             foreach ($methods as $method) {
                 $attributes = $method->getAttributes($attribute);
 
-                if (!count($attributes)) {
+                if (! count($attributes)) {
                     continue;
                 }
 
@@ -60,7 +61,7 @@ final class Locator
         foreach ($files as $file) {
             $className = $this->fullQualifiedClassNameFromFile($file);
 
-            if (!class_exists($className)) {
+            if (! class_exists($className)) {
                 continue;
             }
 

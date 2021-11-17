@@ -11,7 +11,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // get parameters
     $parameters = $containerConfigurator->parameters();
     $parameters->set(Option::PATHS, [
-        __DIR__ . '/app'
+        __DIR__.'/app',
     ]);
 
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_72);

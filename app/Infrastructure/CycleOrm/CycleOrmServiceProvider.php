@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\CycleOrm;
@@ -28,10 +29,10 @@ final class CycleOrmServiceProvider extends ServiceProvider
 
     private function initContainer(): void
     {
-        $this->app->singleton(SpiralContainer::class, static function($app) {
+        $this->app->singleton(SpiralContainer::class, static function ($app) {
             $container = new SpiralContainer();
             $container->bind(TransactionInterface::class, Transaction::class);
-            $container->bind(ORMInterface::class, fn() => $app[ORMInterface::class]);
+            $container->bind(ORMInterface::class, fn () => $app[ORMInterface::class]);
 
             return $container;
         });
@@ -41,7 +42,7 @@ final class CycleOrmServiceProvider extends ServiceProvider
 
     private function initFactory(): void
     {
-        $this->app->singleton(FactoryInterface::class, static function($app) {
+        $this->app->singleton(FactoryInterface::class, static function ($app) {
             return new Factory(
                 dbal: $app[DatabaseProviderInterface::class],
                 factory: $app[SpiralContainer::class],

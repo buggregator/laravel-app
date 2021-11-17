@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Monolog\Console;
@@ -6,9 +7,9 @@ namespace Modules\Monolog\Console;
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
 use App\Contracts\TCP\Handler;
+use App\Contracts\TCP\Response;
 use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
-use App\Contracts\TCP\Response;
 use Spiral\RoadRunner\Tcp\Request;
 use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,10 +17,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class TcpHandler implements Handler
 {
     public function __construct(
-        private CommandBus                        $commands,
+        private CommandBus $commands,
         private \Interfaces\Console\StreamHandler $streamHandler
-    )
-    {
+    ) {
     }
 
     public function handle(Request $request, OutputInterface $output): Response
@@ -34,7 +34,7 @@ class TcpHandler implements Handler
             $payload = json_decode($message, true);
 
             // Impossible to decode the message, give up.
-            if (!$payload) {
+            if (! $payload) {
                 throw new \RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
             }
 

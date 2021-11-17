@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\CycleOrm;
@@ -7,7 +8,6 @@ use Cycle\Database\Config\DatabaseConfig;
 use Cycle\Database\DatabaseManager;
 use Cycle\Database\DatabaseProviderInterface;
 use Illuminate\Support\ServiceProvider;
-use Psr\Log\LoggerInterface;
 
 final class DatabaseServiceProvider extends ServiceProvider
 {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Events\Application\Commands\StoreEvent;
@@ -13,7 +14,6 @@ class Command implements \App\Contracts\Command\Command
         public Uuid $uuid,
         public \DateTimeImmutable $date,
         public array $payload,
-    )
-    {
+    ) {
     }
 }

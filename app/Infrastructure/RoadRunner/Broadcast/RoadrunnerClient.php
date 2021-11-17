@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\RoadRunner\Broadcast;
@@ -17,7 +18,7 @@ final class RoadrunnerClient implements WebsocketClient
     {
         $broadcast = new Broadcast(RPC::create($this->host));
 
-        if (!$broadcast->isAvailable()) {
+        if (! $broadcast->isAvailable()) {
             throw new \LogicException('The [broadcast] plugin not available');
         }
 

@@ -8,5 +8,4 @@ use EventSauce\EventSourcing\Serialization\SerializablePayload;
 
 interface Event extends SerializablePayload
 {
-
 }

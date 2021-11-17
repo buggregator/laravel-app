@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Smtp\Mail;
@@ -25,9 +26,9 @@ class Parser
         /** @var AddressHeader|null $ccHeader */
         $ccHeader = $message->getHeader('cc');
         $ccs = $this->joinNameAndEmail($ccHeader ? $ccHeader->getAddresses() : []);
-        $subject = (string)$message->getHeaderValue('subject');
-        $html = (string)$message->getHtmlContent();
-        $text = (string)$message->getTextContent();
+        $subject = (string) $message->getHeaderValue('subject');
+        $html = (string) $message->getHtmlContent();
+        $text = (string) $message->getTextContent();
         /** @var AbstractHeader|null $replyToHeader */
         $replyToHeader = $message->getHeader('reply-to')?->getParts()[0] ?? null;
         $replyTo = $replyToHeader ? [['email' => $replyToHeader?->getValue(), 'name' => $replyToHeader?->getName()]] : [];
@@ -43,7 +44,7 @@ class Parser
     }
 
     /**
-     * @param MessagePart[] $attachments
+     * @param  MessagePart[]  $attachments
      * @return Attachment[]
      */
     private function buildAttachmentFrom(array $attachments): array
@@ -58,7 +59,7 @@ class Parser
     }
 
     /**
-     * @param AddressPart[] $addresses
+     * @param  AddressPart[]  $addresses
      * @return string[]
      */
     private function joinNameAndEmail(array $addresses): array

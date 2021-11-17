@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\RoadRunner\Queue;
@@ -13,11 +14,11 @@ use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\MaxAttemptsExceededException;
 use Illuminate\Queue\WorkerOptions;
 use Illuminate\Support\Carbon;
+use Spiral\RoadRunner\Jobs\Consumer;
 use Spiral\RoadRunnerLaravel\Application\FactoryInterface as ApplicationFactory;
 use Spiral\RoadRunnerLaravel\WorkerInterface;
 use Spiral\RoadRunnerLaravel\WorkerOptionsInterface;
 use Throwable;
-use Spiral\RoadRunner\Jobs\Consumer;
 
 final class Worker implements WorkerInterface
 {
@@ -69,6 +70,7 @@ final class Worker implements WorkerInterface
 
     /**
      * Process the given job from the queue.
+     *
      * @throws \Throwable
      */
     public function process(RoadRunnerJob $job, WorkerOptions $options): void
@@ -80,7 +82,7 @@ final class Worker implements WorkerInterface
             $this->raiseBeforeJobEvent($job);
 
             $this->markJobAsFailedIfAlreadyExceedsMaxAttempts(
-                $job, (int)$options->maxTries ?? 10
+                $job, (int) $options->maxTries ?? 10
             );
 
             if ($job->isDeleted()) {
@@ -141,7 +143,7 @@ final class Worker implements WorkerInterface
      */
     protected function markJobAsFailedIfAlreadyExceedsMaxAttempts(RoadRunnerJob $job, int $maxTries): void
     {
-        $maxTries = !is_null($job->maxTries()) ? $job->maxTries() : $maxTries;
+        $maxTries = ! is_null($job->maxTries()) ? $job->maxTries() : $maxTries;
 
         $retryUntil = $job->retryUntil();
 
@@ -149,7 +151,7 @@ final class Worker implements WorkerInterface
             return;
         }
 
-        if (!$retryUntil && ($maxTries === 0 || $job->attempts() <= $maxTries)) {
+        if (! $retryUntil && ($maxTries === 0 || $job->attempts() <= $maxTries)) {
             return;
         }
 
@@ -172,7 +174,7 @@ final class Worker implements WorkerInterface
     protected function maxAttemptsExceededException(RoadRunnerJob $job): MaxAttemptsExceededException
     {
         return new MaxAttemptsExceededException(
-            $job->resolveName() . ' has been attempted too many times or run too long. The job may have previously timed out.'
+            $job->resolveName().' has been attempted too many times or run too long. The job may have previously timed out.'
         );
     }
 
@@ -183,6 +185,7 @@ final class Worker implements WorkerInterface
 
     /**
      * Handle an exception that occurred while the job was running.
+     *
      * @throws \Throwable
      */
     protected function handleJobException(RoadRunnerJob $job, WorkerOptions $options, Throwable $e): void
@@ -191,8 +194,8 @@ final class Worker implements WorkerInterface
             // First, we will go ahead and mark the job as failed if it will exceed the maximum
             // attempts it is allowed to run the next time we process it. If so we will just
             // go ahead and mark it as failed now so we do not have to release this again.
-            if (!$job->hasFailed()) {
-                $this->markJobAsFailedIfWillExceedMaxAttempts($job, (int)$options->maxTries, $e);
+            if (! $job->hasFailed()) {
+                $this->markJobAsFailedIfWillExceedMaxAttempts($job, (int) $options->maxTries, $e);
                 $this->markJobAsFailedIfWillExceedMaxExceptions($job, $e);
             }
 
@@ -201,7 +204,7 @@ final class Worker implements WorkerInterface
             // If we catch an exception, we will attempt to release the job back onto the queue
             // so it is not lost entirely. This'll let the job be retried at a later time by
             // another listener (or this same one). We will re-throw this exception after.
-            if (!$job->isDeleted() && !$job->isReleased() && !$job->hasFailed()) {
+            if (! $job->isDeleted() && ! $job->isReleased() && ! $job->hasFailed()) {
                 $job->release($this->calculateBackoff($job, $options));
             }
         }
@@ -214,13 +217,13 @@ final class Worker implements WorkerInterface
      */
     protected function markJobAsFailedIfWillExceedMaxAttempts(RoadRunnerJob $job, int $maxTries, Throwable $e): void
     {
-        $maxTries = !is_null($job->maxTries()) ? $job->maxTries() : $maxTries;
+        $maxTries = ! is_null($job->maxTries()) ? $job->maxTries() : $maxTries;
 
         if ($job->retryUntil() && $job->retryUntil() <= Carbon::now()->getTimestamp()) {
             $this->failJob($job, $e);
         }
 
-        if (!$job->retryUntil() && $maxTries > 0 && $job->attempts() >= $maxTries) {
+        if (! $job->retryUntil() && $maxTries > 0 && $job->attempts() >= $maxTries) {
             $this->failJob($job, $e);
         }
     }
@@ -230,17 +233,17 @@ final class Worker implements WorkerInterface
      */
     protected function markJobAsFailedIfWillExceedMaxExceptions(RoadRunnerJob $job, Throwable $e): void
     {
-        if (!$this->cache || is_null($uuid = $job->uuid()) ||
+        if (! $this->cache || is_null($uuid = $job->uuid()) ||
             is_null($maxExceptions = $job->maxExceptions())) {
             return;
         }
 
-        if (!$this->cache->get('job-exceptions:' . $uuid)) {
-            $this->cache->put('job-exceptions:' . $uuid, 0, Carbon::now()->addDay());
+        if (! $this->cache->get('job-exceptions:'.$uuid)) {
+            $this->cache->put('job-exceptions:'.$uuid, 0, Carbon::now()->addDay());
         }
 
-        if ($maxExceptions <= $this->cache->increment('job-exceptions:' . $uuid)) {
-            $this->cache->forget('job-exceptions:' . $uuid);
+        if ($maxExceptions <= $this->cache->increment('job-exceptions:'.$uuid)) {
+            $this->cache->forget('job-exceptions:'.$uuid);
 
             $this->failJob($job, $e);
         }
@@ -253,11 +256,11 @@ final class Worker implements WorkerInterface
     {
         $backoff = explode(
             ',',
-            method_exists($job, 'backoff') && !is_null($job->backoff())
+            method_exists($job, 'backoff') && ! is_null($job->backoff())
                 ? $job->backoff()
                 : $options->backoff
         );
 
-        return (int)($backoff[$job->attempts() - 1] ?? last($backoff));
+        return (int) ($backoff[$job->attempts() - 1] ?? last($backoff));
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Infrastructure\Bus\Command;
@@ -18,8 +19,7 @@ final class MessengerCommandBus implements CommandBus
 
     public function __construct(
         private MessageBusInterface $bus
-    )
-    {
+    ) {
     }
 
     /**

@@ -15,6 +15,7 @@ class ListAction extends \Modules\Events\Interfaces\Http\Controllers\ListAction
     public function __invoke(Request $request, QueryBus $bus, ActionMap $actionMap)
     {
         $request->offsetSet('type', 'inspector');
+
         return parent::__invoke($request, $bus, $actionMap);
     }
 }

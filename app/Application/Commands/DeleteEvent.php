@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Commands;
@@ -11,7 +12,6 @@ class DeleteEvent implements Command
     // TODO: use readonly property
     public function __construct(
         public Uuid $uuid
-    )
-    {
+    ) {
     }
 }

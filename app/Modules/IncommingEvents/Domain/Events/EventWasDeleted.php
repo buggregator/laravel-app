@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\IncommingEvents\Domain\Events;
@@ -12,8 +13,8 @@ class EventWasDeleted implements Event
     // TODO: use readonly property
     public function __construct(
         public Uuid $uuid
-    )
-    {}
+    ) {
+    }
 
     public function toPayload(): array
     {

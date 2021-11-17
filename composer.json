@@ -28,6 +28,7 @@
         "laravel/tinker": "^2.5",
         "nunomaduro/termwind": "dev-master",
         "php-http/message": "^1.11",
+        "spatie/laravel-route-attributes": "^1.9",
         "spiral/roadrunner-broadcast": "dev-master",
         "spiral/roadrunner-cli": "^2.0",
         "spiral/roadrunner-jobs": "^2.0",

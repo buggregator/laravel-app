@@ -16,6 +16,7 @@ class ShowAction extends \Modules\Events\Interfaces\Http\Controllers\ShowAction
     public function __invoke(Request $request, QueryBus $bus, ActionMap $actionMap, Uuid $uuid)
     {
         $request->offsetSet('type', 'smtp');
+
         return parent::__invoke($request, $bus, $actionMap, $uuid);
     }
 }

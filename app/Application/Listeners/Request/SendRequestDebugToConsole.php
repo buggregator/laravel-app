@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Listeners\Request;
@@ -12,7 +13,7 @@ class SendRequestDebugToConsole implements ListenerInterface
 {
     public function handle($event): void
     {
-        if (!config('app.debug')) {
+        if (! config('app.debug')) {
             return;
         }
 
@@ -22,7 +23,7 @@ class SendRequestDebugToConsole implements ListenerInterface
             if ($request instanceof \Illuminate\Http\Request) {
                 $statusCode = $event->httpResponse()->getStatusCode();
 
-                render((string)view('console.http.request', [
+                render((string) view('console.http.request', [
                     'request' => $request,
                     'response' => $event->httpResponse(),
                     'color' => match ($request->method()) {

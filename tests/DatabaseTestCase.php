@@ -6,15 +6,10 @@ namespace Tests;
 
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
-use App\Domain\Entity\Json;
-use App\Domain\ValueObjects\Uuid;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\RepositoryInterface;
-use Cycle\ORM\TransactionInterface;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Carbon;
-use Infrastructure\EventSauce\Persistance\CycleOrmMessageRepository;
 use Modules\Events\Domain\Event;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -27,7 +22,7 @@ class DatabaseTestCase extends TestCase
     protected function setUp(): void
     {
         $this->afterApplicationCreated(function () {
-            if (!static::$dbInitialized) {
+            if (! static::$dbInitialized) {
                 $response = new BufferedOutput();
 
                 $this->app[Kernel::class]->call('db:wipe', [], $response);

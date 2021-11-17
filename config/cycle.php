@@ -13,7 +13,7 @@ return [
 
         'cache' => [
             'storage' => env('DB_SCHEMA_CACHE_DRIVER', 'file'),
-            'enabled' => (bool)env('DB_SCHEMA_CACHE', false),
+            'enabled' => (bool) env('DB_SCHEMA_CACHE', false),
         ],
 
         /*
@@ -48,8 +48,8 @@ return [
                 base_path('app/Application'),
                 base_path('app/Infrastructure'),
             ],
-            'exclude' => ['vendor', 'tests']
-        ]
+            'exclude' => ['vendor', 'tests'],
+        ],
     ],
 
     'database' => [
@@ -116,7 +116,7 @@ return [
                 ),
                 schema: 'public',
                 queryCache: true,
-            )
-        ]
-    ]
+            ),
+        ],
+    ],
 ];

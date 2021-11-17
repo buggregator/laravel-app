@@ -1,20 +1,21 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\IncommingEvents\Domain\Events;
 
-use App\Domain\ValueObjects\Uuid;
 use App\Contracts\EventSource\Event;
+use App\Domain\ValueObjects\Uuid;
 use EventSauce\EventSourcing\Serialization\SerializablePayload;
 
 final class EventWasReceived implements Event
 {
     // TODO: use readonly property
     public function __construct(
-        public Uuid   $uuid,
+        public Uuid $uuid,
         public string $type,
-        public array  $payload,
-        public int    $timestamp
+        public array $payload,
+        public int $timestamp
     ) {
     }
 
@@ -24,7 +25,7 @@ final class EventWasReceived implements Event
             'uuid' => (string) $this->uuid,
             'type' => $this->type,
             'payload' => $this->payload,
-            'timestamp' => $this->timestamp
+            'timestamp' => $this->timestamp,
         ];
     }
 

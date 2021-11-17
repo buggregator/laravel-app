@@ -88,7 +88,6 @@ class SmtpControllerTest extends DatabaseTestCase
             ->assertNotFound();
     }
 
-
     public function testGetEventHtmlByUuid()
     {
         $event = $this->createEvent('smtp', ['foo1' => 'bar1', 'data' => ['html' => '<h1>Hello world</h1>']]);
@@ -97,7 +96,6 @@ class SmtpControllerTest extends DatabaseTestCase
             ->assertOk()
             ->assertSeeText('Hello world');
     }
-
 
     public function testGetEventHtmlShouldReturn404IfNotFound()
     {

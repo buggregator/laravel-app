@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\Entity;
@@ -7,7 +8,9 @@ use Cycle\Database\DatabaseInterface;
 
 final class Json
 {
-    public function __construct(private array $data = []){}
+    public function __construct(private array $data = [])
+    {
+    }
 
     public function __toString(): string
     {

@@ -6,9 +6,9 @@ namespace Modules\Sentry\Interfaces\Http\Controllers;
 
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
+use Illuminate\Http\Request;
 use Interfaces\Http\Controllers\Controller;
 use Modules\Sentry\Contracts\EventHandler;
-use Illuminate\Http\Request;
 use Spatie\RouteAttributes\Attributes\Post;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -32,4 +32,3 @@ class StoreEventAction extends Controller
         );
     }
 }
-

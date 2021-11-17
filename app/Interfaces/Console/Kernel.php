@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Interfaces\Console;
@@ -12,6 +13,5 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-
     }
 }

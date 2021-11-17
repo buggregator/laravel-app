@@ -1,14 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\VarDumper\Console;
 
 use App\Commands\HandleReceivedEvent;
-use App\Contracts\TCP\Handler;
 use App\Contracts\Command\CommandBus;
+use App\Contracts\TCP\Handler;
+use App\Contracts\TCP\Response;
 use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
-use App\Contracts\TCP\Response;
 use App\Websocket\BrowserOutput;
 use Spiral\RoadRunner\Tcp\Request;
 use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
@@ -44,7 +45,7 @@ class TcpHandler implements Handler
                 throw new \RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
             }
 
-            if (!is_array($payload) || count($payload) < 2 || !$payload[0] instanceof Data || !is_array($payload[1])) {
+            if (! is_array($payload) || count($payload) < 2 || ! $payload[0] instanceof Data || ! is_array($payload[1])) {
                 throw new \RuntimeException("Invalid payload from [{$request->connectionUuid}] client.");
             }
 
@@ -57,7 +58,7 @@ class TcpHandler implements Handler
 
     private function sendToConsole(Request $request, array $payload, OutputInterface $output): void
     {
-        if (!$this->config->isEnabled()) {
+        if (! $this->config->isEnabled()) {
             return;
         }
 
@@ -77,9 +78,9 @@ class TcpHandler implements Handler
             new HandleReceivedEvent('var-dump', [
                 'payload' => [
                     'type' => $payload[0]->getType(),
-                    'value' => $this->convertToPrimitive($payload[0])
+                    'value' => $this->convertToPrimitive($payload[0]),
                 ],
-                'context' => $payload[1]
+                'context' => $payload[1],
             ])
         );
     }
@@ -87,7 +88,7 @@ class TcpHandler implements Handler
     private function convertToPrimitive(Data $data): string|null
     {
         if (in_array($data->getType(), ['string', 'boolean'])) {
-            return (string)$data->getValue();
+            return (string) $data->getValue();
         }
 
         $dumper = new HtmlDumper();
