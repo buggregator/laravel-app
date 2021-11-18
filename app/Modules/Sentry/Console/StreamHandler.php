@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Sentry\Console;
@@ -12,9 +13,8 @@ class StreamHandler implements Handler
 {
     public function __construct(
         private StreamHandlerConfig $config,
-        private HtmlRenderer        $renderer
-    )
-    {
+        private HtmlRenderer $renderer
+    ) {
     }
 
     public function handle(array $payload): void
@@ -48,7 +48,7 @@ class StreamHandler implements Handler
         foreach ($frames as $i => $frame) {
             $file = $frame['filename'];
             $line = $frame['lineno'];
-            $class = empty($frame['class']) ? '' : $frame['class'] . '::';
+            $class = empty($frame['class']) ? '' : $frame['class'].'::';
             $function = $frame['function'] ?? '';
             $pos = str_pad((string)((int)$i + 1), 4, ' ');
 
@@ -56,11 +56,11 @@ class StreamHandler implements Handler
                 'file' => $file,
                 'line' => $line,
                 'class' => $class,
-                'function' => $function
+                'function' => $function,
             ];
 
             if ($i >= 10) {
-                yield $pos => '+ more ' . count($frames) - 10 . ' frames';
+                yield $pos => '+ more '.count($frames) - 10 .' frames';
 
                 break;
             }
@@ -74,22 +74,29 @@ class StreamHandler implements Handler
     protected function renderCodeSnippet(array $frame): array
     {
         $line = (int)$frame['lineno'];
-        $startLine = $line - count($frame['pre_context']);
-
+        $startLine = 0;
         $content = '';
-        foreach ($frame['pre_context'] as $row) {
-            $content .= $row . "\n";
+        if (isset($frame['pre_context'])) {
+            foreach ($frame['pre_context'] as $row) {
+                $content .= $row."\n";
+            }
         }
-        $content .= $frame['context_line'] . "\n";
-        foreach ($frame['post_context'] as $row) {
-            $content .= $row . "\n";
+
+        if (isset($frame['context_line'])) {
+            $content .= $frame['context_line']."\n";
+        }
+
+        if (isset($frame['post_context'])) {
+            foreach ($frame['post_context'] as $row) {
+                $content .= $row."\n";
+            }
         }
 
         return [
             'file' => $frame['filename'],
             'line' => $line,
             'start_line' => $startLine,
-            'content' => $content
+            'content' => $content,
         ];
     }
 
