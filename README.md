@@ -5,6 +5,8 @@
 [![Twitter](https://img.shields.io/badge/twitter-Follow-blue)](https://twitter.com/buggregator)
 [![Join to our telegram](https://img.shields.io/badge/telegram-Join-blue)](https://t.me/joinchat/xATnNI69zXQ0MWIy)
 
+![Frame 2](https://user-images.githubusercontent.com/773481/142460231-07f28ffb-4892-4b97-a01d-fb677eda071b.jpg)
+
 Buggregator is a beautiful, lightweight app built on Laravel and VueJs with [RoadRunner](https://github.com/spiral/roadrunner) underhood, that helps debugging mostly PHP app without extra packages. It runs without installation on multiple platforms via docker and supports [symfony var-dumper](#1-symfony-vardumper-server), [monolog](#4-compatible-with-monolog), [sentry](#3-compatible-with-sentry), [smtp](#2-fake-smtp-server-for-catching-mail) and [spatie ray package](#5-spatie-ray-debug-tool).
 
 #### Contents
