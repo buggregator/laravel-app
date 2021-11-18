@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Infrastructure\RoadRunner\TCP;
 
+use App\Attributes\Locator;
+use App\TCP\CloseConnection;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -111,7 +113,7 @@ final class Worker implements WorkerInterface
     {
         $app = $this->appFactory->create($options->getAppBasePath());
         $app->instance(\Spiral\RoadRunner\Worker::class, $worker);
-        $app->instance(StreamHandler::class, new StreamHandler($this->output, $app));
+        $app->instance(StreamHandler::class, new StreamHandler($this->output, $app, new Locator($app)));
 
         return $app;
     }

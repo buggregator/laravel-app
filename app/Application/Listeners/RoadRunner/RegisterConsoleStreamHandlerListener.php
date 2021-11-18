@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Listeners\RoadRunner;
 
+use App\Attributes\Locator;
 use Interfaces\Console\Handler;
 use Interfaces\Console\StreamHandler;
 use Spiral\RoadRunnerLaravel\Events\BeforeLoopStartedEvent;
@@ -15,7 +16,8 @@ class RegisterConsoleStreamHandlerListener
     {
         $event->application()->instance(Handler::class, new StreamHandler(
             (new ConsoleOutput())->getErrorOutput(),
-            $event->application()
-        ));
+            $event->application(),
+            new Locator($event->application()
+        )));
     }
 }

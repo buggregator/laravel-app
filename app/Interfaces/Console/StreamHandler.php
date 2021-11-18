@@ -21,7 +21,7 @@ class StreamHandler implements Handler
     public function __construct(
         private OutputInterface $output,
         private Application $app,
-        private Locator $attributesLocator
+        Locator $attributesLocator
     ) {
         foreach ($attributesLocator->findClassAttributes('app', Stream::class) as $class => $attributes) {
             $this->processAttributes($class, $attributes);
