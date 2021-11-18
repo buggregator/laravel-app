@@ -18,8 +18,11 @@
         <span class="font-bold">{{ $codeSnippet['file'] }}</span>:<span class="text-yellow font-bold">{{ $codeSnippet['line'] }}
     </p>
 
+    @if(!empty($codeSnippet['content']))
     <hr>
     <code line="{{ $codeSnippet['line'] }}" start-line="{{ $codeSnippet['start_line'] }}">{{ $codeSnippet['content'] }}</code>
+    @endif
+
     <hr>
 
     <div class="mt-1">

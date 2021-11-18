@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Modules\Sentry\Console;
@@ -73,16 +72,23 @@ class StreamHandler implements Handler
      */
     protected function renderCodeSnippet(array $frame): array
     {
-        $line = (int) $frame['lineno'];
-        $startLine = $line - count($frame['pre_context']);
-
+        $line = (int)$frame['lineno'];
+        $startLine = 0;
         $content = '';
-        foreach ($frame['pre_context'] as $row) {
-            $content .= $row."\n";
+        if (isset($frame['pre_context'])) {
+            foreach ($frame['pre_context'] as $row) {
+                $content .= $row."\n";
+            }
         }
-        $content .= $frame['context_line']."\n";
-        foreach ($frame['post_context'] as $row) {
-            $content .= $row."\n";
+
+        if (isset($frame['context_line'])) {
+            $content .= $frame['context_line']."\n";
+        }
+
+        if (isset($frame['post_context'])) {
+            foreach ($frame['post_context'] as $row) {
+                $content .= $row."\n";
+            }
         }
 
         return [
