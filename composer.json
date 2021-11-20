@@ -69,7 +69,7 @@
             "@php artisan key:generate --ansi"
         ],
         "docker-run": [
-            "docker run --pull always --env CLI_SMTP_STREAM=false --env CLI_SENTRY_STREAM=false -p 23517:8000 -p 1025:1025 -p 9912:9912 -p 9913:9913 butschster/buggregator:latest"
+            "docker run --name buggregator --pull always --env CLI_SMTP_STREAM=false --env CLI_SENTRY_STREAM=false -p 23517:8000 -p 1025:1025 -p 9912:9912 -p 9913:9913 butschster/buggregator:latest"
         ]
     },
     "extra": {
