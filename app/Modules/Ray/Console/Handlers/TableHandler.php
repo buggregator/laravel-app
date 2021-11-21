@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Ray\Console\Handlers;
 
 use Modules\Ray\Console\VariableCleaner;
-
 use function Termwind\terminal;
 
 class TableHandler extends AbstractHandler

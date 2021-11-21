@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Spiral\RoadRunnerLaravel\Events\Contracts\WithHttpRequest;
 use Spiral\RoadRunnerLaravel\Events\Contracts\WithHttpResponse;
 use Spiral\RoadRunnerLaravel\Listeners\ListenerInterface;
-
 use function Termwind\render;
 
 class SendRequestDebugToConsole implements ListenerInterface

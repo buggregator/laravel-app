@@ -18,7 +18,7 @@ final class EventWasReceived implements Event, ShouldBroadcastNow
         public string $type,
         public array $payload,
         public int $timestamp,
-        public bool $sendToConsole
+        public bool $sendToConsole = false
     ) {
     }
 

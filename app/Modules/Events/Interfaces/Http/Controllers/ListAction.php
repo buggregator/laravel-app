@@ -34,7 +34,6 @@ class ListAction extends Controller
         ]);
     }
 
-
     #[Get(uri: '/events/{type}', name: 'events.type')]
     public function eventListByType(Request $request, QueryBus $bus, ActionMap $actionMap, string $type)
     {
