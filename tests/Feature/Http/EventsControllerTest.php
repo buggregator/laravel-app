@@ -38,8 +38,7 @@ class EventsControllerTest extends DatabaseTestCase
 
     public function testGetSpecificTypeListOfEventsForUnknownTypeEventShouldReturnNotFound()
     {
-        $this->json('GET', route('events'),
-            ['type' => 'foo'],
+        $this->getJson(route('events.type', 'foo'),
             ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
         )->assertForbidden()->assertJsonFragment(['message' => 'Action for event type [foo] not found.']);
     }
@@ -51,10 +50,8 @@ class EventsControllerTest extends DatabaseTestCase
         $this->createEvent('bar', ['foo1' => 'bar1']);
         $this->createEvent('baz', ['foo1' => 'bar1']);
 
-        $this->json(
-            'GET',
-            route('events'),
-            ['type' => $event1->getType()],
+        $this->getJson(
+            route('events.type', $event1->getType()),
             ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
         )
             ->assertJsonFragment([
@@ -140,10 +137,8 @@ class EventsControllerTest extends DatabaseTestCase
     {
         config()->set('server.foo.http.show', 'Foo/Show');
         $event = $this->createEvent('foo', ['foo1' => 'bar1']);
-        $this->json(
-            'GET',
-            route('event.show', $event->getUuid()->toString()),
-            ['type' => $event->getType()],
+        $this->getJson(
+            route('event.show', [$event->getType(), $event->getUuid()->toString()]),
             ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
         )
             ->assertJsonFragment([
@@ -164,10 +159,8 @@ class EventsControllerTest extends DatabaseTestCase
     public function testGetEventShouldReturn404IfNotFound()
     {
         config()->set('server.foo.http.show', 'Foo/Show');
-        $this->json(
-            'GET',
-            route('event.show', Uuid::generate()->toString()),
-            ['type' => 'foo'],
+        $this->getJson(
+            route('event.show', ['foo', Uuid::generate()->toString()]),
             ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
         )
             ->assertNotFound();
@@ -175,10 +168,8 @@ class EventsControllerTest extends DatabaseTestCase
 
     public function testGetEventShouldReturn404IfWrongType()
     {
-        $this->json(
-            'GET',
-            route('event.show', Uuid::generate()->toString()),
-            ['type' => 'foo'],
+        $this->getJson(
+            route('event.show', ['foo', Uuid::generate()->toString()]),
             ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
         )
             ->assertForbidden();

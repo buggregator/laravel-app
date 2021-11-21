@@ -21,16 +21,6 @@ class DatabaseTestCase extends TestCase
 
     protected function setUp(): void
     {
-        $this->afterApplicationCreated(function () {
-            if (! static::$dbInitialized) {
-                $response = new BufferedOutput();
-
-                $this->app[Kernel::class]->call('db:wipe', [], $response);
-
-                static::$dbInitialized = true;
-            }
-        });
-
         parent::setUp();
     }
 

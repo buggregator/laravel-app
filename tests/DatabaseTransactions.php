@@ -17,6 +17,7 @@ trait DatabaseTransactions
 
         $this->beforeApplicationDestroyed(function () use ($driver) {
             $driver->rollbackTransaction();
+            $driver->disconnect();
         });
     }
 }

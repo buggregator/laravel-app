@@ -38,6 +38,10 @@ final class DatabaseServiceProvider extends ServiceProvider
         );
 
         $this->app->terminating(static function (Application $app): void {
+            if ($app->runningUnitTests()) {
+                return;
+            }
+
             $dbal = $app[DatabaseProviderInterface::class];
             foreach ($dbal->getDrivers() as $driver) {
                 $driver->disconnect();
