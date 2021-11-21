@@ -18,15 +18,11 @@ use Spatie\RouteAttributes\Attributes\Get;
 
 class ShowAction extends Controller
 {
-    #[Get(uri: '/event/{uuid}', name: 'event.show')]
-    public function __invoke(Request $request, QueryBus $bus, ActionMap $actionMap, Uuid $uuid)
+    #[Get(uri: '/events/{type}/{uuid}', name: 'event.show')]
+    public function __invoke(Request $request, QueryBus $bus, ActionMap $actionMap, string $type, Uuid $uuid)
     {
-        $request->validate([
-            'type' => 'required|alpha_dash',
-        ]);
-
         try {
-            $action = $actionMap->getForType($request->type, 'show');
+            $action = $actionMap->getForType($type, 'show');
         } catch (ActionNotFoundException $e) {
             abort(403, $e->getMessage());
         }
@@ -39,7 +35,7 @@ class ShowAction extends Controller
 
         return Inertia::render($action, [
             'event' => $event,
-            'events' => $bus->ask(new FindAllEvents(type: $request->type)),
+            'events' => $bus->ask(new FindAllEvents(type: $type)),
         ]);
     }
 }

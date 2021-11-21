@@ -18,7 +18,7 @@ class StreamHandler implements Handler
 
     public function handle(array $payload): void
     {
-        foreach ($payload['data']['exception']['values'] as $exception) {
+        foreach ($payload['payload']['exception']['values'] as $exception) {
             $this->renderException($exception);
         }
     }
@@ -76,6 +76,7 @@ class StreamHandler implements Handler
         $startLine = 0;
         $content = '';
         if (isset($frame['pre_context'])) {
+            $startLine = $line - count($frame['pre_context']) + 1;
             foreach ($frame['pre_context'] as $row) {
                 $content .= $row."\n";
             }
@@ -105,6 +106,6 @@ class StreamHandler implements Handler
             return true;
         }
 
-        return ! isset($payload['data']['exception']['values'][0]);
+        return empty($payload['payload']['exception']['values']);
     }
 }

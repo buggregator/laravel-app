@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Infrastructure\CycleOrm;
 
 use Cycle\Database\DatabaseProviderInterface;
+use Cycle\Migrations\FileRepository;
+use Cycle\Migrations\RepositoryInterface;
 use Cycle\ORM\Collection\IlluminateCollectionFactory;
+use Cycle\ORM\EntityRegistryInterface;
 use Cycle\ORM\Factory;
 use Cycle\ORM\FactoryInterface;
 use Cycle\ORM\ORMInterface;
@@ -24,20 +27,28 @@ final class CycleOrmServiceProvider extends ServiceProvider
         $this->initFactory();
         $this->initOrm();
         $this->app->bind(TransactionInterface::class, Transaction::class);
+        $this->app->singleton(RepositoryInterface::class, FileRepository::class);
         $this->registerAuthUserProvider();
     }
 
     private function initContainer(): void
     {
-        $this->app->singleton(SpiralContainer::class, static function ($app) {
-            $container = new SpiralContainer();
-            $container->bind(TransactionInterface::class, Transaction::class);
-            $container->bind(ORMInterface::class, fn () => $app[ORMInterface::class]);
+        $this->app[SpiralContainer::class]->bind(TransactionInterface::class, Transaction::class);
 
-            return $container;
-        });
+        $this->app[SpiralContainer::class]->bindSingleton(
+            ORMInterface::class,
+            fn() => $this->app[ORMInterface::class]
+        );
 
-        $this->app->alias(SpiralContainer::class, \Spiral\Core\FactoryInterface::class);
+        $this->app[SpiralContainer::class]->bindSingleton(
+            FactoryInterface::class,
+            fn() => $this->app[FactoryInterface::class]
+        );
+
+        $this->app[SpiralContainer::class]->bindSingleton(
+            DatabaseProviderInterface::class,
+            fn() => $this->app[DatabaseProviderInterface::class]
+        );
     }
 
     private function initFactory(): void
@@ -53,7 +64,7 @@ final class CycleOrmServiceProvider extends ServiceProvider
 
     private function initOrm(): void
     {
-        $this->app->singleton(ORMInterface::class, static function ($app) {
+        $this->app->singleton(ORMInterface::class, static function ($app): \Cycle\ORM\ORM {
             return new \Cycle\ORM\ORM(
                 $app[FactoryInterface::class],
                 $app[SchemaInterface::class]

@@ -14,11 +14,12 @@
     <h2 class="font-bold">{{ $type }}</h2>
     <p>
         <span class="text-red">{{ $message }}</span>
-        <span class="text-gray">on line</span>
+        <span class="text-gray px-1">on line</span>
         <span class="font-bold">{{ $codeSnippet['file'] }}</span>:<span class="text-yellow font-bold">{{ $codeSnippet['line'] }}
     </p>
 
     @if(!empty($codeSnippet['content']))
+
     <hr>
     <code line="{{ $codeSnippet['line'] }}" start-line="{{ $codeSnippet['start_line'] }}">{{ $codeSnippet['content'] }}</code>
     @endif

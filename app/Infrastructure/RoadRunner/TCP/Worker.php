@@ -68,10 +68,12 @@ final class Worker implements WorkerInterface
             $this->setApplicationInstance($sandbox);
 
             if ($this->isDebugModeEnabled($config)) {
-                render((string) view('console.tcp.request', [
-                    'request' => $request,
-                    'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),
-                ]));
+                render(
+                    (string)view('console.tcp.request', [
+                        'request' => $request,
+                        'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),
+                    ])
+                );
             }
 
             try {
@@ -84,24 +86,27 @@ final class Worker implements WorkerInterface
 
                 $response = new CloseConnection();
             } finally {
-                $this->setApplicationInstance($app);
-
                 $tcpWorker->getWorker()->respond(
                     new Payload($response->getBody(), $response->getContext())
                 );
 
+                $tcpKernel->terminate($request, $response);
+
                 if ($this->isDebugModeEnabled($config)) {
-                    render((string) view('console.tcp.response', [
-                        'request' => $request,
-                        'response' => $response,
-                        'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),
-                        'duration' => number_format(round(microtime(true) - $startTime, 4), 4, '.', ''),
-                    ]));
+                    render(
+                        (string)view('console.tcp.response', [
+                            'request' => $request,
+                            'response' => $response,
+                            'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),
+                            'duration' => number_format(round(microtime(true) - $startTime, 4), 4, '.', ''),
+                        ])
+                    );
                 }
 
                 $this->fireEvent($sandbox, new AfterLoopIterationEvent($sandbox));
-
                 unset($response, $request, $sandbox);
+
+                $this->setApplicationInstance($app);
             }
         }
     }
@@ -109,8 +114,10 @@ final class Worker implements WorkerInterface
     /**
      * Create a Laravel application instance and bind all required instances.
      */
-    protected function createApplication(WorkerOptionsInterface $options, \Spiral\RoadRunner\Worker $worker): ApplicationContract
-    {
+    protected function createApplication(
+        WorkerOptionsInterface $options,
+        \Spiral\RoadRunner\Worker $worker
+    ): ApplicationContract {
         $app = $this->appFactory->create($options->getAppBasePath());
         $app->instance(\Spiral\RoadRunner\Worker::class, $worker);
         $app->instance(StreamHandler::class, new StreamHandler($this->output, $app, new Locator($app)));

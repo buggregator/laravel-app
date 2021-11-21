@@ -42,5 +42,5 @@
         @endif
     </div>
 
-    <pre>{{ $body }}</pre>
+    <code>{{ $body }}</code>
 </div>

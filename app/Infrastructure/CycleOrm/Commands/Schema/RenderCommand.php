@@ -17,7 +17,9 @@ final class RenderCommand extends Command
     {
         $this->output->write(
             $renderer->render(
-                $schemaManager->compileSchema()
+                $schemaManager->compileSchema(
+                    $schemaManager->getSchemaGenerators()
+                )
             )
         );
     }

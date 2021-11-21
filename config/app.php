@@ -172,6 +172,7 @@ return [
         Infrastructure\RoadRunner\Queue\QueueServiceProvider::class,
         Infrastructure\RoadRunner\Cache\CacheServiceProvider::class,
         Infrastructure\RoadRunner\Broadcast\BroadcastServiceProvider::class,
+        Infrastructure\CycleOrm\ContainerServiceProvider::class,
         Infrastructure\CycleOrm\DatabaseServiceProvider::class,
         Infrastructure\CycleOrm\SchemaServiceProvider::class,
         Infrastructure\CycleOrm\CycleOrmServiceProvider::class,

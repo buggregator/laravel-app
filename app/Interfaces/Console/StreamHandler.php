@@ -58,11 +58,11 @@ class StreamHandler implements Handler
 
     public function shouldBeSkipped(array $payload): bool
     {
-        if (! isset($payload['type'])) {
+        if (!isset($payload['type'])) {
             return true;
         }
 
-        if (! isset($this->handlers[$payload['type']])) {
+        if (!isset($this->handlers[$payload['type']])) {
             return true;
         }
 

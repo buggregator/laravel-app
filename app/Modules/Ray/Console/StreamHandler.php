@@ -23,7 +23,7 @@ class StreamHandler implements Handler
 
     public function handle(array $stream): void
     {
-        foreach ($stream['data']['payloads'] as $payload) {
+        foreach ($stream['payload']['payloads'] as $payload) {
             if (! isset($this->payloadHandlers[$payload['type']])) {
                 continue;
 
@@ -47,6 +47,6 @@ class StreamHandler implements Handler
             return true;
         }
 
-        return ! isset($stream['data']['payloads']);
+        return ! isset($stream['payload']['payloads']);
     }
 }

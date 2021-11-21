@@ -20,7 +20,7 @@ class StreamHandler implements Handler
 
     public function handle(array $payload): void
     {
-        $levelColor = match (strtolower($payload['data']['level_name'])) {
+        $levelColor = match (strtolower($payload['payload']['level_name'])) {
             'notice' , 'info' => 'blue',
             'warning' => 'yellow',
             'critical', 'error', 'alert', 'emergency' => 'red',
@@ -29,17 +29,17 @@ class StreamHandler implements Handler
 
         $this->renderer->render(
             (string) view('monolog::console.output', [
-                'date' => Carbon::parse($payload['data']['datetime'])->format('r'),
-                'channel' => $payload['data']['channel'] ?? '',
+                'date' => Carbon::parse($payload['payload']['datetime'])->format('r'),
+                'channel' => $payload['payload']['channel'] ?? '',
                 'levelColor' => $levelColor,
-                'level' => $payload['data']['level_name'].'' ?? 'DEBUG',
-                'messages' => explode("\n", $payload['data']['message']),
+                'level' => $payload['payload']['level_name'].'' ?? 'DEBUG',
+                'messages' => explode("\n", $payload['payload']['message']),
             ])
         );
 
         // It can't be sent to HTML
-        if (! empty($payload['data']['context'])) {
-            dump($payload['data']['context']);
+        if (! empty($payload['payload']['context'])) {
+            dump($payload['payload']['context']);
         }
     }
 
@@ -49,6 +49,6 @@ class StreamHandler implements Handler
             return true;
         }
 
-        return ! isset($payload['data']['message']);
+        return ! isset($payload['payload']['message']);
     }
 }

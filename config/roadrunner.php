@@ -73,11 +73,13 @@ return [
 
         Events\AfterLoopIterationEvent::class => [
             ...Defaults::afterLoopIteration(),
+            \Infrastructure\CycleOrm\Listeners\ClearIdentityMap::class,
             Listeners\RunGarbageCollectorListener::class, // keep the memory usage low
         ],
 
-        \App\Contracts\TCP\Events\AfterLoopIterationEvent::class => [
+        \Infrastructure\RoadRunner\TCP\Events\AfterLoopIterationEvent::class => [
             ...Defaults::afterLoopIteration(),
+            \Infrastructure\CycleOrm\Listeners\ClearIdentityMap::class,
             Listeners\RunGarbageCollectorListener::class, // keep the memory usage low
         ],
 

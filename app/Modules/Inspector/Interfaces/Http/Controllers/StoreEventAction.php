@@ -19,7 +19,7 @@ class StoreEventAction extends Controller
         CommandBus $commands,
     ): void {
         $data = json_decode(base64_decode($request->getContent()), true)
-            ?? throw new HttpException('Invalid data');
+            ?? throw new HttpException(500, 'Invalid data');
 
         $commands->dispatch(
             new HandleReceivedEvent('inspector', $data, true)

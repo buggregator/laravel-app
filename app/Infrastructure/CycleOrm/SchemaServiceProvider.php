@@ -18,6 +18,7 @@ final class SchemaServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->commands([
+            Commands\Schema\GenerateCommand::class,
             Commands\Schema\MigrateCommand::class,
             Commands\Schema\RefreshCommand::class,
             Commands\Schema\RenderCommand::class,
@@ -58,8 +59,7 @@ final class SchemaServiceProvider extends ServiceProvider
                 $this->app[DatabaseProviderInterface::class],
                 $this->app['cache']->store(
                     config('cycle.schema.cache.storage')
-                ),
-                $this->app[Migrator::class]
+                )
             );
         });
     }

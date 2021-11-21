@@ -6,7 +6,6 @@ namespace Modules\IncommingEvents\Application\Commands\HandleReceivedEvent;
 
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandHandler;
-use App\Events\EventReceived;
 use Modules\IncommingEvents\Domain\EventProcess;
 use Modules\IncommingEvents\Persistance\EventProcessAggregateRootRepository;
 
@@ -27,9 +26,5 @@ final class Handler implements CommandHandler
                 $command->timestamp
             )
         );
-
-        event(new EventReceived(
-            $command->uuid, $command->type, $command->payload, $command->timestamp, $command->sendToConsole
-        ));
     }
 }

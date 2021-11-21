@@ -7,11 +7,11 @@ namespace Modules\Events\Application\Commands\StoreEvent;
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandHandler;
 use App\Domain\Entity\Json;
-use App\Events\EventReceived;
 use Cycle\ORM\TransactionInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Carbon;
 use Modules\Events\Domain\Event;
+use Modules\IncommingEvents\Domain\Events\EventWasReceived;
 
 class Handler implements CommandHandler
 {
@@ -49,7 +49,7 @@ class Handler implements CommandHandler
         );
 
         $this->dispatcher->dispatch(
-            new EventReceived(
+            new EventWasReceived(
                 $command->uuid, $command->type, $command->payload, $command->timestamp, $command->sendToConsole
             )
         );

@@ -328,12 +328,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cycle/annotated.git",
-                "reference": "e4ae8aaf46de38195bb411148fff9759f2fc4ff0"
+                "reference": "282a7936c8f971d6b1de2b26d6d4536aa397344f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cycle/annotated/zipball/e4ae8aaf46de38195bb411148fff9759f2fc4ff0",
-                "reference": "e4ae8aaf46de38195bb411148fff9759f2fc4ff0",
+                "url": "https://api.github.com/repos/cycle/annotated/zipball/282a7936c8f971d6b1de2b26d6d4536aa397344f",
+                "reference": "282a7936c8f971d6b1de2b26d6d4536aa397344f",
                 "shasum": ""
             },
             "require": {
@@ -364,7 +364,7 @@
                 "issues": "https://github.com/cycle/annotated/issues",
                 "source": "https://github.com/cycle/annotated/tree/2.0"
             },
-            "time": "2021-11-17T16:44:26+00:00"
+            "time": "2021-11-18T17:35:01+00:00"
         },
         {
             "name": "cycle/database",
@@ -486,12 +486,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cycle/orm.git",
-                "reference": "4cbac558d34b1f3c4d5ea39c61b1d7fa3a8c26f5"
+                "reference": "f01c1a66c4f99704b6e67622c571103cb3664e08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cycle/orm/zipball/4cbac558d34b1f3c4d5ea39c61b1d7fa3a8c26f5",
-                "reference": "4cbac558d34b1f3c4d5ea39c61b1d7fa3a8c26f5",
+                "url": "https://api.github.com/repos/cycle/orm/zipball/f01c1a66c4f99704b6e67622c571103cb3664e08",
+                "reference": "f01c1a66c4f99704b6e67622c571103cb3664e08",
                 "shasum": ""
             },
             "require": {
@@ -526,7 +526,7 @@
                 "issues": "https://github.com/cycle/orm/issues",
                 "source": "https://github.com/cycle/orm/tree/2.0"
             },
-            "time": "2021-11-16T07:57:36+00:00"
+            "time": "2021-11-19T15:09:09+00:00"
         },
         {
             "name": "cycle/schema-builder",
@@ -617,16 +617,16 @@
         },
         {
             "name": "cycle/schema-renderer",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cycle/schema-renderer.git",
-                "reference": "8f4bf841c23592245ebc0080395c0e54fdd0a015"
+                "reference": "8fae3165eac5b37b91c9353a813b260405d4534b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cycle/schema-renderer/zipball/8f4bf841c23592245ebc0080395c0e54fdd0a015",
-                "reference": "8f4bf841c23592245ebc0080395c0e54fdd0a015",
+                "url": "https://api.github.com/repos/cycle/schema-renderer/zipball/8fae3165eac5b37b91c9353a813b260405d4534b",
+                "reference": "8fae3165eac5b37b91c9353a813b260405d4534b",
                 "shasum": ""
             },
             "require": {
@@ -651,9 +651,9 @@
             "description": "Utils for Cycle ORM Schema rendering",
             "support": {
                 "issues": "https://github.com/cycle/schema-renderer/issues",
-                "source": "https://github.com/cycle/schema-renderer/tree/1.0.0"
+                "source": "https://github.com/cycle/schema-renderer/tree/1.0.1"
             },
-            "time": "2021-10-04T10:06:00+00:00"
+            "time": "2021-11-18T17:23:04+00:00"
         },
         {
             "name": "dasprid/enum",
@@ -2543,16 +2543,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.72.0",
+            "version": "v8.73.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "5168f8589195a5f48b9c41ad2eec77a6c15f14f3"
+                "reference": "36dfae9d9ef7f88e8f9489c484a0a0609592bc21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/5168f8589195a5f48b9c41ad2eec77a6c15f14f3",
-                "reference": "5168f8589195a5f48b9c41ad2eec77a6c15f14f3",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/36dfae9d9ef7f88e8f9489c484a0a0609592bc21",
+                "reference": "36dfae9d9ef7f88e8f9489c484a0a0609592bc21",
                 "shasum": ""
             },
             "require": {
@@ -2711,7 +2711,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-11-17T15:15:08+00:00"
+            "time": "2021-11-20T19:20:02+00:00"
         },
         {
             "name": "laravel/jetstream",
@@ -3854,12 +3854,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/termwind.git",
-                "reference": "17650f03da94b471f44865980c8aa32dadd8685e"
+                "reference": "4dd06fe3a4fc9bd436c4c1c1d847fec54e3bf7ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/17650f03da94b471f44865980c8aa32dadd8685e",
-                "reference": "17650f03da94b471f44865980c8aa32dadd8685e",
+                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/4dd06fe3a4fc9bd436c4c1c1d847fec54e3bf7ff",
+                "reference": "4dd06fe3a4fc9bd436c4c1c1d847fec54e3bf7ff",
                 "shasum": ""
             },
             "require": {
@@ -3923,7 +3923,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-11-13T18:57:38+00:00"
+            "time": "2021-11-21T04:58:42+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -10455,16 +10455,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.1.2",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "bcea0ae85868a89d5789c75f012c93129f842934"
+                "reference": "cbe085f9fdead5b6d62e4c022ca52dc9427a10ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/bcea0ae85868a89d5789c75f012c93129f842934",
-                "reference": "bcea0ae85868a89d5789c75f012c93129f842934",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/cbe085f9fdead5b6d62e4c022ca52dc9427a10ee",
+                "reference": "cbe085f9fdead5b6d62e4c022ca52dc9427a10ee",
                 "shasum": ""
             },
             "require": {
@@ -10480,7 +10480,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -10495,7 +10495,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.1.2"
+                "source": "https://github.com/phpstan/phpstan/tree/1.2.0"
             },
             "funding": [
                 {
@@ -10515,20 +10515,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-09T12:41:09+00:00"
+            "time": "2021-11-18T14:09:01+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.8",
+            "version": "9.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e"
+                "reference": "f301eb1453c9e7a1bc912ee8b0ea9db22c60223b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
-                "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f301eb1453c9e7a1bc912ee8b0ea9db22c60223b",
+                "reference": "f301eb1453c9e7a1bc912ee8b0ea9db22c60223b",
                 "shasum": ""
             },
             "require": {
@@ -10584,7 +10584,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.8"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.9"
             },
             "funding": [
                 {
@@ -10592,7 +10592,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-30T08:01:38+00:00"
+            "time": "2021-11-19T15:21:02+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

@@ -25,7 +25,6 @@ class StreamHandler implements Handler
     {
         $requestData = $payload['data'][0];
 
-        dump($payload);
         $this->output->table([], [
             ['date', Carbon::createFromTimestamp($requestData['timestamp'])->format('r')],
             ['hostname', $requestData['host']['hostname'] ?? $requestData['host']['ip']],

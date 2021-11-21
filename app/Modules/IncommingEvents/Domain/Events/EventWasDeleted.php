@@ -7,8 +7,10 @@ namespace Modules\IncommingEvents\Domain\Events;
 use App\Contracts\EventSource\Event;
 use App\Domain\ValueObjects\Uuid;
 use EventSauce\EventSourcing\Serialization\SerializablePayload;
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
-class EventWasDeleted implements Event
+class EventWasDeleted implements Event, ShouldBroadcastNow
 {
     // TODO: use readonly property
     public function __construct(
@@ -28,5 +30,15 @@ class EventWasDeleted implements Event
         $payload['uuid'] = Uuid::fromString($payload['uuid']);
 
         return new static(...$payload);
+    }
+
+    public function broadcastOn()
+    {
+        return new Channel('event');
+    }
+
+    public function broadcastWith(): array
+    {
+        return $this->toPayload();
     }
 }

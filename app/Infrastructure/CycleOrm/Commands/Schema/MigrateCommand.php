@@ -10,11 +10,11 @@ use Illuminate\Console\Command;
 final class MigrateCommand extends Command
 {
     protected $signature = 'cycle:schema:migrate';
-    protected $description = 'Run cycle orm migrations';
+    protected $description = 'Migrate ORM schema';
 
     public function handle(Migrator $migrator)
     {
-        if (! $migrator->isConfigured()) {
+        if (!$migrator->isConfigured()) {
             $migrator->configure();
         }
 

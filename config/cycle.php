@@ -70,7 +70,7 @@ return [
 
         'databases' => [
             'default' => [
-                'driver' => env('DB_CONNECTION', 'mysql'),
+                'driver' => env('DB_CONNECTION', 'sqlite'),
             ],
         ],
 
@@ -106,7 +106,7 @@ return [
                 ),
                 queryCache: true
             ),
-            'postgres' => new Database\Config\PostgresDriverConfig(
+            'pgsql' => new Database\Config\PostgresDriverConfig(
                 connection: new Database\Config\Postgres\TcpConnectionConfig(
                     database: env('DB_DATABASE', 'forge'),
                     host: env('DB_HOST', '127.0.0.1'),

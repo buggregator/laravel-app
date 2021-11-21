@@ -23,6 +23,12 @@ class ShowHtmlAction extends Controller
             abort(404, $e->getMessage());
         }
 
-        return Arr::get($event->getPayload()->toArray(), 'data.html');
+        $html = Arr::get($event->getPayload()->toArray(), 'html');
+
+        if ($html === null) {
+            abort(500, 'HTML is empty');
+        }
+
+        return $html;
     }
 }

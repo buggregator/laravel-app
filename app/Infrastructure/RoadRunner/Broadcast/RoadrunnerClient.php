@@ -18,7 +18,7 @@ final class RoadrunnerClient implements WebsocketClient
     {
         $broadcast = new Broadcast(RPC::create($this->host));
 
-        if (! $broadcast->isAvailable()) {
+        if (!$broadcast->isAvailable()) {
             throw new \LogicException('The [broadcast] plugin not available');
         }
 

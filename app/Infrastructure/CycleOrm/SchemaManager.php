@@ -6,11 +6,9 @@ namespace Infrastructure\CycleOrm;
 
 use Cycle\Annotated;
 use Cycle\Database\DatabaseProviderInterface;
-use Cycle\Migrations\Migrator;
 use Cycle\ORM\Schema as ORMSchema;
 use Cycle\ORM\SchemaInterface;
 use Cycle\Schema;
-use Cycle\Schema\Generator\Migrations\GenerateMigrations;
 use Psr\SimpleCache\CacheInterface;
 use Spiral\Tokenizer\ClassLocator;
 
@@ -21,14 +19,13 @@ final class SchemaManager
     public function __construct(
         private ClassLocator $classLocator,
         private DatabaseProviderInterface $database,
-        private CacheInterface $cache,
-        private Migrator $migrator
+        private CacheInterface $cache
     ) {
     }
 
     public function isSyncMode(): bool
     {
-        return (bool) config('cycle.schema.sync');
+        return (bool)config('cycle.schema.sync');
     }
 
     public function createSchema(): SchemaInterface
@@ -41,16 +38,16 @@ final class SchemaManager
         $this->cache->forget(self::SCHEMA_STORAGE_KEY);
     }
 
-    public function compileSchema(bool $migrate = false): array
+    public function compileSchema(array $generators): array
     {
         return (new Schema\Compiler())->compile(
             new Schema\Registry($this->database),
-            $this->getSchemaGenerators($migrate),
-            (array) config('cycle.schema.defaults')
+            $generators,
+            (array)config('cycle.schema.defaults')
         );
     }
 
-    private function getSchemaGenerators(bool $migrate = false): array
+    public function getSchemaGenerators(bool $migrate = false): array
     {
         $generators = [
             new Schema\Generator\ResetTables(),
@@ -65,15 +62,8 @@ final class SchemaManager
             new Schema\Generator\GenerateTypecast(),
         ];
 
-        if ($migrate) {
-            if ($this->isSyncMode()) {
-                $generators[] = new Schema\Generator\SyncTables();
-            } else {
-                $generators[] = new GenerateMigrations(
-                    $this->migrator->getRepository(),
-                    $this->migrator->getConfig()
-                );
-            }
+        if ($migrate && $this->isSyncMode()) {
+            $generators[] = new Schema\Generator\SyncTables();
         }
 
         return $generators;
@@ -81,13 +71,13 @@ final class SchemaManager
 
     private function getSchema(): array
     {
-        if (! config('cycle.schema.cache.enabled')) {
-            return $this->compileSchema(true);
+        if (!config('cycle.schema.cache.enabled')) {
+            return $this->compileSchema($this->getSchemaGenerators(true));
         }
 
         return $this->cache->rememberForever(
             self::SCHEMA_STORAGE_KEY,
-            fn () => $this->compileSchema(true)
+            fn() => $this->compileSchema($this->getSchemaGenerators(true))
         );
     }
 }

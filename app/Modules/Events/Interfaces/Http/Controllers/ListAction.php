@@ -16,25 +16,28 @@ use Spatie\RouteAttributes\Attributes\Get;
 class ListAction extends Controller
 {
     #[Get(uri: '/', name: 'events')]
-    public function __invoke(Request $request, QueryBus $bus, ActionMap $actionMap)
+    public function eventList(Request $request, QueryBus $bus, ActionMap $actionMap, ?string $type = null)
     {
-        $request->validate([
-            'type' => 'sometimes|required|alpha_dash',
-        ]);
-
         $action = 'Events';
-        if ($request->type) {
+        if ($type) {
             try {
-                $action = $actionMap->getForType($request->type, 'index');
+                $action = $actionMap->getForType($type, 'index');
             } catch (ActionNotFoundException $e) {
                 abort(403, $e->getMessage());
             }
         }
 
         return Inertia::render($action, [
-            'events' => $bus->ask(new FindAllEvents(type: $request->type)),
+            'events' => $bus->ask(new FindAllEvents(type: $type)),
             'version' => config('app.version'),
             'name' => config('app.name'),
         ]);
+    }
+
+
+    #[Get(uri: '/events/{type}', name: 'events.type')]
+    public function eventListByType(Request $request, QueryBus $bus, ActionMap $actionMap, string $type)
+    {
+        return $this->eventList($request, $bus, $actionMap, $type);
     }
 }
