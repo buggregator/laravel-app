@@ -10,6 +10,7 @@ use App\Contracts\TCP\Handler;
 use App\Contracts\TCP\Response;
 use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
+use RuntimeException;
 use Spiral\RoadRunner\Tcp\Request;
 use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -35,7 +36,7 @@ class TcpHandler implements Handler
 
             // Impossible to decode the message, give up.
             if (! $payload) {
-                throw new \RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
+                throw new RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
             }
 
             $this->commands->dispatch(

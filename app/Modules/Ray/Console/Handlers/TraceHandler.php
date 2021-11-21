@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
 
+use Generator;
 use Illuminate\Support\Arr;
 
 class TraceHandler extends AbstractHandler
@@ -29,7 +30,7 @@ class TraceHandler extends AbstractHandler
     /**
      * Renders the trace of the exception.
      */
-    protected function prepareTrace(array $frames): \Generator
+    protected function prepareTrace(array $frames): Generator
     {
         foreach ($frames as $i => $frame) {
             $file = $frame['file_name'];

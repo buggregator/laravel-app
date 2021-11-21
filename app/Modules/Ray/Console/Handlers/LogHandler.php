@@ -11,7 +11,11 @@ class LogHandler extends AbstractHandler
         $rows = [];
         foreach ($payload['content']['values'] as $value) {
             if (is_string($value)) {
-                $value = preg_replace('/<(style|script)\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/(style|script)>/i', '', $value);
+                $value = preg_replace(
+                    '/<(style|script)\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/(style|script)>/i',
+                    '',
+                    $value
+                );
                 $value = strip_tags($value);
 
                 $rows[] = $value;

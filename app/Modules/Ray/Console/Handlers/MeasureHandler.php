@@ -16,7 +16,9 @@ class MeasureHandler extends AbstractHandler
             'totalTime' => $this->covertMsToSeconds($payload['content']['total_time']),
             'memoryUsage' => Helper::formatMemory((int) $payload['content']['max_memory_usage_during_total_time']),
             'timeSinceLastCall' => $this->covertMsToSeconds($payload['content']['time_since_last_call']),
-            'memoryUsageSinceLastCall' => Helper::formatMemory((int) $payload['content']['max_memory_usage_since_last_call']),
+            'memoryUsageSinceLastCall' => Helper::formatMemory(
+                (int) $payload['content']['max_memory_usage_since_last_call']
+            ),
         ];
     }
 

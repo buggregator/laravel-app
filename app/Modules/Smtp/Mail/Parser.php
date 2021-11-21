@@ -16,7 +16,7 @@ class Parser
     {
         $message = ParseMessage::from($body, true);
 
-        /** @var \ZBateson\MailMimeParser\Header\Part\AddressPart $fromData */
+        /** @var AddressPart $fromData */
         $fromData = $message->getHeader('from')?->getParts()[0] ?? null;
         $from = [['email' => $fromData?->getValue(), 'name' => $fromData?->getName()]];
 
@@ -31,7 +31,12 @@ class Parser
         $text = (string) $message->getTextContent();
         /** @var AbstractHeader|null $replyToHeader */
         $replyToHeader = $message->getHeader('reply-to')?->getParts()[0] ?? null;
-        $replyTo = $replyToHeader ? [['email' => $replyToHeader?->getValue(), 'name' => $replyToHeader?->getName()]] : [];
+        $replyTo = $replyToHeader ? [
+            [
+                'email' => $replyToHeader?->getValue(),
+                'name' => $replyToHeader?->getName(),
+            ],
+        ] : [];
         $attachments = $this->buildAttachmentFrom(
             $message->getAllAttachmentParts()
         );

@@ -10,6 +10,6 @@ final class QueueServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->app['queue']->extend('roadrunner', fn () => new RoadRunnerConnector);
+        $this->app['queue']->extend('roadrunner', fn () => new RoadRunnerConnector());
     }
 }

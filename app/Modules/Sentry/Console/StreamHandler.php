@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Sentry\Console;
 
 use App\Attributes\Console\Stream;
+use Generator;
 use Interfaces\Console\Handler;
 use Termwind\HtmlRenderer;
 
@@ -42,7 +44,7 @@ class StreamHandler implements Handler
     /**
      * Renders the trace of the exception.
      */
-    protected function prepareTrace(array $frames): \Generator
+    protected function prepareTrace(array $frames): Generator
     {
         foreach ($frames as $i => $frame) {
             $file = $frame['filename'];
@@ -72,7 +74,7 @@ class StreamHandler implements Handler
      */
     protected function renderCodeSnippet(array $frame): array
     {
-        $line = (int)$frame['lineno'];
+        $line = (int) $frame['lineno'];
         $startLine = 0;
         $content = '';
         if (isset($frame['pre_context'])) {

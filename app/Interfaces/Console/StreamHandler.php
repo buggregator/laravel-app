@@ -10,9 +10,11 @@ use App\Websocket\BrowserOutput;
 use Illuminate\Console\OutputStyle;
 use Illuminate\Contracts\Foundation\Application;
 use NunoMaduro\Collision\Adapters\Laravel\ExceptionHandler;
+use ReflectionClass;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Termwind\Termwind;
+use Throwable;
 
 class StreamHandler implements Handler
 {
@@ -30,7 +32,7 @@ class StreamHandler implements Handler
         Termwind::renderUsing(new BrowserOutput($output));
     }
 
-    private function processAttributes(\ReflectionClass $class, array $attributes): void
+    private function processAttributes(ReflectionClass $class, array $attributes): void
     {
         /** @var Stream $stream */
         $stream = $attributes[0]->newInstance();
@@ -51,18 +53,18 @@ class StreamHandler implements Handler
 
         try {
             $this->handlers[$payload['type']]->handle($payload);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             app(ExceptionHandler::class)->renderForConsole($this->output, $e);
         }
     }
 
     public function shouldBeSkipped(array $payload): bool
     {
-        if (!isset($payload['type'])) {
+        if (! isset($payload['type'])) {
             return true;
         }
 
-        if (!isset($this->handlers[$payload['type']])) {
+        if (! isset($this->handlers[$payload['type']])) {
             return true;
         }
 

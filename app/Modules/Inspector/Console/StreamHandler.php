@@ -41,10 +41,13 @@ class StreamHandler implements Handler
             default => 'bg_green'
         };
 
-        $this->output->writeln(sprintf(
-            '  <fg=white;bg=blue;options=bold> %s </>%s',
-            'INSPECTOR', $this->color->apply($style, ' '.$statusCode.' : '.Response::$statusTexts[$statusCode])
-        ));
+        $this->output->writeln(
+            sprintf(
+                '  <fg=white;bg=blue;options=bold> %s </>%s',
+                'INSPECTOR',
+                $this->color->apply($style, ' '.$statusCode.' : '.Response::$statusTexts[$statusCode])
+            )
+        );
 
         $this->output->newLine();
     }

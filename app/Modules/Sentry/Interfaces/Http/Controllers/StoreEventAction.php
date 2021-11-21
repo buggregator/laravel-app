@@ -6,6 +6,8 @@ namespace Modules\Sentry\Interfaces\Http\Controllers;
 
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
+use GuzzleHttp\Psr7\Stream;
+use Http\Message\Encoding\GzipDecodeStream;
 use Illuminate\Http\Request;
 use Interfaces\Http\Controllers\Controller;
 use Modules\Sentry\Contracts\EventHandler;
@@ -21,8 +23,8 @@ class StoreEventAction extends Controller
         EventHandler $handler,
         ConsoleOutput $output
     ): void {
-        $stream = new \Http\Message\Encoding\GzipDecodeStream(
-            new \GuzzleHttp\Psr7\Stream($request->getContent(true))
+        $stream = new GzipDecodeStream(
+            new Stream($request->getContent(true))
         );
 
         $event = $handler->handle(json_decode($stream->getContents(), true));

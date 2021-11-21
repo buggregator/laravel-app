@@ -6,6 +6,13 @@ namespace Infrastructure\RoadRunner\TCP;
 
 use App\Contracts\TCP\Response;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Foundation\Bootstrap\BootProviders;
+use Illuminate\Foundation\Bootstrap\HandleExceptions;
+use Illuminate\Foundation\Bootstrap\LoadConfiguration;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Illuminate\Foundation\Bootstrap\RegisterFacades;
+use Illuminate\Foundation\Bootstrap\RegisterProviders;
+use RuntimeException;
 use Spiral\RoadRunner\Tcp\Request;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -22,12 +29,12 @@ final class Kernel implements \App\Contracts\TCP\Kernel
      * @var string[]
      */
     protected $bootstrappers = [
-        \Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables::class,
-        \Illuminate\Foundation\Bootstrap\LoadConfiguration::class,
-        \Illuminate\Foundation\Bootstrap\HandleExceptions::class,
-        \Illuminate\Foundation\Bootstrap\RegisterFacades::class,
-        \Illuminate\Foundation\Bootstrap\RegisterProviders::class,
-        \Illuminate\Foundation\Bootstrap\BootProviders::class,
+        LoadEnvironmentVariables::class,
+        LoadConfiguration::class,
+        HandleExceptions::class,
+        RegisterFacades::class,
+        RegisterProviders::class,
+        BootProviders::class,
     ];
 
     /**
@@ -61,7 +68,7 @@ final class Kernel implements \App\Contracts\TCP\Kernel
         $this->bootstrap();
 
         if (! isset($this->handlers[$request->server])) {
-            throw new \RuntimeException("Handler for server [$request->server] not found.");
+            throw new RuntimeException("Handler for server [$request->server] not found.");
         }
 
         $handler = $this->app->make($this->handlers[$request->server]);

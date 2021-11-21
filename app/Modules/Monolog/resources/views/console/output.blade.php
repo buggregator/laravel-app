@@ -17,7 +17,7 @@
 
     <div class="mb-1">
         @foreach($messages as $message)
-        <div class="font-bold text-{{ $levelColor }}-500">{{ $message }}</div>
+            <div class="font-bold text-{{ $levelColor }}-500">{{ $message }}</div>
         @endforeach
     </div>
 </div>

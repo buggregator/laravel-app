@@ -8,9 +8,9 @@ use Cycle\Database\DatabaseProviderInterface;
 use Cycle\Migrations\FileRepository;
 use Cycle\Migrations\RepositoryInterface;
 use Cycle\ORM\Collection\IlluminateCollectionFactory;
-use Cycle\ORM\EntityRegistryInterface;
 use Cycle\ORM\Factory;
 use Cycle\ORM\FactoryInterface;
+use Cycle\ORM\ORM;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\SchemaInterface;
 use Cycle\ORM\Transaction;
@@ -37,17 +37,17 @@ final class CycleOrmServiceProvider extends ServiceProvider
 
         $this->app[SpiralContainer::class]->bindSingleton(
             ORMInterface::class,
-            fn() => $this->app[ORMInterface::class]
+            fn () => $this->app[ORMInterface::class]
         );
 
         $this->app[SpiralContainer::class]->bindSingleton(
             FactoryInterface::class,
-            fn() => $this->app[FactoryInterface::class]
+            fn () => $this->app[FactoryInterface::class]
         );
 
         $this->app[SpiralContainer::class]->bindSingleton(
             DatabaseProviderInterface::class,
-            fn() => $this->app[DatabaseProviderInterface::class]
+            fn () => $this->app[DatabaseProviderInterface::class]
         );
     }
 
@@ -64,8 +64,8 @@ final class CycleOrmServiceProvider extends ServiceProvider
 
     private function initOrm(): void
     {
-        $this->app->singleton(ORMInterface::class, static function ($app): \Cycle\ORM\ORM {
-            return new \Cycle\ORM\ORM(
+        $this->app->singleton(ORMInterface::class, static function ($app): ORM {
+            return new ORM(
                 $app[FactoryInterface::class],
                 $app[SchemaInterface::class]
             );

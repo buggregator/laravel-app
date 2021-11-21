@@ -26,7 +26,7 @@ class Handler implements QueryHandler
 
         return EventCollection::make(
             $this->events->findAll($scope, [
-                'date' => 'asc'
+                'date' => 'asc',
             ])
         );
     }

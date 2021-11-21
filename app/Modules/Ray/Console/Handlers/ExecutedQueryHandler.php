@@ -19,9 +19,12 @@ class ExecutedQueryHandler extends AbstractHandler
         }
 
         return [
-            'query' => vsprintf(str_replace('?', '%s', $payload['content']['sql']), collect($payload['content']['bindings'])->map(function ($binding) {
-                return is_numeric($binding) ? $binding : "'{$binding}'";
-            })->toArray()),
+            'query' => vsprintf(
+                str_replace('?', '%s', $payload['content']['sql']),
+                collect($payload['content']['bindings'])->map(function ($binding) {
+                    return is_numeric($binding) ? $binding : "'{$binding}'";
+                })->toArray()
+            ),
             'data' => $data,
         ];
     }

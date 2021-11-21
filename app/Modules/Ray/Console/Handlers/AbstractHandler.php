@@ -25,7 +25,11 @@ abstract class AbstractHandler implements Handler
         $this->renderer->render(
             (string) view('ray::console.output', [
                 'date' => date('r'),
-                'source' => sprintf('%s on line %s', class_basename($payload['origin']['file']), $payload['origin']['line_number']),
+                'source' => sprintf(
+                    '%s on line %s',
+                    class_basename($payload['origin']['file']),
+                    $payload['origin']['line_number']
+                ),
                 'file' => $this->getFilePath($payload['origin']['file']),
                 'type' => ucfirst(str_replace(['-', '_'], ' ', $payload['type'])),
                 'color' => $data['color'] ?? 'gray',

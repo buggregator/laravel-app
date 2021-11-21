@@ -34,7 +34,7 @@ final class DatabaseServiceProvider extends ServiceProvider
         $this->app[SpiralContainer::class]->bind(DatabaseInterface::class, Database::class);
         $this->app[SpiralContainer::class]->bind(
             DatabaseProviderInterface::class,
-            fn() => $this->app[DatabaseProviderInterface::class]
+            fn () => $this->app[DatabaseProviderInterface::class]
         );
 
         $this->app->terminating(static function (Application $app): void {

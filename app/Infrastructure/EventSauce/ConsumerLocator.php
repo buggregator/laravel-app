@@ -8,6 +8,8 @@ use App\Attributes\Locator;
 use App\Attributes\Projectors\Projector;
 use App\Contracts\EventSource\Event;
 use EventSauce\EventSourcing\Message;
+use Generator;
+use ReflectionClass;
 
 final class ConsumerLocator
 {
@@ -20,7 +22,7 @@ final class ConsumerLocator
         }
     }
 
-    public function getConsumers(Message $message): \Generator
+    public function getConsumers(Message $message): Generator
     {
         $event = $message->event();
 
@@ -33,7 +35,7 @@ final class ConsumerLocator
         }
     }
 
-    private function processProjectors(\ReflectionClass $class)
+    private function processProjectors(ReflectionClass $class)
     {
         foreach ($class->getMethods() as $method) {
             foreach ($method->getParameters() as $parameter) {

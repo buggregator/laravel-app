@@ -1,3 +1,3 @@
 @foreach($rows as $line)
-<code>{{ $line }}</code>
+    <code>{{ $line }}</code>
 @endforeach

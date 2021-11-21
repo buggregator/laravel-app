@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Events\Exceptions;
 
-class ActionNotFoundException extends \DomainException
+use DomainException;
+
+class ActionNotFoundException extends DomainException
 {
 }

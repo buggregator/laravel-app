@@ -14,6 +14,7 @@ use Spatie\RouteAttributes\RouteRegistrar;
 class RouteServiceProvider extends ServiceProvider
 {
     public const HOME = '/dashboard';
+
     // protected $namespace = 'Interfaces\\Http\\Controllers';
 
     public function boot()

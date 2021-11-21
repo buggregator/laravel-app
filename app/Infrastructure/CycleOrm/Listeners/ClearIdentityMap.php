@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Infrastructure\CycleOrm\Listeners;
 
-use Cycle\ORM\ORMInterface;
 use Infrastructure\RoadRunner\TCP\Events\AfterLoopIterationEvent;
 
 class ClearIdentityMap

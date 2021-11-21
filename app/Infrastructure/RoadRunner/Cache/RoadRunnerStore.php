@@ -55,7 +55,8 @@ final class RoadRunnerStore extends TaggableStore implements LockProvider
         }
 
         return $this->storage->setMultiple(
-            $prefixedValues, $this->calculateExpiration($seconds)
+            $prefixedValues,
+            $this->calculateExpiration($seconds)
         );
     }
 

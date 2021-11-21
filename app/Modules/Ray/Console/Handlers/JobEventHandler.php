@@ -11,7 +11,7 @@ class JobEventHandler extends AbstractHandler
     protected function makeData(array $payload): array
     {
         return [
-            'event' =>  $payload['content']['event_name'],
+            'event' => $payload['content']['event_name'],
             'job' => VariableCleaner::clean($payload['content']['job'], 0),
         ];
     }

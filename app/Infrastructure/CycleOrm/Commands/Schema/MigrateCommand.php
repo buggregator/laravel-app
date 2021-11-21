@@ -14,7 +14,7 @@ final class MigrateCommand extends Command
 
     public function handle(Migrator $migrator)
     {
-        if (!$migrator->isConfigured()) {
+        if (! $migrator->isConfigured()) {
             $migrator->configure();
         }
 

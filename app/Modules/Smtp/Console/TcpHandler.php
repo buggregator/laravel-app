@@ -18,10 +18,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class TcpHandler implements Handler
 {
-    const READY = 220;
-    const OK = 250;
-    const CLOSING = 221;
-    const START_MAIL_INPUT = 354;
+    public const READY = 220;
+    public const OK = 250;
+    public const CLOSING = 221;
+    public const START_MAIL_INPUT = 354;
 
     public function __construct(
         private CommandBus $commands,
@@ -81,7 +81,7 @@ class TcpHandler implements Handler
 
     private function dispatchMessage(string $message): void
     {
-        $message = (new Parser)->parse($message);
+        $message = (new Parser())->parse($message);
 
         $data = $message->jsonSerialize();
         $this->commands->dispatch(

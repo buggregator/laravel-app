@@ -21,7 +21,7 @@ class StreamHandler implements Handler
     public function handle(array $payload): void
     {
         $levelColor = match (strtolower($payload['payload']['level_name'])) {
-            'notice' , 'info' => 'blue',
+            'notice', 'info' => 'blue',
             'warning' => 'yellow',
             'critical', 'error', 'alert', 'emergency' => 'red',
             default => 'gray'

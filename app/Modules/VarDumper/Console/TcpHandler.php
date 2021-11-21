@@ -11,6 +11,7 @@ use App\Contracts\TCP\Response;
 use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
 use App\Websocket\BrowserOutput;
+use RuntimeException;
 use Spiral\RoadRunner\Tcp\Request;
 use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -25,8 +26,9 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 class TcpHandler implements Handler
 {
     public function __construct(
-        private CommandBus $commands, private StreamHandlerConfig $config)
-    {
+        private CommandBus $commands,
+        private StreamHandlerConfig $config
+    ) {
     }
 
     public function handle(Request $request, OutputInterface $output): Response
@@ -42,11 +44,13 @@ class TcpHandler implements Handler
 
             // Impossible to decode the message, give up.
             if (false === $payload) {
-                throw new \RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
+                throw new RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
             }
 
-            if (! is_array($payload) || count($payload) < 2 || ! $payload[0] instanceof Data || ! is_array($payload[1])) {
-                throw new \RuntimeException("Invalid payload from [{$request->connectionUuid}] client.");
+            if (! is_array($payload) || count($payload) < 2 || ! $payload[0] instanceof Data || ! is_array(
+                    $payload[1]
+                )) {
+                throw new RuntimeException("Invalid payload from [{$request->connectionUuid}] client.");
             }
 
             $this->fireEvent($payload);

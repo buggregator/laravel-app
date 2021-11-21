@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Attributes;
 
+use Generator;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Str;
+use ReflectionAttribute;
+use ReflectionClass;
+use ReflectionMethod;
 use SplFileInfo;
 use Symfony\Component\Finder\Finder;
 
@@ -16,9 +20,9 @@ final class Locator
     }
 
     /**
-     * @return array<\ReflectionClass, \ReflectionAttribute[]>
+     * @return array<ReflectionClass, ReflectionAttribute[]>
      */
-    public function findClassAttributes(string $directory, string $attribute): \Generator
+    public function findClassAttributes(string $directory, string $attribute): Generator
     {
         foreach ($this->findClasses($directory) as $class) {
             $attributes = $class->getAttributes($attribute);
@@ -32,9 +36,9 @@ final class Locator
     }
 
     /**
-     * @return array<\ReflectionMethod, \ReflectionAttribute[]>
+     * @return array<ReflectionMethod, ReflectionAttribute[]>
      */
-    public function findClassMethodsAttributes(string $directory, string $attribute): \Generator
+    public function findClassMethodsAttributes(string $directory, string $attribute): Generator
     {
         foreach ($this->findClasses($directory) as $class) {
             $methods = $class->getMethods();
@@ -51,7 +55,7 @@ final class Locator
         }
     }
 
-    private function findClasses(string $directory): \Generator
+    private function findClasses(string $directory): Generator
     {
         $files = (new Finder())
             ->files()
@@ -65,7 +69,7 @@ final class Locator
                 continue;
             }
 
-            $class = new \ReflectionClass($className);
+            $class = new ReflectionClass($className);
 
             yield $className => $class;
         }

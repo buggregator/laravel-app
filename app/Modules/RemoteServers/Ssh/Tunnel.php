@@ -37,11 +37,13 @@ final class Tunnel
         }
 
         if ($process->getExitCode() !== 0) {
-            throw new SSHException(sprintf(
-                'Unable to create ssh tunnel. Output: %s ErrorOutput: %s',
-                $process->getOutput(),
-                $process->getErrorOutput()
-            ));
+            throw new SSHException(
+                sprintf(
+                    'Unable to create ssh tunnel. Output: %s ErrorOutput: %s',
+                    $process->getOutput(),
+                    $process->getErrorOutput()
+                )
+            );
         }
 
         return $process;

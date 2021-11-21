@@ -24,11 +24,12 @@ final class RoadRunnerBroadcaster extends Broadcaster
         if (empty($request->channel_name)
             || ($this->isGuardedChannel($request->channel_name)
                 && ! $this->retrieveUser($request, $channelName))) {
-            throw new AccessDeniedHttpException;
+            throw new AccessDeniedHttpException();
         }
 
         return parent::verifyUserCanAccessChannel(
-            $request, $channelName
+            $request,
+            $channelName
         );
     }
 
@@ -46,10 +47,12 @@ final class RoadRunnerBroadcaster extends Broadcaster
             ? $user->getAuthIdentifierForBroadcasting()
             : $user->getAuthIdentifier();
 
-        return json_encode(['channel_data' => [
-            'user_id' => $broadcastIdentifier,
-            'user_info' => $result,
-        ]]);
+        return json_encode([
+            'channel_data' => [
+                'user_id' => $broadcastIdentifier,
+                'user_info' => $result,
+            ],
+        ]);
     }
 
     public function broadcast(array $channels, $event, array $payload = []): void

@@ -17,14 +17,16 @@ use Infrastructure\RoadRunner\TCP\Events\BeforeLoopIterationEvent;
 use Interfaces\Console\StreamHandler;
 use Spiral\RoadRunner\Payload;
 use Spiral\RoadRunner\Tcp\TcpWorker;
+use Spiral\RoadRunnerLaravel\Application\Factory;
 use Spiral\RoadRunnerLaravel\Application\FactoryInterface as ApplicationFactory;
 use Spiral\RoadRunnerLaravel\Events;
 use Spiral\RoadRunnerLaravel\WorkerInterface;
 use Spiral\RoadRunnerLaravel\WorkerOptionsInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
-use function Termwind\render;
 use Throwable;
+
+use function Termwind\render;
 
 final class Worker implements WorkerInterface
 {
@@ -36,7 +38,7 @@ final class Worker implements WorkerInterface
 
     public function __construct()
     {
-        $this->appFactory = new \Spiral\RoadRunnerLaravel\Application\Factory();
+        $this->appFactory = new Factory();
         $this->output = new StreamOutput(STDERR);
     }
 
@@ -69,7 +71,7 @@ final class Worker implements WorkerInterface
 
             if ($this->isDebugModeEnabled($config)) {
                 render(
-                    (string)view('console.tcp.request', [
+                    (string) view('console.tcp.request', [
                         'request' => $request,
                         'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),
                     ])
@@ -94,7 +96,7 @@ final class Worker implements WorkerInterface
 
                 if ($this->isDebugModeEnabled($config)) {
                     render(
-                        (string)view('console.tcp.response', [
+                        (string) view('console.tcp.response', [
                             'request' => $request,
                             'response' => $response,
                             'memory' => number_format(memory_get_usage() / 1024 / 1204, 2, '.', ''),

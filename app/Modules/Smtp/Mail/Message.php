@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Smtp\Mail;
 
-class Message implements \JsonSerializable
+use JsonSerializable;
+
+class Message implements JsonSerializable
 {
     public function __construct(
         private ?string $id,
@@ -43,15 +45,17 @@ class Message implements \JsonSerializable
      */
     private function getBccs(): array
     {
-        return array_values(array_filter($this->allRecipients, function (string $recipient) {
-            foreach (array_merge($this->recipients, $this->ccs) as $publicRecipient) {
-                if (strpos($publicRecipient, $recipient) !== false) {
-                    return false;
+        return array_values(
+            array_filter($this->allRecipients, function (string $recipient) {
+                foreach (array_merge($this->recipients, $this->ccs) as $publicRecipient) {
+                    if (strpos($publicRecipient, $recipient) !== false) {
+                        return false;
+                    }
                 }
-            }
 
-            return true;
-        }));
+                return true;
+            })
+        );
     }
 
     public function jsonSerialize()

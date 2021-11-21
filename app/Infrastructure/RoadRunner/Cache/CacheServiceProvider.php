@@ -17,9 +17,11 @@ final class CacheServiceProvider extends ServiceProvider
             Cache::extend('roadrunner', function ($app) {
                 $factory = new Factory(RPC::create(config('roadrunner.rpc.host')));
 
-                return Cache::repository(new RoadRunnerStore(
-                    $factory->select(config('roadrunner.cache.storage', 'cache'))
-                ));
+                return Cache::repository(
+                    new RoadRunnerStore(
+                        $factory->select(config('roadrunner.cache.storage', 'cache'))
+                    )
+                );
             });
         });
     }

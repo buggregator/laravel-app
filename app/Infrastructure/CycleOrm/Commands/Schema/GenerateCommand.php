@@ -19,13 +19,14 @@ final class GenerateCommand extends Command
         Migrator $migrator,
         SchemaManager $schemaManager
     ) {
-        if (!$migrator->isConfigured()) {
+        if (! $migrator->isConfigured()) {
             $migrator->configure();
         }
 
         foreach ($migrator->getMigrations() as $migration) {
             if ($migration->getState()->getStatus() !== State::STATUS_EXECUTED) {
                 $this->error('Outstanding migrations found, run [migrate] first.');
+
                 return;
             }
         }

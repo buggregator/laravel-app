@@ -8,6 +8,7 @@ use App\Domain\Entity\Json;
 use App\Domain\ValueObjects\Uuid;
 use Cycle\Annotated\Annotation\Column;
 use Cycle\Annotated\Annotation\Entity;
+use DateTimeImmutable;
 use Modules\Events\Persistence\CycleOrmEventRepository;
 
 #[Entity(
@@ -27,7 +28,7 @@ class Event
         private Json $payload,
 
         #[Column(type: 'datetime')]
-        private \DateTimeImmutable $date
+        private DateTimeImmutable $date
     ) {
     }
 
@@ -46,7 +47,7 @@ class Event
         return $this->payload;
     }
 
-    public function getDate(): \DateTimeImmutable
+    public function getDate(): DateTimeImmutable
     {
         return $this->date;
     }

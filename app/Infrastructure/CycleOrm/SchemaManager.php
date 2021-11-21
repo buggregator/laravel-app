@@ -25,7 +25,7 @@ final class SchemaManager
 
     public function isSyncMode(): bool
     {
-        return (bool)config('cycle.schema.sync');
+        return (bool) config('cycle.schema.sync');
     }
 
     public function createSchema(): SchemaInterface
@@ -43,7 +43,7 @@ final class SchemaManager
         return (new Schema\Compiler())->compile(
             new Schema\Registry($this->database),
             $generators,
-            (array)config('cycle.schema.defaults')
+            (array) config('cycle.schema.defaults')
         );
     }
 
@@ -71,13 +71,13 @@ final class SchemaManager
 
     private function getSchema(): array
     {
-        if (!config('cycle.schema.cache.enabled')) {
+        if (! config('cycle.schema.cache.enabled')) {
             return $this->compileSchema($this->getSchemaGenerators(true));
         }
 
         return $this->cache->rememberForever(
             self::SCHEMA_STORAGE_KEY,
-            fn() => $this->compileSchema($this->getSchemaGenerators(true))
+            fn () => $this->compileSchema($this->getSchemaGenerators(true))
         );
     }
 }

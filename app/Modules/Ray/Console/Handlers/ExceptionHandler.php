@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
 
+use Generator;
+
 class ExceptionHandler extends AbstractHandler
 {
     protected function makeData(array $payload): array
@@ -22,7 +24,7 @@ class ExceptionHandler extends AbstractHandler
     /**
      * Renders the trace of the exception.
      */
-    protected function prepareTrace(array $frames): \Generator
+    protected function prepareTrace(array $frames): Generator
     {
         foreach ($frames as $i => $frame) {
             $file = $frame['file_name'];
@@ -64,7 +66,7 @@ class ExceptionHandler extends AbstractHandler
         return [
             'file' => $file,
             'line' => $line,
-            'start_line' =>  $startLine,
+            'start_line' => $startLine,
             'content' => $content,
         ];
     }

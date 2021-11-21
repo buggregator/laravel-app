@@ -14,10 +14,15 @@ class RegisterConsoleStreamHandlerListener
 {
     public function handle(BeforeLoopStartedEvent $event): void
     {
-        $event->application()->instance(Handler::class, new StreamHandler(
-            (new ConsoleOutput())->getErrorOutput(),
-            $event->application(),
-            new Locator($event->application()
-        )));
+        $event->application()->instance(
+            Handler::class,
+            new StreamHandler(
+                (new ConsoleOutput())->getErrorOutput(),
+                $event->application(),
+                new Locator(
+                    $event->application()
+                )
+            )
+        );
     }
 }

@@ -15,6 +15,7 @@ use Illuminate\Queue\MaxAttemptsExceededException;
 use Illuminate\Queue\WorkerOptions;
 use Illuminate\Support\Carbon;
 use Spiral\RoadRunner\Jobs\Consumer;
+use Spiral\RoadRunnerLaravel\Application\Factory;
 use Spiral\RoadRunnerLaravel\Application\FactoryInterface as ApplicationFactory;
 use Spiral\RoadRunnerLaravel\WorkerInterface;
 use Spiral\RoadRunnerLaravel\WorkerOptionsInterface;
@@ -34,7 +35,7 @@ final class Worker implements WorkerInterface
 
     public function __construct()
     {
-        $this->appFactory = new \Spiral\RoadRunnerLaravel\Application\Factory();
+        $this->appFactory = new Factory();
     }
 
     public function start(WorkerOptionsInterface $options): void
@@ -51,7 +52,8 @@ final class Worker implements WorkerInterface
         $consumer = new Consumer();
         while ($task = $consumer->waitTask()) {
             $this->runJob(
-                new RoadRunnerJob($app, $task), $options
+                new RoadRunnerJob($app, $task),
+                $options
             );
         }
     }
@@ -71,7 +73,7 @@ final class Worker implements WorkerInterface
     /**
      * Process the given job from the queue.
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function process(RoadRunnerJob $job, WorkerOptions $options): void
     {
@@ -82,7 +84,8 @@ final class Worker implements WorkerInterface
             $this->raiseBeforeJobEvent($job);
 
             $this->markJobAsFailedIfAlreadyExceedsMaxAttempts(
-                $job, (int) $options->maxTries ?? 10
+                $job,
+                (int) $options->maxTries ?? 10
             );
 
             if ($job->isDeleted()) {
@@ -109,9 +112,11 @@ final class Worker implements WorkerInterface
      */
     protected function raiseBeforeJobEvent(RoadRunnerJob $job): void
     {
-        $this->events->dispatch(new JobProcessing(
-            $this->connectionName, $job
-        ));
+        $this->events->dispatch(
+            new JobProcessing(
+                $this->connectionName, $job
+            )
+        );
     }
 
     /**
@@ -119,9 +124,11 @@ final class Worker implements WorkerInterface
      */
     protected function raiseAfterJobEvent(RoadRunnerJob $job): void
     {
-        $this->events->dispatch(new JobProcessed(
-            $this->connectionName, $job
-        ));
+        $this->events->dispatch(
+            new JobProcessed(
+                $this->connectionName, $job
+            )
+        );
     }
 
     /**
@@ -129,9 +136,11 @@ final class Worker implements WorkerInterface
      */
     protected function raiseExceptionOccurredJobEvent(RoadRunnerJob $job, Throwable $e): void
     {
-        $this->events->dispatch(new JobExceptionOccurred(
-            $this->connectionName, $job, $e
-        ));
+        $this->events->dispatch(
+            new JobExceptionOccurred(
+                $this->connectionName, $job, $e
+            )
+        );
     }
 
     /**
@@ -139,7 +148,7 @@ final class Worker implements WorkerInterface
      *
      * This will likely be because the job previously exceeded a timeout.
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function markJobAsFailedIfAlreadyExceedsMaxAttempts(RoadRunnerJob $job, int $maxTries): void
     {
@@ -174,7 +183,8 @@ final class Worker implements WorkerInterface
     protected function maxAttemptsExceededException(RoadRunnerJob $job): MaxAttemptsExceededException
     {
         return new MaxAttemptsExceededException(
-            $job->resolveName().' has been attempted too many times or run too long. The job may have previously timed out.'
+            $job->resolveName(
+            ).' has been attempted too many times or run too long. The job may have previously timed out.'
         );
     }
 
@@ -186,7 +196,7 @@ final class Worker implements WorkerInterface
     /**
      * Handle an exception that occurred while the job was running.
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function handleJobException(RoadRunnerJob $job, WorkerOptions $options, Throwable $e): void
     {

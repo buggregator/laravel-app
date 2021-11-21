@@ -9,8 +9,12 @@ use Spiral\RoadRunner\KeyValue\StorageInterface;
 
 final class RoadRunnerLock extends Lock
 {
-    public function __construct(private StorageInterface $storage, string $name, int $seconds, string|null $owner = null)
-    {
+    public function __construct(
+        private StorageInterface $storage,
+        string $name,
+        int $seconds,
+        string|null $owner = null
+    ) {
         parent::__construct($name, $seconds, $owner);
     }
 
@@ -22,7 +26,9 @@ final class RoadRunnerLock extends Lock
     public function acquire()
     {
         return $this->storage->set(
-            $this->name, $this->owner, $this->seconds
+            $this->name,
+            $this->owner,
+            $this->seconds
         );
     }
 

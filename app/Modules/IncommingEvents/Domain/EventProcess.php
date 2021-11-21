@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\IncommingEvents\Domain;
 
 use App\Domain\ValueObjects\Uuid;
+use DateTimeImmutable;
 use EventSauce\EventSourcing\AggregateRoot;
 use EventSauce\EventSourcing\AggregateRootBehaviour;
 use Illuminate\Support\Carbon;
@@ -17,7 +18,7 @@ final class EventProcess implements AggregateRoot
 
     private string $type;
     private array $payload;
-    private \DateTimeImmutable $date;
+    private DateTimeImmutable $date;
     private bool $deleted = false;
 
     public static function received(Uuid $uuid, string $type, array $payload, int $timestamp): static
@@ -66,7 +67,7 @@ final class EventProcess implements AggregateRoot
         return $this->payload;
     }
 
-    public function date(): \DateTimeImmutable
+    public function date(): DateTimeImmutable
     {
         return $this->date;
     }

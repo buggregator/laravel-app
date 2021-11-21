@@ -9,11 +9,15 @@ use App\Attributes\Locator;
 use App\Attributes\QueryBus\QueryHandler;
 use App\Contracts\Command\Command;
 use App\Contracts\Query\Query;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Foundation\Application;
+use ReflectionMethod;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\HandlerDescriptor;
 use Symfony\Component\Messenger\Handler\HandlersLocatorInterface;
 use Symfony\Component\Messenger\Stamp\ReceivedStamp;
+
+use function get_class;
 
 final class HandlersLocator implements HandlersLocatorInterface
 {
@@ -25,7 +29,12 @@ final class HandlersLocator implements HandlersLocatorInterface
         private Locator $attributesLocator,
 
     ) {
-        foreach ($attributesLocator->findClassMethodsAttributes('app', CommandHandler::class) as $class => $attributes) {
+        foreach (
+            $attributesLocator->findClassMethodsAttributes(
+                'app',
+                CommandHandler::class
+            ) as $class => $attributes
+        ) {
             $this->processCommandHandlerAttributes($class);
         }
 
@@ -66,7 +75,7 @@ final class HandlersLocator implements HandlersLocatorInterface
     /** @internal */
     public static function listTypes(Envelope $envelope): array
     {
-        $class = \get_class($envelope->getMessage());
+        $class = get_class($envelope->getMessage());
 
         return [$class => $class]
             + class_parents($class)
@@ -90,7 +99,7 @@ final class HandlersLocator implements HandlersLocatorInterface
     /**
      * @param  array{0: class-string, 1: non-empty-string}  $handler
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     private function buildHandlerDescriptor(array $handler): HandlerDescriptor
     {
@@ -101,9 +110,9 @@ final class HandlersLocator implements HandlersLocatorInterface
     }
 
     /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
-    private function processCommandHandlerAttributes(\ReflectionMethod $method): void
+    private function processCommandHandlerAttributes(ReflectionMethod $method): void
     {
         foreach ($method->getParameters() as $parameter) {
             if (is_a($parameter->getType()->getName(), Command::class, true)) {
@@ -116,9 +125,9 @@ final class HandlersLocator implements HandlersLocatorInterface
     }
 
     /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
-    private function processQueryHandlerAttributes(\ReflectionMethod $method): void
+    private function processQueryHandlerAttributes(ReflectionMethod $method): void
     {
         foreach ($method->getParameters() as $parameter) {
             if (is_a($parameter->getType()->getName(), Query::class, true)) {

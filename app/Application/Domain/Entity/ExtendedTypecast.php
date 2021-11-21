@@ -32,7 +32,7 @@ final class ExtendedTypecast implements TypecastInterface
     public function cast(array $values): array
     {
         foreach ($this->rules as $column => $rule) {
-            if (!isset($values[$column])) {
+            if (! isset($values[$column])) {
                 continue;
             }
 

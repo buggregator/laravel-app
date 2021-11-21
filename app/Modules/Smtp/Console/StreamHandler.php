@@ -34,7 +34,7 @@ class StreamHandler implements Handler
         }
 
         $this->renderer->render(
-            (string)view('smtp::stream.output', [
+            (string) view('smtp::stream.output', [
                 'id' => $payload['payload']['id'],
                 'date' => date('r'),
                 'subject' => $payload['payload']['subject'],
@@ -57,10 +57,10 @@ class StreamHandler implements Handler
 
     public function shouldBeSkipped(array $payload): bool
     {
-        if (!$this->config->isEnabled()) {
+        if (! $this->config->isEnabled()) {
             return true;
         }
 
-        return !isset($payload['payload']);
+        return ! isset($payload['payload']);
     }
 }

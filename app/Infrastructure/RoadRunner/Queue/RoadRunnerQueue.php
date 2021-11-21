@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Infrastructure\RoadRunner\Queue;
 
 use Closure;
+use DateInterval;
 use DateTimeInterface;
 use Illuminate\Contracts\Queue\Queue as QueueContract;
 use Illuminate\Queue\CallQueuedClosure;
@@ -22,7 +23,7 @@ final class RoadRunnerQueue extends Queue implements QueueContract
     public function __construct(
         private Jobs $jobs,
         private RPCInterface $rpc,
-        private              $default = 'default',
+        private $default = 'default',
     ) {
     }
 
@@ -72,7 +73,7 @@ final class RoadRunnerQueue extends Queue implements QueueContract
     /**
      * Push a raw job onto the queue after a delay.
      */
-    private function laterRaw(DateTimeInterface|\DateInterval|int $delay, array $payload, ?string $queue = null): string
+    private function laterRaw(DateTimeInterface|DateInterval|int $delay, array $payload, ?string $queue = null): string
     {
         $queue = $this->getQueue($queue);
 

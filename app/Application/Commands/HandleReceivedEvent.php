@@ -26,7 +26,7 @@ final class HandleReceivedEvent implements Command
         return [
             'type' => $this->type,
             'payload' => $this->payload,
-            'uuid' => (string)$this->uuid,
+            'uuid' => (string) $this->uuid,
             'timestamp' => $this->timestamp,
         ];
     }

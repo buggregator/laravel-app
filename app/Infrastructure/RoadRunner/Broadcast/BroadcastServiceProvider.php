@@ -13,9 +13,9 @@ final class BroadcastServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app[BroadcastManager::class]
-           ->extend('roadrunner', fn (Application $app, array $config) => new RoadRunnerBroadcaster(
-               new RoadrunnerClient($config['rpc_host'])
-           ));
+            ->extend('roadrunner', fn (Application $app, array $config) => new RoadRunnerBroadcaster(
+                new RoadrunnerClient($config['rpc_host'])
+            ));
 
         require app_path('Interfaces/Websocket/channels.php');
     }

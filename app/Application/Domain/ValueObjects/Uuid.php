@@ -6,8 +6,9 @@ namespace App\Domain\ValueObjects;
 
 use EventSauce\EventSourcing\AggregateRootId;
 use Ramsey\Uuid\UuidInterface;
+use Stringable;
 
-final class Uuid implements AggregateRootId, \Stringable
+final class Uuid implements AggregateRootId, Stringable
 {
     public static function generate(): static
     {
