@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature\Http;
 
 use App\Domain\ValueObjects\Uuid;
-use Inertia\Inertia;
-use Modules\Events\Domain\Event;
 use Tests\DatabaseTestCase;
 
 class SmtpControllerTest extends DatabaseTestCase

@@ -8,10 +8,8 @@ use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\RepositoryInterface;
-use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Events\Domain\Event;
-use Symfony\Component\Console\Output\BufferedOutput;
 
 class DatabaseTestCase extends TestCase
 {

@@ -24,8 +24,8 @@ use Spiral\RoadRunnerLaravel\WorkerInterface;
 use Spiral\RoadRunnerLaravel\WorkerOptionsInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
-use Throwable;
 use function Termwind\render;
+use Throwable;
 
 final class Worker implements WorkerInterface
 {

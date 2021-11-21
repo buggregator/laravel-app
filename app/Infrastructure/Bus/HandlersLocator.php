@@ -9,6 +9,7 @@ use App\Attributes\Locator;
 use App\Attributes\QueryBus\QueryHandler;
 use App\Contracts\Command\Command;
 use App\Contracts\Query\Query;
+use function get_class;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Foundation\Application;
 use ReflectionMethod;
@@ -16,7 +17,6 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\HandlerDescriptor;
 use Symfony\Component\Messenger\Handler\HandlersLocatorInterface;
 use Symfony\Component\Messenger\Stamp\ReceivedStamp;
-use function get_class;
 
 final class HandlersLocator implements HandlersLocatorInterface
 {
