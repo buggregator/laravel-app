@@ -30,11 +30,11 @@ export default {
     methods: {
         continueExecution() {
             this.$emit('disable')
-            axios.delete(`/locks/${this.hash}`)
+            axios.delete(route('ray.lock.delete', this.hash))
         },
         stopExecution() {
             this.$emit('disable')
-            axios.delete(`/locks/${this.hash}`, {
+            axios.delete(route('ray.lock.delete', this.hash), {
                 params: {stop_execution: true}
             })
         }

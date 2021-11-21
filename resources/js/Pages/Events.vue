@@ -86,7 +86,7 @@ export default {
             return 'RayEventComponent'
         },
         loadEvents() {
-            this.$page.props.events.forEach((e) => {
+            this.$page.props.events.data.forEach(e => {
                 this.store.commit('pushEvent', EventFactory.create(e))
             })
         },

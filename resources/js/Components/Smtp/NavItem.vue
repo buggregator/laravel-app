@@ -1,7 +1,7 @@
 <template>
-    <Link :href="`/mail/${event.uuid}`"
+    <Link :href="event.route.show"
           class="block border-b text-sm hover:bg-white flex items-stretch"
-          :class="{ 'bg-white': isActive, 'bg-gray-50': !isActive }"
+          :class="{'bg-white': isActive, 'bg-gray-50': !isActive }"
     >
 
         <div class="w-1 self-stretch flex-none rounded-r" :class="{ 'bg-blue-500': isActive }"></div>
@@ -28,13 +28,14 @@ export default {
     },
     computed: {
         url() {
-            return route('smtp.show', this.event.uuid)
+            return this.event.route.show
         },
         date() {
             return this.event.date.fromNow()
         },
         isActive() {
-            return this.$page.url.startsWith(this.url)
+            const url = new URL(this.url)
+            return this.$page.url.startsWith(url.pathname)
         }
     }
 }

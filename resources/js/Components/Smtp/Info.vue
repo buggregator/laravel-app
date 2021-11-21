@@ -66,7 +66,7 @@
         <TabPanels class="flex-grow mt-3">
             <TabPanel class="h-full">
                 <HtmlPreview>
-                    <iframe :src="`/mail/${event.uuid}/html`"/>
+                    <iframe :src="route('smtp.show.html', event.uuid)"/>
                 </HtmlPreview>
             </TabPanel>
             <TabPanel>
@@ -143,7 +143,8 @@ export default {
     methods: {
         async deleteEvent() {
             try {
-                await this.$inertia.delete(`/mail/${this.event.uuid}`)
+                await this.$inertia.delete(route('event.delete', this.event.uuid))
+                window.location = route('smtp')
             } catch (e) {
 
             }
