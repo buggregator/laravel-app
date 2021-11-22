@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
@@ -14,14 +15,17 @@ class ExecutedQueryHandler extends AbstractHandler
         }
 
         if (isset($payload['content']['time'])) {
-            $data['Time'] = $payload['content']['time'] . ' ms';
+            $data['Time'] = $payload['content']['time'].' ms';
         }
 
         return [
-            'query' => vsprintf(str_replace('?', '%s', $payload['content']['sql']), collect($payload['content']['bindings'])->map(function ($binding) {
-                return is_numeric($binding) ? $binding : "'{$binding}'";
-            })->toArray()),
-            'data' => $data
+            'query' => vsprintf(
+                str_replace('?', '%s', $payload['content']['sql']),
+                collect($payload['content']['bindings'])->map(function ($binding) {
+                    return is_numeric($binding) ? $binding : "'{$binding}'";
+                })->toArray()
+            ),
+            'data' => $data,
         ];
     }
 }

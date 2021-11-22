@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Smtp;
 
-use App\TCP\Kernel;
+use App\Contracts\TCP\Kernel;
 use Modules\Smtp\Console\TcpHandler;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+final class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function boot(): void
     {

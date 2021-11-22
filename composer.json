@@ -12,6 +12,11 @@
     ],
     "require": {
         "php": "^8.0",
+        "cycle/annotated": "2.0.x-dev",
+        "cycle/orm": "2.0.x-dev",
+        "cycle/schema-migrations-generator": "dev-master",
+        "cycle/schema-renderer": "^1.0",
+        "eventsauce/eventsauce": "^1.2",
         "facade/ignition": "^2.5",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -23,14 +28,14 @@
         "laravel/tinker": "^2.5",
         "nunomaduro/termwind": "dev-master",
         "php-http/message": "^1.11",
-        "spatie/laravel-event-sourcing": "^5.0",
+        "spatie/laravel-route-attributes": "^1.9",
         "spiral/roadrunner-broadcast": "dev-master",
         "spiral/roadrunner-cli": "^2.0",
         "spiral/roadrunner-jobs": "^2.0",
         "spiral/roadrunner-kv": "^2.1",
         "spiral/roadrunner-laravel": "^5.2",
         "spiral/roadrunner-tcp": "*",
-        "textalk/websocket": "^1.5",
+        "symfony/messenger": "^5.3",
         "tightenco/ziggy": "^1.0",
         "zbateson/mail-mime-parser": "^2.0"
     },
@@ -39,12 +44,14 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3"
+        "phpunit/phpunit": "^9.3.3",
+        "rector/rector": "^0.12.4"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/Application",
             "Interfaces\\": "app/Interfaces",
+            "Infrastructure\\": "app/Infrastructure",
             "Modules\\": "app/Modules",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
@@ -72,7 +79,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "Spatie\\RouteAttributes\\RouteAttributesServiceProvider"
+            ]
         }
     },
     "config": {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Interfaces\Providers;
@@ -8,25 +9,12 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Spatie\RouteAttributes\RouteRegistrar;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * The path to the "home" route for your application.
-     *
-     * This is used by Laravel authentication to redirect users after login.
-     *
-     * @var string
-     */
     public const HOME = '/dashboard';
 
-    /**
-     * The controller namespace for the application.
-     *
-     * When present, controller route declarations will automatically be prefixed with this namespace.
-     *
-     * @var string|null
-     */
     // protected $namespace = 'Interfaces\\Http\\Controllers';
 
     public function boot()
@@ -41,6 +29,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        $this->registerRoutesFromAttributes();
     }
 
     protected function configureRateLimiting()
@@ -48,5 +38,34 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
+    }
+
+    private function registerRoutesFromAttributes(): void
+    {
+        if (! $this->shouldRegisterRoutes()) {
+            return;
+        }
+
+        $routeRegistrar = (new RouteRegistrar(app()->router))
+            ->useRootNamespace('')
+            ->useMiddleware(config('route-attributes.middleware') ?? []);
+
+        collect(config('route-attributes.directories'))
+            ->each(
+                fn (string $directory) => $routeRegistrar->registerDirectory($directory)
+            );
+    }
+
+    private function shouldRegisterRoutes(): bool
+    {
+        if (! config('route-attributes.enabled')) {
+            return false;
+        }
+
+        if ($this->app->routesAreCached()) {
+            return false;
+        }
+
+        return true;
     }
 }

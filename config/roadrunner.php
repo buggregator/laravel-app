@@ -1,21 +1,21 @@
 <?php
 
 use Spiral\RoadRunner\Environment\Mode;
-use Spiral\RoadRunnerLaravel\Events;
 use Spiral\RoadRunnerLaravel\Defaults;
+use Spiral\RoadRunnerLaravel\Events;
 use Spiral\RoadRunnerLaravel\Listeners;
 
 return [
     'rpc' => [
-        'host' => env('RPC_HOST', 'tcp://127.0.0.1:6001')
+        'host' => env('RPC_HOST', 'tcp://127.0.0.1:6001'),
     ],
 
     'session' => [
-        'storage' => 'session'
+        'storage' => 'session',
     ],
 
     'cache' => [
-        'storage' => 'cache'
+        'storage' => 'cache',
     ],
 
     /*
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'force_https' => (bool)env('APP_FORCE_HTTPS', false),
+    'force_https' => (bool) env('APP_FORCE_HTTPS', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -57,7 +57,7 @@ return [
             Listeners\ResetZiggyListener::class,            // for <https://github.com/tighten/ziggy>
         ],
 
-        \App\Events\Tcp\BeforeLoopIterationEvent::class => [
+        \App\Contracts\TCP\Events\BeforeLoopIterationEvent::class => [
             ...Defaults::beforeLoopIteration(),
         ],
 
@@ -73,11 +73,13 @@ return [
 
         Events\AfterLoopIterationEvent::class => [
             ...Defaults::afterLoopIteration(),
+            \Infrastructure\CycleOrm\Listeners\ClearIdentityMap::class,
             Listeners\RunGarbageCollectorListener::class, // keep the memory usage low
         ],
 
-        \App\Events\Tcp\AfterLoopIterationEvent::class => [
+        \Infrastructure\RoadRunner\TCP\Events\AfterLoopIterationEvent::class => [
             ...Defaults::afterLoopIteration(),
+            \Infrastructure\CycleOrm\Listeners\ClearIdentityMap::class,
             Listeners\RunGarbageCollectorListener::class, // keep the memory usage low
         ],
 
@@ -143,8 +145,8 @@ return [
 
     'workers' => [
         Mode::MODE_HTTP => \Spiral\RoadRunnerLaravel\Worker::class,
-        Mode::MODE_JOBS => \App\Queue\Worker::class,
-        'tcp' => \App\TCP\Worker::class,
+        Mode::MODE_JOBS => \Infrastructure\RoadRunner\Queue\Worker::class,
+        'tcp' => \Infrastructure\RoadRunner\TCP\Worker::class,
         // Mode::MODE_TEMPORAL => ...,
     ],
 ];

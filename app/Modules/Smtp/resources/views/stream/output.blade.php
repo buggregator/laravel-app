@@ -19,28 +19,28 @@
                 <thead title="Addresses"></thead>
                 @php($i = 1)
                 @foreach($addresses as $type => $users)
-                <tbody>
+                    <tbody>
                     <tr>
                         <th colspan="2" align="center">{{ $type }}</th>
                     </tr>
 
                     @foreach($users as $user)
-                    <tr @if($loop->last) border="1" @endif>
-                        <th>{{ $i++ }}.</th>
-                        <td>
-                            @if(!empty($user['name']))
-                                {{ $user['name'] }} [{{ $user['email'] }}]
-                            @else
-                                {{ $user['email'] }}
-                            @endif
-                        </td>
-                    </tr>
+                        <tr @if($loop->last) border="1" @endif>
+                            <th>{{ $i++ }}.</th>
+                            <td>
+                                @if(!empty($user['name']))
+                                    {{ $user['name'] }} [{{ $user['email'] }}]
+                                @else
+                                    {{ $user['email'] }}
+                                @endif
+                            </td>
+                        </tr>
                     @endforeach
-                </tbody>
+                    </tbody>
                 @endforeach
             </table>
         @endif
     </div>
 
-    <pre>{{ $body }}</pre>
+    <code>{{ $body }}</code>
 </div>

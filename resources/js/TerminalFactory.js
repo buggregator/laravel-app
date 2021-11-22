@@ -9,7 +9,9 @@ export default {
         }
 
         ws.listen('terminal', 'Websocket\\TerminalWrite', (payload) => {
-            payload.payload.message.split("\n").forEach((line) => store.commit('terminal/push', line))
+            payload.payload.message.split("\n").forEach((line) => {
+                store.commit('terminal/push', line)
+            })
         })
 
         this.subscribed = true

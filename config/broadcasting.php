@@ -57,7 +57,7 @@ return [
 
         'roadrunner' => [
             'driver' => 'roadrunner',
-            'rpc_host' => env('RPC_HOST', 'tcp://127.0.0.1:6001')
+            'rpc_host' => env('RPC_HOST', 'tcp://127.0.0.1:6001'),
         ],
 
         'log' => [

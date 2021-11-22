@@ -1,21 +1,20 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Events;
 
-use App\Contracts\EventsRepository as EventsRepositoryContract;
+use App\Providers\DomainServiceProvider;
+use Cycle\ORM\ORMInterface;
+use Modules\Events\Domain\Event;
+use Modules\Events\Domain\EventRepository;
 
-use Modules\Events\Projectors\EventReceivedProjector;
-use Spatie\EventSourcing\Facades\Projectionist;
-
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+final class ServiceProvider extends DomainServiceProvider
 {
-    public function register()
+    public function boot()
     {
-        $this->app->bind(EventsRepositoryContract::class, EventsRepository::class);
-
-        Projectionist::addProjectors([
-            EventReceivedProjector::class
-        ]);
+        $this->app->bind(EventRepository::class, function () {
+            return clone $this->app[ORMInterface::class]->getRepository(Event::class);
+        });
     }
 }

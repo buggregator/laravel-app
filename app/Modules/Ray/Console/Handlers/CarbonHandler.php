@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
@@ -12,8 +13,8 @@ class CarbonHandler extends AbstractHandler
             'data' => [
                 'Formatted' => $payload['content']['formatted'],
                 'Timezone' => $payload['content']['timezone'],
-                'Timestamp' => $payload['content']['timestamp']
-            ]
+                'Timestamp' => $payload['content']['timestamp'],
+            ],
         ];
     }
 }

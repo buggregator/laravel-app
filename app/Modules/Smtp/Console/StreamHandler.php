@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Smtp\Console;
@@ -15,7 +16,7 @@ class StreamHandler implements Handler
         private StreamHandlerConfig $config,
         private OutputInterface $output,
         private HtmlRenderer $renderer,
-    ){
+    ) {
     }
 
     public function handle(array $payload): void
@@ -28,24 +29,26 @@ class StreamHandler implements Handler
         }
 
         $attachments = [];
-        foreach ($payload['data']['attachments'] ?? [] as $i => $attachment) {
+        foreach ($payload['payload']['attachments'] ?? [] as $attachment) {
             $attachments[] = $attachment['name'];
         }
 
-        $this->renderer->render((string) view('smtp::stream.output', [
-            'id' => $payload['data']['id'],
-            'date' => date('r'),
-            'subject' => $payload['data']['subject'],
-            'addresses' => $addresses,
-            'attachments' => $attachments,
-            'body' => $payload['data']['text'],
-        ]));
+        $this->renderer->render(
+            (string) view('smtp::stream.output', [
+                'id' => $payload['payload']['id'],
+                'date' => date('r'),
+                'subject' => $payload['payload']['subject'],
+                'addresses' => $addresses,
+                'attachments' => $attachments,
+                'body' => $payload['payload']['text'],
+            ])
+        );
     }
 
     protected function prepareUsers(array $payload, string $key): array
     {
         $users = [];
-        foreach ($payload['data'][$key] as $user) {
+        foreach ($payload['payload'][$key] as $user) {
             $users[] = $user;
         }
 
@@ -54,10 +57,10 @@ class StreamHandler implements Handler
 
     public function shouldBeSkipped(array $payload): bool
     {
-        if (!$this->config->isEnabled()) {
+        if (! $this->config->isEnabled()) {
             return true;
         }
 
-        return !isset($payload['data']);
+        return ! isset($payload['payload']);
     }
 }

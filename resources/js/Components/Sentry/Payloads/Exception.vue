@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Link as="div" :href="route('sentry.show', event.uuid)" class="cursor-pointer pb-2">
+        <Link as="div" :href="event.route.show" class="cursor-pointer pb-2">
             <h3 class="text-blue-800 mb-1 font-semibold">
                 {{ event.payload.type }}
             </h3>

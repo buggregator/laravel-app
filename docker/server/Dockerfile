@@ -1,4 +1,4 @@
-FROM phpswoole/swoole:4.7-php8.0-alpine
+FROM php8.1-alpine
 
 # Optional, force UTC as server time
 RUN echo "UTC" > /etc/timezone

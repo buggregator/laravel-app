@@ -1,15 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\VarDumper\Console;
 
-use App\Events\EventReceived;
+use App\Commands\HandleReceivedEvent;
+use App\Contracts\Command\CommandBus;
+use App\Contracts\TCP\Handler;
+use App\Contracts\TCP\Response;
 use App\TCP\CloseConnection;
 use App\TCP\ContinueRead;
-use App\TCP\Handler;
-use App\TCP\Response;
 use App\Websocket\BrowserOutput;
-use Illuminate\Contracts\Events\Dispatcher;
+use RuntimeException;
 use Spiral\RoadRunner\Tcp\Request;
 use Spiral\RoadRunner\Tcp\TcpWorkerInterface;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -24,8 +26,9 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 class TcpHandler implements Handler
 {
     public function __construct(
-        private Dispatcher $events, private StreamHandlerConfig $config)
-    {
+        private CommandBus $commands,
+        private StreamHandlerConfig $config
+    ) {
     }
 
     public function handle(Request $request, OutputInterface $output): Response
@@ -41,11 +44,13 @@ class TcpHandler implements Handler
 
             // Impossible to decode the message, give up.
             if (false === $payload) {
-                throw new \RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
+                throw new RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
             }
 
-            if (!is_array($payload) || count($payload) < 2 || !$payload[0] instanceof Data || !is_array($payload[1])) {
-                throw new \RuntimeException("Invalid payload from [{$request->connectionUuid}] client.");
+            if (! is_array($payload) || count($payload) < 2 || ! $payload[0] instanceof Data || ! is_array(
+                    $payload[1]
+                )) {
+                throw new RuntimeException("Invalid payload from [{$request->connectionUuid}] client.");
             }
 
             $this->fireEvent($payload);
@@ -57,7 +62,7 @@ class TcpHandler implements Handler
 
     private function sendToConsole(Request $request, array $payload, OutputInterface $output): void
     {
-        if (!$this->config->isEnabled()) {
+        if (! $this->config->isEnabled()) {
             return;
         }
 
@@ -73,13 +78,15 @@ class TcpHandler implements Handler
 
     private function fireEvent(array $payload): void
     {
-        $this->events->dispatch(new EventReceived('var-dump', [
-            'payload' => [
-                'type' => $payload[0]->getType(),
-                'value' => $this->convertToPrimitive($payload[0])
-            ],
-            'context' => $payload[1]
-        ]));
+        $this->commands->dispatch(
+            new HandleReceivedEvent('var-dump', [
+                'payload' => [
+                    'type' => $payload[0]->getType(),
+                    'value' => $this->convertToPrimitive($payload[0]),
+                ],
+                'context' => $payload[1],
+            ])
+        );
     }
 
     private function convertToPrimitive(Data $data): string|null

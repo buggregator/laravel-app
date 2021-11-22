@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
@@ -13,9 +14,11 @@ class MeasureHandler extends AbstractHandler
             'isNew' => $payload['content']['is_new_timer'],
             'name' => $payload['content']['name'],
             'totalTime' => $this->covertMsToSeconds($payload['content']['total_time']),
-            'memoryUsage' => Helper::formatMemory((int)$payload['content']['max_memory_usage_during_total_time']),
+            'memoryUsage' => Helper::formatMemory((int) $payload['content']['max_memory_usage_during_total_time']),
             'timeSinceLastCall' => $this->covertMsToSeconds($payload['content']['time_since_last_call']),
-            'memoryUsageSinceLastCall' => Helper::formatMemory((int)$payload['content']['max_memory_usage_since_last_call']),
+            'memoryUsageSinceLastCall' => Helper::formatMemory(
+                (int) $payload['content']['max_memory_usage_since_last_call']
+            ),
         ];
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
@@ -11,7 +12,7 @@ class EloquentModelHandler extends AbstractHandler
     {
         return [
             'class' => $payload['content']['class_name'],
-            'attributes' => VariableCleaner::clean($payload['content']['attributes'], 0)
+            'attributes' => VariableCleaner::clean($payload['content']['attributes'], 0),
         ];
     }
 

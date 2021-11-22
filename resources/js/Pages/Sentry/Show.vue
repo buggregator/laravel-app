@@ -1,7 +1,7 @@
 <template>
     <MainLayout title="SMTP">
         <nav ref="header" class="border-b flex items-center gap-x-2 text-xs font-semibold px-4 py-2">
-            <Link class="text-gray-600" :href="route('sentry')">Sentry</Link>
+            <Link class="text-gray-600" :href="event.route.index">Sentry</Link>
             <div class="h-1 w-1">
                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330"><path d="M251 154 101 4a15 15 0 1 0-22 22l140 139L79 304a15 15 0 0 0 22 22l150-150a15 15 0 0 0 0-22z"/></svg>
             </div>
@@ -10,7 +10,7 @@
         <main class="flex flex-col flex-grow">
             <header class="bg-gray-50 py-5 px-4 md:px-6 lg:px-8 border-b">
                 <h1 class="text-2xl font-bold flex items-center">
-                    {{ event.payload.type }} <a :href="route('sentry.show.json', event.id)" target="_blank" class="text-sm text-blue-800 ml-5">[JSON]</a>
+                    {{ event.payload.type }} <a :href="event.route.json" target="_blank" class="text-sm text-blue-800 ml-5">[JSON]</a>
                 </h1>
                 <p class="text-gray-700">{{ event.payload.value }}</p>
                 <p class="text-gray-500 text-sm mt-3">{{ date }}</p>
@@ -68,11 +68,11 @@ export default {
     methods: {
         loadEvents() {
             this.store.commit('sentry/clearEvents')
-            this.$page.props.events.forEach((e) => {
+            this.$page.props.events.data.forEach((e) => {
                 this.store.commit('sentry/pushEvent', EventFactory.create(e))
             })
 
-            this.store.commit('sentry/openEvent', EventFactory.create(this.$page.props.event))
+            this.store.commit('sentry/openEvent', EventFactory.create(this.$page.props.event.data))
         }
     },
     computed: {

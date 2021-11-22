@@ -1,6 +1,7 @@
 import {createStore} from "vuex";
 import moment from "moment";
 import axios from "axios";
+import route from "ziggy-js/src/js";
 
 function generateScreenName() {
     return 'Debug session ' + moment().format('hh:mm:ss')
@@ -135,6 +136,17 @@ export const store = createStore({
 
             return labels.filter((item, index) => labels.indexOf(item) == index)
         },
+        eventsByType: state => type => {
+            let events = [];
+
+            Object.keys(state.events).forEach(key => {
+                state.events[key].filter(e => e.app != type).forEach(e => [
+                    events.push(e)
+                ])
+            })
+
+            return events
+        },
         filteredEvents: state => {
             let events = state.events[state.currentScreen] || []
 
@@ -163,6 +175,14 @@ export const store = createStore({
                 })
         }
     },
+    actions: {
+        clearEvents({}, type) {
+            axios.delete(route('events.clear'), {data: {type}})
+        },
+        deleteEvent({}, uuid) {
+            axios.delete(route('event.delete', uuid))
+        },
+    },
     mutations: {
         clearSelectedColors(state) {
             state.selectedColors = []
@@ -188,14 +208,19 @@ export const store = createStore({
                 event.setCollapsed(data[1])
             }
         },
-        clearEvents(state) {
+        clearEvents(state, type) {
+            if (type) {
+                Object.keys(state.events).forEach(key => {
+                    state.events[key] = state.events[key].filter(e => e.app != type)
+                })
+
+                return
+            }
+
             state.events = {}
-            state.screens = []
-            axios.delete(`/events`)
         },
         deleteEvent(state, uuid) {
             state.events[state.currentScreen] = state.events[state.currentScreen].filter(e => e.uuid != uuid)
-            axios.delete(`/event/${uuid}`)
         },
         switchScreen(state, screen) {
             if (_.isEmpty(screen)) {

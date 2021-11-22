@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
@@ -24,7 +25,7 @@ class CustomHandler extends AbstractHandler
         }
 
         return [
-            'string' => $value
+            'string' => $value,
         ];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Interfaces\Http\Controllers;
@@ -10,5 +11,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 }

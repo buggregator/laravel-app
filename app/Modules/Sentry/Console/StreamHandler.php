@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Sentry\Console;
 
 use App\Attributes\Console\Stream;
+use Generator;
 use Interfaces\Console\Handler;
 use Termwind\HtmlRenderer;
 
@@ -19,7 +20,7 @@ class StreamHandler implements Handler
 
     public function handle(array $payload): void
     {
-        foreach ($payload['data']['exception']['values'] as $exception) {
+        foreach ($payload['payload']['exception']['values'] as $exception) {
             $this->renderException($exception);
         }
     }
@@ -30,7 +31,7 @@ class StreamHandler implements Handler
         $editorFrame = reset($frames);
 
         $this->renderer->render(
-            (string)view('sentry::console.output', [
+            (string) view('sentry::console.output', [
                 'date' => date('r'),
                 'type' => $exception['type'],
                 'message' => $exception['value'],
@@ -43,14 +44,14 @@ class StreamHandler implements Handler
     /**
      * Renders the trace of the exception.
      */
-    protected function prepareTrace(array $frames): \Generator
+    protected function prepareTrace(array $frames): Generator
     {
         foreach ($frames as $i => $frame) {
             $file = $frame['filename'];
             $line = $frame['lineno'];
             $class = empty($frame['class']) ? '' : $frame['class'].'::';
             $function = $frame['function'] ?? '';
-            $pos = str_pad((string)((int)$i + 1), 4, ' ');
+            $pos = str_pad((string) ((int) $i + 1), 4, ' ');
 
             yield $pos => [
                 'file' => $file,
@@ -73,10 +74,11 @@ class StreamHandler implements Handler
      */
     protected function renderCodeSnippet(array $frame): array
     {
-        $line = (int)$frame['lineno'];
+        $line = (int) $frame['lineno'];
         $startLine = 0;
         $content = '';
         if (isset($frame['pre_context'])) {
+            $startLine = $line - count($frame['pre_context']) + 1;
             foreach ($frame['pre_context'] as $row) {
                 $content .= $row."\n";
             }
@@ -102,10 +104,10 @@ class StreamHandler implements Handler
 
     public function shouldBeSkipped(array $payload): bool
     {
-        if (!$this->config->isEnabled()) {
+        if (! $this->config->isEnabled()) {
             return true;
         }
 
-        return !isset($payload['data']['exception']['values'][0]);
+        return empty($payload['payload']['exception']['values']);
     }
 }

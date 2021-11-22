@@ -1,17 +1,18 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Listeners\Event;
 
-use App\Events\EventReceived;
 use Interfaces\Console\Handler;
+use Modules\IncommingEvents\Domain\Events\EventWasReceived;
 
 class SendToConsole
 {
-    public function handle(EventReceived $event)
+    public function handle(EventWasReceived $event)
     {
-        if ($event->sendToConsole) {
-            app(Handler::class)->handle($event->toArray());
+        if ($event->sendToConsole && app()->has(Handler::class)) {
+            app(Handler::class)->handle($event->toPayload());
         }
     }
 }

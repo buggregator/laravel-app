@@ -14,7 +14,7 @@ export default class extends Event {
     }
 
     get type() {
-        return 'Sentry'
+        return 'Smtp'
     }
 
     get payloads() {

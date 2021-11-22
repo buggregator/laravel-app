@@ -9,11 +9,13 @@
         <nav class="flex gap-2 items-center justify-center">
             <template v-for="screen in screens">
                 <WsConnectionIcon class="h-5 w-5" v-if="currentScreen == screen"/>
-                <div v-else class="w-4 h-4 cursor-pointer rounded-full border-2 border-blue-400" @click="switchScreen(screen)"></div>
+                <div v-else class="w-4 h-4 cursor-pointer rounded-full border-2 border-blue-400"
+                     @click="switchScreen(screen)"></div>
             </template>
 
-            <button class="w-4 h-4 flex text-xs font-bold items-center justify-center cursor-pointer rounded-full border-2 border-gray-300 text-gray-300"
-                    @click="newScreen">
+            <button
+                class="w-4 h-4 flex text-xs font-bold items-center justify-center cursor-pointer rounded-full border-2 border-gray-300 text-gray-300"
+                @click="newScreen">
                 +
             </button>
         </nav>
@@ -42,15 +44,15 @@ export default {
             this.store.commit('switchScreen', screen)
         },
         clearEvents() {
-            this.store.commit('clearEvents')
+            this.store.dispatch('clearEvents')
         }
     },
 
     setup() {
         const store = useStore();
 
-        const screens = computed(()  => store.getters.screens)
-        const currentScreen = computed(()  => store.state.currentScreen)
+        const screens = computed(() => store.getters.screens)
+        const currentScreen = computed(() => store.state.currentScreen)
         const totalEvents = computed(() => store.getters.totalEvents)
 
         return {

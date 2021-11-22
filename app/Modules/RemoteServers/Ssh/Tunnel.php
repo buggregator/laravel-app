@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\RemoteServers\Ssh;
@@ -14,9 +15,8 @@ final class Tunnel
     public function __construct(
         private string $user,
         private string $host,
-        private int    $port
-    )
-    {
+        private int $port
+    ) {
     }
 
     public function usePrivateKey(string $pathToPrivateKey): self
@@ -37,11 +37,13 @@ final class Tunnel
         }
 
         if ($process->getExitCode() !== 0) {
-            throw new SSHException(sprintf(
-                "Unable to create ssh tunnel. Output: %s ErrorOutput: %s",
-                $process->getOutput(),
-                $process->getErrorOutput()
-            ));
+            throw new SSHException(
+                sprintf(
+                    'Unable to create ssh tunnel. Output: %s ErrorOutput: %s',
+                    $process->getOutput(),
+                    $process->getErrorOutput()
+                )
+            );
         }
 
         return $process;
@@ -54,10 +56,10 @@ final class Tunnel
             '-R',
             '-o ServerAliveInterval=15',
             '-o ExitOnForwardFailure=yes',
-            ...array_map(fn(int $port) => "{$port}:localhost:{$port}", $ports)
+            ...array_map(fn (int $port) => "{$port}:localhost:{$port}", $ports),
         ];
 
-        if (!is_null($this->port)) {
+        if (! is_null($this->port)) {
             $args[] = "-p {$this->port}";
         }
 
@@ -65,13 +67,12 @@ final class Tunnel
             $args[] = "-i {$this->pathToPrivateKey}";
         }
 
-
-        if (!$this->strictHostChecking) {
+        if (! $this->strictHostChecking) {
             $args[] = '-o StrictHostKeyChecking=no';
             $args[] = '-o UserKnownHostsFile=/dev/null';
         }
 
-        if (!$this->passwordAuthentication) {
+        if (! $this->passwordAuthentication) {
             $args[] = '-o PasswordAuthentication=no';
         }
 

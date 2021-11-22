@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Inspector\Console;
@@ -13,6 +14,6 @@ class StreamHandlerConfig
 
     public function isEnabled(): bool
     {
-        return (bool)$this->config->get('server.inspector.cli.enabled');
+        return (bool) $this->config->get('server.inspector.cli.enabled');
     }
 }

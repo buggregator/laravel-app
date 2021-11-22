@@ -1,17 +1,16 @@
-php:
-  risky: true
-  version: 8.0
-  preset: laravel
-  enabled:
-    - ternary_to_elvis_operator
-  disabled:
-    - single_import_per_statement
-  finder:
-    exclude:
-      - "node_modules"
-      - "storage"
-      - "vendor"
-    name: "*.php"
-    not-name:
-      - "*.blade.php"
-      - "_ide_helper.php"
+risky: true
+version: 8.0
+preset: laravel
+enabled:
+  - ternary_to_elvis_operator
+disabled:
+  - single_import_per_statement
+finder:
+  exclude:
+    - "node_modules"
+    - "storage"
+    - "vendor"
+  name: "*.php"
+  not-name:
+    - "*.blade.php"
+    - "_ide_helper.php"

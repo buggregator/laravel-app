@@ -1,6 +1,6 @@
 <div>
     @if($class)
-    <span class="text-gray">{{ $class }}:</span>
+        <span class="text-gray">{{ $class }}:</span>
     @endif
 
     <span class="font-bold">{{ $method }}</span>

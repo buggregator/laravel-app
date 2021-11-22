@@ -2,12 +2,14 @@
 
 namespace Modules\Terminal\Http\Controllers;
 
-use App\Contracts\EventsRepository;
 use Inertia\Inertia;
+use Interfaces\Http\Controllers\Controller;
+use Spatie\RouteAttributes\Attributes\Get;
 
-class ListAction
+class ListAction extends Controller
 {
-    public function __invoke(EventsRepository $events)
+    #[Get('/terminal', name: 'terminal')]
+    public function __invoke()
     {
         return Inertia::render('Terminal/Index');
     }

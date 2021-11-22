@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Modules\Ray\Console\Handlers;
 
+use Generator;
 use Illuminate\Support\Arr;
 
 class TraceHandler extends AbstractHandler
@@ -13,10 +15,10 @@ class TraceHandler extends AbstractHandler
         $frame = Arr::first($payload['content']['frames']);
 
         $frame = $frame ? [
-            'class' => empty($frame['class']) ? '' : $frame['class'] . '::',
+            'class' => empty($frame['class']) ? '' : $frame['class'].'::',
             'method' => $frame['method'],
             'line' => $frame['line_number'],
-            'file' => $frame['file_name']
+            'file' => $frame['file_name'],
         ] : null;
 
         return [
@@ -28,24 +30,24 @@ class TraceHandler extends AbstractHandler
     /**
      * Renders the trace of the exception.
      */
-    protected function prepareTrace(array $frames): \Generator
+    protected function prepareTrace(array $frames): Generator
     {
         foreach ($frames as $i => $frame) {
             $file = $frame['file_name'];
             $line = $frame['line_number'];
-            $class = empty($frame['class']) ? '' : $frame['class'] . '::';
+            $class = empty($frame['class']) ? '' : $frame['class'].'::';
             $function = $frame['method'];
-            $pos = str_pad((string)((int)$i + 1), 4, ' ');
+            $pos = str_pad((string) ((int) $i + 1), 4, ' ');
 
             yield $pos => [
                 'file' => $file,
                 'line' => $line,
                 'class' => $class,
-                'function' => $function
+                'function' => $function,
             ];
 
             if ($i >= 10) {
-                yield $pos => '+ more ' . count($frames) - 10 . ' frames';
+                yield $pos => '+ more '.count($frames) - 10 .' frames';
 
                 break;
             }
