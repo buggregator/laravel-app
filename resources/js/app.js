@@ -20,13 +20,15 @@ createInertiaApp({
         vueApp.config.errorHandler = () => null;
         vueApp.config.warnHandler = () => null;
 
+        store.dispatch('theme/detect')
+
         return vueApp
             .use(plugin)
             .use(store)
             .use(Notifications)
             .mixin({methods: {route}})
             .mount(el);
-    },
+    }
 });
 
 InertiaProgress.init({color: '#4B5563'});

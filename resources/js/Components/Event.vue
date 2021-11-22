@@ -1,16 +1,17 @@
 <template>
-    <div ref="event" :class="{'collapsed': event.collapsed, 'open': !event.collapsed}">
-        <div class="sidebar">
-            <div class="flex items-center space-x-2">
-                <button @click="toggle" class="collapse-button" :class="color">
-                    <span>{{ !event.collapsed ? '-' : '+' }}</span>
+    <div class="event" ref="event" :class="{'collapsed': event.collapsed, 'open': !event.collapsed}">
+        <div class="event__sidebar sidebar">
+            <div class="sidebar__container">
+                <button @click="toggle" class="button button__collapse" :class="color">
+                    <PlusIcon v-if="event.collapsed" />
+                    <MinusIcon v-else />
                 </button>
-                <button class="delete-button" @click="deleteEvent">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><g id="close"><path id="x" d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"/></g></svg>
+                <button class="button button__delete" @click="deleteEvent">
+                    <TimesIcon />
                 </button>
             </div>
 
-            <div class="event-labels">
+            <div class="event__labels">
                 <Label :color="event.color">
                     {{ date }}
                 </Label>
@@ -25,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="body">
+        <div class="event__body">
             <slot></slot>
         </div>
     </div>
@@ -34,9 +35,12 @@
 <script>
 import Label from "@/Components/UI/Label";
 import {useStore} from "vuex";
+import PlusIcon from "@/Components/UI/Icons/PlusIcon";
+import MinusIcon from "@/Components/UI/Icons/MinusIcon";
+import TimesIcon from "@/Components/UI/Icons/TimesIcon";
 
 export default {
-    components: {Label},
+    components: {MinusIcon, PlusIcon, TimesIcon, Label},
     props: {
         event: Object
     },

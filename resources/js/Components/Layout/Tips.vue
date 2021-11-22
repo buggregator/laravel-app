@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-6 p-6 bg-white rounded-l text-gray-600 border">
+    <div class="mt-6 p-6 bg-white rounded-l text-muted border">
         <h3 class="text-xl font-bold mb-3">{{ name }} {{ version }}</h3>
         <ul class="flex flex-col space-y-2">
             <li class="flex space-x-3 items-center">

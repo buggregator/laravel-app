@@ -1,14 +1,14 @@
 <template>
-    <div class="text-xs cursor-pointer border-b border-purple-200" @click="collapsed = !collapsed">
-        <div class=" bg-purple-50 py-2 px-3 flex space-x-2 justify-between items-start">
-            <div class="text-gray-700 break-all font-semibold">
+    <div class="text-xs cursor-pointer border-b border-purple-200 dark:border-gray-600" @click="collapsed = !collapsed">
+        <div class="bg-purple-50 dark:bg-gray-800 py-2 px-3 flex space-x-2 justify-between items-start">
+            <div class="text-muted break-all font-semibold">
                 {{ file.filename }}
                 <span v-if="file.function" class="text-gray-400">in</span>
                 {{ file.function || null }}
                 <span v-if="file.function" class="text-gray-400">at line</span>
                 {{ file.lineno }}
             </div>
-            <div class="w-5 h-4 border border-purple-300 shadow bg-white py-1 rounded">
+            <div class="w-5 h-4 border border-purple-300 shadow bg-white dark:bg-gray-600 py-1 rounded">
                 <svg viewBox="0 0 16 16"
                      fill="currentColor"
                      height="100%" width="100%"
@@ -18,9 +18,9 @@
                 </svg>
             </div>
         </div>
-        <div class="bg-gray-800 p-2 overflow-x-scroll" v-if="!collapsed">
+        <div class="bg-gray-900 p-2 overflow-x-scroll" v-if="!collapsed">
             <div class="flex" v-for="(line, i) in file.pre_context">
-                <div class="w-12 text-gray-500">{{ file.lineno - (file.pre_context.length - i) }}.</div>
+                <div class="w-12 text-muted">{{ file.lineno - (file.pre_context.length - i) }}.</div>
                 <pre class="text-gray-100">{{ line }}</pre>
             </div>
 
@@ -29,7 +29,7 @@
                 <pre>{{ file.context_line }}</pre>
             </div>
             <div class="flex" v-for="(line, i) in file.post_context">
-                <div class="w-12 text-gray-500">{{ file.lineno + i + 1 }}.</div>
+                <div class="w-12 text-muted">{{ file.lineno + i + 1 }}.</div>
                 <pre class="text-gray-100">{{ line }}</pre>
             </div>
         </div>

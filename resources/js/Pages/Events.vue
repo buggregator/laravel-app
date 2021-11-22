@@ -8,10 +8,8 @@
             </div>
         </header>
 
-        <main v-if="hasEvents" class="event-list">
-            <component
-                class="event-item"
-                :is="eventComponent(event)"
+        <main v-if="hasEvents" class="events">
+            <component :is="eventComponent(event)"
                 :event="event"
                 v-for="event in events"
                 :key="event.uuid"

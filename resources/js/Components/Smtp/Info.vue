@@ -3,7 +3,7 @@
         <h2 class="text-2xl mb-3 font-bold">{{ event.subject }}</h2>
 
         <div class="flex items-center space-x-3">
-            <span class="text-sm font-semibold text-gray-600">{{ date }}</span>
+            <span class="text-sm font-semibold text-muted">{{ date }}</span>
             <button class="h-5 w-5" @click="deleteEvent">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path

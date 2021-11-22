@@ -1,7 +1,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import 'simple-syntax-highlighter/dist/sshpre.css';
 @import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
 @import "xterm/css/xterm.css";
 @import "./components/left-sidebar.css";
@@ -10,13 +9,21 @@
 @import "./components/screens.css";
 @import "./components/events.css";
 @import "./components/welcome-block.css";
+@import "./components/sshpre.css";
 
 body {
     @apply bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-50;
+}
+
+.text-muted {
+    @apply text-gray-600 dark:text-gray-300;
+}
+
+.text-muted.red {
+    @apply text-red-600 dark:text-red-300;
 }
 
 .ssh-pre {
     margin-top: 0 !important;
     @apply p-2 md:px-3 lg:px-4 text-2xs sm:text-xs md:text-sm rounded-none border;
 }
-

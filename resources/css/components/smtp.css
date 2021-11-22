@@ -1,0 +1,61 @@
+.device-desktop {
+    @apply w-full h-full border rounded-md;
+
+    > div {
+        @apply w-full h-full rounded-md bg-white;
+    }
+}
+
+.device-tablet {
+    @apply justify-center border-2 rounded-3xl px-5;
+    &:after {
+        @apply border dark:border-gray-700 bg-gray-100 dark:bg-gray-900 rounded-full block w-12 h-12 my-4;
+        content: "";
+    }
+
+    &:before {
+        @apply border dark:border-gray-700 bg-gray-100 dark:bg-gray-900 rounded-full block w-3 h-3 my-2;
+        content: "";
+    }
+
+    > div {
+        height: 1024px;
+        width: 768px;
+    }
+}
+
+.device-mobile {
+    @apply justify-center border-2 rounded-3xl px-3;
+    &:before {
+        @apply border dark:border-gray-700 bg-gray-100 dark:bg-gray-900 rounded-full block w-3 h-3 my-2;
+        content: "";
+    }
+
+    &:after {
+        @apply border dark:border-gray-700 bg-gray-100 dark:bg-gray-900 rounded-full block w-8 h-8 my-3;
+        content: "";
+    }
+
+    > div {
+        height: 568px;
+        width: 320px;
+    }
+
+}
+
+.device-desktop,
+.device-tablet,
+.device-mobile {
+    @apply flex flex-col items-center transition-all ease-in duration-300 bg-gray-50 dark:bg-gray-900;
+}
+
+.device-tablet > div,
+.device-mobile > div {
+    @apply border rounded-md bg-white;
+}
+
+.device-desktop iframe,
+.device-tablet iframe,
+.device-mobile iframe {
+    @apply rounded-md w-full h-full;
+}

@@ -4,10 +4,10 @@
             <div :title="file.file_name" class="bg-gray-50 break-all font-semibold">
                 <div>
                     {{ file.class || 'null' }}:{{ file.method }}
-                    <span class="text-gray-400">at line</span>
+                    <span class="text-muted">at line</span>
                     {{ file.line_number }}
                 </div>
-                <span class="text-gray-400">{{ file.file_name }}</span>
+                <span class="text-muted">{{ file.file_name }}</span>
             </div>
             <div class="w-4 h-4 border border-gray-300 bg-white py-1 rounded" v-if="hasSnippet">
                 <svg viewBox="0 0 16 16"

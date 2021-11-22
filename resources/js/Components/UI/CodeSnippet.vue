@@ -5,7 +5,7 @@
         </ssh-pre>
 
         <button type="button" @click="doCopy"
-                class="flex items-center gap-x-1 absolute top-2 right-2 px-1 bg-white hover:bg-blue-500 border border-blue-500 text-blue-500 hover:text-white transition-all text-xs font-bold"
+                class="flex items-center gap-x-1 absolute top-2 right-2 px-1 bg-white dark:bg-gray-900 hover:bg-blue-500 border border-blue-500 dark:border-blue-400 text-blue-500 dark:text-blue-200 hover:text-white transition-all text-xs font-bold"
                 :class="{'transform scale-110 bg-green-500 hover:bg-green-500': copied}"
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 460" class="w-2 h-2 fill-current">

@@ -1,30 +1,30 @@
 <template>
     <div>
-        <h3 v-if="payload.content.subject" class="text-gray-800 font-bold">
+        <h3 v-if="payload.content.subject" class="font-bold">
             {{ payload.content.subject }}
         </h3>
-        <div v-if="payload.content.mailable_class" class="text-gray-600 text-sm break-all">
+        <div v-if="payload.content.mailable_class" class="text-muted text-sm break-all">
             {{ payload.content.mailable_class }}
         </div>
         <Table>
             <TableRow title="From">
                 <template v-for="user in payload.content.from">
-                    {{ user.email }} <span class="text-gray-600 font-bold" v-if="user.name">[{{ user.name }}]</span>
+                    {{ user.email }} <span class="text-muted font-bold" v-if="user.name">[{{ user.name }}]</span>
                 </template>
             </TableRow>
             <TableRow title="To">
                 <template v-for="user in payload.content.to">
-                    {{ user.email }} <span class="text-gray-600 font-bold" v-if="user.name">[{{ user.name }}]</span>
+                    {{ user.email }} <span class="text-muted font-bold" v-if="user.name">[{{ user.name }}]</span>
                 </template>
             </TableRow>
             <TableRow title="Cc">
                 <template v-for="user in payload.content.cc">
-                    {{ user.email }} <span class="text-gray-600 font-bold" v-if="user.name">[{{ user.name }}]</span>
+                    {{ user.email }} <span class="text-muted font-bold" v-if="user.name">[{{ user.name }}]</span>
                 </template>
             </TableRow>
             <TableRow title="Bcc">
                 <template v-for="user in payload.content.bcc">
-                    {{ user.email }} <span class="text-gray-600 font-bold" v-if="user.name">[{{ user.name }}]</span>
+                    {{ user.email }} <span class="text-muted font-bold" v-if="user.name">[{{ user.name }}]</span>
                 </template>
             </TableRow>
         </Table>

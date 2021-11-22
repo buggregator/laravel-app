@@ -1,15 +1,14 @@
 .left-sidebar {
     @apply bg-gray-200 dark:bg-gray-800 border-r border-gray-300 dark:border-gray-600 flex flex-col justify-between;
-}
 
-.left-sidebar > nav {
-    @apply divide-y divide-gray-300 dark:divide-gray-600;
-}
+    > nav {
+        @apply divide-y divide-gray-300 dark:divide-gray-600;
 
-.left-sidebar > nav > a {
-    @apply text-blue-500 p-3 md:p-4 lg:p-5 block hover:bg-blue-500 hover:text-white;
-}
-
-.left-sidebar > nav > a.active {
-    @apply bg-blue-700 text-blue-200;
+        > a {
+            @apply text-blue-500 p-3 md:p-4 lg:p-5 block hover:bg-blue-500 hover:text-white;
+            &.active {
+                @apply bg-blue-700 text-blue-200;
+            }
+        }
+    }
 }
