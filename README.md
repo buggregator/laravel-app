@@ -1,7 +1,7 @@
 # A server for debugging PHP applications and more.
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
-[![StyleCI](https://github.styleci.io/repos/395126230/shield?branch=feature/36)](https://github.styleci.io/repos/395126230?branch=feature/36)
+[![StyleCI](https://github.styleci.io/repos/395126230/shield?branch=master)](https://github.styleci.io/repos/395126230?branch=master)
 [![build](https://github.com/buggregator/app/actions/workflows/main.yml/badge.svg)](https://github.com/buggregator/app/actions/workflows/main.yml)
 [![Downloads](https://img.shields.io/docker/pulls/butschster/buggregator.svg)](https://hub.docker.com/repository/docker/butschster/buggregator)
 [![Twitter](https://img.shields.io/badge/twitter-Follow-blue)](https://twitter.com/buggregator)
