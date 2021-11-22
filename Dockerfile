@@ -1,4 +1,4 @@
-FROM php8.1-alpine
+FROM php8.0-cli-alpine
 
 # Optional, force UTC as server time
 RUN echo "UTC" > /etc/timezone
@@ -7,6 +7,7 @@ RUN docker-php-ext-install opcache && docker-php-ext-enable opcache
 RUN docker-php-ext-install pcntl
 RUN apk add --no-cache libzip-dev && docker-php-ext-configure zip && docker-php-ext-install zip
 RUN apk add --no-cache supervisor git
+RUN docker-php-ext-install pdo pdo_pgsql pdo_mysql sockets
 
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
