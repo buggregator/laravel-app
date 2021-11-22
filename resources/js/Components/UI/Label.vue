@@ -1,11 +1,16 @@
 <template>
-    <span class="font-bold border bg-white px-2 rounded-full text-2xs inline-flex items-center">
+    <span class="label" :class="color">
         <slot></slot>
     </span>
 </template>
 
 <script>
 export default {
-
+    props: {
+        color: {
+            type: String,
+            default: 'gray'
+        }
+    }
 }
 </script>

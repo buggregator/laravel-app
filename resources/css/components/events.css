@@ -1,0 +1,57 @@
+.event-page {}
+
+.filters .event-type-filters {
+    @apply flex flex-row flex-wrap gap-2 items-center justify-center;
+}
+
+.filters .filter-label {
+    @apply cursor-pointer;
+}
+
+.event-page header {
+    @apply md:sticky md:top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600;
+}
+
+.event-page > header > .filters {
+    @apply p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2 border-t border-gray-200 dark:border-gray-600;
+}
+
+.event-page > .event-list {
+    @apply flex flex-col divide-y dark:divide-gray-600;
+}
+
+.event-list .event-item {
+    @apply flex-grow md:flex md:space-y-0 md:space-x-3 lg:space-x-5 p-3 md:p-0 transition-colors md:bg-gray-50 md:dark:bg-gray-700;
+}
+
+.event-list .event-item:hover {
+    @apply md:bg-gray-50 dark:bg-gray-800;
+}
+
+.event-list .event-item.collapsed {
+    @apply overflow-hidden shadow-bottom h-20 md:h-12 lg:h-16;
+}
+
+.event-list .event-item .sidebar {
+    @apply w-full md:w-1/4 pb-3 flex justify-between sm:items-center md:items-start md:px-3 md:py-3 lg:px-5 lg:py-5 md:border-r dark:border-gray-600;
+}
+
+.event-list .event-item .collapse-button {
+    @apply w-5 h-5 md:w-4 md:h-4 leading-none rounded-full opacity-90 hover:opacity-100 transition transition-all hover:ring-4 ring-offset-1 flex items-center justify-center;
+}
+
+.event-list .event-item .collapse-button span {
+    @apply text-sm text-white font-bold leading-none;
+}
+
+.event-list .event-item .delete-button {
+    @apply w-5 h-5 p-1 rounded-full text-red-700 bg-white hover:bg-red-700 hover:text-white transition transition-all hover:ring-4 ring-offset-1;
+}
+
+.event-list .event-item .event-labels {
+    @apply flex flex-wrap flex-row-reverse gap-2 justify-start
+}
+
+.event-list .event-item .body {
+    @apply w-full md:w-3/4 flex-col space-y-5 md:pr-3 lg:pr-5 md:py-3 lg:py-5;
+}

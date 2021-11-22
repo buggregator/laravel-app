@@ -1,27 +1,23 @@
 <template>
-    <div class="bg-gray-200 border-right border-gray-300 flex flex-col justify-between">
-        <div class="divide-y divide-gray-300">
+    <section class="left-sidebar">
+        <nav>
             <Link
                 v-for="link in links"
                 :href="link.href"
                 :title="link.title"
-                class="p-3 md:p-4 lg:p-5 block hover:bg-blue-500 hover:text-white"
-                :class="{'bg-blue-500 text-white': isActive(link), 'text-blue-500': !isActive(link)}"
+                :class="{'active': isActive(link)}"
             >
                 <span v-html="link.icon"></span>
-                <div v-if="link.counter && link.counter() > 0">test</div>
             </Link>
-        </div>
+        </nav>
 
         <WsConnectionIcon class="p-3 md:p-4 lg:p-5"/>
-    </div>
+    </section>
 </template>
 
 <script>
 import WsConnectionIcon from "@/Components/UI/WsConnectionIcon";
 import {Link} from '@inertiajs/inertia-vue3'
-import {useStore} from "vuex";
-import {computed} from "vue";
 
 export default {
     components: {Link, WsConnectionIcon},

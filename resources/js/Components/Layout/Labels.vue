@@ -1,13 +1,13 @@
 <template>
-    <div class="flex flex-row flex-wrap gap-2 items-center justify-center">
+    <section class="event-type-filters">
         <Label @click="toggleLabel(label)"
                v-for="label in labels"
-               class="cursor-pointer"
-               :class="{'bg-blue-500 text-white': selectedLabels.includes(label)}"
+               class="filter-label"
+               :class="{'active': selectedLabels.includes(label)}"
         >
             {{ label }}
         </Label>
-    </div>
+    </section>
 </template>
 
 <script>

@@ -35,9 +35,7 @@ export default {
     },
     setup() {
         const store = useStore();
-
         const events = computed(() => store.state.sentry.events)
-
         return {
             events, store
         }

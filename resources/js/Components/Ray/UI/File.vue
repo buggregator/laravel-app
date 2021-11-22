@@ -1,7 +1,7 @@
 <template>
     <div class="text-xs cursor-pointer" @click="collapsed = !collapsed">
         <div class="border-b bg-gray-50 p-1 px-3 flex space-x-2 justify-between items-start">
-            <div :title="file.file_name" class="bg-gray-50 text-gray-700 break-all font-semibold">
+            <div :title="file.file_name" class="bg-gray-50 break-all font-semibold">
                 <div>
                     {{ file.class || 'null' }}:{{ file.method }}
                     <span class="text-gray-400">at line</span>

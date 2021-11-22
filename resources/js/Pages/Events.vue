@@ -1,16 +1,16 @@
 <template>
-    <MainLayout :title="currentScreen">
-        <header class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
+    <MainLayout :title="currentScreen" classes="event-page">
+        <header>
             <Screens/>
-            <div class="p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2">
+            <div class="filters">
                 <Labels/>
                 <Colors/>
             </div>
         </header>
 
-        <main v-if="hasEvents" class="flex flex-col divide-y border-b">
+        <main v-if="hasEvents" class="event-list">
             <component
-                class="flex-grow"
+                class="event-item"
                 :is="eventComponent(event)"
                 :event="event"
                 v-for="event in events"
@@ -18,7 +18,7 @@
             ></component>
         </main>
 
-        <section v-else class="flex-1 p-4 flex flex-col justify-center items-center bg-gray-50">
+        <section v-else class="welcome-block">
             <WsConnectionStatus/>
             <Tips/>
         </section>

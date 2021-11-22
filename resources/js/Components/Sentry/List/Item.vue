@@ -5,8 +5,8 @@
                 {{ event.payload.type }}
             </h3>
 
-            <span v-if="event.location" class="text-xs text-gray-500 md:ml-3">
-                <strong>{{ event.location.filename }}</strong> in <strong>{{ event.location.function }}</strong>
+            <span v-if="location" class="text-xs text-gray-500 md:ml-3">
+                <strong>{{ location.filename }}</strong> in <strong>{{ location.function }}</strong>
             </span>
         </div>
 
@@ -42,6 +42,9 @@ export default {
         date() {
             return this.event.date.fromNow()
         },
+        location() {
+            return this.event.location
+        }
     }
 }
 </script>

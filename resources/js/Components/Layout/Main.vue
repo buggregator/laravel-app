@@ -7,7 +7,7 @@
             </LeftSidebar>
         </div>
 
-        <div class="flex flex-col h-full flex-1">
+        <div class="flex flex-col h-full flex-1" :class="classes">
             <slot></slot>
         </div>
     </div>
@@ -22,7 +22,8 @@ import LeftSidebar from './Sidebar/Left'
 export default {
     components: {LeftSidebar},
     props: {
-        title: String
+        title: String,
+        classes: String
     }
 }
 </script>

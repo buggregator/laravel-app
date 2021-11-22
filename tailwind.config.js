@@ -2,6 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors')
 
 module.exports = {
+    darkMode: 'class',
     purge: [
 
     ],
@@ -32,7 +33,7 @@ module.exports = {
             current: 'currentColor',
             black: colors.black,
             white: colors.white,
-            gray: colors.trueGray,
+            gray: colors.coolGray,
             purple: colors.indigo,
             green: colors.green,
             blue: colors.blue,

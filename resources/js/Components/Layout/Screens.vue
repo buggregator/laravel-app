@@ -1,29 +1,23 @@
 <template>
-    <div class="flex flex-col md:flex-row px-4 py-2 space-y-2 md:space-y-0 md:justify-between items-center bg-gray-100">
-        <div>
-            <h3 class="text-gray-700 font-bold flex space-x-2 items-center" v-if="currentScreen">
-                <span class="text-xs">{{ currentScreen }}</span>
-            </h3>
-        </div>
+    <div class="screens">
+        <h3 class="screen-title" v-if="currentScreen">
+            <span class="text-xs">{{ currentScreen }}</span>
+        </h3>
 
-        <nav class="flex gap-2 items-center justify-center">
+        <nav class="buttons">
             <template v-for="screen in screens">
-                <WsConnectionIcon class="h-5 w-5" v-if="currentScreen == screen"/>
-                <div v-else class="w-4 h-4 cursor-pointer rounded-full border-2 border-blue-400"
-                     @click="switchScreen(screen)"></div>
+                <WsConnectionIcon class="current" v-if="currentScreen == screen"/>
+                <div v-else class="screen" @click="switchScreen(screen)">
+                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 0a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4V4a4 4 0 0 0-4-4H4ZM2 4c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4Zm8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
+                </div>
             </template>
 
-            <button
-                class="w-4 h-4 flex text-xs font-bold items-center justify-center cursor-pointer rounded-full border-2 border-gray-300 text-gray-300"
-                @click="newScreen">
-                +
+            <button @click="newScreen" class="new-screen">
+                <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 4a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4Zm4-2a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4Zm6 2c.6 0 1 .4 1 1v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0v-4H5a1 1 0 1 1 0-2h4V5c0-.6.4-1 1-1Z" /></svg>
             </button>
         </nav>
 
-        <button
-            @click="clearEvents"
-            class="px-3 py-1 ring ring-red-300 text-xs bg-red-800 text-white rounded-sm hover:bg-red-700 transition transition-all duration-300"
-        >
+        <button @click="clearEvents" class="clear-events">
             Clear screen
         </button>
     </div>
