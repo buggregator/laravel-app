@@ -18,6 +18,9 @@ ARG ROADRUNNER_CONFIG=.rr.yaml
 
 WORKDIR /app
 
+RUN touch database/database.sqlite
+RUN chmod 0777 database/database.sqlite
+
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
 # Download latest stable version of RoadRunner
@@ -28,4 +31,4 @@ EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
 
-CMD composer install && php artisan migrate:fresh --force && ./rr serve -c ${ROADRUNNER_CONFIG}
+CMD composer install && php artisan db:wipe && php artisan cycle:schema:migrate && ./rr serve -c ${ROADRUNNER_CONFIG}

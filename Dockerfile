@@ -25,12 +25,13 @@ RUN chmod 0777 storage -R
 RUN chmod 0777 bootstrap -R
 
 # Create .env file
-RUN cp /app/.env.example /app/.env
-RUN cat /app/.env.example
-RUN echo "APP_VERSION=\"${APP_VERSION}\"" >> /app/.env
+RUN cp .env.example .env
+RUN cat .env.example
+RUN echo "APP_VERSION=\"${APP_VERSION}\"" >> .env
 
 # Create a sqlite database
-RUN touch /app/database/database.sqlite
+RUN touch database/database.sqlite
+RUN chmod 0777 database/database.sqlite
 
 # Download latest stable version of RoadRunner
 RUN vendor/bin/rr get-binary -o linux -a amd64 -f ${ROADRUNNER_VERSION} -s ${ROADRUNNER_STABILITY}
@@ -40,4 +41,4 @@ EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
 
-CMD php artisan migrate:fresh --force && ./rr serve -c ${ROADRUNNER_CONFIG}
+CMD php artisan db:wipe && php artisan cycle:schema:migrate && ./rr serve -c ${ROADRUNNER_CONFIG}
