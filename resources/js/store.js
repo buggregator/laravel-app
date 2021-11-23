@@ -95,9 +95,39 @@ const sentry = {
     }
 }
 
+
+const inspector = {
+    namespaced: true,
+    state: () => ({
+        events: [],
+        event: null
+    }),
+    mutations: {
+        clearEvents(state) {
+            state.events = []
+        },
+        pushEvent(state, event) {
+            if (state.events.find(e => event.uuid == e.uuid)) {
+                return
+            }
+
+            state.events.unshift(event)
+        },
+        openEvent(state, event) {
+            state.event = event
+        },
+        deleteEvent(state, event) {
+            state.events = state.events.filter(e => event.uuid == e.uuid)
+        },
+        closeEvent(state) {
+            state.event = null
+        }
+    }
+}
+
 export const store = createStore({
     modules: {
-        ws, smtp, sentry, terminal
+        ws, smtp, sentry, terminal, inspector
     },
 
     state() {

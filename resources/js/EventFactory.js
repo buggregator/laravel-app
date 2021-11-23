@@ -4,20 +4,22 @@ import SlackEvent from "./Slack/event";
 import MonologEvent from "./Monolog/event";
 import SmtpEvent from "./Smtp/event";
 import VarDumpEvent from "./VarDump/event";
+import InspectorEvent from "./Inspector/event";
 import {store} from "./store";
 
 const eventTypes = {
     ray: json => {
-        const event = new RayEvent(json.payload, json.uuid, json.timestamp);
+        const event = new RayEvent(json.data, json.uuid, json.timestamp);
         if (new RayEventHandler(event).handle()) {
             return event
         }
     },
-    sentry: json => new SentryEvent(json.payload, json.uuid, json.timestamp),
-    slack: json => new SlackEvent(json.payload, json.uuid, json.timestamp),
-    monolog: json => new MonologEvent(json.payload, json.uuid, json.timestamp),
-    smtp: json => new SmtpEvent(json.payload, json.uuid, json.timestamp),
-    'var-dump': json => new VarDumpEvent(json.payload, json.uuid, json.timestamp)
+    sentry: json => new SentryEvent(json.data, json.uuid, json.timestamp),
+    slack: json => new SlackEvent(json.data, json.uuid, json.timestamp),
+    monolog: json => new MonologEvent(json.data, json.uuid, json.timestamp),
+    smtp: json => new SmtpEvent(json.data, json.uuid, json.timestamp),
+    inspector: json => new InspectorEvent(json.data, json.uuid, json.timestamp),
+    'var-dump': json => new VarDumpEvent(json.data, json.uuid, json.timestamp)
 }
 
 export default {
@@ -40,6 +42,8 @@ export default {
                 store.commit('smtp/pushEvent', event)
             } else if (event instanceof SentryEvent) {
                 store.commit('sentry/pushEvent', event)
+            } else if (event instanceof InspectorEvent) {
+                store.commit('inspector/pushEvent', event)
             }
 
             store.commit('pushEvent', event)

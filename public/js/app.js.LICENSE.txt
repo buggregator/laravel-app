@@ -15,6 +15,12 @@
    */
 
 /*!
+ * ApexCharts v3.30.0
+ * (c) 2018-2021 ApexCharts
+ * Released under the MIT License.
+ */
+
+/*!
  * vuex v4.0.2
  * (c) 2021 Evan You
  * @license MIT
@@ -34,6 +40,14 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
+
+/*! svg.draggable.js - v2.2.2 - 2019-01-08
+* https://github.com/svgdotjs/svg.draggable.js
+* Copyright (c) 2019 Wout Fierens; Licensed MIT */
+
+/*! svg.filter.js - v2.0.2 - 2016-02-24
+* https://github.com/wout/svg.filter.js
+* Copyright (c) 2016 Wout Fierens; Licensed MIT */
 
 /**
  * @license

@@ -84,7 +84,6 @@ export default class extends Event {
 
     detectColor() {
         let color = this.color
-
         this.payloads.forEach(function (payload) {
             if (payload.content.color) {
                 color = payload.content.color
