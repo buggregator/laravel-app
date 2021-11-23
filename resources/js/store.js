@@ -95,7 +95,6 @@ const sentry = {
     }
 }
 
-
 const inspector = {
     namespaced: true,
     state: () => ({

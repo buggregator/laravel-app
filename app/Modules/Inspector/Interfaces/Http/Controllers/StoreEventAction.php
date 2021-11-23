@@ -21,6 +21,12 @@ class StoreEventAction extends Controller
         $data = json_decode(base64_decode($request->getContent()), true)
             ?? throw new HttpException(500, 'Invalid data');
 
+        $type = $data[0]['type'] ?? 'unknown';
+
+        if ($type !== 'request') {
+            abort(403);
+        }
+
         $commands->dispatch(
             new HandleReceivedEvent('inspector', $data, true)
         );

@@ -14,9 +14,9 @@ const colorMap = {
 }
 
 const segmentColor = {
-    sqlite: '#FEB019',
-    view: '#16a34a',
-    artisan: '#2563eb',
+    sqlite: 'orange',
+    view: 'blue',
+    artisan: 'purple',
 }
 
 const result = {
@@ -28,10 +28,15 @@ export default class extends Event {
     labels = ['inspector']
     color = 'gray'
     app = 'inspector'
+
     constructor(event, id, timestamp) {
         super(event, id, timestamp)
         this.color = colorMap[this.processResult] || 'gray'
-        this.id = id;
+
+        this.labels.push(this.process.model)
+        if (this.process.type) {
+            this.labels.push(this.process.type)
+        }
     }
 
     get type() {
@@ -39,7 +44,7 @@ export default class extends Event {
     }
 
     get serverName() {
-        return this.payloads[0].host.hostname
+        return this.process.host.hostname
     }
 
     get payloads() {
@@ -56,14 +61,14 @@ export default class extends Event {
     }
 
     get processDate() {
-        return  moment.unix(this.process.timestamp)
+        return moment.unix(this.process.timestamp)
     }
 
     get processResult() {
-       return (this.process.result || result.SUCCESS).toUpperCase();
+        return (this.process.result || result.SUCCESS).toUpperCase();
     }
-    // TODO если нужно разные цвета у разных типов сегмента на графике
-    setColorSegment(type) {
-        return segmentColor[type] || '#FEB019';
+
+    segmentColor(type) {
+        return segmentColor[type] || 'gray';
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <Event :event="event">
-        <NavItem :event="event" class="border" />
+        <NavItem :event="event" />
     </Event>
 </template>
 
