@@ -43,6 +43,7 @@ import SlackEventComponent from "@/Components/Slack/Event"
 import SmtpEventComponent from "@/Components/Smtp/Event"
 import VarDumpComponent from "@/Components/VarDump/Event"
 import MonologComponent from "@/Components/Monolog/Event"
+import InspectorComponent from "@/Components/Inspector/Event"
 
 import RayEvent from "@/Ray/event"
 import SentryEvent from "@/Sentry/event"
@@ -50,6 +51,7 @@ import SlackEvent from "@/Slack/event"
 import SmtpEvent from "@/Smtp/event"
 import VarDumpEvent from "@/VarDump/event"
 import MonologEvent from "@/Monolog/event"
+import InspectorEvent from "@/Inspector/event"
 import EventFactory from "@/EventFactory"
 
 export default {
@@ -60,7 +62,7 @@ export default {
         WsConnectionStatus, Label, Tips,
         Screens, Head, Link,
         RayEventComponent, SentryEventComponent, SlackEventComponent,
-        SmtpEventComponent, VarDumpComponent, MonologComponent
+        SmtpEventComponent, VarDumpComponent, MonologComponent, InspectorComponent,
     },
 
     computed: {
@@ -81,6 +83,8 @@ export default {
                 return 'VarDumpComponent'
             } else if (event instanceof MonologEvent) {
                 return 'MonologComponent'
+            } else if (event instanceof InspectorEvent) {
+                return 'InspectorComponent'
             }
 
             return 'RayEventComponent'
