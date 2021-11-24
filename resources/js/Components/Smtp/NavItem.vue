@@ -1,6 +1,6 @@
 <template>
     <Link :href="event.route.show"
-          class="block border-b text-sm hover:bg-white flex items-stretch dark:border-gray-600"
+          class="block border-b text-sm hover:bg-white dark:hover:bg-gray-900 flex items-stretch dark:border-gray-600"
           :class="{'bg-gray-50 dark:bg-gray-800': isActive }"
     >
 

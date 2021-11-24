@@ -53,9 +53,11 @@ export default {
             if (e.payload.type === 'smtp') {
                 store.commit('smtp/clearEvents')
             }
-
             if (e.payload.type === 'sentry') {
                 store.commit('sentry/clearEvents')
+            }
+            if (e.payload.type === 'inspector') {
+                store.commit('inspector/clearEvents')
             }
 
             store.commit('clearEvents', e.payload.type)

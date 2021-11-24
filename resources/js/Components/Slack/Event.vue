@@ -35,7 +35,7 @@ export default {
     methods: {
         value(string) {
             if (typeof string == 'string') {
-                return string.replace(/```([^]+?.*?[^]+?[^]+?)```/g, '<pre class="overflow-x-scroll bg-white p-2">$1</pre>')
+                return string.replace(/```([^]+?.*?[^]+?[^]+?)```/g, '<pre class="overflow-x-scroll bg-white dark:bg-gray-700 p-2">$1</pre>')
             }
 
             return string
