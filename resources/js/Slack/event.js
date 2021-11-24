@@ -7,7 +7,7 @@ const colorMap = {
 }
 
 export default class extends Event{
-    labels = ['Monolog']
+    labels = ['monolog']
     app = 'monolog'
 
     constructor(event, id, timestamp) {
