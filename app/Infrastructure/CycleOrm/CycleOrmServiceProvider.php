@@ -17,13 +17,11 @@ use Cycle\ORM\Transaction;
 use Cycle\ORM\TransactionInterface;
 use Illuminate\Support\ServiceProvider;
 use Infrastructure\CycleOrm\Auth\UserProvider;
-use Spiral\Core\Container as SpiralContainer;
 
 final class CycleOrmServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->initContainer();
         $this->initFactory();
         $this->initOrm();
         $this->app->bind(TransactionInterface::class, Transaction::class);
@@ -31,32 +29,12 @@ final class CycleOrmServiceProvider extends ServiceProvider
         $this->registerAuthUserProvider();
     }
 
-    private function initContainer(): void
-    {
-        $this->app[SpiralContainer::class]->bind(TransactionInterface::class, Transaction::class);
-
-        $this->app[SpiralContainer::class]->bindSingleton(
-            ORMInterface::class,
-            fn () => $this->app[ORMInterface::class]
-        );
-
-        $this->app[SpiralContainer::class]->bindSingleton(
-            FactoryInterface::class,
-            fn () => $this->app[FactoryInterface::class]
-        );
-
-        $this->app[SpiralContainer::class]->bindSingleton(
-            DatabaseProviderInterface::class,
-            fn () => $this->app[DatabaseProviderInterface::class]
-        );
-    }
-
     private function initFactory(): void
     {
         $this->app->singleton(FactoryInterface::class, static function ($app) {
             return new Factory(
                 dbal: $app[DatabaseProviderInterface::class],
-                factory: $app[SpiralContainer::class],
+                factory: new Container($app),
                 defaultCollectionFactory: new IlluminateCollectionFactory()
             );
         });
@@ -66,8 +44,8 @@ final class CycleOrmServiceProvider extends ServiceProvider
     {
         $this->app->singleton(ORMInterface::class, static function ($app): ORM {
             return new ORM(
-                $app[FactoryInterface::class],
-                $app[SchemaInterface::class]
+                factory: $app[FactoryInterface::class],
+                schema: $app[SchemaInterface::class]
             );
         });
     }
