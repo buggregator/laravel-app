@@ -1,7 +1,7 @@
 <template>
     <Link :href="event.route.show"
           class="block border-b text-sm hover:bg-white flex items-stretch dark:border-gray-600"
-          :class="{'bg-white dark:bg-gray-900': isActive, 'bg-gray-50 dark:bg-gray-800': !isActive }"
+          :class="{'bg-gray-50 dark:bg-gray-800': isActive }"
     >
 
         <div class="w-1 self-stretch flex-none rounded-r" :class="{'bg-blue-500 dark:bg-blue-100': isActive }"></div>

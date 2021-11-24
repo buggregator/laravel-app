@@ -4,6 +4,7 @@ import SlackEvent from "./Slack/event";
 import MonologEvent from "./Monolog/event";
 import SmtpEvent from "./Smtp/event";
 import VarDumpEvent from "./VarDump/event";
+import InspectorEvent from "./Inspector/event";
 import {store} from "./store";
 
 const eventTypes = {
@@ -17,6 +18,7 @@ const eventTypes = {
     slack: json => new SlackEvent(json.payload, json.uuid, json.timestamp),
     monolog: json => new MonologEvent(json.payload, json.uuid, json.timestamp),
     smtp: json => new SmtpEvent(json.payload, json.uuid, json.timestamp),
+    inspector: json => new InspectorEvent(json.payload, json.uuid, json.timestamp),
     'var-dump': json => new VarDumpEvent(json.payload, json.uuid, json.timestamp)
 }
 
@@ -40,6 +42,8 @@ export default {
                 store.commit('smtp/pushEvent', event)
             } else if (event instanceof SentryEvent) {
                 store.commit('sentry/pushEvent', event)
+            } else if (event instanceof InspectorEvent) {
+                store.commit('inspector/pushEvent', event)
             }
 
             store.commit('pushEvent', event)
@@ -62,6 +66,7 @@ export default {
 
     create(json) {
         const type = json.type.toLowerCase()
+
         if (eventTypes.hasOwnProperty(type)) {
             return eventTypes[type](json)
         }
