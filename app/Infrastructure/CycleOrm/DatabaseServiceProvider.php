@@ -12,7 +12,6 @@ use Cycle\Database\DatabaseProviderInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Psr\Log\LoggerInterface;
-use Spiral\Core\Container as SpiralContainer;
 
 final class DatabaseServiceProvider extends ServiceProvider
 {

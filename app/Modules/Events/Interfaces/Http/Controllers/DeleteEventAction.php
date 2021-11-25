@@ -13,7 +13,7 @@ use Spatie\RouteAttributes\Attributes\Delete;
 
 class DeleteEventAction extends Controller
 {
-    #[Delete(uri: '/event/{uuid}', name: 'event.delete')]
+    #[Delete(uri: '/event/{uuid}', name: 'event.delete', middleware: 'auth')]
     public function __invoke(CommandBus $bus, Uuid $uuid)
     {
         try {

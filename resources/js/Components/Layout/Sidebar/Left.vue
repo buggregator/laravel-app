@@ -9,22 +9,23 @@
                 :class="{'bg-blue-500 text-white': isActive(link), 'text-blue-500': !isActive(link)}"
             >
                 <span v-html="link.icon"></span>
-                <div v-if="link.counter && link.counter() > 0">test</div>
             </Link>
         </div>
 
-        <WsConnectionIcon class="p-3 md:p-4 lg:p-5"/>
+        <div class="divide-y divide-gray-300">
+            <WsConnectionIcon class="p-3 md:p-4 lg:p-5"/>
+            <Logout />
+        </div>
     </div>
 </template>
 
 <script>
 import WsConnectionIcon from "@/Components/UI/WsConnectionIcon";
 import {Link} from '@inertiajs/inertia-vue3'
-import {useStore} from "vuex";
-import {computed} from "vue";
+import Logout from "./Logout";
 
 export default {
-    components: {Link, WsConnectionIcon},
+    components: {Logout, Link, WsConnectionIcon},
     data() {
         return {
             links: [

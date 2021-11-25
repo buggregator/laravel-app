@@ -15,7 +15,7 @@ use Spatie\RouteAttributes\Attributes\Get;
 
 class ListAction extends Controller
 {
-    #[Get(uri: '/', name: 'events')]
+    #[Get(uri: '/', name: 'events', middleware: 'auth')]
     public function eventList(Request $request, QueryBus $bus, ActionMap $actionMap, ?string $type = null)
     {
         $action = 'Events';

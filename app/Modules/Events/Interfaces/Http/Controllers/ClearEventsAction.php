@@ -12,7 +12,7 @@ use Spatie\RouteAttributes\Attributes\Delete;
 
 class ClearEventsAction extends Controller
 {
-    #[Delete(uri: '/events', name: 'events.clear')]
+    #[Delete(uri: '/events', name: 'events.clear', middleware: 'auth')]
     public function __invoke(Request $request, CommandBus $bus): void
     {
         $bus->dispatch(

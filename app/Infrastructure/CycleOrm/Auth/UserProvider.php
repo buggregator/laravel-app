@@ -36,8 +36,6 @@ final class UserProvider implements \Illuminate\Contracts\Auth\UserProvider
 
     public function updateRememberToken(Authenticatable $user, $token)
     {
-        // TODO: use command handler
-
         $user->setRememberToken($token);
         $this->transaction->persist($user);
         $this->transaction->run();

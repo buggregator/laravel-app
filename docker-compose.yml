@@ -45,7 +45,6 @@ services:
             - 9913:9913
         volumes:
             - ./:/app
-        command: /bin/sh -c "touch database/database.sqlite && composer install && touch database/database.sqlite && php artisan db:wipe && php artisan cycle:schema:migrate && ./rr serve"
         depends_on:
             - db
 

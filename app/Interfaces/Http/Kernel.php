@@ -24,6 +24,7 @@ use Interfaces\Http\Middleware\EncryptCookies;
 use Interfaces\Http\Middleware\HandleInertiaRequests;
 use Interfaces\Http\Middleware\PreventRequestsDuringMaintenance;
 use Interfaces\Http\Middleware\RedirectIfAuthenticated;
+use Interfaces\Http\Middleware\ShareInertiaData;
 use Interfaces\Http\Middleware\SubstituteUuids;
 use Interfaces\Http\Middleware\TrustProxies;
 use Laravel\Jetstream\Http\Middleware\AuthenticateSession;
@@ -62,6 +63,7 @@ class Kernel extends HttpKernel
             //\Interfaces\Http\Middleware\VerifyCsrfToken::class,
             SubstituteBindings::class,
             SubstituteUuids::class,
+            ShareInertiaData::class,
             HandleInertiaRequests::class,
         ],
 

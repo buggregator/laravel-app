@@ -42,4 +42,4 @@ EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
 
-CMD php artisan db:wipe && php artisan cycle:schema:migrate && ./rr serve -c ${ROADRUNNER_CONFIG}
+CMD php artisan db:wipe && php artisan cycle:schema:migrate && php artisan user:create && ./rr serve -c ${ROADRUNNER_CONFIG}

@@ -177,6 +177,13 @@ Application log, Show Http client requests, Mailable
 
 ### Laravel settings
 
+Please make sure `ray.php` config published to the project root.
+
+You can run an artisan command to publish it in to the project root.
+```bash
+php artisan ray:publish-config
+```
+
 **Env variables**
 ```
 RAY_HOST=127.0.0.1  # Ray server host
@@ -227,7 +234,8 @@ You can find out more information about installation and configuration on [offic
 
 # UI
 
-Buggregator has a responsive design and a mobile device can be used as an additional screen for viewing event history. Also you can user a termial to collect dump output if you don't want to use a browser.
+Buggregator has a responsive design and a mobile device can be used as an additional screen for viewing event history. 
+Also you can use a termial to collect dump output if you don't want to use a browser.
 
 ![Buggregator devices](https://user-images.githubusercontent.com/773481/131818515-bc6c154a-4978-4a57-979e-d0f8cc99f09e.png)
 
@@ -285,6 +293,43 @@ services:
         - 9913:9913
 ```
 
+# Authentication
+
+By default Buggregator doesn't use any authentication, but you can enable it via ENV variables.
+
+```
+AUTH_ENABLED=true
+AUTH_USERNAME=admin
+AUTH_PASSWORD=secret
+```
+
+**Example**
+
+```bash
+docker run --pull always --env AUTH_ENABLED=true --env AUTH_USERNAME=admin --env AUTH_PASSWORD=secret -p 23517:8000 -p 1025:1025 -p 9912:9912 -p 9913:9913 butschster/buggregator:latest
+```
+
+or
+
+```yaml
+// docker-compose.yml
+version: "2"
+services:
+    ...
+
+    buggregator:
+        image: butschster/buggregator:latest
+        ports:
+        - 23517:8000
+        - 1025:1025
+        - 9912:9912
+        - 9913:9913
+        environment:
+            AUTH_ENABLED: false
+            AUTH_USERNAME: admin
+            AUTH_PASSWORD: secret
+```
+
 ### If you don't want to see dump output in your terminal, you can disable it through ENV variables
 
 ```
@@ -317,8 +362,8 @@ services:
         - 9912:9912
         - 9913:9913
         environment:
-            - CLI_SMTP_STREAM=false
-            - CLI_RAY_STREAM=false
+            CLI_SMTP_STREAM: false
+            CLI_RAY_STREAM: false
 ```
 
 That's it. Now you open http://127.0.0.1:23517 url in your browser or open terminal and collect dump output from your application.
@@ -343,8 +388,9 @@ There are several [projects](https://github.com/buggregator/app/projects) in thi
 
 1. Clone repository `git clone https://github.com/buggregator/app.git`
 2. Run composer `composer install`
-3. Download RoadRunner binary `vendor/bin/rr get-binary`
-3. Run RoadRunner server `./rr serve`
+3. Run migrations `php artisan cycle:schema:migrate`
+4. Download RoadRunner binary `vendor/bin/rr get-binary`
+5. Run RoadRunner server `./rr serve`
 
 ## Frontend part
 
