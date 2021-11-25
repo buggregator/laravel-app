@@ -11,16 +11,20 @@
             </Link>
         </nav>
 
-        <WsConnectionIcon class="p-3 md:p-4 lg:p-5"/>
+        <div class="divide-y divide-gray-300">
+            <WsConnectionIcon class="p-3 md:p-4 lg:p-5"/>
+            <Logout />
+        </div>
     </section>
 </template>
 
 <script>
 import WsConnectionIcon from "@/Components/UI/WsConnectionIcon";
 import {Link} from '@inertiajs/inertia-vue3'
+import Logout from "./Logout";
 
 export default {
-    components: {Link, WsConnectionIcon},
+    components: {Logout, Link, WsConnectionIcon},
     data() {
         return {
             links: [

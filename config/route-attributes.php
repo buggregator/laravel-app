@@ -19,8 +19,6 @@ return [
      * This middleware will be applied to all routes.
      */
     'middleware' => [
-        \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        \Interfaces\Http\Middleware\SubstituteUuids::class,
-
+        'web',
     ],
 ];

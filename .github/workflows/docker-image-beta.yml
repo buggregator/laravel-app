@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-release:
-    if: "!github.event.release.prerelease"
+    if: "github.event.release.prerelease"
     runs-on: ubuntu-latest
 
     steps:
@@ -39,4 +39,4 @@ jobs:
           build-args:
             APP_VERSION=${{ steps.previoustag.outputs.tag }}
           tags:
-            ${{ secrets.DOCKER_HUB_USERNAME }}/buggregator:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/buggregator:${{ steps.previoustag.outputs.tag }}
+           ${{ secrets.DOCKER_HUB_USERNAME }}/buggregator:${{ steps.previoustag.outputs.tag }}

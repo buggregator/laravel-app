@@ -12,7 +12,11 @@ class InspectorControllerTest extends DatabaseTestCase
     public function testEventShouldBeStored()
     {
         $content = base64_encode(json_encode(
-            $payload = ['foo' => 'bar']
+            $payload = [
+                [
+                    'type' => 'request',
+                ],
+            ]
         ));
 
         $headers = [

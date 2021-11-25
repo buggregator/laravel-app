@@ -24,3 +24,10 @@ EXPOSE 8000
 EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
+
+CMD composer install && \
+    touch database/database.sqlite && \
+    php artisan db:wipe && \
+    php artisan cycle:schema:migrate && \
+    php artisan user:create && \
+    ./rr serve

@@ -7,23 +7,29 @@ namespace Modules\User\Domain;
 use App\Domain\ValueObjects\Uuid;
 use Cycle\Annotated\Annotation\Column;
 use Cycle\Annotated\Annotation\Entity;
+use Cycle\Annotated\Annotation\Table\Index;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Modules\User\Persistence\CycleOrmUserRepository;
 
-#[Entity(
-    repository: CycleOrmUserRepository::class
-)]
+#[Entity(repository: CycleOrmUserRepository::class)]
+#[Index(columns: ['name'], unique: true)]
 class User implements Authenticatable
 {
     #[Column(type: 'string')]
     private string $rememberToken = '';
 
+    #[Column(type: 'string', primary: true, typecast: 'uuid')]
+    private Uuid $uuid;
+
     /**  @internal */
     public function __construct(
-        private Uuid $uuid,
+        #[Column(type: 'string(32)')]
         private string $name,
-        private string $password
+        #[Column(type: 'string(32)')]
+        private string $password,
+        ?Uuid $uuid = null,
     ) {
+        $this->uuid = $uuid ?? Uuid::generate();
     }
 
     public function getUuid(): Uuid
@@ -59,5 +65,10 @@ class User implements Authenticatable
     public function getRememberTokenName(): string
     {
         return 'remember_token';
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

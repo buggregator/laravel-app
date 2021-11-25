@@ -1,17 +1,7 @@
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Defaults
-    |--------------------------------------------------------------------------
-    |
-    | This option controls the default authentication "guard" and password
-    | reset options for your application. You may change these defaults
-    | as required, but they're a perfect start for most applications.
-    |
-    */
+    'enabled' => (bool) env('AUTH_ENABLED', false),
 
     'defaults' => [
         'guard' => 'web',
@@ -67,7 +57,7 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'cycle',
+            'driver' => 'cycleorm',
             'model' => \Modules\User\Domain\User::class,
         ],
 

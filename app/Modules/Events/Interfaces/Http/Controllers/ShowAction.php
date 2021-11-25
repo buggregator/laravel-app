@@ -18,7 +18,7 @@ use Spatie\RouteAttributes\Attributes\Get;
 
 class ShowAction extends Controller
 {
-    #[Get(uri: '/events/{type}/{uuid}', name: 'event.show')]
+    #[Get(uri: '/events/{type}/{uuid}', name: 'event.show', middleware: 'auth')]
     public function __invoke(Request $request, QueryBus $bus, ActionMap $actionMap, string $type, Uuid $uuid)
     {
         try {
