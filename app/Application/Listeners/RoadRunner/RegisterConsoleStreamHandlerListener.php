@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Listeners\RoadRunner;
 
+use App\Attributes\EventBus\Listener;
 use App\Attributes\Locator;
 use Interfaces\Console\Handler;
 use Interfaces\Console\StreamHandler;
@@ -12,6 +13,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 class RegisterConsoleStreamHandlerListener
 {
+    #[Listener]
     public function handle(BeforeLoopStartedEvent $event): void
     {
         $event->application()->instance(

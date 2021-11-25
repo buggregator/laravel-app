@@ -8,6 +8,7 @@ use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\RepositoryInterface;
+use Cycle\ORM\Transaction;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Events\Domain\Event;
 
@@ -20,6 +21,10 @@ class DatabaseTestCase extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->beforeApplicationDestroyed(function () {
+            $this->getOrm()->getHeap()->clean();
+        });
     }
 
     public function createEvent(string $type, array $payload): Event
@@ -54,6 +59,8 @@ class DatabaseTestCase extends TestCase
 
     public function persistEntity($entity)
     {
-        $this->getRepositoryFor($entity)->store($entity);
+        $t = new Transaction($this->getOrm());
+        $t->persist($entity);
+        $t->run();
     }
 }
