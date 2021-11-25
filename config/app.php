@@ -188,6 +188,7 @@ return [
         Modules\Smtp\ServiceProvider::class,
         Modules\Ray\ServiceProvider::class,
         Modules\Sentry\ServiceProvider::class,
+        Modules\User\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -196,9 +197,9 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\DomainServiceProvider::class,
+        App\Providers\JetstreamServiceProvider::class,
         Interfaces\Providers\RouteServiceProvider::class,
         Interfaces\Providers\FortifyServiceProvider::class,
-        Interfaces\Providers\JetstreamServiceProvider::class,
     ],
 
     /*

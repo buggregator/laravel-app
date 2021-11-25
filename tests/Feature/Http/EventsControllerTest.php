@@ -10,12 +10,19 @@ use Tests\DatabaseTestCase;
 
 class EventsControllerTest extends DatabaseTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        config()->set('auth.enabled', false);
+    }
+
     public function testGetListOfEvents()
     {
         $event1 = $this->createEvent('foo', ['foo' => 'bar']);
         $event2 = $this->createEvent('bar', ['foo1' => 'bar1']);
 
-        $this->getJson(route('events'), ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()])
+        $this->getJson(route('events'), ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()])
             ->assertJsonFragment([
                 'events' => [
                     'data' => [
@@ -39,7 +46,7 @@ class EventsControllerTest extends DatabaseTestCase
     public function testGetSpecificTypeListOfEventsForUnknownTypeEventShouldReturnNotFound()
     {
         $this->getJson(route('events.type', 'foo'),
-            ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
+            ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()]
         )->assertForbidden()->assertJsonFragment(['message' => 'Action for event type [foo] not found.']);
     }
 
@@ -52,7 +59,7 @@ class EventsControllerTest extends DatabaseTestCase
 
         $this->getJson(
             route('events.type', $event1->getType()),
-            ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
+            ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()]
         )
             ->assertJsonFragment([
                 'component' => 'Foo/Index',
@@ -81,7 +88,7 @@ class EventsControllerTest extends DatabaseTestCase
 
         $this->getJson(
             route('events'),
-            ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
+            ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()]
         )->assertJsonCount(0, 'props.events.data');
     }
 
@@ -95,7 +102,7 @@ class EventsControllerTest extends DatabaseTestCase
 
         $this->getJson(
             route('events'),
-            ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
+            ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()]
         )->assertJsonCount(2, 'props.events.data');
     }
 
@@ -109,7 +116,7 @@ class EventsControllerTest extends DatabaseTestCase
 
         $this->getJson(
             route('events'),
-            ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
+            ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()]
         )->assertJsonCount(2, 'props.events.data');
     }
 
@@ -139,7 +146,7 @@ class EventsControllerTest extends DatabaseTestCase
         $event = $this->createEvent('foo', ['foo1' => 'bar1']);
         $this->getJson(
             route('event.show', [$event->getType(), $event->getUuid()->toString()]),
-            ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
+            ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()]
         )
             ->assertJsonFragment([
                 'component' => 'Foo/Show',
@@ -161,7 +168,7 @@ class EventsControllerTest extends DatabaseTestCase
         config()->set('server.foo.http.show', 'Foo/Show');
         $this->getJson(
             route('event.show', ['foo', Uuid::generate()->toString()]),
-            ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
+            ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()]
         )
             ->assertNotFound();
     }
@@ -170,7 +177,7 @@ class EventsControllerTest extends DatabaseTestCase
     {
         $this->getJson(
             route('event.show', ['foo', Uuid::generate()->toString()]),
-            ['X-Inertia' => true, 'X-Inertia-Version' => Inertia::getVersion()]
+            ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()]
         )
             ->assertForbidden();
     }

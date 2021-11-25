@@ -57,7 +57,7 @@ return [
             Listeners\ResetZiggyListener::class,            // for <https://github.com/tighten/ziggy>
         ],
 
-        \App\Contracts\TCP\Events\BeforeLoopIterationEvent::class => [
+        \Infrastructure\RoadRunner\TCP\Events\BeforeLoopIterationEvent::class => [
             ...Defaults::beforeLoopIteration(),
         ],
 

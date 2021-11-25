@@ -13,7 +13,7 @@ use Spatie\RouteAttributes\Attributes\Get;
 
 class ShowJsonAction extends Controller
 {
-    #[Get(uri: '/event/{uuid}/json', name: 'event.show.json')]
+    #[Get(uri: '/event/{uuid}/json', name: 'event.show.json', middleware: 'auth')]
     public function __invoke(QueryBus $bus, Uuid $uuid)
     {
         try {

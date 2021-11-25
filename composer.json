@@ -80,7 +80,8 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "Spatie\\RouteAttributes\\RouteAttributesServiceProvider"
+                "spatie/laravel-route-attributes",
+                "laravel/jetstream"
             ]
         }
     },

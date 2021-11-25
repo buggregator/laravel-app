@@ -15,6 +15,7 @@ use Cycle\ORM\ORMInterface;
 use Cycle\ORM\SchemaInterface;
 use Cycle\ORM\Transaction;
 use Cycle\ORM\TransactionInterface;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Infrastructure\CycleOrm\Auth\UserProvider;
 
@@ -26,6 +27,10 @@ final class CycleOrmServiceProvider extends ServiceProvider
         $this->initOrm();
         $this->app->bind(TransactionInterface::class, Transaction::class);
         $this->app->singleton(RepositoryInterface::class, FileRepository::class);
+    }
+
+    public function boot(): void
+    {
         $this->registerAuthUserProvider();
     }
 
@@ -52,13 +57,15 @@ final class CycleOrmServiceProvider extends ServiceProvider
 
     private function registerAuthUserProvider(): void
     {
-        $this->app['auth']->provider('cycle', function ($app, $config) {
-            return new UserProvider(
-                $app[ORMInterface::class],
-                $app[TransactionInterface::class],
-                $config['model'],
-                $app['hash'],
-            );
+        Auth::resolved(function ($auth) {
+            $auth->provider('cycleorm', static function ($app, array $config): UserProvider {
+                return new UserProvider(
+                    $app[ORMInterface::class],
+                    $app[TransactionInterface::class],
+                    $config['model'],
+                    $app['hash'],
+                );
+            });
         });
     }
 }

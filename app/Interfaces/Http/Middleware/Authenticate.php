@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 
 class Authenticate extends Middleware
 {
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param  Request  $request
-     * @return string|null
-     */
+    protected function authenticate($request, array $guards)
+    {
+        if (! config('auth.enabled')) {
+            return;
+        }
+
+        parent::authenticate($request, $guards);
+    }
+
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
