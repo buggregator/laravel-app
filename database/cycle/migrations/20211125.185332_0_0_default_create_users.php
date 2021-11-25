@@ -27,11 +27,11 @@ class OrmDefault1e5a31b92337b8a5a635afa30098a402 extends Migration
                 'nullable' => false,
                 'default' => null,
             ])
-            ->addIndex(["name"], [
+            ->addIndex(['name'], [
                 'name' => 'users_index_name_619fdbaa03862',
                 'unique' => true,
             ])
-            ->setPrimaryKeys(["uuid"])
+            ->setPrimaryKeys(['uuid'])
             ->create();
     }
 

@@ -18,6 +18,5 @@ class JetstreamServiceProvider extends \Laravel\Jetstream\JetstreamServiceProvid
                 'status' => session('status'),
             ]);
         });
-
     }
 }

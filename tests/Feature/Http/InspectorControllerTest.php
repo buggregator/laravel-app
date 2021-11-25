@@ -14,8 +14,8 @@ class InspectorControllerTest extends DatabaseTestCase
         $content = base64_encode(json_encode(
             $payload = [
                 [
-                    'type' => 'request'
-                ]
+                    'type' => 'request',
+                ],
             ]
         ));
 

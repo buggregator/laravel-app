@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'enabled' => (bool)env('AUTH_ENABLED', false),
+    'enabled' => (bool) env('AUTH_ENABLED', false),
 
     'defaults' => [
         'guard' => 'web',

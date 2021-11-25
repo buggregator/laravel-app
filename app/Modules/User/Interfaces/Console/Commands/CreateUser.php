@@ -26,7 +26,6 @@ class CreateUser extends Command
         $username = $this->argument('username') ?? env('AUTH_USERNAME', 'admin');
         $password = $this->argument('password') ?? env('AUTH_PASSWORD', Str::random(8));
 
-
         $user = $orm->getRepository(User::class)->findOne(['name' => $username]);
         if ($user) {
             $this->error(sprintf('User with given username [%s] exists. Try another name.', $username));

@@ -1,6 +1,5 @@
 <?php
 
-use Interfaces\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
 
 return [
@@ -137,9 +136,9 @@ return [
         // Features::emailVerification(),
         // Features::updateProfileInformation(),
         // Features::updatePasswords(),
-//        Features::twoFactorAuthentication([
-//            'confirmPassword' => true,
-//        ]),
+        //        Features::twoFactorAuthentication([
+        //            'confirmPassword' => true,
+        //        ]),
     ],
 
 ];
