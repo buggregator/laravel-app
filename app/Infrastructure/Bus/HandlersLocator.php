@@ -26,7 +26,6 @@ final class HandlersLocator implements HandlersLocatorInterface
     public function __construct(
         private Application $app,
         private Locator $attributesLocator,
-
     ) {
         foreach (
             $attributesLocator->findClassMethodsAttributes(

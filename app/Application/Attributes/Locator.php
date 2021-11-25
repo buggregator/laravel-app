@@ -60,6 +60,9 @@ final class Locator
         $files = (new Finder())
             ->files()
             ->name('*.php')
+            ->exclude([
+                'resources',
+            ])
             ->in($this->app->basePath($directory));
 
         foreach ($files as $file) {
@@ -80,10 +83,16 @@ final class Locator
         $path = Str::replaceFirst($this->app->basePath(), '', $file->getRealPath());
         $class = trim($path, DIRECTORY_SEPARATOR);
 
-        return str_replace(
-            [DIRECTORY_SEPARATOR, 'App\\Application\\', 'App\\'],
-            ['\\', 'App\\', ''],
-            ucfirst(Str::replaceLast('.php', '', $class))
-        );
+        $class = ucfirst(Str::replaceLast('.php', '', $class));
+        $class = str_replace(DIRECTORY_SEPARATOR, '\\', $class);
+        if (str_starts_with($class, 'App\\')) {
+            $class = substr($class, 4);
+        }
+
+        if (str_starts_with($class, 'Application\\')) {
+            $class = 'App\\'.substr($class, 12);
+        }
+
+        return $class;
     }
 }
