@@ -270,7 +270,7 @@ export const store = createStore({
             }
         },
         pushEvent(state, event) {
-            if (!event || !event.uuid) {
+            if (!event) {
                 return;
             }
 
