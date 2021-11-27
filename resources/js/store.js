@@ -270,6 +270,10 @@ export const store = createStore({
             }
         },
         pushEvent(state, event) {
+            if (!event || !event.uuid) {
+                return;
+            }
+
             this.commit('ensureScreenExists', state.currentScreen)
 
             const existsEvent = this.getters.eventByUuid(event.uuid)

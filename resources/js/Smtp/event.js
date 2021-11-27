@@ -16,8 +16,4 @@ export default class extends Event {
     get type() {
         return 'Smtp'
     }
-
-    get payloads() {
-        return this.event.exception.values
-    }
 }
