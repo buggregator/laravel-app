@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="event-ray__event">
     <Dump v-if="payload.content.class_based_event" :value="payload.content.event" />
     <div v-else>
       <h3>

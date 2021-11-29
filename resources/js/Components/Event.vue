@@ -19,7 +19,7 @@
                     {{ event.app }}
                 </Label>
 
-                <div v-if="hasLabels" class="flex gap-2">
+                <div v-if="hasLabels" class="flex gap-2 flex-wrap">
                     <Label v-for="label in labels" :color="event.color">
                         {{ label }}
                     </Label>

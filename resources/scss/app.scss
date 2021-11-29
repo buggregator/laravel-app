@@ -1,0 +1,41 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
+@import "xterm/css/xterm.css";
+@import "./components/buttons";
+@import "./components/event-table";
+@import "./components/event-footer";
+@import "./components/code-snippet";
+@import "./components/host";
+@import "./components/label";
+@import "./components/collapsed";
+@import "./components/sshpre";
+@import "./components/layouts/main-layout";
+@import "./components/layouts/left-sidebar";
+@import "./components/layouts/logout";
+@import "./components/layouts/events-page";
+@import "./components/layouts/filters";
+@import "./components/layouts/tips";
+@import "./components/layouts/screens";
+@import "./components/layouts/event";
+@import "./components/events/list-page/event-ray";
+@import "./components/events/single-page/smtp";
+@import "./components/events/list-page/event-ray";
+
+body {
+    @apply bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-50;
+}
+
+.text-muted {
+    @apply text-gray-600 dark:text-gray-300;
+}
+
+.text-muted.red {
+    @apply text-red-600 dark:text-red-300;
+}
+
+.ssh-pre {
+    margin-top: 0 !important;
+    @apply p-2 md:px-3 lg:px-4 text-2xs sm:text-xs md:text-sm rounded-none border;
+}

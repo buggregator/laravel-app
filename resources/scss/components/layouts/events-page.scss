@@ -1,0 +1,17 @@
+.events-page {
+    &__header {
+        @apply md:sticky md:top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600;
+    }
+
+    &__filters {
+        @apply p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2 border-t border-gray-200 dark:border-gray-600;
+    }
+
+    &__events {
+        @apply flex flex-col divide-y dark:divide-gray-600;
+    }
+
+    &__welcome-block {
+        @apply flex-1 p-4 flex flex-col justify-center items-center bg-gray-50 dark:bg-gray-800;
+    }
+}

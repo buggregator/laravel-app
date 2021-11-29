@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="event-ray__job">
       <Dump :value="payload.content.job" />
   </div>
 </template>

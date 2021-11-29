@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <CodeSnippet language="json">
+    <div class="event-ray__json">
+        <CodeSnippet language="json" class="event-ray__json-snippet">
             {{ json }}
         </CodeSnippet>
     </div>

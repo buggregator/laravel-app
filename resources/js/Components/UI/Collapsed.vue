@@ -1,9 +1,9 @@
 <template>
-    <div class="border rounded bg-white" :class="{'cursor-pointer': !isOpen}" @click="isOpen = !isOpen">
-        <h3 class="font-semibold flex justify-between items-center border-b p-3">
+    <div class="collapsed" :class="{'cursor-pointer': !isOpen}" @click="isOpen = !isOpen">
+        <h3 class="collapsed__title-wrap">
             {{ title }}
 
-            <div class="w-5 h-5 border border-gray-300 bg-white py-1 rounded">
+            <div class="collapsed__icon">
                 <svg viewBox="0 0 16 16"
                      fill="currentColor"
                      height="100%" width="100%"
@@ -14,7 +14,7 @@
             </div>
         </h3>
 
-        <div v-if="isOpen">
+        <div v-if="isOpen" class="collapsed__body">
             <slot></slot>
         </div>
     </div>

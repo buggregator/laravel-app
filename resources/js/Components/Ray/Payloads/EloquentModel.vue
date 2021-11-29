@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="event-ray__model">
         <h3>
             Class name: <code class="font-semibold">{{ payload.content.class_name }}</code>
         </h3>

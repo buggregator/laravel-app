@@ -1,6 +1,6 @@
 <template>
-    <Event :event="event">
-        <div class="flex flex-col justify-items-stretch w-full divide-y">
+    <Event :event="event" class="event--ray event-ray">
+        <div class="event-ray__wrap">
             <EventPayload
                 v-for="payload in event.payloads"
                 :payload="payload"

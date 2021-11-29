@@ -1,13 +1,13 @@
 <template>
-    <Head :title="title"/>
-    <div class="flex h-screen items-stretch">
-        <div class="w-10 md:w-14 lg:w-16 flex-none">
+    <Head :title="title"></Head>
+    <div class="main-layout">
+        <div class="main-layout__sidebar">
             <LeftSidebar class="w-10 md:w-14 lg:w-16 fixed h-screen">
                 <slot name="left-sidebar"></slot>
             </LeftSidebar>
         </div>
 
-        <div class="flex flex-col h-full flex-1" :class="classes">
+        <div class="main-layout__content" :class="classes">
             <slot></slot>
         </div>
     </div>

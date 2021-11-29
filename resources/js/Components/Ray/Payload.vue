@@ -1,12 +1,12 @@
 <template>
-        <component
-            class="flex-grow"
-            :is="component"
-            :payload="payload"
-            :disabled="disabled"
-            v-on:disable="$emit('disable')"
-            v-on:delete="deleteEvent"
-        ></component>
+    <component
+        class="flex-grow"
+        :is="component"
+        :payload="payload"
+        :disabled="disabled"
+        v-on:disable="$emit('disable')"
+        v-on:delete="deleteEvent"
+    ></component>
 </template>
 
 <script>

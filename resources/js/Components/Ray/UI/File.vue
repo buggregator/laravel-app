@@ -1,7 +1,7 @@
 <template>
-    <div class="text-xs cursor-pointer" @click="collapsed = !collapsed">
-        <div class="border-b bg-gray-50 p-1 px-3 flex space-x-2 justify-between items-start">
-            <div :title="file.file_name" class="bg-gray-50 break-all font-semibold">
+    <div class="event-ray-file" @click="collapsed = !collapsed">
+        <div class="event-ray-file__header">
+            <div :title="file.file_name" class="event-ray-file__title">
                 <div>
                     {{ file.class || 'null' }}:{{ file.method }}
                     <span class="text-muted">at line</span>
@@ -9,7 +9,7 @@
                 </div>
                 <span class="text-muted">{{ file.file_name }}</span>
             </div>
-            <div class="w-4 h-4 border border-gray-300 bg-white py-1 rounded" v-if="hasSnippet">
+            <div class="event-ray-file__icon" v-if="hasSnippet">
                 <svg viewBox="0 0 16 16"
                      fill="currentColor"
                      height="100%" width="100%"
@@ -20,8 +20,8 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 p-2 overflow-x-scroll" v-if="hasSnippet && !collapsed">
-            <div class="flex text-gray-100" v-for="(line, i) in file.snippet" :class="{'bg-pink-800 text-white': file.line_number == line.line_number}">
+        <div class="event-ray-file__body" v-if="hasSnippet && !collapsed">
+            <div class="event-ray-file__snippet" v-for="(line, i) in file.snippet" :class="{'bg-pink-800 text-white': file.line_number == line.line_number}">
                 <div class="w-12">{{ line.line_number }}.</div>
                 <pre>{{ line.text }}</pre>
             </div>

@@ -1,0 +1,11 @@
+.main-layout {
+    @apply flex h-screen items-stretch;
+
+    &__sidebar {
+        @apply w-10 md:w-14 lg:w-16 flex-none;
+    }
+
+    &__content {
+        @apply flex flex-col h-full flex-1;
+    }
+}

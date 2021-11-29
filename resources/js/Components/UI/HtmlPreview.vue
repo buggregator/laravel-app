@@ -21,7 +21,6 @@
                 </svg>
             </button>
         </div>
-
         <div :class="`device-${device}`">
             <div>
                 <slot></slot>

@@ -1,0 +1,100 @@
+.event-ray {
+    &__wrap {
+        @apply flex flex-col justify-items-stretch w-full divide-y;
+    }
+
+    &__caller {
+        &-name {
+            @apply text-blue-400 dark:text-blue-100 underline;
+        }
+
+        &-code {
+            @apply font-semibold break-all;
+        }
+    }
+
+    &__exception {
+        &-wrap {
+            @apply p-3 bg-gray-100 border rounded-t;
+        }
+
+        &-text {
+            @apply text-muted text-sm break-all;
+        }
+
+        &-files {
+            @apply border-b border-l border-r divide-y flex-col justify-center;
+        }
+    }
+
+    &__mailable {
+        &-class {
+            @apply text-muted text-sm break-all;
+        }
+
+        &-row-text {
+           @apply text-muted font-bold
+        }
+    }
+
+    &__pause {
+        @apply flex;
+        &-btn {
+            @apply px-5 py-2 flex items-center space-x-3 bg-gray-100 border text-sm font-medium hover:bg-gray-50 focus:outline-none disabled:opacity-50;
+
+            &--continue {
+                @apply rounded-l-full;
+            }
+
+            &--stop {
+                @apply border-l-0 rounded-r-full;
+            }
+        }
+    }
+
+    &__query {
+        &-snipper {
+            @apply border-b-0;
+        }
+    }
+
+    &__trace {
+        &-files {
+            @apply flex-col justify-center border divide-y;
+        }
+    }
+
+    &__view {
+        &-title {
+            @apply text-sm md:text-base mb-2;
+        }
+
+        &-code {
+            @apply font-semibold break-all;
+        }
+    }
+}
+
+.event-ray-file {
+       @apply text-xs cursor-pointer;
+
+    &__header {
+       @apply border-b bg-gray-50 p-1 px-3 flex space-x-2 justify-between items-start;
+    }
+
+    &__title {
+        @apply bg-gray-50 break-all font-semibold;
+    }
+
+    &__icon {
+        @apply w-4 h-4 border border-gray-300 bg-white py-1 rounded;
+    }
+
+    &__body {
+        @apply bg-gray-800 p-2 overflow-x-scroll;
+    }
+
+    &__snippet {
+        @apply flex text-gray-100;
+    }
+}

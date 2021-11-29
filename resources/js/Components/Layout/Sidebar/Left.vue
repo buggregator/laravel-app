@@ -1,17 +1,18 @@
 <template>
     <section class="left-sidebar">
-        <nav>
+        <nav class="left-sidebar__nav">
             <Link
                 v-for="link in links"
                 :href="link.href"
                 :title="link.title"
                 :class="{'active': isActive(link)}"
+                class="left-sidebar__link"
             >
                 <span v-html="link.icon"></span>
             </Link>
         </nav>
 
-        <div class="divide-y divide-gray-300">
+        <div class="left-sidebar__info">
             <WsConnectionIcon class="p-3 md:p-4 lg:p-5"/>
             <Logout />
         </div>

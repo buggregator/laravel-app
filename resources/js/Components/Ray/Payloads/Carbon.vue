@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <Table>
+    <div class="event-ray__carbon">
+        <Table class="event-ray__carbon-table">
             <TableRow title="Formatted">
                 {{ payload.content.formatted }}
             </TableRow>

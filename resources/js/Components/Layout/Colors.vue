@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-row flex-wrap items-center gap-2">
-        <button v-if="hasSelectedColors" class="w-4 h-4 text-red-700 -ml-6" @click="clear">
+    <div class="filters__colors">
+        <button v-if="hasSelectedColors" class="filters__btn-clear" @click="clear">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><g id="close"><path id="x" d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"/></g></svg>
         </button>
         <div v-else class="w-4 h-4 -ml-6"></div>

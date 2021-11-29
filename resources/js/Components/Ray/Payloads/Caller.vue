@@ -1,13 +1,11 @@
 <template>
-    <div>
-        <div>
-            <h3>Called from </h3>
-            <a
-                class="text-blue-400 dark:text-blue-100 underline"
-                :href='`phpstorm://open?file=${encodeURIComponent(file.file_name)}&line=${file.line_number}`'>
-                <code class="font-semibold break-all">{{ file.class || 'null' }}:{{ file.method }}</code>
-            </a>
-        </div>
+    <div class="event-ray__caller">
+        <h3>Called from </h3>
+        <a
+            class="event-ray__caller-name"
+            :href='`phpstorm://open?file=${encodeURIComponent(file.file_name)}&line=${file.line_number}`'>
+            <code class="event-ray__caller-code">{{ file.class || 'null' }}:{{ file.method }}</code>
+        </a>
     </div>
 </template>
 

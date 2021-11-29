@@ -1,0 +1,11 @@
+.collapsed {
+    @apply border rounded bg-white;
+
+    &__title-wrap {
+        @apply font-semibold flex justify-between items-center border-b p-3;
+    }
+
+    &__icon {
+        @apply w-5 h-5 border border-gray-300 bg-white py-1 rounded;
+    }
+}

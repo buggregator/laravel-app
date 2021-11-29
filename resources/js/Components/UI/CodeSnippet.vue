@@ -1,12 +1,11 @@
 <template>
-    <div class="relative">
+    <div class="code-snippet">
         <ssh-pre :language="language">
             <slot></slot>
         </ssh-pre>
 
         <button type="button" @click="doCopy"
-                class="flex items-center gap-x-1 absolute top-2 right-2 px-1 bg-white dark:bg-gray-900 hover:bg-blue-500 border border-blue-500 dark:border-blue-400 text-blue-500 dark:text-blue-200 hover:text-white transition-all text-xs font-bold"
-                :class="{'transform scale-110 bg-green-500 hover:bg-green-500': copied}"
+                class="code-snippet__btn-copy" :class="{'active': copied}"
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 460" class="w-2 h-2 fill-current">
                 <path d="M426 0H172c-18 0-33 15-33 33v77h30V33c0-2 1-3 3-3h254c2 0 3 1 3 3v254c0 2-1 3-3 3h-75v30h75c18 0 33-15 33-33V33c0-18-15-33-33-33z"/>

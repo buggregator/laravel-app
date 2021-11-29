@@ -18,11 +18,13 @@
         "@tailwindcss/typography": "^0.3.0",
         "@vue/compiler-sfc": "^3.0.5",
         "axios": "^0.21",
-        "fsevents": "^2.3.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "postcss-import": "^12.0.1",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.43.5",
+        "sass-loader": "^12.3.0",
         "tailwindcss": "^2.0.1",
         "vue": "^3.0.5",
         "vue-loader": "^16.1.2"
@@ -46,5 +48,8 @@
         "xterm": "^4.14.1",
         "xterm-addon-fit": "^0.5.0",
         "ziggy-js": "^1.4.0"
+    },
+    "optionalDependencies": {
+        "fsevents": "^2.3.2"
     }
 }

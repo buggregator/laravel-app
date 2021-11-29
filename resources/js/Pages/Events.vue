@@ -1,24 +1,26 @@
 <template>
-    <MainLayout :title="currentScreen" classes="event-page">
-        <header>
-            <Screens/>
-            <div class="filters">
+    <MainLayout :title="currentScreen" classes="events-page">
+        <header class="events-page__header">
+            <Screens class="events-page__screens"/>
+            <div class="events-page__filters filters">
                 <Labels/>
                 <Colors/>
             </div>
         </header>
 
-        <main v-if="hasEvents" class="events">
-            <component :is="eventComponent(event)"
+        <main v-if="hasEvents" class="events-page__events">
+            <component
+                :is="eventComponent(event)"
                 :event="event"
                 v-for="event in events"
                 :key="event.uuid"
-            ></component>
+                class="events-page__event"
+            />
         </main>
 
-        <section v-else class="welcome-block">
+        <section v-else class="events-page__welcome-block">
             <WsConnectionStatus/>
-            <Tips/>
+            <Tips class="events-page__tips"/>
         </section>
     </MainLayout>
 </template>
