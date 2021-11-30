@@ -1,10 +1,10 @@
 <template>
-    <Tab v-slot="{ selected }" as="template">
-        <div class="flex flex-col">
-            <button class="px-4 py-2 font-bold text-sm" :class="{'text-muted': !selected}">
+    <Tab v-slot="{ selected }" as="template" class="tab">
+        <div class="tab__wrap">
+            <button class="tab__btn" :class="{'text-muted': !selected}">
                 <slot></slot>
             </button>
-            <div class="h-1 rounded-t" :class="{'bg-blue-500 dark:bg-blue-100': selected}"></div>
+            <div class="tab__thumb" :class="{'selected': selected}"></div>
         </div>
     </Tab>
 </template>

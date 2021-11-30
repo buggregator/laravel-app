@@ -1,5 +1,5 @@
 <template>
-    <Event :event="event" class="event--ray event-ray">
+    <Event :event="event" class="event--ray">
         <div class="event-ray__wrap">
             <EventPayload
                 v-for="payload in event.payloads"

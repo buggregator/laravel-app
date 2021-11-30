@@ -1,16 +1,16 @@
 <template>
     <div>
-        <h1 class="font-semibold text-blue-800 dark:text-gray-100 mb-2">
+        <h1 class="event-inspector__title">
             {{ event.process.name }}
         </h1>
 
-        <Link :href="event.route.show" class="block">
-            <Cards :event="event" class="border hover:bg-white dark:hover:bg-gray-900"/>
+        <Link :href="event.route.show" class="event-inspector__link">
+            <Cards :event="event" class="event-inspector__cards"/>
         </Link>
 
-        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-3 text-xs text-gray-400">
+        <div class="event-inspector__footer">
             <span>{{ date }}</span>
-            <Host :name="event.serverName"/>
+            <Host :name="event.serverName" class="event-inspector__host"/>
         </div>
     </div>
 </template>

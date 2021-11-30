@@ -3,8 +3,8 @@
         {{ value }}
     </CodeSnippet>
     <div v-else v-html="cleanHtml"
-         class="text-blue-700 break-all"
-         :class="{'bg-gray-800 rounded p-2 text-xs': dumpId}"
+         class="dump"
+         :class="{'active': dumpId}"
     ></div>
 </template>
 

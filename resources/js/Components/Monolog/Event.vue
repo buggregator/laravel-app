@@ -1,15 +1,15 @@
 <template>
-    <Event :event="event">
-        <div class="text-xs break-all">
-            <CodeSnippet class="border-b-0 mt-2">
+    <Event :event="event" class="event--monolog">
+        <div class="event-monolog__wrap">
+            <CodeSnippet class="event-monolog__snippet">
                 {{ event.text }}
             </CodeSnippet>
 
-            <CodeSnippet v-if="hasPayloads" language="json" class="border-b-0">
+            <CodeSnippet v-if="hasPayloads" language="json" class="event-monolog__payloads">
                 {{ event.payloads }}
             </CodeSnippet>
 
-            <Table v-if="hasFields">
+            <Table v-if="hasFields" class="event-monolog__table">
                 <TableRow :title="key" v-for="(value, key) in fields">
                     <div v-html="value"></div>
                 </TableRow>

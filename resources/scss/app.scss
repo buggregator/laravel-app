@@ -11,6 +11,9 @@
 @import "./components/label";
 @import "./components/collapsed";
 @import "./components/sshpre";
+@import "./components/dump";
+@import "./components/html-preview";
+@import "./components/tab";
 @import "./components/layouts/main-layout";
 @import "./components/layouts/left-sidebar";
 @import "./components/layouts/logout";
@@ -20,8 +23,12 @@
 @import "./components/layouts/screens";
 @import "./components/layouts/event";
 @import "./components/events/list-page/event-ray";
+@import "./components/events/list-page/event-monolog";
+@import "./components/events/list-page/event-inspector";
+@import "./components/events/list-page/event-slack";
+@import "./components/events/list-page/event-vardump";
 @import "./components/events/single-page/smtp";
-@import "./components/events/list-page/event-ray";
+@import "./components/events/single-page/inspector";
 
 body {
     @apply bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-50;

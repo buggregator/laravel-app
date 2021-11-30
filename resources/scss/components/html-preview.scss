@@ -1,0 +1,19 @@
+.html-preview {
+    @apply flex flex-col items-center h-full;
+
+    &__wrap {
+        @apply flex justify-center mb-5;
+    }
+
+    &__btn {
+        @apply p-1 rounded;
+
+        &.active {
+            @apply bg-blue-50 text-blue-600;
+        }
+    }
+
+    &__btn-icon {
+        @apply w-10 h-6 fill-current;
+    }
+}

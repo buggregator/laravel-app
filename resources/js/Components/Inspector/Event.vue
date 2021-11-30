@@ -1,6 +1,6 @@
 <template>
-    <Event :event="event">
-        <NavItem :event="event" />
+    <Event :event="event" class="event--inspector">
+        <NavItem :event="event" class="event-inspector__nav"/>
     </Event>
 </template>
 

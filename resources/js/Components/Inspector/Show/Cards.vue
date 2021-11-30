@@ -1,16 +1,16 @@
 <template>
-    <section class="pt-5 pb-4 px-4 md:px-5 border-b dark:border-gray-600 flex flex-col sm:flex-row justify-between items-start divide-y sm:divide-y-0 sm:divide-x dark:divide-gray-600">
-        <div class="w-full sm:w-1/4 pb-5 sm:pb-0">
-            <h4 class="text-muted font-bold text-2xs mb-1 uppercase">Timestamp</h4>
-            <strong class="text-xs sm:text-sm md:text-md">{{ event.processDate }}</strong>
+    <section class="inspector-cards">
+        <div class="inspector-cards__item sm:px-0">
+            <h4 class="inspector-cards__item-name">Timestamp</h4>
+            <strong class="inspector-cards__item-value md:text-md">{{ event.processDate }}</strong>
         </div>
-        <div class="w-full sm:w-1/4 sm:px-10 py-5 sm:py-0">
-            <h4 class="text-muted font-bold text-2xs mb-1 uppercase">Duration</h4>
-            <strong class="text-xs sm:text-sm md:text-md">{{ event.process.duration }} ms</strong>
+        <div class="inspector-cards__item pt-5 sm:pt-0">
+            <h4 class="inspector-cards__item-name">Duration</h4>
+            <strong class="inspector-cards__item-value md:text-md">{{ event.process.duration }} ms</strong>
         </div>
-        <div class="w-full sm:w-1/4 sm:px-10 py-5 sm:py-0">
-            <h4 class="text-muted font-bold text-2xs mb-1 uppercase">Result</h4>
-            <span :class="`bg-${event.color}-700`" class="px-3 py-1 text-white rounded text-2xs font-bold">{{ event.processResult }}</span>
+        <div class="inspector-cards__item pt-5 sm:pt-0">
+            <h4 class="inspector-cards__item-name">Result</h4>
+            <span :class="`bg-${event.color}-700`" class="inspector-cards__item-label">{{ event.processResult }}</span>
         </div>
     </section>
 </template>

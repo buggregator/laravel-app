@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="event__body">
+        <div class="event__body" :class="`event-${event.app}`">
             <slot></slot>
         </div>
     </div>
