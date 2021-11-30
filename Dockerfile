@@ -17,7 +17,6 @@ ARG APP_VERSION=v1.0
 
 RUN git clone https://github.com/butschster/ray-server.git /app
 RUN git checkout ${APP_VERSION}
-RUN git pull
 RUN composer install
 
 RUN chmod 0777 storage -R
