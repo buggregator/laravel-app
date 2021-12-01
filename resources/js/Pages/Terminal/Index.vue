@@ -61,7 +61,7 @@ const commands = {
         description: 'Clears console'
     }
 }
-
+let terminalInit = false;
 export default {
     components: {
         MainLayout
@@ -69,15 +69,16 @@ export default {
     setup() {
         const store = useStore();
         const messages = computed(() => store.state.terminal.messages)
-        const terminalInit = false
 
         return {
-            messages, store, terminalInit
+            messages, store
         }
     },
-    destroyed() {
+
+    unmounted() {
         this.term.clear()
     },
+
     mounted() {
         this.initTerminal();
         this.sendMessages(this.messages)
@@ -85,12 +86,11 @@ export default {
 
     methods: {
         initTerminal() {
-            if (!this.terminalInit) {
+            if (!terminalInit ) {
                 this.term = new Terminal(settings)
 
                 const fitAddon = new FitAddon()
                 this.term.loadAddon(fitAddon)
-
                 this.term.open(document.getElementById('terminal'))
                 fitAddon.fit()
 
@@ -131,7 +131,7 @@ export default {
                     this.sendMessages(payload.payload.message.split("\n"))
                 })
 
-                this.terminalInit = true;
+                terminalInit = true;
             }
         },
         runCommand(text) {
