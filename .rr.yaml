@@ -9,12 +9,13 @@ server:
 
 http:
   address: 0.0.0.0:8000
-  middleware: [ "gzip", "websockets" ]
+  middleware: [ "gzip", "static", "websockets" ]
   static:
     dir: "public"
     forbid: [ ".php" ]
+    calculate_etag: true
   pool:
-    num_workers: 2
+    num_workers: 1
 
 tcp:
   servers:
@@ -58,3 +59,6 @@ logs:
   level: info
   mode: raw
   line_ending: "\r"
+  channels:
+    http:
+      level: panic

@@ -1,5 +1,5 @@
 <template>
-    <MainLayout title="SMTP">
+    <MainLayout title="Sentry">
         <div ref="header" class="border-b dark:border-gray-400 flex items-center gap-x-2 text-xs font-semibold px-4 py-2">
             <div class="text-muted">Sentry</div>
         </div>

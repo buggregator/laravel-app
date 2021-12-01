@@ -1,5 +1,5 @@
 .dump {
-    @apply text-blue-700 break-all;
+    @apply text-blue-700 dark:text-white break-all;
 
     &.active {
         @apply bg-gray-800 rounded p-2 text-xs;

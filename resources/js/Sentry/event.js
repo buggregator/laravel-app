@@ -5,6 +5,19 @@ export default class extends Event {
     color = 'pink'
     app = 'sentry'
 
+    constructor(event, id, timestamp) {
+        super(event, id, timestamp)
+
+        this._payload = event.exception.values[0] || {
+            type: 'Unknown',
+            value: 'Something went wrong',
+            stacktrace: {
+                frames: []
+            }
+        }
+        this._stacktrace = this._payload.stacktrace.frames.reverse()
+    }
+
     get serverName() {
         return this.event.server_name
     }
@@ -14,13 +27,7 @@ export default class extends Event {
     }
 
     get payload() {
-        return this.event.exception.values[0] || {
-            type: 'Unknown',
-            value: 'Something went wrong',
-            stacktrace: {
-                frames: []
-            }
-        }
+        return this._payload
     }
 
     get request() {
@@ -52,7 +59,7 @@ export default class extends Event {
     }
 
     get stacktrace() {
-        return this.payload.stacktrace.frames.reverse()
+        return this._stacktrace
     }
 
     get breadcrumbs() {

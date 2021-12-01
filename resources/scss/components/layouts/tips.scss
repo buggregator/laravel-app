@@ -6,7 +6,8 @@
     }
 
     &__list {
-        @apply flex flex-col space-y-2;
+        @apply flex flex-col space-y-4;
+        @apply flex flex-col space-y-4;
     }
 
     &__item {
@@ -14,6 +15,6 @@
     }
 
     &__link {
-        @apply text-blue-600 dark:text-blue-200 underline;
+        @apply text-blue-600 dark:text-blue-200 underline break-all;
     }
 }

@@ -5,7 +5,7 @@
                 {{ event.payload.type }}
             </h3>
 
-            <span v-if="location" class="text-xs text-muted md:ml-3">
+            <span v-if="event.location" class="text-xs text-muted md:ml-3">
                 <strong>{{ location.filename }}</strong> in <strong>{{ location.function }}</strong>
             </span>
         </div>

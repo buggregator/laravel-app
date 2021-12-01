@@ -61,9 +61,6 @@ export default {
     },
     mounted() {
         this.loadEvents()
-
-
-        console.log(this.event)
     },
     methods: {
         async deleteEvent() {

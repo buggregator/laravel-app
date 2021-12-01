@@ -38,10 +38,6 @@ final class DatabaseServiceProvider extends ServiceProvider
             $dbal = $app[DatabaseProviderInterface::class];
             foreach ($dbal->getDrivers() as $driver) {
                 $driver->disconnect();
-
-                $app[LoggerInterface::class]->debug('Driver disconnected', [
-                    'driver' => $driver::class,
-                ]);
             }
         });
     }
