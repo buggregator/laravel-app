@@ -54,7 +54,12 @@ return [
 
     'database' => [
 
-        'logger' => env('DB_LOGGER', 'null'),
+        'logger' => [
+            'default' => env('DB_LOGGER', 'null'),
+            'drivers' => [
+                //'sqlite' => 'stderr'
+            ]
+        ],
 
         /*
         |--------------------------------------------------------------------------
@@ -94,6 +99,7 @@ return [
                 connection: new Database\Config\SQLite\FileConnectionConfig(
                     database: env('DB_DATABASE', database_path('database.sqlite'))
                 ),
+                driver: \Infrastructure\CycleOrm\Database\Drivers\SQLiteDriver::class,
                 queryCache: true,
             ),
             'mysql' => new Database\Config\MySQLDriverConfig(

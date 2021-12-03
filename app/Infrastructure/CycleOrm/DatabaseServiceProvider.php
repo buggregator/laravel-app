@@ -18,13 +18,15 @@ final class DatabaseServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(DatabaseProviderInterface::class, static function ($app) {
-            $manager = new DatabaseManager(
-                new DatabaseConfig(config('cycle.database'))
+            return new DatabaseManager(
+                new DatabaseConfig(
+                    config('cycle.database')
+                ),
+                new LoggerFactory(
+                    $app['log'],
+                    config('cycle.database.logger')
+                )
             );
-
-            $manager->setLogger($app['log']->driver(config('cycle.database.logger')));
-
-            return $manager;
         });
 
         $this->app->alias(DatabaseProviderInterface::class, DatabaseManager::class);
