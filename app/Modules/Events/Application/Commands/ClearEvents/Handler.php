@@ -6,7 +6,7 @@ namespace Modules\Events\Application\Commands\ClearEvents;
 
 use App\Commands\ClearEvents;
 use App\Contracts\Command\CommandHandler;
-use Cycle\ORM\TransactionInterface;
+use Cycle\ORM\EntityManagerInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Modules\Events\Domain\Event;
 use Modules\Events\Domain\EventRepository;
@@ -17,7 +17,7 @@ class Handler implements CommandHandler
     public function __construct(
         private EventRepository $events,
         private Dispatcher $dispatcher,
-        private TransactionInterface $transaction
+        private EntityManagerInterface $entityManager
     ) {
     }
 
@@ -31,10 +31,10 @@ class Handler implements CommandHandler
 
         // TODO: make more optimized
         $this->events->findAll($scope)->each(
-            fn (Event $event) => $this->transaction->delete($event)
+            fn (Event $event) => $this->entityManager->delete($event)
         );
 
-        $this->transaction->run();
+        $this->entityManager->run();
     }
 
     #[\App\Attributes\CommandBus\CommandHandler]

@@ -8,13 +8,13 @@ use Cycle\Database\DatabaseProviderInterface;
 use Cycle\Migrations\FileRepository;
 use Cycle\Migrations\RepositoryInterface;
 use Cycle\ORM\Collection\IlluminateCollectionFactory;
+use Cycle\ORM\EntityManager;
+use Cycle\ORM\EntityManagerInterface;
 use Cycle\ORM\Factory;
 use Cycle\ORM\FactoryInterface;
 use Cycle\ORM\ORM;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\SchemaInterface;
-use Cycle\ORM\Transaction;
-use Cycle\ORM\TransactionInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Infrastructure\CycleOrm\Auth\UserProvider;
@@ -25,7 +25,7 @@ final class CycleOrmServiceProvider extends ServiceProvider
     {
         $this->initFactory();
         $this->initOrm();
-        $this->app->bind(TransactionInterface::class, Transaction::class);
+        $this->app->bind(EntityManagerInterface::class, EntityManager::class);
         $this->app->singleton(RepositoryInterface::class, FileRepository::class);
     }
 
@@ -61,7 +61,7 @@ final class CycleOrmServiceProvider extends ServiceProvider
             $auth->provider('cycleorm', static function ($app, array $config): UserProvider {
                 return new UserProvider(
                     $app[ORMInterface::class],
-                    $app[TransactionInterface::class],
+                    $app[EntityManagerInterface::class],
                     $config['model'],
                     $app['hash'],
                 );

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Infrastructure\CycleOrm\Auth;
 
+use Cycle\ORM\EntityManagerInterface;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\RepositoryInterface;
-use Cycle\ORM\TransactionInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Support\Str;
@@ -15,7 +15,7 @@ final class UserProvider implements \Illuminate\Contracts\Auth\UserProvider
 {
     public function __construct(
         private ORMInterface $orm,
-        private TransactionInterface $transaction,
+        private EntityManagerInterface $entityManager,
         private string $model,
         private Hasher $hasher
     ) {
@@ -37,8 +37,8 @@ final class UserProvider implements \Illuminate\Contracts\Auth\UserProvider
     public function updateRememberToken(Authenticatable $user, $token)
     {
         $user->setRememberToken($token);
-        $this->transaction->persist($user);
-        $this->transaction->run();
+        $this->entityManager->persist($user);
+        $this->entityManager->run();
     }
 
     public function retrieveByCredentials(array $credentials)
