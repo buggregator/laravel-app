@@ -203,7 +203,7 @@ You can find out documentation on [official site](https://docs.inspector.dev/)
 ----
 
 
-## 6. [Ray debug tool](https://github.com/spatie/ray) 
+## 6. Spatie [Ray debug tool](https://github.com/spatie/ray) 
 
 Buggregator is compatible with `spatie/ray` package. The Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash
 applications. After installing one of the libraries, you can use the ray function to quickly dump stuff. Any variable(s) that you pass will be sent to the Buggregator.
