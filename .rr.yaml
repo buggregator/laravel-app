@@ -9,7 +9,7 @@ server:
 
 http:
   address: 0.0.0.0:8000
-  middleware: [ "gzip", "websockets" ]
+  middleware: [ "static", "gzip", "websockets" ]
   static:
     dir: "public"
     forbid: [ ".php" ]
@@ -34,15 +34,15 @@ websockets:
 broadcast:
   default:
     driver: memory
-    config: {}
+    config: { }
 
 kv:
   session:
     driver: memory
-    config: {}
+    config: { }
   cache:
     driver: memory
-    config: {}
+    config: { }
 
 jobs:
   consume: [ "default", "events" ]
@@ -58,3 +58,7 @@ logs:
   level: info
   mode: raw
   line_ending: "\r"
+  channels:
+    http:
+      mode: production
+      level: error
