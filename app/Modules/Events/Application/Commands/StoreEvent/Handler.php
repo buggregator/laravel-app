@@ -7,7 +7,7 @@ namespace Modules\Events\Application\Commands\StoreEvent;
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandHandler;
 use App\Domain\Entity\Json;
-use Cycle\ORM\TransactionInterface;
+use Cycle\ORM\EntityManagerInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Carbon;
 use Modules\Events\Domain\Event;
@@ -17,14 +17,14 @@ class Handler implements CommandHandler
 {
     public function __construct(
         private Dispatcher $dispatcher,
-        private TransactionInterface $transaction,
+        private EntityManagerInterface $entityManager,
     ) {
     }
 
     #[\App\Attributes\CommandBus\CommandHandler]
     public function handle(Command $command): void
     {
-        $this->transaction->persist(
+        $this->entityManager->persist(
             new Event(
                 $command->uuid,
                 $command->type,
@@ -33,7 +33,7 @@ class Handler implements CommandHandler
             )
         );
 
-        $this->transaction->run();
+        $this->entityManager->run();
     }
 
     #[\App\Attributes\CommandBus\CommandHandler]

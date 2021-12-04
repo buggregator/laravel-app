@@ -6,7 +6,7 @@ namespace Modules\Events\Application\Commands\DeleteEvent;
 
 use App\Domain\Entity\Json;
 use App\Domain\ValueObjects\Uuid;
-use Cycle\ORM\TransactionInterface;
+use Cycle\ORM\EntityManagerInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Modules\Events\Domain\Event;
 use Modules\Events\Domain\EventRepository;
@@ -24,7 +24,7 @@ class HandlerTest extends TestCase
             ->with($uuid->toString())
             ->andReturn($event = new Event($uuid, 'foo', new Json(['foo' => 'bar']), new \DateTimeImmutable()));
 
-        $transaction = \Mockery::mock(TransactionInterface::class);
+        $transaction = \Mockery::mock(EntityManagerInterface::class);
         $transaction->shouldReceive('delete')->once()->with($event);
         $transaction->shouldReceive('run')->once();
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\User\Interfaces\Console\Commands;
 
+use Cycle\ORM\EntityManagerInterface;
 use Cycle\ORM\ORMInterface;
-use Cycle\ORM\TransactionInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -15,7 +15,7 @@ class CreateUser extends Command
 {
     protected $signature = 'user:create {username?} {password?}';
 
-    public function handle(TransactionInterface $transaction, ORMInterface $orm)
+    public function handle(EntityManagerInterface $entityManager, ORMInterface $orm)
     {
         if (! config('auth.enabled')) {
             $this->error('Authentication is disabled.');
@@ -33,8 +33,8 @@ class CreateUser extends Command
             return;
         }
 
-        $transaction->persist(new User($username, Hash::make($password)));
-        $transaction->run();
+        $entityManager->persist(new User($username, Hash::make($password)));
+        $entityManager->run();
 
         $this->info('User created.');
         $this->table([], [
