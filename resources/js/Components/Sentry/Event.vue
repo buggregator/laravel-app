@@ -1,8 +1,8 @@
 <template>
-  <Event :event="event">
-    <Exception :event="event"/>
+  <Event :event="event" class="event--sentry">
+    <Exception :event="event" class="event-sentry__exception"/>
 
-    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-3 text-xs text-gray-400">
+    <div class="event-sentry__wrap">
       <div>
         <span>{{ date }}</span>
         <span class="mx-2">|</span>
@@ -10,7 +10,7 @@
         <span class="mx-2">|</span>
         <span><strong>env: </strong>{{ event.environment }}</span>
       </div>
-      <Host :name="event.serverName"/>
+      <Host :name="event.serverName" class="event-sentry__host"/>
     </div>
   </Event>
 </template>

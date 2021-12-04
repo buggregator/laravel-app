@@ -26808,7 +26808,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex flex-col sm:flex-row sm:justify-between sm:items-center mt-3 text-xs text-gray-400"
+  "class": "event-sentry__wrap"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
@@ -26839,11 +26839,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Event = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Event", true);
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Event, {
-    event: $props.event
+    event: $props.event,
+    "class": "event--sentry"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Exception, {
-        event: $props.event
+        event: $props.event,
+        "class": "event-sentry__exception"
       }, null, 8
       /* PROPS */
       , ["event"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.date), 1
@@ -26853,7 +26855,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )]), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.event.environment), 1
       /* TEXT */
       )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Host, {
-        name: $props.event.serverName
+        name: $props.event.serverName,
+        "class": "event-sentry__host"
       }, null, 8
       /* PROPS */
       , ["name"])])];
@@ -26976,29 +26979,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "mb-1 font-semibold"
+  "class": "sentry-exception"
 };
 var _hoisted_2 = {
-  "class": "text-muted text-sm break-all"
+  "class": "sentry-exception__title"
 };
 var _hoisted_3 = {
+  "class": "sentry-exception__text"
+};
+var _hoisted_4 = {
   key: 0,
-  "class": "border border-purple-200 dark:border-gray-600 flex-col justify-center"
+  "class": "sentry-exception__files"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
 
   var _component_File = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("File");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     as: "div",
     href: $props.event.route.show,
-    "class": "cursor-pointer pb-2"
+    "class": "sentry-exception__link"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.event.payload.type), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.event.payload.type), 1
       /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.event.payload.value), 1
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.event.payload.value), 1
       /* TEXT */
       )];
     }),
@@ -27007,10 +27013,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href"]), $props.frames > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.stacktrace, function (file, i) {
+  , ["href"]), $props.frames > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.stacktrace, function (file, i) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_File, {
       file: file,
-      collapsed: i !== 0
+      collapsed: i !== 0,
+      "class": "sentry-exception__file"
     }, null, 8
     /* PROPS */
     , ["file", "collapsed"]);
@@ -27419,21 +27426,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "bg-purple-50 dark:bg-gray-800 py-2 px-3 flex space-x-2 justify-between items-start"
+  "class": "sentry-file__title-wrap"
 };
 var _hoisted_2 = {
-  "class": "text-muted break-all font-semibold"
+  "class": "sentry-file__title"
 };
 var _hoisted_3 = {
   key: 0,
-  "class": "text-gray-400"
+  "class": "sentry-exception__title-info"
 };
 var _hoisted_4 = {
   key: 1,
-  "class": "text-gray-400"
+  "class": "sentry-exception__title-info"
 };
 var _hoisted_5 = {
-  "class": "w-5 h-4 border border-purple-300 shadow bg-white dark:bg-gray-600 py-1 rounded"
+  "class": "sentry-file__title-icon"
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
@@ -27445,35 +27452,35 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_7 = [_hoisted_6];
 var _hoisted_8 = {
   key: 0,
-  "class": "bg-gray-900 p-2 overflow-x-scroll"
+  "class": "sentry-file__body"
 };
 var _hoisted_9 = {
-  "class": "flex"
+  "class": "sentry-file__row"
 };
 var _hoisted_10 = {
-  "class": "w-12 text-muted"
+  "class": "sentry-file__row-number"
 };
 var _hoisted_11 = {
-  "class": "text-gray-100"
+  "class": "sentry-file__row-text"
 };
 var _hoisted_12 = {
-  "class": "flex bg-pink-800 text-white"
+  "class": "sentry-file__row sentry-file__row--red"
 };
 var _hoisted_13 = {
   "class": "w-12"
 };
 var _hoisted_14 = {
-  "class": "flex"
+  "class": "sentry-file__row"
 };
 var _hoisted_15 = {
-  "class": "w-12 text-muted"
+  "class": "sentry-file__row-number"
 };
 var _hoisted_16 = {
-  "class": "text-gray-100"
+  "class": "sentry-file__row-text"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-    "class": "text-xs cursor-pointer border-b border-purple-200 dark:border-gray-600",
+    "class": "sentry-file",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $props.collapsed = !$props.collapsed;
     })
@@ -27489,7 +27496,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     height: "100%",
     width: "100%",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-      'transform rotate-180': $props.collapsed
+      'rotate': $props.collapsed
     })
   }, _hoisted_7, 2
   /* CLASS */
@@ -27660,12 +27667,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Event = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Event", true);
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Event, {
-    event: $props.event
+    event: $props.event,
+    "class": "event--smtp"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NavItem, {
         event: $props.event,
-        "class": "border"
+        "class": "event-smtp__nav-item"
       }, null, 8
       /* PROPS */
       , ["event"])];
@@ -28131,10 +28139,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex-grow p-3"
+  "class": "event-smtp__link-body"
 };
 var _hoisted_2 = {
-  "class": "flex justify-between text-xs text-muted"
+  "class": "event-smtp__link-text"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "To:", -1
@@ -28146,19 +28154,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
     href: $props.event.route.show,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["block border-b text-sm hover:bg-white dark:hover:bg-gray-900 flex items-stretch dark:border-gray-600", {
-      'bg-gray-50 dark:bg-gray-800': $options.isActive
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["event-smtp__link", {
+      'active': $options.isActive
     }])
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["w-1 self-stretch flex-none rounded-r", {
-          'bg-blue-500 dark:bg-blue-100': $options.isActive
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["event-sentry__left", {
+          'active': $options.isActive
         }])
       }, null, 2
       /* CLASS */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["font-semibold", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["event-smtp__link-title", {
           'font-bold': $options.isActive
         }])
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.event.event.subject), 3
@@ -28801,10 +28809,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex flex-col text-center md:flex-row gap-4 items-center justify-center"
+  "class": "ws-connection"
 };
 var _hoisted_2 = {
-  "class": "text-sm md:text-base text-muted font-semibold"
+  "class": "ws-connection__text"
 };
 var _hoisted_3 = {
   key: 0
@@ -28816,7 +28824,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_WsConnectionIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("WsConnectionIcon");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_WsConnectionIcon, {
-    "class": "h-8 w-8"
+    "class": "ws-connection__icon"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$setup.wsConnected ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_3, "Hurry! Give me something. I can't wait to show it.")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_4, "Houston we have a problem! Websocket is not connected. Try to reload page."))])]);
 }
 
@@ -28910,7 +28918,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+  "class": "auth"
 };
 var _hoisted_2 = {
   "class": "max-w-sm w-full space-y-8"

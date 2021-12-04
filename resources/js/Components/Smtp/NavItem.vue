@@ -1,13 +1,13 @@
 <template>
     <Link :href="event.route.show"
-          class="block border-b text-sm hover:bg-white dark:hover:bg-gray-900 flex items-stretch dark:border-gray-600"
-          :class="{'bg-gray-50 dark:bg-gray-800': isActive }"
+          class="event-smtp__link"
+          :class="{'active': isActive }"
     >
 
-        <div class="w-1 self-stretch flex-none rounded-r" :class="{'bg-blue-500 dark:bg-blue-100': isActive }"></div>
-        <div class="flex-grow p-3">
-            <h3 class="font-semibold" :class="{ 'font-bold': isActive }">{{ event.event.subject }}</h3>
-            <div class="flex justify-between text-xs text-muted">
+        <div class="event-sentry__left" :class="{'active': isActive }"></div>
+        <div class="event-smtp__link-body">
+            <h3 class="event-smtp__link-title" :class="{ 'font-bold': isActive }">{{ event.event.subject }}</h3>
+            <div class="event-smtp__link-text">
                 <span>
                     <strong>To:</strong> {{ event.event.to[0].email }}
                 </span>
