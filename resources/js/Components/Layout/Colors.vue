@@ -1,7 +1,7 @@
 <template>
     <div class="filters__colors">
         <button v-if="hasSelectedColors" class="filters__btn-clear" @click="clear">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><g id="close"><path id="x" d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z"/></g></svg>
+            <TimesIcon />
         </button>
         <div v-else class="w-4 h-4 -ml-6"></div>
         <ColorButton v-for="color in colors" :color="color"/>
@@ -12,9 +12,10 @@
 import {computed} from 'vue';
 import {useStore} from "vuex";
 import ColorButton from "../UI/ColorButton";
+import TimesIcon from "../UI/Icons/TimesIcon";
 
 export default {
-    components: {ColorButton},
+    components: {TimesIcon, ColorButton},
     methods: {
         clear() {
             this.store.commit('clearSelectedColors')

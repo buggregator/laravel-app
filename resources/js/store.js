@@ -236,8 +236,8 @@ export const store = createStore({
         clearEvents({}, type) {
             axios.delete(route('events.clear'), {data: {type}})
         },
-        deleteEvent({}, uuid) {
-            axios.delete(route('event.delete', uuid))
+        deleteEvent({}, event) {
+            axios.delete(route('event.delete', event.id))
         },
     },
     mutations: {
@@ -298,6 +298,10 @@ export const store = createStore({
             }
         },
         pushEvent(state, event) {
+            if (!event) {
+                return;
+            }
+
             this.commit('ensureScreenExists', state.currentScreen)
 
             const existsEvent = this.getters.eventByUuid(event.uuid)

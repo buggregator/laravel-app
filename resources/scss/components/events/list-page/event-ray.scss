@@ -15,7 +15,7 @@
 
     &__exception {
         &-wrap {
-            @apply p-3 bg-gray-100 border rounded-t;
+            @apply p-3 border rounded-t;
         }
 
         &-text {
@@ -76,22 +76,22 @@
 }
 
 .event-ray-file {
-       @apply text-xs cursor-pointer;
+       @apply text-xs cursor-pointer border-b border-purple-200 dark:border-gray-600;
 
     &__header {
-       @apply border-b bg-gray-50 p-1 px-3 flex space-x-2 justify-between items-start;
+       @apply bg-purple-50 dark:bg-gray-800 py-2 px-3 flex space-x-2 justify-between items-start;
     }
 
     &__title {
-        @apply bg-gray-50 break-all font-semibold;
+        @apply text-muted break-all font-semibold;
     }
 
     &__icon {
-        @apply w-4 h-4 border border-gray-300 bg-white py-1 rounded;
+        @apply w-5 h-4 border border-purple-300 shadow bg-white dark:bg-gray-600 py-1 rounded;
     }
 
     &__body {
-        @apply bg-gray-800 p-2 overflow-x-scroll;
+        @apply bg-gray-900 p-2 overflow-x-scroll;
     }
 
     &__snippet {

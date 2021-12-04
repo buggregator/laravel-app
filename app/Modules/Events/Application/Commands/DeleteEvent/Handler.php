@@ -7,7 +7,7 @@ namespace Modules\Events\Application\Commands\DeleteEvent;
 use App\Commands\DeleteEvent;
 use App\Contracts\Command\CommandHandler;
 use App\Exceptions\EntityNotFoundException;
-use Cycle\ORM\TransactionInterface;
+use Cycle\ORM\EntityManagerInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Modules\Events\Domain\EventRepository;
 use Modules\IncommingEvents\Domain\Events\EventWasDeleted;
@@ -17,7 +17,7 @@ class Handler implements CommandHandler
     public function __construct(
         private EventRepository $events,
         private Dispatcher $dispatcher,
-        private TransactionInterface $transaction
+        private EntityManagerInterface $entityManager
     ) {
     }
 
@@ -30,8 +30,8 @@ class Handler implements CommandHandler
             throw new EntityNotFoundException('Event with given uuid is not found.');
         }
 
-        $this->transaction->delete($event);
-        $this->transaction->run();
+        $this->entityManager->delete($event);
+        $this->entityManager->run();
     }
 
     #[\App\Attributes\CommandBus\CommandHandler]

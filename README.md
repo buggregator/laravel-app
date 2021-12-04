@@ -9,15 +9,17 @@
 
 ![Frame 2](https://user-images.githubusercontent.com/773481/142460231-07f28ffb-4892-4b97-a01d-fb677eda071b.jpg)
 
-Buggregator is a beautiful, lightweight app built on Laravel and VueJs with [RoadRunner](https://github.com/spiral/roadrunner) underhood, that helps debugging mostly PHP app without extra packages. It runs without installation on multiple platforms via docker and supports [symfony var-dumper](#1-symfony-vardumper-server), [monolog](#4-compatible-with-monolog), [sentry](#3-compatible-with-sentry), [smtp](#2-fake-smtp-server-for-catching-mail) and [spatie ray package](#5-spatie-ray-debug-tool).
+Buggregator is a beautiful, lightweight standalone server built on Laravel, VueJs and [RoadRunner](https://github.com/spiral/roadrunner) underhood, that helps debugging mostly PHP applications without extra packages. 
+It runs without installation on multiple platforms via docker and supports [symfony var-dumper](#1-symfony-vardumper-server), [monolog](#4-monolog-server), [sentry](#3-compatible-with-sentry), [smtp](#2-fake-smtp-server-for-catching-mail), [inspector](#5-compatible-with-inspector) and [spatie ray package](#5-spatie-ray-debug-tool).
 
 #### Contents
 1. [Features](#features)
    - [Symfony VarDumper server](#1-symfony-vardumper-server)
    - [Fake SMTP server](#2-fake-smtp-server-for-catching-mail)
-   - [Sentry server](#3-compatible-with-sentry)
-   - [Monolog server](#4-compatible-with-monolog)
-   - [Spatie Ray debug tool](#5-spatie-ray-debug-tool)
+   - [Sentry server](#3-compatible-with-sentry-reports)
+   - [Monolog server](#4-monolog-server)
+   - [Inspector](#5-compatible-with-inspector-reports)
+   - [Spatie Ray debug tool](#6-spatie-ray-debug-tool)
 2. [Installation](#installation)
    - [Docker image](#docker-image)
    - [Docker compose](#docker-compose)
@@ -28,8 +30,6 @@ Buggregator is a beautiful, lightweight app built on Laravel and VueJs with [Roa
 ---
 
 ![Buggregator](https://user-images.githubusercontent.com/773481/131818548-39189a7e-355a-4a9c-b783-9ae8ce627d79.png)
-
-# Killer features
 
 ## 1. Symfony [VarDumper server](https://symfony.com/doc/current/components/var_dumper.html#the-dump-server)
 
@@ -75,7 +75,7 @@ MAILER_DSN=smtp://127.0.0.1:1025
 ----
 
 
-## 3. Compatible with Sentry
+## 3. Compatible with [Sentry](https://sentry.io/) reports
 
 Buggregator can be used to receive Sentry reports from your application. Buggregator is a lightweight alternative for local development. 
 Just configure Sentry DSN to send data to Buggregator. It can display dump output in the browser as well as in a terminal (console output). 
@@ -90,14 +90,14 @@ SENTRY_LARAVEL_DSN=http://sentry@127.0.0.1:23517/1
 ```
 
 ### Other platforms
-To report to Sentry you’ll need to use a language-specific SDK. The Sentry team builds and maintains these for most popular languages.
+To report to Buggregator you’ll need to use a language-specific SDK. The Sentry team builds and maintains these for most popular languages.
 You can find out documentation on [official site](https://docs.sentry.io/platforms/)
 
 
 ----
 
 
-## 4. Compatible with [Monolog](https://github.com/Seldaek/monolog)
+## 4. [Monolog](https://github.com/Seldaek/monolog) server
 
 Buggregator can display dump output in the browser as well as in a terminal (console output).
 Buggregator can receive logs from `monolog/monolog` package via `\Monolog\Handler\SlackWebhookHandler` or `\Monolog\Handler\SocketHandler` handler.
@@ -164,7 +164,46 @@ $log->error('Bar');
 ----
 
 
-## 5. Spatie [Ray debug tool](https://github.com/spatie/ray)
+## 5. Compatible with [Inspector](https://inspector.dev/) reports
+
+Buggregator can be used to receive Inspector events from your application. Buggregator is a lightweight alternative for local development.
+Just configure Inspector client URL to send data to Buggregator. It can display dump output in the browser as well as in a terminal (console output).
+
+### Laravel settings
+
+Laravel is supported via a native package. You can read about integrations on [official site](https://docs.inspector.dev/laravel)
+
+```php
+INSPECTOR_URL=http://127.0.0.1:23517/inspector
+INSPECTOR_API_KEY=test
+INSPECTOR_INGESTION_KEY=1test
+INSPECTOR_ENABLE=true
+```
+
+### Other platforms
+
+For PHP you can use `inspector-apm/inspector-php` package.
+
+```php
+use Inspector\Inspector;
+use Inspector\Configuration;
+
+$configuration = new Configuration('YOUR_INGESTION_KEY');
+$configuration->setUrl('http://127.0.0.1:23517/inspector');
+$inspector = new Inspector($configuration);
+
+// ...
+```
+
+
+To report to Buggregator you’ll need to use a language-specific SDK. The Inspector team builds and maintains these for most popular languages.
+You can find out documentation on [official site](https://docs.inspector.dev/)
+
+
+----
+
+
+## 6. Spatie [Ray debug tool](https://github.com/spatie/ray) 
 
 Buggregator is compatible with `spatie/ray` package. The Ray debug tool supports PHP, Ruby, JavaScript, TypeScript, NodeJS, Go and Bash
 applications. After installing one of the libraries, you can use the ray function to quickly dump stuff. Any variable(s) that you pass will be sent to the Buggregator.
@@ -388,7 +427,7 @@ There are several [projects](https://github.com/buggregator/app/projects) in thi
 
 1. Clone repository `git clone https://github.com/buggregator/app.git`
 2. Run composer `composer install`
-3. Run migrations `php artisan cycle:schema:migrate`
+3. Run migrations `php artisan app:configure`
 4. Download RoadRunner binary `vendor/bin/rr get-binary`
 5. Run RoadRunner server `./rr serve`
 

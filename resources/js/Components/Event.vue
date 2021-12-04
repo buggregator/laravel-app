@@ -61,7 +61,7 @@ export default {
             this.event.setCollapsed(!this.event.collapsed)
         },
         deleteEvent() {
-            this.store.dispatch('deleteEvent', this.event.uuid)
+            this.store.dispatch('deleteEvent', this.event)
         }
     },
     computed: {

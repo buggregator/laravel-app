@@ -10,8 +10,7 @@
 
             <span>Continue</span>
         </button>
-        <button :disabled="disabled" @click="stopExecution"
-                class="event-ray__pause-btn event-ray__pause-btn--stop active:bg-grey-300">
+        <button :disabled="disabled" @click="stopExecution" class="event-ray__pause-btn event-ray__pause-btn--stop active:bg-grey-300">
             <span class="w-3 h-3 bg-red-700 block"></span>
             <span>Stop execution</span>
         </button>

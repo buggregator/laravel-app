@@ -12,8 +12,6 @@ RUN set -ex && apk --no-cache add postgresql-dev
 RUN apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS
 RUN docker-php-ext-install pdo pdo_pgsql pdo_mysql sockets
 
-ARG ROADRUNNER_STABILITY=stable
-ARG ROADRUNNER_VERSION=2.*
 ARG ROADRUNNER_CONFIG=.rr.yaml
 
 WORKDIR /app
@@ -25,9 +23,4 @@ EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
 
-CMD composer install && \
-    touch database/database.sqlite && \
-    php artisan db:wipe && \
-    php artisan cycle:schema:migrate && \
-    php artisan user:create && \
-    ./rr serve
+CMD composer install && php artisan app:configure && ./rr serve -c ${ROADRUNNER_CONFIG}

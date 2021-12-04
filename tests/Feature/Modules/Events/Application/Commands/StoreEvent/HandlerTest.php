@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Modules\Events\Application\Commands\StoreEvent;
 
 use App\Domain\ValueObjects\Uuid;
-use Cycle\ORM\TransactionInterface;
+use Cycle\ORM\EntityManagerInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Modules\Events\Application\Commands\StoreEvent\Command;
 use Modules\Events\Application\Commands\StoreEvent\Handler;
@@ -23,17 +23,17 @@ class HandlerTest extends DatabaseTestCase
             payload: ['foo' => 'bar']
         );
 
-        $transaction = \Mockery::mock(TransactionInterface::class);
-        $transaction->shouldReceive('persist')->once()->withArgs(
+        $entityManager = \Mockery::mock(EntityManagerInterface::class);
+        $entityManager->shouldReceive('persist')->once()->withArgs(
             fn (Event $event) => $event->getUuid()->equals($uuid)
                 && $event->getType() === 'test'
                 && $event->getDate() === $date
                 && (string) $event->getPayload() === '{"foo":"bar"}'
         );
 
-        $transaction->shouldReceive('run')->once();
+        $entityManager->shouldReceive('run')->once();
 
-        $handler = new Handler(\Mockery::mock(Dispatcher::class), $transaction);
+        $handler = new Handler(\Mockery::mock(Dispatcher::class), $entityManager);
         $handler->handle($command);
     }
 }

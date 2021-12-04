@@ -6,8 +6,8 @@ namespace Infrastructure\EventSauce\Persistance;
 
 use App\Domain\Entity\Json;
 use App\Domain\ValueObjects\Uuid;
+use Cycle\ORM\EntityManagerInterface;
 use Cycle\ORM\ORMInterface;
-use Cycle\ORM\TransactionInterface;
 use EventSauce\EventSourcing\AggregateRootId;
 use EventSauce\EventSourcing\Header;
 use EventSauce\EventSourcing\Message;
@@ -20,7 +20,7 @@ class CycleOrmMessageRepository implements EventRepository
 {
     public function __construct(
         private ORMInterface $orm,
-        private TransactionInterface $transaction,
+        private EntityManagerInterface $entityManager,
         private MessageSerializer $serializer
     ) {
     }
@@ -34,7 +34,7 @@ class CycleOrmMessageRepository implements EventRepository
                 ? Uuid::fromString($payload['headers'][Header::EVENT_ID])
                 : Uuid::generate();
 
-            $this->transaction->persist(
+            $this->entityManager->persist(
                 entity: new Event(
                     $eventId,
                     $payload['headers'][Header::EVENT_TYPE],
@@ -42,11 +42,11 @@ class CycleOrmMessageRepository implements EventRepository
                     $payload['headers'][Header::AGGREGATE_ROOT_VERSION] ?? 0,
                     new Json($payload)
                 ),
-                mode: TransactionInterface::MODE_ENTITY_ONLY
+                cascade: false
             );
         }
 
-        $this->transaction->run();
+        $this->entityManager->run();
     }
 
     public function retrieveAll(AggregateRootId $id): Generator

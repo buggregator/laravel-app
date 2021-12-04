@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Infrastructure\CycleOrm\Listeners;
 
-use Infrastructure\RoadRunner\TCP\Events\AfterLoopIterationEvent;
+use Cycle\ORM\ORMInterface;
+use Infrastructure\RoadRunner\TCP\Events\AfterLoopIterationEvent as TCPAfterLoopIterationEventAlias;
+use Spiral\RoadRunnerLaravel\Events\AfterLoopIterationEvent as HTTPAfterLoopIterationEventAlias;
 
 class ClearIdentityMap
 {
-    public function handle(AfterLoopIterationEvent|\Spiral\RoadRunnerLaravel\Events\AfterLoopIterationEvent $event
+    public function handle(
+        TCPAfterLoopIterationEventAlias|HTTPAfterLoopIterationEventAlias $event
     ): void {
-        // TODO fix it
-        // app(ORMInterface::class)->getHeap()->clean();
+        app(ORMInterface::class)->getHeap()->clean();
     }
 }
