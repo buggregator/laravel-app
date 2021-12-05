@@ -1,6 +1,6 @@
 .event-ray {
     &__wrap {
-        @apply flex flex-col justify-items-stretch w-full divide-y;
+        @apply flex flex-col justify-items-stretch w-full space-y-2;
     }
 
     &__caller {
@@ -15,7 +15,7 @@
 
     &__exception {
         &-wrap {
-            @apply p-3 border rounded-t;
+            @apply p-3 border rounded-t dark:border-gray-400 bg-gray-50 dark:bg-gray-700;
         }
 
         &-text {
@@ -23,7 +23,7 @@
         }
 
         &-files {
-            @apply border-b border-l border-r divide-y flex-col justify-center;
+            @apply border-b border-l border-r divide-y flex-col justify-center dark:border-gray-400;
         }
     }
 
@@ -40,7 +40,7 @@
     &__pause {
         @apply flex;
         &-btn {
-            @apply px-5 py-2 flex items-center space-x-3 bg-gray-100 border text-sm font-medium hover:bg-gray-50 focus:outline-none disabled:opacity-50;
+            @apply px-5 py-2 flex items-center space-x-3 bg-gray-100 dark:bg-gray-800 border dark:border-gray-600 text-sm font-medium hover:bg-gray-50 focus:outline-none disabled:opacity-50;
 
             &--continue {
                 @apply rounded-l-full;
@@ -60,7 +60,7 @@
 
     &__trace {
         &-files {
-            @apply flex-col justify-center border divide-y;
+            @apply flex-col justify-center border dark:border-gray-600 divide-y;
         }
     }
 

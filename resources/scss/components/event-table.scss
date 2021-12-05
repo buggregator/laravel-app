@@ -2,7 +2,7 @@
    @apply bg-gray-100 dark:bg-gray-800 text-sm border dark:border-gray-600 divide-y dark:divide-gray-600;
 
     &__row {
-        @apply md:flex bg-gray-50 dark:bg-gray-800 text-xs md:text-sm sm:space-y-1 py-1 md:py-2 px-2 md:px-4 items-center;
+        @apply md:flex bg-gray-50 dark:bg-gray-800 text-responsive sm:space-y-1 py-1 md:py-2 px-2 md:px-4 items-center;
     }
 
     &__cell-name {
@@ -11,5 +11,9 @@
 
     &__cell-value {
         @apply break-all md:w-3/4;
+
+      .dump {
+        @apply border-0;
+      }
     }
 }

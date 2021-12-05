@@ -1,6 +1,6 @@
 <template>
-    <div class="collapsed" :class="{'cursor-pointer': !isOpen}" @click="isOpen = !isOpen">
-        <h3 class="collapsed__title-wrap">
+    <div class="collapsed" :class="{'cursor-pointer': !isOpen}">
+        <h3 class="collapsed__title-wrap" @click="isOpen = !isOpen">
             {{ title }}
 
             <div class="collapsed__icon">

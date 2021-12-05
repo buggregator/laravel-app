@@ -1,5 +1,5 @@
 <template>
-    <Dump :value="value" :class="textSize"/>
+    <Dump v-if="!isEmptyValue" :value="value" :class="textSize"/>
 </template>
 
 <script>
@@ -11,6 +11,9 @@ export default {
         payload: Object
     },
     computed: {
+        isEmptyValue() {
+            return this.value == ''
+        },
         value() {
             return this.payload.content.values[0] || ''
         },

@@ -47,7 +47,6 @@ body {
     @apply text-red-600 dark:text-red-300;
 }
 
-.ssh-pre {
-    margin-top: 0 !important;
-    @apply p-2 md:px-3 lg:px-4 text-2xs sm:text-xs md:text-sm rounded-none border;
+.text-responsive {
+    @apply text-2xs sm:text-xs md:text-sm lg:text-base;
 }

@@ -1,6 +1,10 @@
 <template>
     <Event :event="event" class="event--vardump">
-        <Dump :value="event.payloads.value" class="event-var-dump__dump"/>
+        <Dump
+            :type="event.payloads.type"
+            :value="event.payloads.value"
+            class="event-var-dump__dump"
+        />
 
         <Origin :origin="event.origin" />
     </Event>

@@ -9,11 +9,9 @@
                 {{ event.payloads }}
             </CodeSnippet>
 
-            <Table v-if="hasFields" class="event-monolog__table">
-                <TableRow :title="key" v-for="(value, key) in fields">
-                    <div v-html="value"></div>
-                </TableRow>
-            </Table>
+            <CodeSnippet v-if="hasFields" :title="field.title" v-for="field in fields">
+                {{ field.value }}
+            </CodeSnippet>
         </div>
     </Event>
 </template>

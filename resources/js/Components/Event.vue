@@ -1,5 +1,5 @@
 <template>
-    <div class="event" ref="event" :class="{'collapsed': event.collapsed, 'open': !event.collapsed}">
+    <div class="event" ref="event" :id="event.id" :class="{'collapsed': event.collapsed, 'open': !event.collapsed}">
         <div class="event__sidebar sidebar">
             <div class="sidebar__container">
                 <button @click="toggle" class="button button__collapse" :class="color">

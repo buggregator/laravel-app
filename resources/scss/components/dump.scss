@@ -1,7 +1,3 @@
 .dump {
-    @apply text-blue-700 dark:text-white break-all dark:border-gray-600 dark:bg-gray-800 p-2 rounded;
-
-    &.active {
-        @apply bg-gray-800 rounded p-2 text-xs;
-    }
+    @apply text-responsive font-mono p-2 md:px-3 lg:px-4 border text-blue-700 dark:text-white break-all dark:border-gray-600 bg-gray-800 rounded;
 }

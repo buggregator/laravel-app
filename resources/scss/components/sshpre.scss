@@ -1,5 +1,6 @@
 .ssh-pre {
-    @apply relative mt-2 p-2 border bg-gray-50 dark:border-gray-600 dark:bg-gray-800 block;
+    margin-top: 0 !important;
+    @apply font-mono relative border dark:border-gray-600 p-2 md:px-3 lg:px-4 text-responsive rounded bg-gray-800 block;
 }
 
 .ssh-pre__content {

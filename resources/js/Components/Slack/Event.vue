@@ -4,11 +4,9 @@
             <CodeSnippet class="event-slack__snippet">
                 {{ event.text }}
             </CodeSnippet>
-            <Table v-if="hasFields" class="event-slack__table">
-                <TableRow :title="field.title" v-for="field in fields">
-                    <div v-html="value(field.value)"></div>
-                </TableRow>
-            </Table>
+            <CodeSnippet v-if="hasFields" :title="field.title" v-for="field in fields">
+                {{ value(field.value) }}
+            </CodeSnippet>
         </div>
     </Event>
 </template>
@@ -35,7 +33,7 @@ export default {
     methods: {
         value(string) {
             if (typeof string == 'string') {
-                return string.replace(/```([^]+?.*?[^]+?[^]+?)```/g, '<pre class="event-slack__pre-value">$1</pre>')
+                return string.replace(/```([^]+?.*?[^]+?[^]+?)```/g, '$1')
             }
 
             return string

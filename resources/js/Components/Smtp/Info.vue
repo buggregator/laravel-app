@@ -16,41 +16,27 @@
     <div class="text-xs font-semibold mt-3 flex flex-wrap items-center">
         <div class="flex border border-purple-300 rounded items-center mr-3 mb-2">
             <div class="px-3 py-1 border-r">From</div>
-            <div class="px-3 py-1 bg-gray-800 text-white font-semibold rounded-r" v-for="email in event.event.from">
-                {{ email.name }} [{{ email.email }}]
-            </div>
+            <div class="px-3 py-1 bg-gray-800 text-white font-semibold rounded-r" v-for="email in event.event.from">{{ email.name }} [{{ email.email }}]</div>
         </div>
 
         <div class="flex border border-purple-300 rounded items-center mr-3 mb-2" v-for="email in event.event.to">
             <div class="px-3 py-1 border-r">To</div>
-            <div class="px-3 py-1 bg-blue-800 text-white font-semibold rounded-r">{{ email.name }} [{{
-                    email.email
-                }}]
-            </div>
+            <div class="px-3 py-1 bg-blue-800 text-white font-semibold rounded-r">{{ email.name }} [{{email.email}}]</div>
         </div>
 
         <div class="flex border border-purple-300 rounded items-center mr-3 mb-2" v-for="email in event.event.cc">
             <div class="px-3 py-1 border-r">CC</div>
-            <div class="px-3 py-1 bg-red-800 text-white font-semibold rounded-r">{{ email.name }} [{{
-                    email.email
-                }}]
-            </div>
+            <div class="px-3 py-1 bg-red-800 text-white font-semibold rounded-r">{{ email.name }} [{{email.email}}]</div>
         </div>
 
         <div class="flex border border-purple-300 rounded items-center mr-3 mb-2" v-for="email in event.event.bcc">
             <div class="px-3 py-1 border-r">BCC</div>
-            <div class="px-3 py-1 bg-purple-800 text-white font-semibold rounded-r">{{ email.name }} [{{
-                    email.email
-                }}]
-            </div>
+            <div class="px-3 py-1 bg-purple-800 text-white font-semibold rounded-r">{{ email.name }} [{{email.email}}]</div>
         </div>
 
         <div class="flex border border-purple-300 rounded items-center mr-3 mb-2" v-for="email in event.event.reply_to">
             <div class="px-3 py-1 border-r">Reply to</div>
-            <div class="px-3 py-1 bg-green-800 text-white font-semibold rounded-r">{{ email.name }} [{{
-                    email.email
-                }}]
-            </div>
+            <div class="px-3 py-1 bg-green-800 text-white font-semibold rounded-r">{{ email.name }} [{{email.email}}]</div>
         </div>
     </div>
 

@@ -4,6 +4,7 @@
             <EventPayload
                 v-for="payload in event.payloads"
                 :payload="payload"
+                :id="event.id"
                 :disabled="event.disabled"
                 v-on:disable="event.disable()"
                 v-on:delete="$emit('deleteEvent')"

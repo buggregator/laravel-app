@@ -4,6 +4,6 @@
         @apply h-8 w-8;
     }
     &__text {
-        @apply text-sm md:text-base text-muted font-semibold;
+        @apply text-responsive text-muted font-semibold;
     }
 }
