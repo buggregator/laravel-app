@@ -23,4 +23,4 @@ EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
 
-CMD composer install && php artisan app:configure && ./rr serve -c ${ROADRUNNER_CONFIG}
+CMD composer install && ./rr serve -c ${ROADRUNNER_CONFIG}
