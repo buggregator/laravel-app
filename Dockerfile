@@ -33,4 +33,4 @@ EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
 
-CMD php artisan app:configure && ./rr serve -c ${ROADRUNNER_CONFIG}
+CMD ./rr serve -c ${ROADRUNNER_CONFIG}

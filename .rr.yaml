@@ -3,6 +3,8 @@ rpc:
 
 server:
   command: "php ./bin/rr-worker start"
+  on_init:
+    command: "php artisan app:configure"
   relay: pipes
   env:
     TERM_PROGRAM: Hyper
