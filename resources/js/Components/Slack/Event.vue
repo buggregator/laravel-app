@@ -1,14 +1,12 @@
 <template>
-    <Event :event="event">
-        <div class="text-xs break-all">
-            <CodeSnippet class="border-b-0">
+    <Event :event="event" class="event--slack">
+        <div class="event-slack__wrap">
+            <CodeSnippet class="event-slack__snippet">
                 {{ event.text }}
             </CodeSnippet>
-            <Table v-if="hasFields">
-                <TableRow :title="field.title" v-for="field in fields">
-                    <div v-html="value(field.value)"></div>
-                </TableRow>
-            </Table>
+            <CodeSnippet v-if="hasFields" :title="field.title" v-for="field in fields">
+                {{ value(field.value) }}
+            </CodeSnippet>
         </div>
     </Event>
 </template>
@@ -35,7 +33,7 @@ export default {
     methods: {
         value(string) {
             if (typeof string == 'string') {
-                return string.replace(/```([^]+?.*?[^]+?[^]+?)```/g, '<pre class="overflow-x-scroll bg-white p-2">$1</pre>')
+                return string.replace(/```([^]+?.*?[^]+?[^]+?)```/g, '$1')
             }
 
             return string

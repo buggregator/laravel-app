@@ -1,6 +1,6 @@
 <template>
-    <Event :event="event">
-        <NavItem :event="event" class="border" />
+    <Event :event="event" class="event--smtp">
+        <NavItem :event="event" class="event-smtp__nav-item" />
     </Event>
 </template>
 

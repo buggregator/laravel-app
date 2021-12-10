@@ -1,5 +1,5 @@
 <template>
-    <Dump :value="payload.content.content"/>
+    <Dump :value="payload.content.content" class="event-ray__custom"/>
 </template>
 
 <script>

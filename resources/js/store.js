@@ -7,6 +7,34 @@ function generateScreenName() {
     return 'Debug session ' + moment().format('hh:mm:ss')
 }
 
+const theme = {
+    namespaced: true,
+    state: () => ({
+        darkMode: false
+    }),
+    actions: {
+        detect(context) {
+            context.commit(
+                'toggle',
+                (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches))
+            )
+        }
+    },
+    mutations: {
+        toggle(state, value) {
+            if (value === true) {
+                localStorage.theme = 'dark'
+                state.darkMode = true
+                document.documentElement.classList.add('dark')
+            } else {
+                localStorage.theme = 'light'
+                state.darkMode = false
+                document.documentElement.classList.remove('dark')
+            }
+        }
+    }
+}
+
 const ws = {
     namespaced: true,
     state: () => ({
@@ -126,7 +154,7 @@ const inspector = {
 
 export const store = createStore({
     modules: {
-        ws, smtp, sentry, terminal, inspector
+        ws, smtp, sentry, terminal, inspector, theme
     },
 
     state() {
@@ -208,8 +236,8 @@ export const store = createStore({
         clearEvents({}, type) {
             axios.delete(route('events.clear'), {data: {type}})
         },
-        deleteEvent({}, uuid) {
-            axios.delete(route('event.delete', uuid))
+        deleteEvent({}, event) {
+            axios.delete(route('event.delete', event.id))
         },
     },
     mutations: {

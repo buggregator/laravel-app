@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <CodeSnippet language="sql" class="border-b-0">
+    <div class="event-ray__query">
+        <CodeSnippet language="sql" class="event-ray__query-snippet">
             {{ formattedSql }}
         </CodeSnippet>
-        <Table>
+        <Table class="event-ray__query-table">
             <TableRow title="Connection name">
                 {{ this.payload.content.connection_name }}
             </TableRow>

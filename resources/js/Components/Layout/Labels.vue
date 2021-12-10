@@ -1,9 +1,9 @@
 <template>
-    <div class="flex flex-row flex-wrap gap-2 items-center justify-center">
+    <div class="filters__label-list">
         <Label @click="toggleLabel(label)"
                v-for="label in labels"
-               class="cursor-pointer"
-               :class="{'bg-blue-500 text-white': selectedLabels.includes(label)}"
+               class="filters__label-item"
+               :class="{'active': selectedLabels.includes(label)}"
         >
             {{ label }}
         </Label>
@@ -31,7 +31,6 @@ export default {
 
     setup() {
         const store = useStore();
-
 
         const labels = computed(()  => store.getters.availableLabels)
         const selectedLabels = computed(()  => store.state.selectedLabels)

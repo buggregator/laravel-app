@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="event-ray__event">
     <Dump v-if="payload.content.class_based_event" :value="payload.content.event" />
     <div v-else>
-      <h3 class="text-gray-800">
+      <h3>
           Event: <code class="font-semibold">{{ payload.content.name }}</code>
       </h3>
       <Dump :value="payload.content.payload" />

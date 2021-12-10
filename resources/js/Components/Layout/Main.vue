@@ -1,13 +1,13 @@
 <template>
-    <Head :title="title"/>
-    <div class="flex h-screen items-stretch">
-        <div class="w-10 md:w-14 lg:w-16 flex-none">
-            <LeftSidebar class="w-10 md:w-14 lg:w-16 fixed h-screen">
+    <Head :title="title"></Head>
+    <div class="main-layout">
+        <div class="main-layout__sidebar-wrap">
+            <LeftSidebar class="main-layout__sidebar">
                 <slot name="left-sidebar"></slot>
             </LeftSidebar>
         </div>
 
-        <div class="flex flex-col h-full flex-1">
+        <div class="main-layout__content" :class="classes">
             <slot></slot>
         </div>
     </div>
@@ -22,7 +22,8 @@ import LeftSidebar from './Sidebar/Left'
 export default {
     components: {LeftSidebar},
     props: {
-        title: String
+        title: String,
+        classes: String
     }
 }
 </script>

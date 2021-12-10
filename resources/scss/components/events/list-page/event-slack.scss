@@ -1,0 +1,14 @@
+.event-slack {
+    &__wrap {
+        @apply text-xs break-all;
+    }
+
+    &__snippet {
+        @apply border-b-0;
+    }
+
+    &__pre-value {
+        @apply overflow-x-scroll bg-white dark:bg-gray-700 p-2;
+    }
+
+}

@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <h3 v-if="payload.content.is_new_timer" class="text-gray-800 font-bold">
+    <div class="event-ray__measure">
+        <h3 v-if="payload.content.is_new_timer" class="font-bold">
             Start measuring performance...
         </h3>
 
-        <Table v-else>
+        <Table v-else class="event-ray__measure-table">
             <TableRow title="Total time">
                 {{ totalTime }} s
             </TableRow>

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="flex-col justify-center border divide-y">
+    <div class="event-ray__trace">
+        <div class="event-ray__trace-files">
             <File :file="file" v-for="(file, i) in payload.content.frames" />
         </div>
     </div>

@@ -1,11 +1,8 @@
 <template>
     <CodeSnippet v-if="isBool" language="php">
-        {{ value }}
+        {{ value == 1 }}
     </CodeSnippet>
-    <div v-else v-html="cleanHtml"
-         class="text-blue-700 break-all"
-         :class="{'bg-gray-800 rounded p-2 text-xs': dumpId}"
-    ></div>
+    <div v-else v-html="cleanHtml" class="dump" :class="{'active': dumpId}"></div>
 </template>
 
 <script>
@@ -13,7 +10,7 @@ import CodeSnippet from "@/Components/UI/CodeSnippet"
 
 export default {
     components: {CodeSnippet},
-    props: ['value'],
+    props: ['value', 'type'],
     data() {
         return {
             evaluated: false
@@ -26,7 +23,7 @@ export default {
     },
     computed: {
         isBool() {
-            return typeof this.value == 'boolean'
+            return typeof this.value == 'boolean' || this.type === 'boolean'
         },
         dumpId() {
             if (typeof this.value === 'string') {

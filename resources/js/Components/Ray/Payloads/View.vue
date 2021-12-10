@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <h3 class="text-gray-800 text-sm md:text-base mb-2">
-            View: <code class="font-semibold break-all">{{ payload.content.view_path_relative_to_project_root }}</code>
+    <div class="event-ray__view">
+        <h3 class="event-ray__view-title">
+            View: <code class="event-ray__view-code">{{ payload.content.view_path_relative_to_project_root }}</code>
         </h3>
         <Dump :value="payload.content.data"/>
     </div>

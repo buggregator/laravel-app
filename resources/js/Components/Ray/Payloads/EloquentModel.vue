@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h3 class="text-gray-800">
+    <div class="event-ray__model">
+        <h3>
             Class name: <code class="font-semibold">{{ payload.content.class_name }}</code>
         </h3>
         <Dump :value="payload.content.attributes"/>

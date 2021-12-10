@@ -1,6 +1,6 @@
 <template>
-    <div class="flex space-x-4 items-center">
-        <span class="text-gray-400 underline text-2xs cursor-help" :title="`${origin.file}:${origin.line_number}`">
+    <div class="event-var-dump__footer">
+        <span class="event-var-dump__footer-text" :title="`${origin.file}:${origin.line_number}`">
             {{ origin.name }}:{{ origin.line_number }}
         </span>
     </div>

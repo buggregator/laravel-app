@@ -1,0 +1,20 @@
+.tips {
+    @apply mt-6 p-6 bg-white dark:bg-gray-900 rounded-l text-muted border;
+
+    &__title {
+        @apply text-xl font-bold mb-3;
+    }
+
+    &__list {
+        @apply flex flex-col space-y-4;
+        @apply flex flex-col space-y-4;
+    }
+
+    &__item {
+        @apply flex space-x-3 items-center;
+    }
+
+    &__link {
+        @apply text-blue-600 dark:text-blue-200 underline break-all;
+    }
+}

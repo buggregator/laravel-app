@@ -1,26 +1,26 @@
 <template>
-    <MainLayout :title="currentScreen">
-        <header class="md:sticky md:top-0 z-50 bg-white border-b border-gray-200">
-            <Screens/>
-            <div class="p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2">
+    <MainLayout :title="currentScreen" classes="events-page">
+        <header class="events-page__header">
+            <Screens class="events-page__screens"/>
+            <div class="events-page__filters filters">
                 <Labels/>
                 <Colors/>
             </div>
         </header>
 
-        <main v-if="hasEvents" class="flex flex-col divide-y border-b">
+        <main v-if="hasEvents" class="events-page__events">
             <component
-                class="flex-grow"
                 :is="eventComponent(event)"
                 :event="event"
                 v-for="event in events"
                 :key="event.uuid"
-            ></component>
+                class="events-page__event"
+            />
         </main>
 
-        <section v-else class="flex-1 p-4 flex flex-col justify-center items-center bg-gray-50">
+        <section v-else class="events-page__welcome-block">
             <WsConnectionStatus/>
-            <Tips/>
+            <Tips class="events-page__tips"/>
         </section>
     </MainLayout>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <CodeSnippet>
+    <CodeSnippet class="event-ray__application">
         {{ payload.content.value }}
     </CodeSnippet>
 </template>

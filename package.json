@@ -18,11 +18,13 @@
         "@tailwindcss/typography": "^0.3.0",
         "@vue/compiler-sfc": "^3.0.5",
         "axios": "^0.21",
-        "fsevents": "^2.3.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "postcss-import": "^12.0.1",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.43.5",
+        "sass-loader": "^12.3.0",
         "tailwindcss": "^2.0.1",
         "vue": "^3.0.5",
         "vue-loader": "^16.1.2"
@@ -31,13 +33,13 @@
         "@headlessui/vue": "^1.4.0",
         "@ivanv/vue-collapse-transition": "^1.0.2",
         "@kyvg/vue3-notification": "^2.3.3",
-        "apexcharts": "^3.30.0",
+        "@vueform/toggle": "^2.0.1",
         "moment": "^2.29.1",
+        "postcss-nesting": "^10.0.2",
         "reconnecting-websocket": "^4.4.0",
         "simple-syntax-highlighter": "^2.0.6",
         "uuid": "^8.3.2",
         "vue-markdown": "^2.2.4",
-        "vue3-apexcharts": "^1.4.1",
         "vue3-clipboard": "^1.0.0",
         "vue3-markdown-it": "^1.0.9",
         "vue3-perfect-scrollbar": "^1.5.5",
@@ -46,5 +48,8 @@
         "xterm": "^4.14.1",
         "xterm-addon-fit": "^0.5.0",
         "ziggy-js": "^1.4.0"
+    },
+    "optionalDependencies": {
+        "fsevents": "^2.3.2"
     }
 }

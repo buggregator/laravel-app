@@ -1,9 +1,10 @@
 <template>
-    <Event :event="event">
-        <div class="flex flex-col justify-items-stretch w-full divide-y">
+    <Event :event="event" class="event--ray">
+        <div class="event-ray__wrap">
             <EventPayload
                 v-for="payload in event.payloads"
                 :payload="payload"
+                :id="event.id"
                 :disabled="event.disabled"
                 v-on:disable="event.disable()"
                 v-on:delete="$emit('deleteEvent')"

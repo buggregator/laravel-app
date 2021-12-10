@@ -1,0 +1,9 @@
+.event-var-dump {
+    &__footer {
+        @apply flex space-x-4 items-center;
+    }
+
+    &__footer-text {
+        @apply text-muted underline text-2xs cursor-help;
+    }
+}

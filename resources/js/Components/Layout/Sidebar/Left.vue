@@ -1,22 +1,22 @@
 <template>
-    <div class="bg-gray-200 border-right border-gray-300 flex flex-col justify-between">
-        <div class="divide-y divide-gray-300">
+    <section class="left-sidebar">
+        <nav class="left-sidebar__nav">
             <Link
                 v-for="link in links"
                 :href="link.href"
                 :title="link.title"
-                class="p-3 md:p-4 lg:p-5 block hover:bg-blue-500 hover:text-white"
-                :class="{'bg-blue-500 text-white': isActive(link), 'text-blue-500': !isActive(link)}"
+                :class="{'active': isActive(link)}"
+                class="left-sidebar__link"
             >
                 <span v-html="link.icon"></span>
             </Link>
-        </div>
+        </nav>
 
-        <div class="divide-y divide-gray-300">
+        <div class="left-sidebar__info">
             <WsConnectionIcon class="p-3 md:p-4 lg:p-5"/>
             <Logout />
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -58,6 +58,12 @@ export default {
                     title: 'Terminal',
                     state: (url) => this.$page.url.startsWith(url),
                     icon: '<svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 22"><path fill-rule="evenodd" d="M19 2H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3ZM5 0a5 5 0 0 0-5 5v12a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5H5Z"/><path fill-rule="evenodd" d="m11.1 15 .3-.6.6-.2h5.1c.3 0 .5 0 .6.2.2.2.3.4.3.7 0 .2 0 .5-.3.6-.1.2-.3.3-.6.3H12a.8.8 0 0 1-.6-.3 1 1 0 0 1-.3-.6ZM6.3 6.4a.9.9 0 0 1 .6-.3.8.8 0 0 1 .6.3l3.4 3.6a1 1 0 0 1 .2.6 1 1 0 0 1-.2.7l-3.4 3.6-.6.3a.8.8 0 0 1-.6-.3 1 1 0 0 1-.3-.6c0-.3 0-.5.3-.7l2.8-3-2.8-3A1 1 0 0 1 6 7a1 1 0 0 1 .3-.6Z" /></svg>'
+                },
+                {
+                    href: route('settings'),
+                    title: 'Settings',
+                    state: (url) => this.$page.url.startsWith(url),
+                    icon: '<svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 3H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3ZM5 1a5 5 0 0 0-5 5v12a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V6a5 5 0 0 0-5-5H5Z"/><path d="M11.6 11.8V5.4c0-.2.2-.4.4-.4s.4.2.4.4v6.4a2 2 0 0 1 0 4v2.8c0 .2-.2.4-.4.4a.4.4 0 0 1-.4-.4v-2.9a2 2 0 0 1 0-3.9ZM12 15a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4ZM16.6 8.5V5.4c0-.2.2-.4.4-.4s.4.2.4.4v3.1a2 2 0 0 1 0 4v6.1c0 .2-.2.4-.4.4a.4.4 0 0 1-.4-.4v-6.2a2 2 0 0 1 0-3.9Zm.4 3.2a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4ZM6.6 8.5V5.4c0-.2.2-.4.4-.4s.4.2.4.4v3.1a2 2 0 0 1 0 4v6.1c0 .2-.2.4-.4.4a.4.4 0 0 1-.4-.4v-6.2a2 2 0 0 1 0-4Zm.4 3.2a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Z"/></svg>'
                 }
             ]
         }
