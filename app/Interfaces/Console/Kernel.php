@@ -11,7 +11,7 @@ use Interfaces\Console\Commands\ConfigureApp;
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
-        ConfigureApp::class
+        ConfigureApp::class,
     ];
 
     protected function schedule(Schedule $schedule)

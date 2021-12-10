@@ -58,7 +58,7 @@ return [
             'default' => env('DB_LOGGER', 'null'),
             'drivers' => [
                 //'sqlite' => 'stderr'
-            ]
+            ],
         ],
 
         /*

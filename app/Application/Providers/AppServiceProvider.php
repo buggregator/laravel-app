@@ -12,5 +12,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         CliDumper::$defaultOutput = 'php://stderr';
+
+        $this->app['url']->forceScheme('https');
     }
 }

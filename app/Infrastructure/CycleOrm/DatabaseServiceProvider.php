@@ -11,7 +11,6 @@ use Cycle\Database\DatabaseManager;
 use Cycle\Database\DatabaseProviderInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Psr\Log\LoggerInterface;
 
 final class DatabaseServiceProvider extends ServiceProvider
 {

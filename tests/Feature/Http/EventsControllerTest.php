@@ -85,6 +85,8 @@ class EventsControllerTest extends DatabaseTestCase
 
         $this->deleteJson(route('events.clear'));
 
+        $this->cleanIdentityMap();
+
         $this->getJson(
             route('events'),
             ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()]
