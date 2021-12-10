@@ -19,9 +19,11 @@ class Handler implements QueryHandler
     #[\App\Attributes\QueryBus\QueryHandler]
     public function __invoke(FindEventByUuid $query): EventResource
     {
-        $event = $this->events->findByPK((string) $query->uuid);
+        $event = $this->events->findByPK((string)$query->uuid);
         if (! $event) {
-            throw new EntityNotFoundException('Event with given uuid is not found.');
+            throw new EntityNotFoundException(
+                sprintf('Event with given uuid [%s] was not found.', (string)$query->uuid)
+            );
         }
 
         return new EventResource($event);

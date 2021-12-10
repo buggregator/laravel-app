@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\User\Interfaces\Console\Commands;
 
-use Cycle\ORM\EntityManagerInterface;
-use Cycle\ORM\ORMInterface;
+use App\Commands\FinUserByUsername;
+use App\Contracts\Command\CommandBus;
+use App\Contracts\Query\QueryBus;
+use App\Exceptions\EntityNotFoundException;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Modules\User\Domain\User;
 
 class CreateUser extends Command
 {
     protected $signature = 'user:create {username?} {password?}';
 
-    public function handle(EntityManagerInterface $entityManager, ORMInterface $orm)
+    public function handle(CommandBus $commandBus, QueryBus $queryBus, CreateUserConfig $config)
     {
         if (! config('auth.enabled')) {
             $this->error('Authentication is disabled.');
@@ -23,23 +22,25 @@ class CreateUser extends Command
             return;
         }
 
-        $username = $this->argument('username') ?? env('AUTH_USERNAME', 'admin');
-        $password = $this->argument('password') ?? env('AUTH_PASSWORD', Str::random(8));
+        $username = $this->argument('username') ?? $config->username();
+        $password = $this->argument('password') ?? $config->password();
 
-        $user = $orm->getRepository(User::class)->findOne(['name' => $username]);
-        if ($user) {
+        try {
+            $queryBus->ask(new FinUserByUsername($username));
             $this->error(sprintf('User with given username [%s] exists. Try another name.', $username));
+        } catch (EntityNotFoundException $e) {
+            $commandBus->dispatch(
+                new \Modules\User\Application\Commands\CreateUser\Command(
+                    username: $username,
+                    password: $password
+                )
+            );
 
-            return;
+            $this->info('User created.');
+            $this->table([], [
+                ['Username', $username],
+                ['Password', $password],
+            ]);
         }
-
-        $entityManager->persist(new User($username, Hash::make($password)));
-        $entityManager->run();
-
-        $this->info('User created.');
-        $this->table([], [
-            ['Username', $username],
-            ['Password', $password],
-        ]);
     }
 }

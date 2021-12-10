@@ -6,9 +6,9 @@ namespace Tests;
 
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
+use Cycle\ORM\EntityManager;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\RepositoryInterface;
-use Cycle\ORM\Transaction;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Events\Domain\Event;
 
@@ -29,10 +29,12 @@ class DatabaseTestCase extends TestCase
 
     public function createEvent(string $type, array $payload): Event
     {
-        $this->app[CommandBus::class]->dispatch($command = new HandleReceivedEvent(
-            type: $type,
-            payload: $payload
-        ));
+        $this->app[CommandBus::class]->dispatch(
+            $command = new HandleReceivedEvent(
+                type: $type,
+                payload: $payload
+            )
+        );
 
         return $this->getRepositoryFor(Event::class)->findByPK($command->uuid->toString());
     }
@@ -59,7 +61,7 @@ class DatabaseTestCase extends TestCase
 
     public function persistEntity($entity)
     {
-        $t = new Transaction($this->getOrm());
+        $t = new EntityManager($this->getOrm());
         $t->persist($entity);
         $t->run();
     }
