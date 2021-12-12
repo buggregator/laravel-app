@@ -3,9 +3,9 @@
         <div class="sentry-file__title-wrap">
             <div class="sentry-file__title">
                 {{ file.filename }}
-                <span v-if="file.function" class="sentry-exception__title-info">in</span>
+                <span v-if="file.function" class="sentry-file__title-info">in</span>
                 {{ file.function || null }}
-                <span v-if="file.function" class="sentry-exception__title-info">at line</span>
+                <span v-if="file.function" class="sentry-file__title-info">at line</span>
                 {{ file.lineno }}
             </div>
             <div class="sentry-file__title-icon">

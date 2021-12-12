@@ -1,7 +1,7 @@
 <template>
-    <MainLayout title="Terminal">
-        <main class="flex flex-grow w-full">
-            <div class="w-full h-full" id="terminal"></div>
+    <MainLayout title="Terminal" class="terminal">
+        <main class="terminal__main">
+            <div class="terminal__main-wrap" id="terminal"></div>
         </main>
     </MainLayout>
 </template>

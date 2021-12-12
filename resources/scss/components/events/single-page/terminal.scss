@@ -1,0 +1,9 @@
+.terminal {
+    &__main {
+        @apply flex flex-grow w-full;
+    }
+
+    &__main-wrap {
+        @apply w-full h-full;
+    }
+}

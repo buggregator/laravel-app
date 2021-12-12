@@ -1,20 +1,20 @@
 <template>
-    <Link as="div" :href="event.route.show" class="cursor-pointer p-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800">
-        <div class="flex flex-col md:flex-row md:items-center mb-1">
-            <h3 class="text-blue-800 dark:text-blue-300 font-semibold">
+    <Link as="div" :href="event.route.show" class="sentry-item">
+        <div class="sentry-item__header">
+            <h3 class="sentry-item__title">
                 {{ event.payload.type }}
             </h3>
 
-            <span v-if="event.location" class="text-xs text-muted md:ml-3">
+            <span v-if="event.location" class="sentry-item__location">
                 <strong>{{ location.filename }}</strong> in <strong>{{ location.function }}</strong>
             </span>
         </div>
 
-        <div class="text-sm break-all">
+        <div class="sentry-item__value">
             {{ event.payload.value }}
         </div>
 
-        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-3 text-xs text-muted">
+        <div class="sentry-item__text">
             <div>
                 <span>{{ date }}</span>
                 <span class="mx-2">|</span>
@@ -22,7 +22,7 @@
                 <span class="mx-2">|</span>
                 <span><strong>env: </strong>{{ event.environment }}</span>
             </div>
-            <Host :name="event.serverName" />
+            <Host :name="event.serverName" class="sentry-item__host"/>
         </div>
     </Link>
 </template>

@@ -1,7 +1,7 @@
 <template>
-    <section class="py-5 px-4 md:px-6 lg:px-8 border-b dark:border-gray-600">
-        <h3 class="text-muted font-bold uppercase text-sm mb-5">Url</h3>
-        <Table class="mt-3">
+    <section class="inspector-url">
+        <h3 class="inspector-url__title">Url</h3>
+        <Table class="inspector-url__table">
             <TableRow :title="name" v-for="(value, name) in event.process.http.url">
                 {{ value }}
             </TableRow>

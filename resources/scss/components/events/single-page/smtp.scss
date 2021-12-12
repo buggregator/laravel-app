@@ -1,0 +1,127 @@
+.smtp {
+    &__nav {
+        @apply border-b flex items-center gap-x-2 text-xs font-semibold px-4 py-2;
+    }
+
+    &__main {
+        @apply md:flex flex-grow w-full;
+    }
+
+    &__events-list {
+        @apply w-full md:w-72 lg:w-96 flex-none border-r;
+    }
+
+    &__empty {
+        @apply h-full flex flex-col items-center justify-center my-10;
+    }
+
+    &__empty-icon {
+        @apply w-1/3 fill-current text-blue-400 dark:text-gray-100;
+    }
+
+    &__empty-text {
+        @apply font-semibold text-2xl mt-2;
+    }
+
+    &__settings {
+        @apply p-5 flex flex-col flex-grow border-t md:border-t-0;
+    }
+
+    &__settings-title {
+        @apply text-2xl font-bold;
+    }
+
+    &__settings-text {
+        @apply font-semibold text-sm;
+    }
+
+    &__btn-clear {
+        @apply text-sm bg-red-600 py-1 px-3 text-white;
+    }
+}
+
+.smtp-show {
+    &__nav {
+        @apply border-b flex items-center gap-x-2 text-xs font-semibold px-4 py-2;
+    }
+
+    &__link {
+        @apply text-muted;
+    }
+
+    &__main {
+        @apply flex flex-grow w-full;
+    }
+
+    &__list {
+        @apply w-0 md:w-72 lg:w-96 flex-none border-r;
+    }
+
+    &__empty {
+        @apply h-full flex flex-col items-center justify-center;
+    }
+
+    &__empty-title{
+        @apply font-semibold text-xl mt-2;
+    }
+
+    &__event {
+        @apply flex flex-col flex-grow py-5 px-4 md:px-6 lg:px-8;
+    }
+}
+
+.smtp-address {
+    @apply flex flex-col divide-y;
+
+    &__item {
+        @apply flex items-center space-x-2;
+    }
+
+    &__item-text {
+        @apply text-white bg-gray-800 px-2;
+    }
+}
+
+.smtp-info {
+    @apply flex flex-col md:flex-row justify-between;
+
+    &__title {
+        @apply text-2xl mb-3 font-bold;
+    }
+
+    &__header {
+        @apply flex items-center space-x-3;
+    }
+
+    &__date {
+        @apply text-sm font-semibold text-muted;
+    }
+
+    &__btn-delete {
+        @apply h-5 w-5;
+    }
+
+    &__fields-list {
+        @apply text-xs font-semibold mt-3 flex flex-wrap items-center;
+    }
+
+    &__item {
+        @apply flex border border-purple-300 rounded items-center mr-3 mb-2;
+    }
+
+    &__field {
+        @apply px-3 py-1 border-r;
+    }
+
+    &__item-value {
+        @apply px-3 py-1  text-white font-semibold rounded-r;
+    }
+
+    &__tabs-list {
+        @apply flex justify-start mt-3 border-b;
+    }
+
+    &__tabs-panel {
+        @apply flex-grow mt-3;
+    }
+}

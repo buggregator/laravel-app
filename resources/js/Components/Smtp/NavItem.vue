@@ -4,7 +4,7 @@
           :class="{'active': isActive }"
     >
 
-        <div class="event-sentry__left" :class="{'active': isActive }"></div>
+        <div class="event-smtp__left" :class="{'active': isActive }"></div>
         <div class="event-smtp__link-body">
             <h3 class="event-smtp__link-title" :class="{ 'font-bold': isActive }">{{ event.event.subject }}</h3>
             <div class="event-smtp__link-text">

@@ -1,47 +1,47 @@
 <template>
-    <section class="py-5 px-4 md:px-6 lg:px-8 border-b">
-        <h3 class="text-muted font-bold uppercase text-sm mb-5">tags</h3>
+    <section class="sentry-tags">
+        <h3 class="sentry-tags__title">tags</h3>
 
-        <div class="flex items-stretch flex-col md:flex-row mb-5">
-            <div v-if="event.runtime" class="border border-purple-300 dark:border-gray-400 rounded px-4 pb-2 pt-1 hover:bg-purple-50 dark:hover:bg-purple-600 cursor-pointer md:mr-5 mb-3 md:mb-0">
-                <span class="text-muted text-xs font-bold">runtime</span>
+        <div class="sentry-tags__type-wrap">
+            <div v-if="event.runtime" class="sentry-tags__type-event">
+                <span class="sentry-tags__event-title">runtime</span>
                 <h4 class="font-bold">{{ event.runtime.name }}</h4>
                 <p class="text-sm">Version: {{ event.runtime.version }}</p>
             </div>
 
-            <div v-if="event.os" class="border border-purple-300 dark:border-gray-400 rounded px-4 pb-2 pt-1 hover:bg-purple-50 dark:hover:bg-purple-600 cursor-pointer md:mr-5 mb-3 md:mb-0">
-                <span class="text-muted text-xs font-bold">os</span>
+            <div v-if="event.os" class="sentry-tags__type-event">
+                <span class="sentry-tags__event-title">os</span>
                 <h4 class="font-bold">{{ event.os.name }}</h4>
                 <p class="text-sm">Version: {{ event.os.version }}</p>
             </div>
 
-            <div v-if="event.sdk" class="border border-purple-300 dark:border-gray-400 rounded px-4 pb-2 pt-1 hover:bg-purple-50 dark:hover:bg-purple-600 cursor-pointer md:mr-5 mb-3 md:mb-0">
-                <span class="text-muted text-xs font-bold">sdk</span>
+            <div v-if="event.sdk" class="sentry-tags__type-event">
+                <span class="sentry-tags__event-title">sdk</span>
                 <h4 class="font-bold">{{ event.sdk.name }}</h4>
                 <p class="text-sm">Version: {{ event.sdk.version }}</p>
             </div>
         </div>
 
-        <div class="flex flex-row flex-wrap items-center text-purple-600 dark:text-purple-100">
-            <div class="flex border border-purple-300 rounded text-xs items-center mr-3 mb-2">
-                <div class="px-3 py-1 border-r">env</div>
-                <div class="px-3 py-1 bg-purple-100 dark:bg-purple-800 rounded-r font-bold">{{ event.environment }}</div>
+        <div class="sentry-tags__list">
+            <div class="sentry-tags__item">
+                <div class="sentry-tags__item-name">env</div>
+                <div class="sentry-tags__item-value">{{ event.environment }}</div>
             </div>
-            <div class="flex border border-purple-300 rounded text-xs items-center mr-3 mb-2" v-if="event.logger">
-                <div class="px-3 py-1 border-r">logger</div>
-                <div class="px-3 py-1 bg-purple-100 dark:bg-purple-800 font-bold rounded-r">{{ event.logger }}</div>
+            <div class="sentry-tags__item" v-if="event.logger">
+                <div class="sentry-tags__item-name">logger</div>
+                <div class="sentry-tags__item-value">{{ event.logger }}</div>
             </div>
-            <div class="flex border border-purple-300 rounded text-xs items-center mr-3 mb-2">
-                <div class="px-3 py-1 border-r">os</div>
-                <div class="px-3 py-1 bg-purple-100 dark:bg-purple-800 font-bold rounded-r">{{ event.os.name }} {{ event.os.version }}</div>
+            <div class="sentry-tags__item">
+                <div class="sentry-tags__item-name">os</div>
+                <div class="sentry-tags__item-value">{{ event.os.name }} {{ event.os.version }}</div>
             </div>
-            <div class="flex border border-purple-300 rounded text-xs items-center mr-3 mb-2">
-                <div class="px-3 py-1 border-r">runtime</div>
-                <div class="px-3 py-1 bg-purple-100 dark:bg-purple-800 font-bold rounded-r">{{ event.runtime.name }} {{ event.runtime.version }}</div>
+            <div class="sentry-tags__item">
+                <div class="sentry-tags__item-name">runtime</div>
+                <div class="sentry-tags__item-value">{{ event.runtime.name }} {{ event.runtime.version }}</div>
             </div>
-            <div class="flex border border-purple-300 rounded text-xs items-center mr-3 mb-2">
-                <div class="px-3 py-1 border-r">server name</div>
-                <div class="px-3 py-1 bg-purple-100 dark:bg-purple-800 font-bold rounded-r">{{ event.serverName }}</div>
+            <div class="sentry-tags__item">
+                <div class="sentry-tags__item-name">server name</div>
+                <div class="sentry-tags__item-value">{{ event.serverName }}</div>
             </div>
         </div>
     </section>

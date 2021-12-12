@@ -34,6 +34,8 @@
 @import "./components/events/list-page/event-smtp";
 @import "./components/events/single-page/smtp";
 @import "./components/events/single-page/inspector";
+@import "./components/events/single-page/terminal";
+@import "./components/events/single-page/sentry";
 
 body {
     @apply bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-50;
