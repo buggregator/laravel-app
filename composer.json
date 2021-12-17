@@ -23,7 +23,6 @@
         "inertiajs/inertia-laravel": "^0.4.3",
         "laravel/framework": "^8.54",
         "laravel/jetstream": "^2.3",
-        "laravel/octane": "^1.0",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "nunomaduro/termwind": "dev-master",
