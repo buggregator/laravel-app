@@ -5,12 +5,13 @@ RUN echo "UTC" > /etc/timezone
 
 RUN docker-php-ext-install opcache && docker-php-ext-enable opcache
 RUN docker-php-ext-install pcntl
-RUN apk add --no-cache libzip-dev && docker-php-ext-configure zip && docker-php-ext-install zip
-RUN apk add --no-cache supervisor git
+RUN apk add --no-cache libzip-dev sqlite-dev supervisor git && \
+    docker-php-ext-configure zip && \
+    docker-php-ext-install zip
 
 RUN set -ex && apk --no-cache add postgresql-dev
 RUN apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS
-RUN docker-php-ext-install pdo pdo_pgsql pdo_mysql sockets
+RUN docker-php-ext-install pdo pdo_sqlite pdo_pgsql pdo_mysql sockets
 
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
