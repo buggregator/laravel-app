@@ -38,6 +38,6 @@ class SQLiteDriver extends \Cycle\Database\Driver\SQLite\SQLiteDriver
     public function disconnect(): void
     {
         parent::disconnect();
-        $this->getLock()->release();
+        $this->getLock()->forceRelease();
     }
 }
