@@ -19,7 +19,6 @@ WORKDIR /app
 
 ARG CACHEBUST=1
 ARG APP_VERSION=v1.0
-ARG ROADRUNNER_CONFIG=.rr.yaml
 
 RUN git clone https://github.com/buggregator/app.git /app
 RUN composer install
@@ -37,4 +36,4 @@ EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
 
-CMD ./rr serve -c ${ROADRUNNER_CONFIG}
+CMD ./rr serve
