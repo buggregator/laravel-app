@@ -56,6 +56,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'url_scheme' => env('APP_URL_SCHEME', 'http') === 'http' ? 'http' : 'https',
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

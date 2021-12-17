@@ -13,6 +13,6 @@ class AppServiceProvider extends ServiceProvider
     {
         CliDumper::$defaultOutput = 'php://stderr';
 
-        $this->app['url']->forceScheme('https');
+        $this->app['url']->forceScheme(config('app.url_scheme'));
     }
 }
