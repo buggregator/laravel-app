@@ -11,12 +11,17 @@ server:
 
 http:
   address: 0.0.0.0:8000
-  middleware: [ "static", "gzip", "websockets" ]
+  middleware: [ "static", "gzip", "websockets", "headers" ]
   static:
     dir: "public"
     forbid: [ ".php" ]
   pool:
     num_workers: 2
+  headers:
+    cors:
+      allowed_origin: "*"
+      allowed_headers: "*"
+      allowed_methods: "GET,HEAD,POST,PUT,PATCH,DELETE,OPTIONS"
 
 tcp:
   servers:
