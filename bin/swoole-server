@@ -118,6 +118,10 @@ $server->on('request', function ($request, $response) use ($server, $workerState
         ]);
     }
 
+    $response->header('Access-Control-Allow-Origin', config('cors.allowed_origins'));
+    $response->header('Access-Control-Allow-Headers', config('cors.allowed_headers'));
+    $response->header('Access-Control-Allow-Methods', config('cors.allowed_methods'));
+
     $workerState->worker->handle(...$workerState->client->marshalRequest(new RequestContext([
         'swooleRequest' => $request,
         'swooleResponse' => $response,
