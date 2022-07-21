@@ -1,10 +1,17 @@
 <template>
     <div class="sentry-exception">
         <Link as="div" :href="event.route.show" class="sentry-exception__link">
-            <h3 class="sentry-exception__title">
-                {{ event.payload.type }}
-            </h3>
-            <div class="sentry-exception__text">
+            <span class="float-left">
+                <h3 class="sentry-exception__title">
+                    {{ event.payload.type }}
+                </h3>
+            </span>
+            <span class="float-left margin-space-10">
+                <h6>
+                    {{ event.transactionName }}
+                </h6>
+            </span>
+            <div class="sentry-exception__text clear-both">
                 {{ event.payload.value }}
             </div>
         </Link>
