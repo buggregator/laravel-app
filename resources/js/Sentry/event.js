@@ -62,6 +62,10 @@ export default class extends Event {
         return this._stacktrace
     }
 
+    get tags() {
+        return this.event.tags
+    }
+
     get breadcrumbs() {
         return this.event.breadcrumbs.values || []
     }
