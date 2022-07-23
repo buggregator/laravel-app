@@ -16,7 +16,10 @@ export default class extends Event {
             }
         }
         this._stacktrace = this._payload.stacktrace.frames.reverse()
-        this._contexts = event.contexts || {}
+        this._contexts = event.contexts || {
+            os: {},
+            runtime: {}
+        }
     }
 
     get serverName() {
@@ -48,7 +51,7 @@ export default class extends Event {
     }
 
     get os() {
-        return this.event.contexts.os
+        return this._contexts.os
     }
 
     get environment() {
@@ -56,19 +59,32 @@ export default class extends Event {
     }
 
     get runtime() {
-        return this.event.contexts.runtime
+        return this._contexts.runtime
     }
 
     get stacktrace() {
         return this._stacktrace
     }
 
+    get tags() {
+        return this.event.tags
+    }
+    
+    get exceptions() {
+        return this.event.exception.values || []
+    }
+
     get breadcrumbs() {
         return this.event.breadcrumbs.values || []
     }
 
+
     get contexts() {
         return this._contexts
+    }
+
+    get user() {
+        return this.event.user
     }
 
     get location() {
