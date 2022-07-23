@@ -28,21 +28,10 @@
 
             <Tags :event="event" />
 
-            <section class="py-5 px-4 md:px-6 lg:px-8 border-b dark:border-gray-400">
-                <h3 class="text-muted font-bold uppercase text-sm mb-5">exception</h3>
-
-                <h3 class="mb-1 text-xl font-bold">
-                    {{ event.payload.type }}
-                </h3>
-                <div class="text-muted break-all mb-5">
-                    {{ event.payload.value }}
-                </div>
-                <div class="border border-purple-200 text-muted">
-                    <File :file="file" v-for="(file, i) in stacktrace" :collapsed="i !== 0"/>
-                </div>
-            </section>
+            <Exceptions :exceptions="event.exceptions" />
 
             <Breadcrumbs :event="event" />
+            <User :event="event" />
             <Request :event="event" />
         </main>
     </MainLayout>
@@ -57,11 +46,14 @@ import {Link} from '@inertiajs/inertia-vue3'
 import File from "@/Components/Sentry/UI/File";
 import Tags from "@/Components/Sentry/Show/Tags";
 import Breadcrumbs from "@/Components/Sentry/Show/Breadcrumbs";
+import User from "@/Components/Sentry/Show/User";
 import Request from "@/Components/Sentry/Show/Request";
+import Exceptions from "@/Components/Sentry/Show/Exceptions";
 export default {
     components: {
         MainLayout, Link, File,
         Tags, Breadcrumbs, Request,
+        User, Exceptions
     },
     setup() {
         const store = useStore();
