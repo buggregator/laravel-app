@@ -16,6 +16,7 @@ export default class extends Event {
             }
         }
         this._stacktrace = this._payload.stacktrace.frames.reverse()
+        this._contexts = event.contexts || {}
     }
 
     get serverName() {
@@ -64,6 +65,10 @@ export default class extends Event {
 
     get breadcrumbs() {
         return this.event.breadcrumbs.values || []
+    }
+
+    get contexts() {
+        return this._contexts
     }
 
     get location() {
