@@ -62,6 +62,10 @@ export default class extends Event {
         return this._stacktrace
     }
 
+    get exceptions() {
+        return this.event.exception.values || []
+    }
+
     get breadcrumbs() {
         return this.event.breadcrumbs.values || []
     }
