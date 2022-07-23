@@ -33,6 +33,9 @@
             <Breadcrumbs :event="event" />
             <User :event="event" />
             <Request :event="event" />
+            <App :event="event" />
+            <Device :event="event" />
+            <OS :event="event" />
         </main>
     </MainLayout>
 </template>
@@ -48,11 +51,15 @@ import Tags from "@/Components/Sentry/Show/Tags";
 import Breadcrumbs from "@/Components/Sentry/Show/Breadcrumbs";
 import User from "@/Components/Sentry/Show/User";
 import Request from "@/Components/Sentry/Show/Request";
+import App from "@/Components/Sentry/Show/App";
+import Device from "@/Components/Sentry/Show/Device";
+import OS from "@/Components/Sentry/Show/OS";
 import Exceptions from "@/Components/Sentry/Show/Exceptions";
 export default {
     components: {
         MainLayout, Link, File,
         Tags, Breadcrumbs, Request,
+        App, Device, OS,
         User, Exceptions
     },
     setup() {

@@ -78,6 +78,11 @@ export default class extends Event {
         return this.event.breadcrumbs.values || []
     }
 
+
+    get contexts() {
+        return this._contexts
+    }
+
     get user() {
         return this.event.user
     }
