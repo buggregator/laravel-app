@@ -66,6 +66,10 @@ export default class extends Event {
         return this._stacktrace
     }
 
+    get tags() {
+        return this.event.tags
+    }
+    
     get exceptions() {
         return this.event.exception.values || []
     }
