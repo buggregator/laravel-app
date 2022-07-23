@@ -66,6 +66,10 @@ export default class extends Event {
         return this.event.breadcrumbs.values || []
     }
 
+    get user() {
+        return this.event.user
+    }
+
     get location() {
         const lastElm = [this.stacktrace.length - 1];
         if (lastElm < 0) {

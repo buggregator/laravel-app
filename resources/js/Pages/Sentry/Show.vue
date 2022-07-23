@@ -43,6 +43,7 @@
             </section>
 
             <Breadcrumbs :event="event" />
+            <User :event="event" />
             <Request :event="event" />
         </main>
     </MainLayout>
@@ -57,11 +58,13 @@ import {Link} from '@inertiajs/inertia-vue3'
 import File from "@/Components/Sentry/UI/File";
 import Tags from "@/Components/Sentry/Show/Tags";
 import Breadcrumbs from "@/Components/Sentry/Show/Breadcrumbs";
+import User from "@/Components/Sentry/Show/User";
 import Request from "@/Components/Sentry/Show/Request";
 export default {
     components: {
         MainLayout, Link, File,
         Tags, Breadcrumbs, Request,
+        User
     },
     setup() {
         const store = useStore();
