@@ -44,11 +44,15 @@
                 <div class="px-3 py-1 bg-purple-100 dark:bg-purple-800 font-bold rounded-r">{{ event.serverName }}</div>
             </div>
         </div>
+
+        <CodeSnippet v-if="event.tags" class="mt-3" language="json">{{ event.tags }}</CodeSnippet>
     </section>
 </template>
 
 <script>
+import CodeSnippet from "../../UI/CodeSnippet";
 export default {
+    components: {CodeSnippet},
     props: {
         event: Object
     }

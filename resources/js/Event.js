@@ -23,6 +23,10 @@ export class Event {
         }
     }
 
+    get transactionName() {
+        return this.event.transaction
+    }
+
     get serverName() {
         return 'unknown'
     }
