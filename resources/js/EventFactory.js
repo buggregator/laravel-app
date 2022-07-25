@@ -45,7 +45,7 @@ export default {
             } else if (event instanceof InspectorEvent) {
                 store.commit('inspector/pushEvent', event)
             }
-
+            store.commit('pushUnreadEvent', event.app)
             store.commit('pushEvent', event)
         }).listen(`${namespace}\\EventWasDeleted`, e => {
             store.commit('deleteEvent', e.payload.uuid)

@@ -79,7 +79,7 @@ const smtp = {
             if (state.events.find(e => event.uuid == e.uuid)) {
                 return
             }
-
+            
             state.events.unshift(event)
         },
         openEvent(state, event) {
@@ -165,6 +165,7 @@ export const store = createStore({
             selectedLabels: [],
             selectedColors: [],
             events: {},
+            unReadEvents: [],
         }
     },
     getters: {
@@ -176,6 +177,9 @@ export const store = createStore({
             }
 
             return screens
+        },
+        getUnreadEvents:(state) => {
+          return state.unReadEvents;
         },
         eventByUuid: (state) => (uuid) => {
             return state.events[state.currentScreen].find(event => event.uuid == uuid)
@@ -296,6 +300,15 @@ export const store = createStore({
             if (!state.events.hasOwnProperty(screen)) {
                 state.events[screen] = []
             }
+        },
+        pushUnreadEvent(state, type) {
+            state.unReadEvents.push(type)
+        },
+        deleteUnreadEvent(state, type) {
+            state.unReadEvents = state.unReadEvents.filter(e =>e !== type)
+        },
+        clearUnreadEvents(state) {
+            state.unReadEvents = []
         },
         pushEvent(state, event) {
             if (!event) {
