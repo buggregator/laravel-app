@@ -24,4 +24,4 @@ EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
 
-CMD composer install && ./rr serve -c .rr.yaml
+CMD composer install && ./rr serve -c ${ROADRUNNER_CONFIG}

@@ -79,6 +79,7 @@ const smtp = {
             if (state.events.find(e => event.uuid == e.uuid)) {
                 return
             }
+            
             state.events.unshift(event)
         },
         openEvent(state, event) {
@@ -107,6 +108,7 @@ const sentry = {
             if (state.events.find(e => event.uuid == e.uuid)) {
                 return
             }
+
             state.events.unshift(event)
         },
         openEvent(state, event) {
@@ -135,6 +137,7 @@ const inspector = {
             if (state.events.find(e => event.uuid == e.uuid)) {
                 return
             }
+
             state.events.unshift(event)
         },
         openEvent(state, event) {
