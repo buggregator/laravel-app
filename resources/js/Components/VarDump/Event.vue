@@ -6,7 +6,7 @@
             class="event-var-dump__dump"
         />
 
-        <Origin :origin="event.origin" />
+        <Origin :origin="event.origin" :json="event.route.json"/>
     </Event>
 </template>
 

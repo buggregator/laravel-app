@@ -3,6 +3,7 @@
         <span class="event-var-dump__footer-text" :title="`${origin.file}:${origin.line_number}`">
             {{ origin.name }}:{{ origin.line_number }}
         </span>
+        <a :href="json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-auto">[JSON]</a>
     </div>
 </template>
 
@@ -11,7 +12,8 @@ import Label from "@/Components/UI/Label";
 export default {
     components: {Label},
     props: {
-        origin: Object
+        origin: Object,
+        json: String,
     }
 }
 </script>

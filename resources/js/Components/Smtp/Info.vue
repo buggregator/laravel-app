@@ -1,6 +1,7 @@
 <template>
     <div class="flex flex-col flex-reverse md:flex-row justify-between">
-        <h2 class="text-2xl mb-3 font-bold">{{ event.subject }}</h2>
+        <h2 class="text-sm sm:text-base md:text-lg lg:text-2xl">{{ event.subject }}</h2>
+        <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-5 mr-auto">[JSON]</a>
 
         <div class="flex items-center space-x-3">
             <span class="text-sm font-semibold text-muted">{{ date }}</span>

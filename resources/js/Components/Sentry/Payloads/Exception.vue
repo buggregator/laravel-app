@@ -1,6 +1,6 @@
 <template>
-    <div class="sentry-exception">
-        <Link as="div" :href="event.route.show" class="sentry-exception__link">
+    <div class="sentry-exception flex items-start justify-between flex-wrap">
+        <Link as="div" :href="event.route.show" class="sentry-exception__link flex-grow">
             <span class="float-left">
                 <h3 class="sentry-exception__title">
                     {{ event.payload.type }}
@@ -15,7 +15,8 @@
                 {{ event.payload.value }}
             </div>
         </Link>
-        <div class="sentry-exception__files" v-if="frames > 0">
+        <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-auto">[JSON]</a>
+        <div class="sentry-exception__files w-full" v-if="frames > 0">
             <File :file="file" v-for="(file, i) in stacktrace" :collapsed="i !== 0" class="sentry-exception__file"/>
         </div>
     </div>

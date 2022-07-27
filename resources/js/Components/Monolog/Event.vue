@@ -1,7 +1,7 @@
 <template>
     <Event :event="event" class="event--monolog">
         <div class="event-monolog__wrap">
-            <CodeSnippet class="event-monolog__snippet">
+            <CodeSnippet class="event-monolog__snippet text-white mt-0">
                 {{ event.text }}
             </CodeSnippet>
 
@@ -12,6 +12,9 @@
             <CodeSnippet v-if="hasFields" :title="field.title" v-for="field in fields">
                 {{ field.value }}
             </CodeSnippet>
+            <div class="text-right">
+                <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-auto">[JSON]</a>
+            </div>
         </div>
     </Event>
 </template>

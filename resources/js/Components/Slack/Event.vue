@@ -7,6 +7,9 @@
             <CodeSnippet v-if="hasFields" :title="field.title" v-for="field in fields">
                 {{ value(field.value) }}
             </CodeSnippet>
+            <div class="text-right">
+                <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-auto">[JSON]</a>
+            </div>
         </div>
     </Event>
 </template>

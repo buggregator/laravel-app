@@ -10,6 +10,9 @@
                 v-on:delete="$emit('deleteEvent')"
             />
         </div>
+        <div class="event-ray__json">
+            <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-auto">[JSON]</a>
+        </div>
         <Origin v-if="hasPayloads" class="mt-3" :origin="event.payloads[0].origin"/>
     </Event>
 </template>

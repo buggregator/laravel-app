@@ -1,7 +1,8 @@
 <template>
     <div>
         <h1 class="event-inspector__title">
-            {{ event.process.name }}
+            <span>{{ event.process.name }}</span>
+            <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-auto">[JSON]</a>
         </h1>
 
         <Link :href="event.route.show" class="event-inspector__link">
