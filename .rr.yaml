@@ -1,3 +1,5 @@
+version: "2.7"
+
 rpc:
   listen: tcp://127.0.0.1:6001
 
@@ -56,8 +58,10 @@ jobs:
   pipelines:
     default:
       driver: memory
+      config: { }
     events:
       driver: memory
+      config: { }
   pool:
     num_workers: 2
 

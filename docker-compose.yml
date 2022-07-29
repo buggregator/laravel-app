@@ -33,8 +33,8 @@ services:
     php:
         build: "./docker/server"
         environment:
-            DB_CONNECTION: pgsql
-            DB_HOST: db
+            DB_CONNECTION: mysql
+            DB_HOST: 127.0.0.1
             DB_DATABASE: homestead
             DB_USERNAME: homestead
             DB_PASSWORD: secret
@@ -48,18 +48,24 @@ services:
         depends_on:
             - db
 
-    node:
-        image: node:14-bullseye-slim
-        volumes:
-            - ./:/app:rw
-        working_dir: /app
-        command: bash -c "npm install && npm run watch"
+#    composer:
+#        image: composer
+#        volumes:
+#            - ./:/app
+#        command: install
+#
+#    node:
+#        image: node:14-bullseye-slim
+#        volumes:
+#            - ./:/app:rw
+#        working_dir: /app
+#        command: bash -c "npm install && npm run watch"
 
-    db:
-        image: postgres
-        environment:
-            POSTGRES_USER: homestead
-            POSTGRES_DB: homestead
-            POSTGRES_PASSWORD: secret
-        ports:
-            - 5432:5432
+#    db:
+#        image: postgres
+#        environment:
+#            POSTGRES_USER: homestead
+#            POSTGRES_DB: homestead
+#            POSTGRES_PASSWORD: secret
+#        ports:
+#            - 5432:5432

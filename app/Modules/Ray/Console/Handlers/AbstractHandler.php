@@ -35,7 +35,8 @@ abstract class AbstractHandler implements Handler
                 'color' => $data['color'] ?? 'gray',
                 'label' => $payload['content']['label'] ?? null,
                 'content' => view($this->getViewName($payload), $data),
-            ])
+            ]),
+            0
         );
     }
 

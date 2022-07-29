@@ -37,7 +37,8 @@ class StreamHandler implements Handler
                 'message' => $exception['value'],
                 'trace' => iterator_to_array($this->prepareTrace($frames)),
                 'codeSnippet' => $this->renderCodeSnippet($editorFrame),
-            ])
+            ]),
+            0
         );
     }
 
