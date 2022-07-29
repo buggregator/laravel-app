@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Modules\Ray\Interfaces\Http\Controllers;
 
 use App\Commands\ClearEvents;
+use App\Commands\FindProjectByName;
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
+use App\Contracts\Query\QueryBus;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Http\Request;
 use Interfaces\Http\Controllers\Controller;
@@ -23,7 +25,8 @@ class StoreEventAction extends Controller
         CommandBus $commands,
         Repository $cache,
         EventHandler $handler,
-        ConsoleOutput $output
+        ConsoleOutput $output,
+        QueryBus $queryBus,
     ): void {
         $type = $request->input('payloads.0.type');
 
@@ -37,8 +40,10 @@ class StoreEventAction extends Controller
 
         $event = $handler->handle($request->all());
 
+        $project = $queryBus->ask(new FindProjectByName('default'));
+        $projectId = $project->getId();
         $commands->dispatch(
-            new HandleReceivedEvent('ray', $event, true)
+            new HandleReceivedEvent((int) $projectId, 'ray', $event, true)
         );
     }
 }

@@ -20,7 +20,8 @@ class HandlerTest extends DatabaseTestCase
             type: 'test',
             uuid: $uuid = Uuid::generate(),
             date: $date = new \DateTimeImmutable(),
-            payload: ['foo' => 'bar']
+            payload: ['foo' => 'bar'],
+            projectId: 1
         );
 
         $entityManager = \Mockery::mock(EntityManagerInterface::class);

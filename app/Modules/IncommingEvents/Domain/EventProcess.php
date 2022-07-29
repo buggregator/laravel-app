@@ -21,11 +21,11 @@ final class EventProcess implements AggregateRoot
     private DateTimeImmutable $date;
     private bool $deleted = false;
 
-    public static function received(Uuid $uuid, string $type, array $payload, int $timestamp): static
+    public static function received(int $projectId, Uuid $uuid, string $type, array $payload, int $timestamp): static
     {
         $process = new static($uuid);
         $process->recordThat(
-            new EventWasReceived($uuid, $type, $payload, $timestamp)
+            new EventWasReceived($projectId, $uuid, $type, $payload, $timestamp)
         );
 
         return $process;

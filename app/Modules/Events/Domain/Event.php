@@ -28,7 +28,10 @@ class Event
         private Json $payload,
 
         #[Column(type: 'datetime')]
-        private DateTimeImmutable $date
+        private DateTimeImmutable $date,
+
+        #[Column(type: 'integer', nullable: false)]
+        private int $projectId
     ) {
     }
 
@@ -50,5 +53,10 @@ class Event
     public function getDate(): DateTimeImmutable
     {
         return $this->date;
+    }
+
+    public function getProjectId(): int
+    {
+        return $this->projectId;
     }
 }

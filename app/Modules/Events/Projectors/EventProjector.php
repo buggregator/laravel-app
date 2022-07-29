@@ -26,7 +26,8 @@ class EventProjector implements Projector
                 $event->type,
                 $event->uuid,
                 Carbon::createFromTimestamp($event->timestamp)->toDateTimeImmutable(),
-                $event->payload
+                $event->payload,
+                $event->projectId
             )
         );
     }

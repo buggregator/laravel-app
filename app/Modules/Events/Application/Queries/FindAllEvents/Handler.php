@@ -23,6 +23,9 @@ class Handler implements QueryHandler
         if ($query->type) {
             $scope['type'] = $query->type;
         }
+        if ($query->projectId) {
+            $scope['project_id'] = $query->projectId;
+        }
 
         return EventCollection::make(
             $this->events->findAll($scope, [

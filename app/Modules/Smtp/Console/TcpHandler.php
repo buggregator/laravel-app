@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Smtp\Console;
 
+use App\Commands\FindProjectByName;
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
+use App\Contracts\Query\QueryBus;
 use App\Contracts\TCP\Handler;
 use App\Contracts\TCP\Response;
 use App\TCP\CloseConnection;
@@ -26,7 +28,8 @@ class TcpHandler implements Handler
     public function __construct(
         private CommandBus $commands,
         private \Interfaces\Console\StreamHandler $streamHandler,
-        private Repository $cache
+        private Repository $cache,
+        private QueryBus $queryBus,
     ) {
     }
 
@@ -84,8 +87,10 @@ class TcpHandler implements Handler
         $message = (new Parser())->parse($message);
 
         $data = $message->jsonSerialize();
+        $project = $this->queryBus->ask(new FindProjectByName('default'));
+        $projectId = $project->getId();
         $this->commands->dispatch(
-            $command = new HandleReceivedEvent('smtp', $data)
+            $command = new HandleReceivedEvent((int) $projectId, 'smtp', $data)
         );
         $this->streamHandler->handle($command->toArray());
     }

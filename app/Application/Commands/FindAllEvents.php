@@ -10,7 +10,8 @@ final class FindAllEvents implements Query
 {
     // TODO: use readonly property
     public function __construct(
-        public ?string $type = null
+        public ?string $type = null,
+        public ?int $projectId = null,
     ) {
     }
 }
