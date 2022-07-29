@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Cache;
 
 class SQLiteDriver extends \Cycle\Database\Driver\SQLite\SQLiteDriver
 {
-    public static function create(DriverConfig $config): self
+    public static function create(DriverConfig $config): static
     {
         return new self(
             $config,

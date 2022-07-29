@@ -41,7 +41,8 @@ class StreamHandler implements Handler
                 'addresses' => $addresses,
                 'attachments' => $attachments,
                 'body' => $payload['payload']['text'],
-            ])
+            ]),
+            0
         );
     }
 

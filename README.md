@@ -284,7 +284,7 @@ Also you can use a termial to collect dump output if you don't want to use a bro
 
 ## Technological stack
 
-- [Laravel 8](https://laravel.com/)
+- [Laravel 9](https://laravel.com/)
 - [InertiaJs](https://inertiajs.com/)
 - [RoadRunner](https://roadrunner.dev/) Http, Websocket, TCP, Queue, Cache server in one bottle
 - [Vue](https://vuejs.org/)
