@@ -37,7 +37,13 @@ class SQLiteDriver extends \Cycle\Database\Driver\SQLite\SQLiteDriver
 
     public function disconnect(): void
     {
+        try {
+            $this->getLock()->forceRelease();
+        } catch (\Throwable $e) {
+            $this->logger?->error(
+                \sprintf('Lock [%s] can not be released. Reason: %s', 'driver.'.$this->getType(), $e->getMessage())
+            );
+        }
         parent::disconnect();
-        $this->getLock()->forceRelease();
     }
 }
