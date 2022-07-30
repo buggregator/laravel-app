@@ -1,6 +1,12 @@
 #!/bin/sh
 
-if [ "$DB_HOST" = "127.0.0.1" ]; then
+DB_HOST=${DB_HOST:-"127.0.0.1"}
+DB_CONNECTION=${DB_CONNECTION:-"mysql"}
+
+if [ "$DB_CONNECTION" = "mysql" ] && ( [ "$DB_HOST" = "127.0.0.1" ] || [ "$DB_HOST" = "localhost" ] ); then
+
+  echo "[i] Starting local MySQL server..."
+
   if [ ! -d "/run/mysqld" ]; then
     mkdir -p /run/mysqld
   fi
@@ -12,14 +18,14 @@ if [ "$DB_HOST" = "127.0.0.1" ]; then
 
     mysql_install_db --user=root > /dev/null
 
+    MYSQL_DATABASE=${DB_DATABASE:-"homestead"}
+    MYSQL_USER=${DB_USERNAME:-"homestead"}
+    MYSQL_PASSWORD=${DB_PASSWORD:-"secret"}
+
     if [ "$MYSQL_ROOT_PASSWORD" = "" ]; then
-      MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
       echo "[i] MySQL root Password: $MYSQL_ROOT_PASSWORD"
     fi
-
-    MYSQL_DATABASE=${DB_DATABASE:-""}
-    MYSQL_USER=${DB_USERNAME:-""}
-    MYSQL_PASSWORD=${DB_PASSWORD:-""}
 
     tfile=`mktemp`
     if [ ! -f "$tfile" ]; then
@@ -40,7 +46,6 @@ EOF
 
       if [ "$MYSQL_USER" != "" ]; then
         echo "[i] Creating user: $MYSQL_USER with password $MYSQL_PASSWORD"
-        echo "GRANT ALL PRIVILEGES ON *.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
         echo "GRANT ALL PRIVILEGES ON *.* to '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';" >> $tfile
       fi
 
@@ -67,11 +72,11 @@ EOF
      sleep 1
      echo "waiting for mysql ..."
   done
+else
+  echo "[i] Using an external database connection [$DB_CONNECTION]. Skip local MySQL starting..."
 fi
 
-# Start the helper process
+echo "[i] Starting Buggregator server..."
 ./rr serve
 
-# now we bring the primary process back into the foreground
-# and leave it there
 fg %1

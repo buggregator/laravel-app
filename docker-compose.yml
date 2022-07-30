@@ -27,14 +27,16 @@ services:
             INSPECTOR_API_KEY: test
         ports:
             - 9000:8000
-        depends_on:
-            - php
 
     php:
         build: "./docker/server"
         environment:
             DB_CONNECTION: mysql
-            DB_HOST: 127.0.0.1
+
+            # Use for an external database
+            #DB_CONNECTION: pgsql
+            #DB_HOST: db
+
             DB_DATABASE: homestead
             DB_USERNAME: homestead
             DB_PASSWORD: secret
@@ -48,18 +50,12 @@ services:
         depends_on:
             - db
 
-#    composer:
-#        image: composer
-#        volumes:
-#            - ./:/app
-#        command: install
-#
-#    node:
-#        image: node:14-bullseye-slim
-#        volumes:
-#            - ./:/app:rw
-#        working_dir: /app
-#        command: bash -c "npm install && npm run watch"
+    node:
+        image: node:14-bullseye-slim
+        volumes:
+            - ./:/app:rw
+        working_dir: /app
+        command: bash -c "npm install && npm run watch"
 
 #    db:
 #        image: postgres

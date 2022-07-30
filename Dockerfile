@@ -22,15 +22,14 @@ WORKDIR /app
 ARG CACHEBUST=1
 ARG APP_VERSION=v1.0
 
+COPY docker/server/startup.sh /startup.sh
+COPY docker/server/my.cnf /etc/mysql/my.cnf
+
 RUN git clone https://github.com/buggregator/app.git /app
 RUN composer install
 
 RUN chmod 0777 storage -R
 RUN chmod 0777 bootstrap -R
-
-# These lines moved to the end allow us to rebuild image quickly after only these files were modified.
-COPY docker/server/startup.sh /startup.sh
-COPY docker/server/my.cnf /etc/mysql/my.cnf
 RUN chmod +x /startup.sh
 
 # Create .env file
@@ -42,5 +41,6 @@ EXPOSE 8000
 EXPOSE 1025
 EXPOSE 9912
 EXPOSE 9913
+EXPOSE 3306
 
 CMD sh -c /startup.sh
