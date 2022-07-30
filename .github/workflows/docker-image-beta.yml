@@ -39,4 +39,4 @@ jobs:
           build-args:
             APP_VERSION=${{ steps.previoustag.outputs.tag }}
           tags:
-           ${{ secrets.DOCKER_HUB_USERNAME }}/buggregator:${{ steps.previoustag.outputs.tag }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/buggregator:beta, ${{ secrets.DOCKER_HUB_USERNAME }}/buggregator:${{ steps.previoustag.outputs.tag }}
