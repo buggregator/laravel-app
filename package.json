@@ -34,6 +34,7 @@
         "@ivanv/vue-collapse-transition": "^1.0.2",
         "@kyvg/vue3-notification": "^2.3.3",
         "@vueform/toggle": "^2.0.1",
+        "ag-grid-vue3": "^28.0.0",
         "moment": "^2.29.1",
         "postcss-nesting": "^10.0.2",
         "reconnecting-websocket": "^4.4.0",

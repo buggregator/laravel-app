@@ -23,7 +23,7 @@ class HandlerTest extends TestCase
         });
 
         $handler = new Handler($repository);
-        $handler(new HandleReceivedEvent(
+        $handler(new HandleReceivedEvent(1,
             'foo', ['foo' => 'bar']
         ));
     }

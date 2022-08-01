@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\VarDumper\Console;
 
+use App\Commands\FindProjectByName;
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
+use App\Contracts\Query\QueryBus;
 use App\Contracts\TCP\Handler;
 use App\Contracts\TCP\Response;
 use App\TCP\CloseConnection;
@@ -27,7 +29,8 @@ class TcpHandler implements Handler
 {
     public function __construct(
         private CommandBus $commands,
-        private StreamHandlerConfig $config
+        private StreamHandlerConfig $config,
+        private QueryBus $queryBus,
     ) {
     }
 
@@ -78,8 +81,10 @@ class TcpHandler implements Handler
 
     private function fireEvent(array $payload): void
     {
+        $project = $this->queryBus->ask(new FindProjectByName('default'));
+        $projectId = $project->getId();
         $this->commands->dispatch(
-            new HandleReceivedEvent('var-dump', [
+            new HandleReceivedEvent((int) $projectId, 'var-dump', [
                 'payload' => [
                     'type' => $payload[0]->getType(),
                     'value' => $this->convertToPrimitive($payload[0]),

@@ -22,7 +22,7 @@ class HandlerTest extends TestCase
         $repository->shouldReceive('findByPK')
             ->once()
             ->with($uuid->toString())
-            ->andReturn($event = new Event($uuid, 'foo', new Json(['foo' => 'bar']), new \DateTimeImmutable()));
+            ->andReturn($event = new Event($uuid, 'foo', new Json(['foo' => 'bar']), new \DateTimeImmutable(), 1));
 
         $transaction = \Mockery::mock(EntityManagerInterface::class);
         $transaction->shouldReceive('delete')->once()->with($event);
