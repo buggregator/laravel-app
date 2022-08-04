@@ -284,7 +284,7 @@ Also you can use a termial to collect dump output if you don't want to use a bro
 
 ## Technological stack
 
-- [Laravel 8](https://laravel.com/)
+- [Laravel 9](https://laravel.com/)
 - [InertiaJs](https://inertiajs.com/)
 - [RoadRunner](https://roadrunner.dev/) Http, Websocket, TCP, Queue, Cache server in one bottle
 - [Vue](https://vuejs.org/)
@@ -298,19 +298,26 @@ You can run Buggregator via docker from [Docker Hub](https://hub.docker.com/repo
 
 Just run one of bash command 
 
-**Latest version**
+**Latest stable release**
+
 ```bash
 docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 -p 9913:9913 butschster/buggregator:latest
+```
+
+**Latest beta release**
+```bash
+docker run --pull always -p 23517:8000 -p 1025:1025 -p 9912:9912 -p 9913:9913 butschster/buggregator:beta
 ```
 
 You can omit `--pull always` argument if your docker-compose doesn't support it.
 
 **Specific version**
+
 ```bash
 docker run -p 23517:8000 -p 1025:1025 -p 9912:9912 -p 9913:9913 butschster/buggregator:v1.18
 ```
 
-**You can omit unused ports if you use, for example, only var-dumper**
+**You can omit unused ports if you use, for example, only `var-dumper`**
 ```bash
 docker run --pull always -p 9912:9912 butschster/buggregator:latest
 ```

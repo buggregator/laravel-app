@@ -13,7 +13,7 @@
                     <h1 class="font-bold text-sm sm:text-base md:text-lg lg:text-2xl  break-all sm:break-normal">
                         {{ event.payload.type }}
                     </h1>
-                    <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-5 mr-auto">[JSON]</a>
+                    <JsonChip  :href="event.route.json" class="mr-auto ml-1.5 mb-2" />
                     <button class="h-5 w-5" @click="deleteEvent">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path d="m338 197-19 221c-1 10 14 11 15 1l19-221a8 8 0 0 0-15-1zM166 190c-4 0-7 4-7 8l19 221c1 10 16 9 15-1l-19-221c0-4-4-7-8-7zM249 197v222a7 7 0 1 0 15 0V197a7 7 0 1 0-15 0z"/>
@@ -54,8 +54,10 @@ import App from "@/Components/Sentry/Show/App";
 import Device from "@/Components/Sentry/Show/Device";
 import OS from "@/Components/Sentry/Show/OS";
 import Exceptions from "@/Components/Sentry/Show/Exceptions";
+import JsonChip from "@/Components/UI/JsonChip";
 export default {
     components: {
+        JsonChip,
         MainLayout, Link, File,
         Tags, Breadcrumbs, Request,
         App, Device, OS,

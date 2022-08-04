@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Monolog\Console;
 
+use App\Commands\FindProjectByName;
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
+use App\Contracts\Query\QueryBus;
 use App\Contracts\TCP\Handler;
 use App\Contracts\TCP\Response;
 use App\TCP\CloseConnection;
@@ -19,7 +21,8 @@ class TcpHandler implements Handler
 {
     public function __construct(
         private CommandBus $commands,
-        private \Interfaces\Console\StreamHandler $streamHandler
+        private \Interfaces\Console\StreamHandler $streamHandler,
+        private QueryBus $queryBus,
     ) {
     }
 
@@ -39,8 +42,10 @@ class TcpHandler implements Handler
                 throw new RuntimeException("Unable to decode a message from [{$request->connectionUuid}] client.");
             }
 
+            $project = $this->queryBus->ask(new FindProjectByName('default'));
+            $projectId = $project->getId();
             $this->commands->dispatch(
-                $command = new HandleReceivedEvent('monolog', $payload)
+                $command = new HandleReceivedEvent((int) $projectId, 'monolog', $payload)
             );
 
             $this->streamHandler->handle($command->toArray());

@@ -13,6 +13,7 @@ final class HandleReceivedEvent implements Command
     public int $timestamp;
 
     public function __construct(
+        public int $projectId,
         public string $type,
         public array $payload,
         public bool $sendToConsole = false
@@ -24,6 +25,7 @@ final class HandleReceivedEvent implements Command
     public function toArray(): array
     {
         return [
+            'projectId' => $this->projectId,
             'type' => $this->type,
             'payload' => $this->payload,
             'uuid' => (string) $this->uuid,

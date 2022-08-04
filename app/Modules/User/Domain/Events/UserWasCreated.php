@@ -10,7 +10,6 @@ use EventSauce\EventSourcing\Serialization\SerializablePayload;
 
 final class UserWasCreated implements Event
 {
-
     public function __construct(
         public Uuid $uuid,
         public string $username,
@@ -21,7 +20,7 @@ final class UserWasCreated implements Event
     public function toPayload(): array
     {
         return [
-            'uuid' => (string)$this->uuid,
+            'uuid' => (string) $this->uuid,
             'username' => $this->username,
             'password' => $this->password,
         ];

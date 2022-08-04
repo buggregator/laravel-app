@@ -71,6 +71,6 @@ final class ExtendedTypecast implements CastableInterface, UncastableInterface
 
     private function uncastJson(mixed $value): string
     {
-        return (string)$value;
+        return (string) $value;
     }
 }

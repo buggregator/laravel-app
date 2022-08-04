@@ -12,8 +12,8 @@
             <CodeSnippet v-if="hasFields" :title="field.title" v-for="field in fields">
                 {{ field.value }}
             </CodeSnippet>
-            <div class="text-right">
-                <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-auto">[JSON]</a>
+            <div class="text-right mt-1">
+                <JsonChip :href="event.route.json" />
             </div>
         </div>
     </Event>
@@ -24,9 +24,10 @@ import CodeSnippet from "@/Components/UI/CodeSnippet"
 import Table from "@/Components/UI/Table"
 import TableRow from "@/Components/UI/TableRow"
 import Event from "../Event"
+import JsonChip from "@/Components/UI/JsonChip";
 
 export default {
-    components: {Event, TableRow, Table, CodeSnippet},
+    components: {JsonChip, Event, TableRow, Table, CodeSnippet},
     props: {
         event: Object,
     },

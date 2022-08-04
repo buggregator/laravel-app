@@ -34,7 +34,8 @@ class StreamHandler implements Handler
                 'levelColor' => $levelColor,
                 'level' => $payload['payload']['level_name'].'' ?? 'DEBUG',
                 'messages' => explode("\n", $payload['payload']['message']),
-            ])
+            ]),
+            0
         );
 
         // It can't be sent to HTML

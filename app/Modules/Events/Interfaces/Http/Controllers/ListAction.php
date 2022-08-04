@@ -16,7 +16,7 @@ use Spatie\RouteAttributes\Attributes\Get;
 class ListAction extends Controller
 {
     #[Get(uri: '/', name: 'events', middleware: 'auth')]
-    public function eventList(Request $request, QueryBus $bus, ActionMap $actionMap, ?string $type = null)
+    public function eventList(Request $request, QueryBus $bus, ActionMap $actionMap, ?string $type = null, ?int $projectId = null)
     {
         $action = 'Events';
         if ($type) {
@@ -28,15 +28,15 @@ class ListAction extends Controller
         }
 
         return Inertia::render($action, [
-            'events' => $bus->ask(new FindAllEvents(type: $type)),
+            'events' => $bus->ask(new FindAllEvents(type: $type, projectId: $projectId)),
             'version' => config('app.version'),
             'name' => config('app.name'),
         ]);
     }
 
-    #[Get(uri: '/events/{type}', name: 'events.type')]
-    public function eventListByType(Request $request, QueryBus $bus, ActionMap $actionMap, string $type)
+    #[Get(uri: '/events/type/{type}/{projectId?}', name: 'events.type')]
+    public function eventListByType(Request $request, QueryBus $bus, ActionMap $actionMap, string $type, ?int $projectId = null)
     {
-        return $this->eventList($request, $bus, $actionMap, $type);
+        return $this->eventList($request, $bus, $actionMap, $type, $projectId);
     }
 }

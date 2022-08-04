@@ -13,6 +13,7 @@ class EventWasReceivedTest extends TestCase
     public function testConvertsEventToArray()
     {
         $event = new EventWasReceived(
+            1,
             $uuid = Uuid::generate(),
             'test',
             ['foo' => 'bar'],
@@ -20,6 +21,7 @@ class EventWasReceivedTest extends TestCase
         );
 
         $this->assertSame([
+            'projectId' => 1,
             'uuid' => $uuid->toString(),
             'type' => 'test',
             'payload' => ['foo' => 'bar'],
@@ -30,6 +32,7 @@ class EventWasReceivedTest extends TestCase
     public function testConvertsArrayToEvent()
     {
         $event = EventWasReceived::fromPayload([
+            'projectId' => 1,
             'uuid' => $uuid = Uuid::generate()->toString(),
             'type' => 'test',
             'payload' => ['foo' => 'bar'],

@@ -14,7 +14,7 @@
                     <h1 class="text-sm sm:text-base md:text-lg lg:text-2xl font-bold break-all sm:break-normal">
                         {{ event.process.name }}
                     </h1>
-                    <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-5 mr-auto">[JSON]</a>
+                    <JsonChip :href="event.route.json" class="mb-2 ml-1.5 mr-auto"/>
 
                     <div class="mt-5 sm:ml-5 sm:mt-0 flex justify-between sm:flex-none">
                         <button class="fill-current text-blue-500 h-5 w-5" @click="deleteEvent">
@@ -27,7 +27,7 @@
                 </div>
             </header>
 
-            <Cards :event="event"/>
+            <Cards :event="event" class="px-4 md:px-6 lg:px-8"/>
             <TimelineChart :event="event" v-if="event && event.event.length > 0"/>
             <Url :event="event"/>
             <Request :event="event"/>
@@ -46,9 +46,11 @@ import TimelineChart from "@/Components/Inspector/Show/Timeline";
 import Cards from "@/Components/Inspector/Show/Cards";
 import Request from "@/Components/Inspector/Show/Request";
 import Url from "@/Components/Inspector/Show/Url";
+import JsonChip from "@/Components/UI/JsonChip";
 
 export default {
     components: {
+        JsonChip,
         Request, Url, MainLayout, NavItem, TimelineChart, Cards, Link
     },
     setup() {

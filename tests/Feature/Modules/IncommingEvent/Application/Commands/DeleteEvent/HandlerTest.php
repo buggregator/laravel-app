@@ -21,7 +21,7 @@ class HandlerTest extends TestCase
         $repository->shouldReceive('retrieve')
             ->once()
             ->with($uuid)
-            ->andReturn($aggregateRoot = EventProcess::received($uuid, 'foo', ['foo' => 'bar'], 123));
+            ->andReturn($aggregateRoot = EventProcess::received(1, $uuid, 'foo', ['foo' => 'bar'], 123));
 
         $repository->shouldReceive('persist')->once()
             ->withArgs(function (EventProcess $process) use ($aggregateRoot) {

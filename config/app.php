@@ -184,6 +184,7 @@ return [
          * Modules Service Providers...
          */
         Modules\Events\ServiceProvider::class,
+        Modules\Project\ServiceProvider::class,
         Modules\Monolog\ServiceProvider::class,
         Modules\VarDumper\ServiceProvider::class,
         Modules\RemoteServers\ServiceProvider::class,

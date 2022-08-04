@@ -20,6 +20,7 @@ final class Handler implements CommandHandler
     {
         $this->repository->persist(
             EventProcess::received(
+                $command->projectId,
                 $command->uuid,
                 $command->type,
                 $command->payload,

@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-col flex-reverse md:flex-row justify-between">
+    <div class="flex flex-col flex-reverse md:flex-row justify-between items-center">
         <h2 class="text-sm sm:text-base md:text-lg lg:text-2xl">{{ event.subject }}</h2>
-        <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-5 mr-auto">[JSON]</a>
+        <JsonChip :href="event.route.json" class="mb-2 ml-1.5 mr-auto"/>
 
         <div class="flex items-center space-x-3">
             <span class="text-sm font-semibold text-muted">{{ date }}</span>
@@ -116,9 +116,11 @@ import HtmlPreview from "@/Components/UI/HtmlPreview";
 import Tab from "@/Components/UI/TabGroup/Tab";
 import {TabGroup, TabList, TabPanels, TabPanel} from '@headlessui/vue'
 import Addresses from "@/Components/Smtp/Addresses";
+import JsonChip from "@/Components/UI/JsonChip";
 
 export default {
     components: {
+        JsonChip,
         CodeSnippet, Dump, Collapsed, HtmlPreview,
         TabGroup, TabList, Tab, TabPanels, TabPanel, Table, TableRow, Addresses
     },

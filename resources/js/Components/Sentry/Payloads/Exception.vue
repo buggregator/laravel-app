@@ -15,7 +15,7 @@
                 {{ event.payload.value }}
             </div>
         </Link>
-        <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 ml-auto">[JSON]</a>
+        <JsonChip :href="event.route.json" class="ml-auto"/>
         <div class="sentry-exception__files w-full" v-if="frames > 0">
             <File :file="file" v-for="(file, i) in stacktrace" :collapsed="i !== 0" class="sentry-exception__file"/>
         </div>
@@ -25,9 +25,10 @@
 <script>
 import {Link} from '@inertiajs/inertia-vue3'
 import File from "../UI/File";
+import JsonChip from "@/Components/UI/JsonChip";
 
 export default {
-    components: {File, Link},
+    components: {JsonChip, File, Link},
     props: {
         event: Object,
         frames: {

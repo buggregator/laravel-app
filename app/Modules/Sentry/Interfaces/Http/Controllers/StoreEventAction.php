@@ -6,6 +6,7 @@ namespace Modules\Sentry\Interfaces\Http\Controllers;
 
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
+use App\Contracts\Query\QueryBus;
 use GuzzleHttp\Psr7\Stream;
 use Http\Message\Encoding\GzipDecodeStream;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ class StoreEventAction extends Controller
     public function __invoke(
         Request $request,
         CommandBus $commands,
+        QueryBus $queryBus,
         EventHandler $handler,
         ConsoleOutput $output
     ): void {
@@ -28,9 +30,9 @@ class StoreEventAction extends Controller
         );
 
         $event = $handler->handle(json_decode($stream->getContents(), true));
-
+        $projectId = request()->route()->parameter('projectId');
         $commands->dispatch(
-            new HandleReceivedEvent('sentry', $event, true)
+            new HandleReceivedEvent((int) $projectId, 'sentry', $event, true)
         );
     }
 }

@@ -9,28 +9,26 @@ use App\Contracts\Command\CommandBus;
 use Cycle\ORM\EntityManager;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\RepositoryInterface;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Events\Domain\Event;
 
 class DatabaseTestCase extends TestCase
 {
-    use DatabaseTransactions, WithFaker;
-
-    protected static $dbInitialized = false;
+    use WithFaker;
+    use RefreshDatabase;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->beforeApplicationDestroyed(function () {
-            $this->getOrm()->getHeap()->clean();
-        });
+        $this->seed('Database\\Seeders\\ProjectSeeder');
     }
 
     public function createEvent(string $type, array $payload): Event
     {
         $this->app[CommandBus::class]->dispatch(
             $command = new HandleReceivedEvent(
+                projectId: 1,
                 type: $type,
                 payload: $payload
             )

@@ -14,6 +14,7 @@ final class EventWasReceived implements Event, ShouldBroadcastNow
 {
     // TODO: use readonly property
     public function __construct(
+        public int $projectId,
         public Uuid $uuid,
         public string $type,
         public array $payload,
@@ -25,6 +26,7 @@ final class EventWasReceived implements Event, ShouldBroadcastNow
     public function toPayload(): array
     {
         return [
+            'projectId' => $this->projectId,
             'uuid' => (string) $this->uuid,
             'type' => $this->type,
             'payload' => $this->payload,

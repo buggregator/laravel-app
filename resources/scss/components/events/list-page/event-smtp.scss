@@ -23,4 +23,10 @@
     &__link-text {
         @apply flex justify-between text-xs text-muted;
     }
+    &__json {
+       @apply text-right;
+       margin-top: 0 !important;
+       margin-bottom: -15px !important;
+
+    }
 }

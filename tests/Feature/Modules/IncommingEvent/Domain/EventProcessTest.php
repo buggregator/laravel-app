@@ -25,6 +25,7 @@ class EventProcessTest extends DatabaseTestCase
         $repository = $this->app[EventProcessAggregateRootRepository::class];
 
         $processedEvent = EventProcess::received(
+            projectId: 1,
             uuid: $uuid = Uuid::generate(),
             type: 'test',
             payload: ['foo' => 'bar'],
@@ -47,6 +48,7 @@ class EventProcessTest extends DatabaseTestCase
         $repository = $this->app[EventProcessAggregateRootRepository::class];
 
         $processedEvent = EventProcess::received(
+            projectId: 1,
             uuid: $uuid = Uuid::generate(),
             type: 'test',
             payload: ['foo' => 'bar'],

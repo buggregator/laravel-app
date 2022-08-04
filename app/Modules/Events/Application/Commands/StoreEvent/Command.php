@@ -15,6 +15,7 @@ class Command implements \App\Contracts\Command\Command
         public Uuid $uuid,
         public DateTimeImmutable $date,
         public array $payload,
+        public int $projectId,
     ) {
     }
 }

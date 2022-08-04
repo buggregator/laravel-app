@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <a :href="event.route.json" target="_blank" class="text-xs text-blue-800 dark:text-blue-100 absolute top-3 right-2">[JSON]</a>
+        <JsonChip :href="event.route.json" class="absolute top-3 right-2"/>
         <Link as="div" :href="event.route.show" class="cursor-pointer p-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800">
             <div class="flex flex-col md:flex-row md:items-center mb-1">
                 <h3 class="text-blue-800 dark:text-blue-300 font-semibold pr-96">
@@ -33,9 +33,11 @@
 <script>
 import Host from "@/Components/UI/Host";
 import {Link} from '@inertiajs/inertia-vue3'
+import JsonChip from "@/Components/UI/JsonChip";
 
 export default {
     components: {
+        JsonChip,
         Link, Host
     },
     props: {
