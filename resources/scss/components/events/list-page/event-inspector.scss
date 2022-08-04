@@ -1,6 +1,6 @@
 .event-inspector {
     &__title {
-        @apply font-semibold text-blue-800 dark:text-gray-100 mb-2;
+        @apply font-semibold text-black dark:text-gray-100 mb-2 flex justify-between items-center;
     }
 
     &__cards {

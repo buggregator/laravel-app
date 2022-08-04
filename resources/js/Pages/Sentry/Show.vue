@@ -1,5 +1,5 @@
 <template>
-    <MainLayout title="SMTP">
+    <MainLayout title="Sentry">
         <nav ref="header" class="border-b dark:border-gray-400 flex items-center gap-x-2 text-xs font-semibold px-4 py-2">
             <Link class="text-muted" :href="event.route.index">Sentry</Link>
             <div class="h-1 w-1">
@@ -9,12 +9,11 @@
         </nav>
         <main class="flex flex-col flex-grow">
             <header class="bg-gray-50 dark:bg-gray-900 py-5 px-4 md:px-6 lg:px-8 border-b">
-                <div class="flex justify-between">
-                    <h1 class="text-2xl font-bold flex items-center">
+                <div class="flex justify-between items-center">
+                    <h1 class="font-bold text-sm sm:text-base md:text-lg lg:text-2xl  break-all sm:break-normal">
                         {{ event.payload.type }}
-                        <a :href="event.route.json" target="_blank"  class="text-sm text-blue-800 ml-5">[JSON]</a>
                     </h1>
-
+                    <JsonChip  :href="event.route.json" class="mr-auto ml-1.5 mb-2" />
                     <button class="h-5 w-5" @click="deleteEvent">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path d="m338 197-19 221c-1 10 14 11 15 1l19-221a8 8 0 0 0-15-1zM166 190c-4 0-7 4-7 8l19 221c1 10 16 9 15-1l-19-221c0-4-4-7-8-7zM249 197v222a7 7 0 1 0 15 0V197a7 7 0 1 0-15 0z"/>
@@ -55,8 +54,10 @@ import App from "@/Components/Sentry/Show/App";
 import Device from "@/Components/Sentry/Show/Device";
 import OS from "@/Components/Sentry/Show/OS";
 import Exceptions from "@/Components/Sentry/Show/Exceptions";
+import JsonChip from "@/Components/UI/JsonChip";
 export default {
     components: {
+        JsonChip,
         MainLayout, Link, File,
         Tags, Breadcrumbs, Request,
         App, Device, OS,

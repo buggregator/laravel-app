@@ -47,8 +47,8 @@ services:
             - 9913:9913
         volumes:
             - ./:/app
-        depends_on:
-            - db
+#        depends_on:
+#            - db
 
     node:
         image: node:14-bullseye-slim

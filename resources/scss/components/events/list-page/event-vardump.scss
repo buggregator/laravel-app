@@ -1,6 +1,6 @@
 .event-var-dump {
     &__footer {
-        @apply flex space-x-4 items-center;
+        @apply flex space-x-4 items-center justify-between ;
     }
 
     &__footer-text {

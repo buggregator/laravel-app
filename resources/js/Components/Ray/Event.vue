@@ -10,6 +10,9 @@
                 v-on:delete="$emit('deleteEvent')"
             />
         </div>
+        <div class="event-ray__json">
+            <JsonChip :href="event.route.json" />
+        </div>
         <Origin v-if="hasPayloads" class="mt-3" :origin="event.payloads[0].origin"/>
     </Event>
 </template>
@@ -18,9 +21,10 @@
 import Origin from "./Origin";
 import EventPayload from "./Payload";
 import Event from "../Event";
+import JsonChip from "@/Components/UI/JsonChip";
 
 export default {
-    components: {Event, EventPayload, Origin},
+    components: {JsonChip, Event, EventPayload, Origin},
     props: {
         event: Object
     },

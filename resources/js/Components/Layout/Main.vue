@@ -1,5 +1,5 @@
 <template>
-    <Head :title="title"></Head>
+    <Head :title="title"><title></title></Head>
     <div class="main-layout">
         <div class="main-layout__sidebar-wrap">
             <LeftSidebar class="main-layout__sidebar">
