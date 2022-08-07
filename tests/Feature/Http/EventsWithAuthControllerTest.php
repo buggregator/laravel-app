@@ -22,6 +22,12 @@ class EventsWithAuthControllerTest extends DatabaseTestCase
             ->assertUnauthorized();
     }
 
+    public function testGetListOfSentryTransactionEvents()
+    {
+        $this->getJson(route('events.transactions', [1, 1]), ['X-Inertia' => true, 'X-Inertia-Version' => $this->inertiaVersion()])
+            ->assertUnauthorized();
+    }
+
     public function testGetSpecificTypeListOfEventsForUnknownTypeEventShouldReturnNotFound()
     {
         $this->getJson(route('events.type', 'foo'),
@@ -65,6 +71,12 @@ class EventsWithAuthControllerTest extends DatabaseTestCase
     {
         $event = $this->createEvent('bar', ['foo1' => 'bar1']);
         $this->getJson(route('event.show.json', $event->getUuid()->toString()))
+            ->assertUnauthorized();
+    }
+
+    public function testGetEventsJson()
+    {
+        $this->getJson(route('events.show.json', ['foo', 1, 1, 1, 1]))
             ->assertUnauthorized();
     }
 

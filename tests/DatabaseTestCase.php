@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use App\Commands\FindTransactionByName;
 use App\Commands\HandleReceivedEvent;
 use App\Contracts\Command\CommandBus;
+use App\Contracts\Query\QueryBus;
+use App\Exceptions\EntityNotFoundException;
 use Cycle\ORM\EntityManager;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\RepositoryInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Events\Domain\Event;
+use Modules\Transaction\Domain\Transaction;
 
 class DatabaseTestCase extends TestCase
 {
@@ -24,13 +28,26 @@ class DatabaseTestCase extends TestCase
         $this->seed('Database\\Seeders\\ProjectSeeder');
     }
 
-    public function createEvent(string $type, array $payload): Event
+    public function findOrCreateTransaction($transactionName): int
+    {
+        try {
+            $transaction = $this->app[QueryBus::class]->ask(new FindTransactionByName($transactionName));
+        } catch (EntityNotFoundException) {
+            $transaction = new Transaction($transactionName);
+            $this->persistEntity($transaction);
+        }
+
+        return $transaction->getId();
+    }
+
+    public function createEvent(string $type, array $payload, $transactionId = null): Event
     {
         $this->app[CommandBus::class]->dispatch(
             $command = new HandleReceivedEvent(
                 projectId: 1,
                 type: $type,
-                payload: $payload
+                payload: $payload,
+                transactionId: $transactionId
             )
         );
 

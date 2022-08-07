@@ -67,6 +67,12 @@ export default {
                     supIcon: computed(() => this.unReadEvents.filter(i => i === 'inspector').length > 0),
                 },
                 {
+                    href: route('performance'),
+                    title: 'Performance',
+                    state: (url) => this.$page.url.startsWith(url),
+                    icon: '<svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M 3.59,12.01 C 3.59,12.01 8.52,0.50 8.52,0.50 8.52,0.50 19.82,0.50 19.82,0.50 19.82,0.50 11.66,8.77 11.66,8.77 11.66,8.77 18.38,8.77 18.38,8.77 18.38,8.77 5.19,23.56 5.19,23.56 5.19,23.56 8.58,11.95 8.58,11.95 8.58,11.95 3.59,12.01 3.59,12.01 Z"></path></svg>'
+                },
+                {
                     href: route('terminal'),
                     title: 'Terminal',
                     state: (url) => this.$page.url.startsWith(url),

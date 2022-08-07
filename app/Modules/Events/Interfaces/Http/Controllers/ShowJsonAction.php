@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Events\Interfaces\Http\Controllers;
 
 use App\Commands\FindEventByUuid;
+use App\Commands\FindEvents;
 use App\Contracts\Query\QueryBus;
 use App\Domain\ValueObjects\Uuid;
 use App\Exceptions\EntityNotFoundException;
@@ -21,5 +22,13 @@ class ShowJsonAction extends Controller
         } catch (EntityNotFoundException $e) {
             abort(404, $e->getMessage());
         }
+    }
+
+    #[Get(uri: '/events/{type}/{transactionId}/{projectId}/{offset}/{limit}/json', name: 'events.show.json', middleware: 'auth')]
+    public function eventList(QueryBus $bus, string $type, int $transactionId, int $projectId, int $offset, int $limit)
+    {
+        return $bus->ask(new FindEvents(
+            type: $type, projectId: $projectId, transactionId: $transactionId, offset: $offset, limit: $limit
+        ));
     }
 }

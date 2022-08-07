@@ -19,7 +19,8 @@ final class EventWasReceived implements Event, ShouldBroadcastNow
         public string $type,
         public array $payload,
         public int $timestamp,
-        public bool $sendToConsole = false
+        public bool $sendToConsole = false,
+        public ?int $transactionId = null,
     ) {
     }
 
@@ -27,6 +28,7 @@ final class EventWasReceived implements Event, ShouldBroadcastNow
     {
         return [
             'projectId' => $this->projectId,
+            'transactionId' => $this->transactionId,
             'uuid' => (string) $this->uuid,
             'type' => $this->type,
             'payload' => $this->payload,

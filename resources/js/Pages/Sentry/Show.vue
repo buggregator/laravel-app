@@ -86,10 +86,7 @@ export default {
         },
         loadEvents() {
             this.store.commit('sentry/clearEvents')
-            this.$page.props.events.data.forEach((e) => {
-                this.store.commit('sentry/pushEvent', EventFactory.create(e))
-            })
-
+            this.store.commit('sentry/pushEvent', EventFactory.create(this.$page.props.event.data))
             this.store.commit('sentry/openEvent', EventFactory.create(this.$page.props.event.data))
         }
     },

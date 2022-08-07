@@ -26,6 +26,7 @@ class EventProcessTest extends DatabaseTestCase
 
         $processedEvent = EventProcess::received(
             projectId: 1,
+            transactionId: null,
             uuid: $uuid = Uuid::generate(),
             type: 'test',
             payload: ['foo' => 'bar'],
@@ -49,6 +50,7 @@ class EventProcessTest extends DatabaseTestCase
 
         $processedEvent = EventProcess::received(
             projectId: 1,
+            transactionId: null,
             uuid: $uuid = Uuid::generate(),
             type: 'test',
             payload: ['foo' => 'bar'],

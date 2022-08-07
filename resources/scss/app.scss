@@ -35,6 +35,8 @@
 @import "./components/events/list-page/event-smtp";
 @import "./components/events/single-page/smtp";
 @import "./components/events/single-page/inspector";
+@import "./components/vue-pagination";
+@import "vue-loading-overlay/dist/vue-loading.css";
 
 body {
     @apply bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-50;

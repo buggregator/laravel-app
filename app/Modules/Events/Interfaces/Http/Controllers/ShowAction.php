@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Events\Interfaces\Http\Controllers;
 
-use App\Commands\FindAllEvents;
 use App\Commands\FindEventByUuid;
+use App\Commands\FindEvents;
 use App\Contracts\Query\QueryBus;
 use App\Domain\ValueObjects\Uuid;
 use App\Exceptions\EntityNotFoundException;
@@ -33,9 +33,14 @@ class ShowAction extends Controller
             abort(404, $e->getMessage());
         }
 
-        return Inertia::render($action, [
-            'event' => $event,
-            'events' => $bus->ask(new FindAllEvents(type: $type)),
-        ]);
+        $props = ['event' => $event];
+
+        if (! in_array($type, ['sentry', 'sentryTransaction'])) {
+            $props = array_merge($props, [
+                'events' => $bus->ask(new FindEvents(type: $type)),
+            ]);
+        }
+
+        return Inertia::render($action, $props);
     }
 }

@@ -16,6 +16,7 @@ class Command implements \App\Contracts\Command\Command
         public DateTimeImmutable $date,
         public array $payload,
         public int $projectId,
+        public ?int $transactionId,
     ) {
     }
 }

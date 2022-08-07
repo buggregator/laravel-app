@@ -16,7 +16,8 @@ final class HandleReceivedEvent implements Command
         public int $projectId,
         public string $type,
         public array $payload,
-        public bool $sendToConsole = false
+        public bool $sendToConsole = false,
+        public ?int $transactionId = null,
     ) {
         $this->uuid = Uuid::generate();
         $this->timestamp = time();
@@ -26,6 +27,7 @@ final class HandleReceivedEvent implements Command
     {
         return [
             'projectId' => $this->projectId,
+            'transactionId' => $this->transactionId,
             'type' => $this->type,
             'payload' => $this->payload,
             'uuid' => (string) $this->uuid,

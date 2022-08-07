@@ -27,6 +27,8 @@ class Handler implements CommandHandler
         $scope = [];
         if ($command->type) {
             $scope['type'] = $command->type;
+        } else {
+            $scope['type'] = ['<>' => 'sentryTransaction'];
         }
 
         // TODO: make more optimized
