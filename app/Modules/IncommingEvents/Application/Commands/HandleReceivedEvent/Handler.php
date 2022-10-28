@@ -21,6 +21,7 @@ final class Handler implements CommandHandler
         $this->repository->persist(
             EventProcess::received(
                 $command->projectId,
+                $command->transactionId,
                 $command->uuid,
                 $command->type,
                 $command->payload,

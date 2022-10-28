@@ -1,17 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Commands;
 
 use App\Contracts\Query\Query;
 
-final class FindAllEvents implements Query
+abstract class AskEvents implements Query
 {
-    // TODO: use readonly property
     public function __construct(
         public ?string $type = null,
         public ?int $projectId = null,
+        public ?int $transactionId = null,
     ) {
     }
 }

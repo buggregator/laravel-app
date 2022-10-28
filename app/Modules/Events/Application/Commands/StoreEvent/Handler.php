@@ -30,10 +30,10 @@ class Handler implements CommandHandler
                 $command->type,
                 new Json($command->payload),
                 $command->date,
-                $command->projectId
+                $command->projectId,
+                $command->transactionId
             )
         );
-
         $this->entityManager->run();
     }
 
@@ -46,13 +46,14 @@ class Handler implements CommandHandler
                 uuid: $command->uuid,
                 date: Carbon::createFromTimestamp($command->timestamp)->toDateTimeImmutable(),
                 payload: $command->payload,
-                projectId: $command->projectId
+                projectId: $command->projectId,
+                transactionId: $command->transactionId
             )
         );
 
         $this->dispatcher->dispatch(
             new EventWasReceived(
-                $command->projectId, $command->uuid, $command->type, $command->payload, $command->timestamp, $command->sendToConsole
+                $command->projectId, $command->uuid, $command->type, $command->payload, $command->timestamp, $command->sendToConsole, $command->transactionId
             )
         );
     }

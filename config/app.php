@@ -185,6 +185,7 @@ return [
          */
         Modules\Events\ServiceProvider::class,
         Modules\Project\ServiceProvider::class,
+        Modules\Transaction\ServiceProvider::class,
         Modules\Monolog\ServiceProvider::class,
         Modules\VarDumper\ServiceProvider::class,
         Modules\RemoteServers\ServiceProvider::class,

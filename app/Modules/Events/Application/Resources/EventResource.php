@@ -15,6 +15,8 @@ class EventResource extends JsonResource
             'type' => $this->getType(),
             'payload' => $this->getPayload()->toArray(),
             'timestamp' => $this->getDate()->getTimestamp(),
+            'projectId' => $this->getProjectId(),
+            'transactionId' => $this->getTransactionId(),
         ];
     }
 }

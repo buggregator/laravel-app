@@ -19,7 +19,7 @@ class EventTest extends DatabaseTestCase
 
         $event = new Event($uuid, 'test', new Json([
             'foo' => 'bar',
-        ]), new \DateTimeImmutable(), 1);
+        ]), new \DateTimeImmutable(), 1, null);
 
         $this->persistEntity($event);
         $this->cleanIdentityMap();

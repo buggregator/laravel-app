@@ -31,7 +31,10 @@ class Event
         private DateTimeImmutable $date,
 
         #[Column(type: 'integer', nullable: false)]
-        private int $projectId
+        private int $projectId,
+
+        #[Column(type: 'integer', nullable: true)]
+        private ?int $transactionId
     ) {
     }
 
@@ -58,5 +61,10 @@ class Event
     public function getProjectId(): int
     {
         return $this->projectId;
+    }
+
+    public function getTransactionId(): ?int
+    {
+        return $this->transactionId;
     }
 }

@@ -22,6 +22,7 @@ class EventWasReceivedTest extends TestCase
 
         $this->assertSame([
             'projectId' => 1,
+            'transactionId' => null,
             'uuid' => $uuid->toString(),
             'type' => 'test',
             'payload' => ['foo' => 'bar'],
@@ -33,6 +34,7 @@ class EventWasReceivedTest extends TestCase
     {
         $event = EventWasReceived::fromPayload([
             'projectId' => 1,
+            'transactionId' => null,
             'uuid' => $uuid = Uuid::generate()->toString(),
             'type' => 'test',
             'payload' => ['foo' => 'bar'],

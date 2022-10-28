@@ -35,6 +35,15 @@ return [
             'enabled' => (bool) env('CLI_SENTRY_STREAM', true),
         ],
     ],
+    'sentryTransaction' => [
+        'http' => [
+            'index' => 'SentryTransaction/Index',
+            'show' => 'SentryTransaction/Show',
+        ],
+        'cli' => [
+            'enabled' => (bool) env('CLI_SENTRY_TRANSACTION_STREAM', true),
+        ],
+    ],
     'smtp' => [
         'http' => [
             'index' => 'Smtp/Index',
