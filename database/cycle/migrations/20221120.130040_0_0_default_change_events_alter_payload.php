@@ -13,7 +13,7 @@ class OrmDefaultEcdc8134797047661b676f0a3969a742 extends Migration
         $this->table('events')
             ->alterColumn('payload', 'longText', [
                 'nullable' => false,
-                'default'  => null
+                'default'  => null,
             ])
             ->update();
     }
