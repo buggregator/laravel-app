@@ -19,7 +19,7 @@ class OrmDefault1e5a31b92337b8a5a635afa30098a401 extends Migration
                 'nullable' => false,
                 'default' => null,
             ])
-            ->addColumn('payload', 'json', [
+            ->addColumn('payload', 'longText', [
                 'nullable' => false,
                 'default' => null,
             ])
