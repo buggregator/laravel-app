@@ -1,10 +1,10 @@
 <template>
     <MainLayout title="SMTP">
-        <div ref="header" class="border-b flex items-center gap-x-2 text-xs font-semibold px-4 py-2">
+        <div ref="header" class="breadcrumbs">
             <div class="text-muted">Mailbox</div>
         </div>
         <main class="md:flex flex-grow w-full">
-            <div class="w-full md:w-72 lg:w-96 flex-none border-r">
+            <div class="w-full md:w-72 lg:w-96 flex-none border-r border-style">
                 <PerfectScrollbar :style="{height: menuHeight}" v-if="events.length > 0">
                     <NavItem v-for="event in events" :event="event"/>
                 </PerfectScrollbar>
@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <div class="p-5 flex flex-col flex-grow border-t md:border-t-0">
+            <div class="p-5 flex flex-col flex-grow border-t md:border-t-0 border-style">
                 <h2 class="text-2xl font-bold">SMTP Settings</h2>
                 <p class="font-semibold text-sm">Use these settings to send messages directly from your email client or mail transfer agent.</p>
 

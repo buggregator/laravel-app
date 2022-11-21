@@ -2,7 +2,6 @@
     <div>
         <h1 class="event-inspector__title">
             <span>{{ event.process.name }}</span>
-            <JsonChip :href="event.route.json" class="ml-auto"/>
         </h1>
 
         <Link :href="event.route.show" class="event-inspector__link">
@@ -20,10 +19,9 @@
 import Host from "@/Components/UI/Host";
 import {Link} from '@inertiajs/inertia-vue3'
 import Cards from "./Show/Cards";
-import JsonChip from "@/Components/UI/JsonChip";
 
 export default {
-    components: {JsonChip, Cards, Link, Host},
+    components: {Cards, Link, Host},
     props: {
         event: Object,
     },

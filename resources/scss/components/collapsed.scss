@@ -1,8 +1,8 @@
 .collapsed {
-    @apply border dark:border-gray-600 rounded bg-white dark:bg-gray-800;
+    @apply border border-style rounded bg-white dark:bg-gray-800;
 
     &__title-wrap {
-        @apply text-muted text-responsive font-semibold flex justify-between items-center border-b dark:border-gray-600 p-3;
+        @apply text-muted text-responsive font-semibold flex justify-between items-center border-b border-style p-3;
     }
 
     &__icon {

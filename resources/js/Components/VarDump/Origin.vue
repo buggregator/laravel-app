@@ -9,9 +9,9 @@
 
 <script>
 import Label from "@/Components/UI/Label";
-import JsonChip from "@/Components/UI/JsonChip";
+
 export default {
-    components: {JsonChip, Label},
+    components: {Label},
     props: {
         origin: Object,
         json: String,

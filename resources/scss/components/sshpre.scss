@@ -1,6 +1,6 @@
 .ssh-pre {
     margin-top: 0 !important;
-    @apply font-mono relative border dark:border-gray-600 p-2 md:px-3 lg:px-4 text-responsive rounded bg-gray-800 block;
+    @apply font-mono relative border border-style p-2 md:px-3 lg:px-4 text-responsive bg-gray-800 block;
 }
 
 .ssh-pre__content {
@@ -9,11 +9,11 @@
 }
 
 .ssh-pre .txt {
-    @apply text-gray-800 dark:text-gray-300
+    @apply text-gray-300
 }
 
 .ssh-pre .comment {
-    @apply italic text-gray-300 dark:text-gray-800;
+    @apply italic text-gray-800;
 }
 
 .ssh-pre .comment * {
@@ -21,7 +21,7 @@
 }
 
 .ssh-pre .quote {
-    @apply text-red-700 dark:text-red-300
+    @apply text-red-300
 }
 
 .ssh-pre .quote * {
@@ -29,35 +29,35 @@
 }
 
 .ssh-pre .htmlentity {
-    @apply text-blue-700 dark:text-blue-300 font-bold
+    @apply text-blue-300 font-bold
 }
 
 .ssh-pre .number {
-    @apply text-red-700 dark:text-red-300
+    @apply text-red-300
 }
 
 .ssh-pre .boolean {
-    @apply text-red-700 dark:text-red-300
+    @apply text-red-300
 }
 
 .ssh-pre .keyword {
-    @apply text-blue-700 dark:text-blue-300 font-bold
+    @apply text-blue-300 font-bold
 }
 
 .ssh-pre .this {
-    @apply text-purple-600 dark:text-purple-300 font-bold
+    @apply text-purple-300 font-bold
 }
 
 .ssh-pre .punctuation {
-    @apply text-purple-600 dark:text-purple-300
+    @apply text-purple-300
 }
 
 .ssh-pre .external-var, .ssh-pre .special {
-    @apply text-orange-700 dark:text-orange-300
+    @apply text-orange-300
 }
 
 .ssh-pre .variable {
-    @apply text-blue-700 dark:text-blue-300
+    @apply text-blue-300
 }
 
 .ssh-pre .obj-attr {
@@ -73,19 +73,19 @@
 }
 
 .ssh-pre[data-type=html] .doctype {
-    @apply text-blue-900 dark:text-blue-100
+    @apply text-blue-100
 }
 
 .ssh-pre[data-type=html] .tag-name {
-    @apply text-blue-600 dark:text-blue-300
+    @apply text-blue-300
 }
 
 .ssh-pre[data-type=html] .attribute {
-    @apply text-orange-700 dark:text-orange-300
+    @apply text-orange-300
 }
 
 .ssh-pre[data-type=html-vue] .doctype {
-    @apply text-blue-900 dark:text-blue-100
+    @apply text-blue-100
 }
 
 .ssh-pre[data-type=html-vue] .tag-name {
@@ -101,7 +101,7 @@
 }
 
 .ssh-pre[data-type=pug] .tag-name {
-    @apply text-blue-600 dark:text-blue-300 font-bold
+    @apply text-blue-300 font-bold
 }
 
 .ssh-pre[data-type=pug] .punctuation {
@@ -117,7 +117,7 @@
 }
 
 .ssh-pre[data-type=pug] .attribute {
-    @apply text-orange-700 dark:text-orange-300
+    @apply text-orange-300
 }
 
 .ssh-pre[data-type=pug] .text {
@@ -198,7 +198,7 @@
 }
 
 .ssh-pre[data-type=sql] .var-type {
-    @apply text-orange-700 dark:text-orange-300 font-bold
+    @apply text-orange-300 font-bold
 }
 
 .ssh-pre--dark .txt {

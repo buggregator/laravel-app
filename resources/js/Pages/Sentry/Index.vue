@@ -1,6 +1,6 @@
 <template>
     <MainLayout title="Sentry">
-        <div ref="header" class="border-b dark:border-gray-400 flex items-center gap-x-2 text-xs font-semibold px-4 py-2">
+        <div ref="header" class="breadcrumbs">
             <div class="text-muted">Sentry</div>
         </div>
         <main class="m-3">
@@ -10,7 +10,7 @@
                     <button @click="clearEvents" class="text-sm bg-red-600 py-1 px-3 text-white">Clear events</button>
                 </div>
             </div>
-            <div class="divide-y dark:divide-gray-400 border-2 dark:border-gray-400" v-if="events.length > 0">
+            <div class="divide-y border-2 border-style" v-if="events.length > 0">
                 <ListItem v-for="event in events" :event="event"/>
             </div>
             <div v-else class="h-full flex flex-col items-center justify-center my-10">

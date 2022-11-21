@@ -1,7 +1,19 @@
 <template>
     <div class="event" ref="event" :id="event.id" :class="{'collapsed': event.collapsed, 'open': !event.collapsed}">
         <div class="event__sidebar sidebar">
+            <div class="event__labels">
+                <Label :color="event.color">
+                    {{ date }}
+                </Label>
+                <Label :color="event.color">
+                    {{ event.app }}
+                </Label>
+                <Label v-if="hasLabels" v-for="label in labels" :color="event.color">
+                    {{ label }}
+                </Label>
+            </div>
             <div class="sidebar__container">
+                <JsonChip :href="event.route.json" />
                 <button @click="toggle" class="button button__collapse" :class="color">
                     <PlusIcon v-if="event.collapsed" />
                     <MinusIcon v-else />
@@ -10,23 +22,8 @@
                     <TimesIcon />
                 </button>
             </div>
-
-            <div class="event__labels">
-                <Label :color="event.color">
-                    {{ date }}
-                </Label>
-                <Label :color="event.color">
-                    {{ event.app }}
-                </Label>
-
-                <div v-if="hasLabels" class="flex gap-2 flex-wrap">
-                    <Label v-for="label in labels" :color="event.color">
-                        {{ label }}
-                    </Label>
-                </div>
-            </div>
         </div>
-        <div class="event__body" :class="`event-${event.app}`">
+        <div class="event__body" >
             <slot></slot>
         </div>
     </div>
@@ -38,9 +35,10 @@ import {useStore} from "vuex";
 import PlusIcon from "@/Components/UI/Icons/PlusIcon";
 import MinusIcon from "@/Components/UI/Icons/MinusIcon";
 import TimesIcon from "@/Components/UI/Icons/TimesIcon";
+import JsonChip from "@/Components/UI/JsonChip";
 
 export default {
-    components: {MinusIcon, PlusIcon, TimesIcon, Label},
+    components: {MinusIcon, PlusIcon, TimesIcon, Label, JsonChip},
     props: {
         event: Object
     },

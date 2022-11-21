@@ -1,14 +1,14 @@
 .events-page {
     &__header {
-        @apply md:sticky md:top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600;
+        @apply md:sticky md:top-0 z-50 bg-white dark:bg-gray-900 border-b border-style;
     }
 
     &__filters {
-        @apply p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2 border-t border-gray-200 dark:border-gray-600;
+        @apply p-2 flex flex-col md:flex-row justify-center md:justify-between items-center gap-2 border-t border-style;
     }
 
     &__events {
-        @apply flex flex-col divide-y dark:divide-gray-600;
+        @apply flex flex-col divide-y border-style;
     }
 
     &__welcome-block {

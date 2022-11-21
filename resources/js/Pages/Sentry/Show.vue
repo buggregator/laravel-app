@@ -1,6 +1,6 @@
 <template>
     <MainLayout title="Sentry">
-        <nav ref="header" class="border-b dark:border-gray-400 flex items-center gap-x-2 text-xs font-semibold px-4 py-2">
+        <nav ref="header" class="breadcrumbs">
             <Link class="text-muted" :href="event.route.index">Sentry</Link>
             <div class="h-1 w-1">
                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330"><path d="M251 154 101 4a15 15 0 1 0-22 22l140 139L79 304a15 15 0 0 0 22 22l150-150a15 15 0 0 0 0-22z"/></svg>
@@ -21,7 +21,7 @@
                         </svg>
                     </button>
                 </div>
-                <p class="text-muted">{{ event.payload.value }}</p>
+                <pre class="text-muted text-sm" v-html="event.payload.value" />
                 <p class="text-muted text-sm mt-3">{{ date }}</p>
             </header>
 

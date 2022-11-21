@@ -11,11 +11,8 @@
                     {{ event.transactionName }}
                 </h6>
             </span>
-            <div class="sentry-exception__text clear-both">
-                {{ event.payload.value }}
-            </div>
+            <pre class="sentry-exception__text clear-both" v-html="event.payload.value" />
         </Link>
-        <JsonChip :href="event.route.json" class="ml-auto"/>
         <div class="sentry-exception__files w-full" v-if="frames > 0">
             <File :file="file" v-for="(file, i) in stacktrace" :collapsed="i !== 0" class="sentry-exception__file"/>
         </div>
@@ -25,10 +22,9 @@
 <script>
 import {Link} from '@inertiajs/inertia-vue3'
 import File from "../UI/File";
-import JsonChip from "@/Components/UI/JsonChip";
 
 export default {
-    components: {JsonChip, File, Link},
+    components: {File, Link},
     props: {
         event: Object,
         frames: {
