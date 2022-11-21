@@ -8,7 +8,7 @@
                 <span v-if="file.function" class="sentry-exception__title-info">at line</span>
                 {{ file.lineno }}
             </div>
-            <div class="sentry-file__title-icon">
+            <div class="sentry-file__title-icon" v-if="file.pre_context">
                 <svg viewBox="0 0 16 16"
                      fill="currentColor"
                      height="100%" width="100%"
@@ -18,7 +18,7 @@
                 </svg>
             </div>
         </div>
-        <div class="sentry-file__body" v-if="!collapsed">
+        <div class="sentry-file__body" v-if="file.pre_context && !collapsed">
             <div class="sentry-file__row" v-for="(line, i) in file.pre_context">
                 <div class="sentry-file__row-number">{{ file.lineno - (file.pre_context.length - i) }}.</div>
                 <pre class="sentry-file__row-text">{{ line }}</pre>

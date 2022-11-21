@@ -5,7 +5,6 @@
             :value="event.payloads.value"
             class="event-var-dump__dump"
         />
-
         <Origin :origin="event.origin" :json="event.route.json"/>
     </Event>
 </template>

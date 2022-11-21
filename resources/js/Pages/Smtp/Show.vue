@@ -1,6 +1,6 @@
 <template>
     <MainLayout title="SMTP">
-        <div ref="header" class="border-b flex items-center gap-x-2 text-xs font-semibold px-4 py-2">
+        <div ref="header" class="breadcrumbs">
             <Link class="text-muted" :href="event.route.index">Mailbox</Link>
             <div class="h-1 w-1">
                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330">
@@ -11,7 +11,7 @@
             <span>{{ event.subject }}</span>
         </div>
         <main class="flex flex-grow w-full">
-            <div class="w-0 md:w-72 lg:w-96 flex-none border-r">
+            <div class="w-0 md:w-72 lg:w-96 flex-none border-r border-style">
                 <PerfectScrollbar :style="{height: menuHeight}" v-if="events.length > 0">
                     <NavItem v-for="event in events" :event="event"/>
                 </PerfectScrollbar>

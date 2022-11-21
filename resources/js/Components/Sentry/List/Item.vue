@@ -1,6 +1,5 @@
 <template>
     <div class="relative">
-        <JsonChip :href="event.route.json" class="absolute top-3 right-2"/>
         <Link as="div" :href="event.route.show" class="cursor-pointer p-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800">
             <div class="flex flex-col md:flex-row md:items-center mb-1">
                 <h3 class="text-blue-800 dark:text-blue-300 font-semibold pr-96">
@@ -12,9 +11,7 @@
                 </span>
             </div>
 
-            <div class="text-sm break-all">
-                {{ event.payload.value }}
-            </div>
+            <pre class="text-xs break-all" v-html="event.payload.value"/>
 
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-3 text-xs text-muted">
                 <div>

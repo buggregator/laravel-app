@@ -1,6 +1,6 @@
 <template>
     <MainLayout title="Settings" class="main-layout--settings settings">
-        <div ref="header" class="settings__header">
+        <div ref="header" class="breadcrumbs">
             <div class="text-muted">Settings</div>
         </div>
         <main class="settings__main">

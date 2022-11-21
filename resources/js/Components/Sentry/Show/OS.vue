@@ -1,5 +1,5 @@
 <template>
-    <section class="py-5 px-4 md:px-6 lg:px-8 border-b" v-if="event.contexts.os">
+    <section class="py-5 px-4 md:px-6 lg:px-8 border-b" v-if="event.contexts.os.name">
         <h3 class="text-muted font-bold uppercase text-sm mb-5">operating system</h3>
 
         <Table>

@@ -1,6 +1,6 @@
 <template>
     <MainLayout title="Performance">
-        <div ref="header" class="border-b dark:border-gray-400 flex items-center gap-x-2 text-xs font-semibold px-4 py-2">
+        <div ref="header" class="breadcrumbs">
             <div class="text-muted">Performance</div>
         </div>
         <main class="m-3">

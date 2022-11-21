@@ -15,7 +15,7 @@
         }
     }
     &__link-body {
-        @apply flex-grow p-3;
+        @apply flex-grow p-3 dark:bg-gray-800;
     }
     &__link-title {
         @apply font-semibold;

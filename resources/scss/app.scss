@@ -26,6 +26,7 @@
 @import "./components/layouts/tips";
 @import "./components/layouts/screens";
 @import "./components/layouts/event";
+@import "./components/layouts/breadcrumbs";
 @import "./components/events/list-page/event-ray";
 @import "./components/events/list-page/event-monolog";
 @import "./components/events/list-page/event-inspector";
@@ -52,4 +53,8 @@ body {
 
 .text-responsive {
     @apply text-2xs sm:text-xs md:text-sm lg:text-base;
+}
+
+.border-style {
+    @apply border-gray-300 dark:border-gray-500 divide-gray-300 dark:divide-gray-500;
 }

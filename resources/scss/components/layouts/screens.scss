@@ -10,7 +10,7 @@
     }
 
     &__screen-current {
-        @apply h-4 w-4 border-2 border-blue-400 dark:border-gray-600 dark:bg-black rounded;
+        @apply h-4 w-4 border-2 border-style dark:bg-black rounded;
     }
 
     &__screen {

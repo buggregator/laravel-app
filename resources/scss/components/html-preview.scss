@@ -33,12 +33,12 @@
 }
 
 .device-tablet::after {
-    @apply border dark:border-gray-700 bg-gray-100 dark:bg-gray-900 rounded-full block w-12 h-12 my-4;
+    @apply border border-style bg-gray-100 dark:bg-gray-900 rounded-full block w-12 h-12 my-4;
     content: "";
 }
 
 .device-tablet::before {
-    @apply border dark:border-gray-700 bg-gray-100 dark:bg-gray-900 rounded-full block w-3 h-3 my-2;
+    @apply border border-style bg-gray-100 dark:bg-gray-900 rounded-full block w-3 h-3 my-2;
     content: "";
 }
 
@@ -52,12 +52,12 @@
 }
 
 .device-mobile::before {
-    @apply border dark:border-gray-700 bg-gray-100 dark:bg-gray-900 rounded-full block w-3 h-3 my-2;
+    @apply border border-style bg-gray-100 dark:bg-gray-900 rounded-full block w-3 h-3 my-2;
     content: "";
 }
 
 .device-mobile::after {
-    @apply border dark:border-gray-700 bg-gray-100 dark:bg-gray-900 rounded-full block w-8 h-8 my-3;
+    @apply border border-style bg-gray-100 dark:bg-gray-900 rounded-full block w-8 h-8 my-3;
     content: "";
 }
 

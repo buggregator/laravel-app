@@ -1,5 +1,5 @@
 .event {
-    @apply flex-grow md:flex md:space-y-0 md:space-x-3 lg:space-x-5 p-3 md:p-0 transition-colors md:dark:bg-gray-700;
+    @apply flex-grow flex flex-col p-3 lg:p-5 transition-colors md:dark:bg-gray-700;
 
     &:hover {
         @apply md:bg-gray-50 dark:bg-gray-900;
@@ -13,7 +13,7 @@
     }
 
     .sidebar {
-        @apply w-full md:w-1/4 pb-3 flex justify-between sm:items-center md:items-start md:px-3 md:py-3 lg:px-5 lg:py-5 md:border-r dark:border-gray-600;
+        @apply w-full flex justify-between pb-3;
 
         &__container {
             @apply flex items-center space-x-2;
@@ -26,7 +26,7 @@
                 }
 
                 &__collapse {
-
+                    @apply text-white;
                 }
 
                 &__delete {
@@ -37,12 +37,13 @@
     }
 
     &__labels {
-        @apply flex flex-wrap flex-row-reverse gap-2 justify-start
+        @apply flex flex-wrap gap-3
     }
 
     &__body {
-        @apply w-full md:w-3/4 flex-col space-y-5 md:pr-3 lg:pr-5 md:py-3 lg:py-5;
+        @apply flex flex-col;
     }
+
     &__content {
         &--ray {
             @apply flex flex-col justify-items-stretch w-full divide-y;

@@ -1,6 +1,6 @@
 <template>
     <MainLayout title="SMTP">
-        <div ref="header" class="border-b dark:border-gray-400 flex items-center gap-x-2 text-xs font-semibold px-4 py-2">
+        <div ref="header" class="breadcrumbs">
             <div class="text-muted">Inspector</div>
         </div>
         <main>
