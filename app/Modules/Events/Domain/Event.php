@@ -24,7 +24,7 @@ class Event
         #[Column(type: 'string')]
         private string $type,
 
-        #[Column(type: 'json', typecast: 'json')]
+        #[Column(type: 'longText', typecast: 'json')]
         private Json $payload,
 
         #[Column(type: 'datetime')]
