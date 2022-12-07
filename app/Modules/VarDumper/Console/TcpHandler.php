@@ -60,7 +60,7 @@ class TcpHandler implements Handler
             $this->sendToConsole($request, $payload, new BrowserOutput($output));
         }
 
-        return new CloseConnection();
+        return new ContinueRead();
     }
 
     private function sendToConsole(Request $request, array $payload, OutputInterface $output): void
