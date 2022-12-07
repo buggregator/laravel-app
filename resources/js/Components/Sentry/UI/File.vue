@@ -32,6 +32,12 @@
                 <div class="sentry-file__row-number">{{ file.lineno + i + 1 }}.</div>
                 <pre class="sentry-file__row-text">{{ line }}</pre>
             </div>
+            <div class="event-table" v-if="file.vars">
+                <div class="event-table__row" v-for="(v, k) in file.vars">
+                    <div class="event-table__cell-name">{{ k }}</div>
+                    <div class="event-table__cell-value">{{ v }}</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
