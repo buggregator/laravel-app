@@ -22,7 +22,6 @@ It runs without installation on multiple platforms via docker and supports [symf
    - [Spatie Ray debug tool](#6-spatie-ray-debug-tool)
 2. [Installation](#installation)
    - [Docker image](#docker-image)
-   - [Docker compose](#docker-compose)
 3. [Configuration](#configuration)
 4. [Contributing](#contributing)
 5. [License](#license)
