@@ -45,6 +45,7 @@ import VarDumpComponent from "@/Components/VarDump/Event"
 import MonologComponent from "@/Components/Monolog/Event"
 import InspectorComponent from "@/Components/Inspector/Event"
 import SentryTransactionComponent from "@/Components/SentryTransaction/Event"
+import HttpDumpComponent from "@/Components/HttpDump/Event"
 
 import RayEvent from "@/Ray/event"
 import SentryEvent from "@/Sentry/event"
@@ -54,6 +55,7 @@ import SmtpEvent from "@/Smtp/event"
 import VarDumpEvent from "@/VarDump/event"
 import MonologEvent from "@/Monolog/event"
 import InspectorEvent from "@/Inspector/event"
+import HttpDumpEvent from "@/HttpDump/event"
 import EventFactory from "@/EventFactory"
 
 export default {
@@ -65,7 +67,7 @@ export default {
         Screens, Head, Link,
         RayEventComponent, SentryEventComponent, SlackEventComponent,
         SmtpEventComponent, VarDumpComponent, MonologComponent, InspectorComponent,
-        SentryTransactionComponent,
+        SentryTransactionComponent, HttpDumpComponent
     },
 
     computed: {
@@ -92,6 +94,8 @@ export default {
                 return 'InspectorComponent'
             } else if (event instanceof SentryTransactionEvent) {
                 return 'SentryTransactionComponent'
+            } else if (event instanceof HttpDumpEvent) {
+                return 'HttpDumpComponent'
             }
 
             return 'RayEventComponent'

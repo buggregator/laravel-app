@@ -8,6 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class EventResource extends JsonResource
 {
+    public bool $preserveKeys = true;
+
     public function toArray($request)
     {
         return [

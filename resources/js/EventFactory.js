@@ -6,6 +6,7 @@ import SmtpEvent from "./Smtp/event";
 import VarDumpEvent from "./VarDump/event";
 import InspectorEvent from "./Inspector/event";
 import SentryTransactionEvent from "./SentryTransaction/event";
+import HttpDumpEvent from "./HttpDump/event";
 import {store} from "./store";
 
 const eventTypes = {
@@ -21,7 +22,8 @@ const eventTypes = {
     smtp: json => new SmtpEvent(json.payload, json.uuid, json.timestamp),
     inspector: json => new InspectorEvent(json.payload, json.uuid, json.timestamp),
     sentrytransaction: json => new SentryTransactionEvent(json.payload, json.uuid, json.timestamp, json.projectId, json.transactionId),
-    'var-dump': json => new VarDumpEvent(json.payload, json.uuid, json.timestamp)
+    'var-dump': json => new VarDumpEvent(json.payload, json.uuid, json.timestamp),
+    httpdump: json => new HttpDumpEvent(json.payload, json.uuid, json.timestamp)
 }
 
 export default {
@@ -48,6 +50,8 @@ export default {
                 store.commit('sentryTransaction/pushEvent', event)
             } else if (event instanceof InspectorEvent) {
                 store.commit('inspector/pushEvent', event)
+            } else if (event instanceof HttpDumpEvent) {
+                store.commit('httpdump/pushEvent', event)
             }
             store.commit('pushUnreadEvent', event.app)
             store.commit('pushEvent', event)
@@ -65,6 +69,9 @@ export default {
             }
             if (e.payload.type === 'inspector') {
                 store.commit('inspector/clearEvents')
+            }
+            if (e.payload.type === 'httpdump') {
+                store.commit('httpdump/clearEvents')
             }
 
             store.commit('clearEvents', e.payload.type)
