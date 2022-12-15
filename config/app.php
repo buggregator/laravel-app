@@ -193,6 +193,7 @@ return [
         Modules\Ray\ServiceProvider::class,
         Modules\Sentry\ServiceProvider::class,
         Modules\User\ServiceProvider::class,
+        Modules\HttpDump\ServiceProvider::class,
 
         /*
          * Application Service Providers...

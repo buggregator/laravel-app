@@ -79,7 +79,36 @@ const smtp = {
             if (state.events.find(e => event.uuid == e.uuid)) {
                 return
             }
-            
+
+            state.events.unshift(event)
+        },
+        openEvent(state, event) {
+            state.event = event
+        },
+        deleteEvent(state, event) {
+            state.events = state.events.filter(e => event.uuid == e.uuid)
+        },
+        closeEvent(state) {
+            state.event = null
+        }
+    }
+}
+
+const httpdump = {
+    namespaced: true,
+    state: () => ({
+        events: [],
+        event: null
+    }),
+    mutations: {
+        clearEvents(state) {
+            state.events = []
+        },
+        pushEvent(state, event) {
+            if (state.events.find(e => event.uuid == e.uuid)) {
+                return
+            }
+
             state.events.unshift(event)
         },
         openEvent(state, event) {
@@ -182,7 +211,7 @@ const inspector = {
 
 export const store = createStore({
     modules: {
-        ws, smtp, sentry, sentryTransaction, terminal, inspector, theme
+        ws, smtp, sentry, sentryTransaction, terminal, inspector, theme, httpdump
     },
 
     state() {

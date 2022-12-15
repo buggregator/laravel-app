@@ -60,6 +60,13 @@ export default {
                     icon: '<svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 3H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3ZM5 1a5 5 0 0 0-5 5v12a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V6a5 5 0 0 0-5-5H5Z" /><path fill-rule="evenodd" clip-rule="evenodd" d="M7 12c0-.6.4-1 1-1h10a1 1 0 1 1 0 2H8a1 1 0 0 1-1-1Z" /><path fill-rule="evenodd" clip-rule="evenodd" d="M5 8c0-.6.4-1 1-1h10a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1ZM5 16c0-.6.4-1 1-1h10a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Z"/></svg>',
                     supIcon: computed(() => this.unReadEvents.filter(i => i === 'inspector').length > 0),
                 },
+                {
+                    href: route('events.type', 'httpdump'),
+                    title: 'HTTP Dump',
+                    state: (url) => this.$page.url.startsWith(url),
+                    icon: '<svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 22"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 0a4 4 0 0 0-4 4v11.27A2 2 0 0 0 0 17v2a3 3 0 0 0 3 3h20a3 3 0 0 0 3-3v-2a2 2 0 0 0-1-1.73V4a4 4 0 0 0-4-4H5Zm18 15V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v11h5.5l2 1.5H15l2.25-1.5H23Zm-6.9 3.16L17.87 17H24v2a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-2h5.83l1.47 1.1.53.4h5.77l.5-.34Zm3.02-11.35h-2.18v4.38h.87V9.88h1.32A.88.88 0 0 0 20 9V7.69a.88.88 0 0 0-.88-.88ZM17.82 9V7.69h1.3V9h-1.3Zm-6.57-1.31h-.88V6.8H13v.88h-.88v3.5h-.87v-3.5Zm4.81-.88h-2.62v.88h.87v3.5h.88v-3.5h.87V6.8ZM8.63 8.56V6.81h.87v4.38h-.88V9.44h-1.3v1.75h-.88V6.8h.87v1.75h1.32Z"/></svg>',
+                    supIcon: computed(() => this.unReadEvents.filter(i => i === 'httpdump').length > 0),
+                },
                 // {
                 //     href: route('performance'),
                 //     title: 'Performance',

@@ -20,6 +20,7 @@ It runs without installation on multiple platforms via docker and supports [symf
    - [Monolog server](#4-monolog-server)
    - [Inspector](#5-compatible-with-inspector-reports)
    - [Spatie Ray debug tool](#6-spatie-ray-debug-tool)
+   - [HTTP Requests dump server](#7-http-requests-dump-server)
 2. [Installation](#installation)
    - [Docker image](#docker-image)
 3. [Configuration](#configuration)
@@ -212,6 +213,9 @@ Buggregator can display dump output in the browser as well as in a terminal (con
 Json, Xml, Carbon, File, Table, Image, Html, Text, Notifications, Phpinfo, Exception, Show queries, Count queries, Show events,
 Show jobs, Show cache, Model, Show views, Markdown, Collections, Env, Response, Request, Ban, Charles, Remove, Hide/Show events,
 Application log, Show Http client requests, Mailable
+
+## 7. HTTP Requests dump server
+Buggregator can receive HTTP requests and store them for inspection.
 
 ### Laravel settings
 

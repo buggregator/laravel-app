@@ -33,6 +33,7 @@ class SendRequestDebugToConsole implements ListenerInterface
                             'POST' => 'blue',
                             'PUT' => 'yellow',
                             'DELETE' => 'red',
+                            'HEAD' => 'white',
                         },
                         'responseColor' => match (true) {
                             $statusCode >= 500 => 'red',

@@ -26,6 +26,12 @@ return [
             ],
         ],
     ],
+    'httpdump' => [
+        'http' => [
+            'index' => 'HttpDump/Index',
+            'show' => 'HttpDump/Show',
+        ],
+    ],
     'sentry' => [
         'http' => [
             'index' => 'Sentry/Index',
