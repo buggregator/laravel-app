@@ -1,3 +1,12 @@
+
+### Hello dear developer!
+
+### The old version of Buggregator, which uses Laravel framework, is no longer being actively developed. The new beta version, built with [Spiral framework](https://spiral.dev/), is now available at https://github.com/buggregator/spiral-app and offers significant improvements in performance and stability, as well as a lighter docker image size of around 300mb. It also includes xhprof support for profiling PHP applications. Developers are encouraged to switch to the new version for the best debugging experience.
+
+Stay tuned for the upcoming stable release!
+
+---
+
 # A server for debugging PHP applications and more.
 
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dbutschster%26type%3Dpatrons&style=flat)](https://patreon.com/butschster)
